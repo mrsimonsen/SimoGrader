@@ -3,16 +3,28 @@ import SystemCommands as sc
 from data_maker import Assignment,Student
 from data_maker import main as setup
 
+def multi_run(assign_list):
+	if assign_list == None:
+		setup()
+		assigns = sys.argv[1:]
+		assign_list = []
+		data = shelve.open('grading_data')
+		for a in assigns:
+			assign_list.append(data[a])
+		return assign_list
+	elif len(assign_list):
+		return assign_list
+	else:
+		return None
+
 def intro():
 	setup()
 	n=True
-	try:
+	if len(sys.argv)-1:
 		assign = sys.argv[1]
 		data = shelve.open('grading_data')
 		assign_obj = data[assign]
 		n = False
-	except:
-		pass
 	while n:
 		print("Java Grader with Python")
 		print("This program needs to be ran from the parent directory of the collection of student repos")
@@ -33,7 +45,7 @@ def gather(a):
 	subprocess.run(["rm", "-rf", "testing"])
 	os.mkdir("testing")
 	data = shelve.open('grading_data')
-	students = data['students']
+	students = data["students"]
 	for s in students:
 		os.chdir('testing')
 		os.mkdir(s.github)
@@ -67,7 +79,7 @@ def grade(a):
 	s = data['students']
 	root = os.getcwd()
 	os.chdir('testing')
-	with open('report.csv','w',newline='') as f:
+	with open(f'{a.folder[:2]}report.csv','w',newline='') as f:
 		w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		w.writerow(['Period','Student Name','assignment name','points earned','is late?'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
@@ -94,7 +106,7 @@ def grade(a):
 	data['students'] = s
 	data.close()
 	os.chdir('..')
-	subprocess.run(["cp", "Repos/testing/report.csv", "report.csv"])
+	subprocess.run(["cp", f"Repos/testing/{a.folder[:2]}report.csv", f"{a.folder[:2]}report.csv"])
 
 def string_to_math(thing):
 	if "/" in thing:
@@ -116,11 +128,25 @@ def string_to_math(thing):
 	return round(score/total * 10,2)
 
 def main():
-	assign_obj = intro()
-	print("--Gathering Files--")
-	gather(assign_obj)
-	print('--Starting Grading--')
-	grade(assign_obj)
+	assign_list = None
+	if len(sys.argv)-2:
+		assign_list = multi_run(assign_list)
+		assign_obj = assign_list.pop(0)
+		while assign_obj:
+			print(assign_obj)
+			print(f"--Gathering Files {assign_obj.folder}--")	
+			gather(assign_obj)
+			print(f'--Starting Grading--')
+			grade(assign_obj)
+			print(f"--{assign_obj.folder} Complete--")
+			assign_list = multi_run(assign_list)
+			assign_obj = assign_list.pop(0)
+	else:
+		assign_obj = intro()
+		print("--Gathering Files--")
+		gather(assign_obj)
+		print('--Starting Grading--')
+		grade(assign_obj)
 	print("--Testing Complete--")
 
 if __name__ == '__main__':
