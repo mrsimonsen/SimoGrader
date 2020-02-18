@@ -4,6 +4,7 @@ from os import chdir, makedirs, path, listdir, getcwd
 from os import environ as env
 from subprocess import run
 from time import sleep
+from sys import exit
 
 status = ""
 
@@ -38,7 +39,16 @@ run(["clear"])
 status+="\nAll repos cloned"
 print(status)
 print("copying testing files")
-chdir('Testing Files')
+if pre == "1030-assignments-":
+	loc = "Python"
+elif pre == "1400-assignments-":
+	loc = "Java"
+elif pre == "1410-assignments-":
+	loc = "C++"
+else:
+	print("Location not defined")
+	exit()
+chdir(loc)
 for f in listdir():
 	run(["cp", f, path.join('..',"Repos", f)])
 status += "\nTest files copied"

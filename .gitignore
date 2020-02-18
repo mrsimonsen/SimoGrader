@@ -1,4 +1,6 @@
 *.class
 __pychache__
-report.csv
+*report.csv
 Repos/
+*/grading_data
+gradign_data
