@@ -68,7 +68,7 @@ public class Test04 {
     setInput("JK, IDK if TMI BFF. TTYL");
     student.main(args);
     correct = "Enter text:\nYou entered: JK, IDK if TMI BFF. TTYL\n";
-    correct += "JK: just kidding\nIDK: I don't know\nTMI: too much information\nBFF: best friend forever\nTTYL: talk to you later\n";
+    correct += "BFF: best friend forever\nIDK: I don't know\nJK: just kidding\nTMI: too much information\nTTYL: talk to you later\n";
     result = getOutput();
     restoreSystem();
     if (result.equals(correct)){
