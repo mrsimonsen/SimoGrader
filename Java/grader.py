@@ -5,14 +5,15 @@ from data_maker import main as setup
 
 def multi_run(assign_list):
 	if assign_list == None:
-		setup()
 		assigns = sys.argv[1:]
 		assign_list = []
+		setup()
 		data = shelve.open('grading_data')
 		for a in assigns:
 			assign_list.append(data[a])
 		return assign_list
 	elif len(assign_list):
+		setup()
 		return assign_list
 	else:
 		return None
@@ -77,6 +78,7 @@ def format_date(raw):
 def grade(a):
 	data = shelve.open('grading_data')
 	s = data['students']
+	data.close()
 	root = os.getcwd()
 	os.chdir('testing')
 	with open(f'{a.folder[:2]}report.csv','w',newline='') as f:
@@ -96,17 +98,16 @@ def grade(a):
 		for student in s:
 			if student.github == f:
 				student.set_grade(a, points)
-	f = open('report.csv','a',newline='')
+	f = open(f'{a.folder[:2]}report.csv','a',newline='')
 	w = csv.writer(f,delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
 	s.sort(key=lambda x:x.name)
 	for i in s:
 		w.writerow([i.period,i.name,i.assignment.folder,i.score,i.late])
 	f.close()
 	os.chdir(root)
-	data['students'] = s
-	data.close()
 	os.chdir('..')
 	subprocess.run(["cp", f"Repos/testing/{a.folder[:2]}report.csv", f"{a.folder[:2]}report.csv"])
+	os.chdir(root)
 
 def string_to_math(thing):
 	if "/" in thing:
@@ -131,8 +132,8 @@ def main():
 	assign_list = None
 	if len(sys.argv)-2:
 		assign_list = multi_run(assign_list)
-		assign_obj = assign_list.pop(0)
-		while assign_obj:
+		while assign_list:
+			assign_obj = assign_list.pop(0)
 			print(assign_obj)
 			print(f"--Gathering Files {assign_obj.folder}--")	
 			gather(assign_obj)
@@ -140,7 +141,6 @@ def main():
 			grade(assign_obj)
 			print(f"--{assign_obj.folder} Complete--")
 			assign_list = multi_run(assign_list)
-			assign_obj = assign_list.pop(0)
 	else:
 		assign_obj = intro()
 		print("--Gathering Files--")

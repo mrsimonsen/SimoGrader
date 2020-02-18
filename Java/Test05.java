@@ -71,8 +71,9 @@ public class Test05 {
     total++;
     setInput("JK, IDK if TMI BFF. TTYL");
     student.main(args);
-    correct = "Enter text:\nYou entered: Nice pic, TMI haha JK. TTYL\n";
-    correct += "\nReplaced \"JK\" with \"just kidding\".\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"TMI\" with \"too much information\".\nReplaced \"BFF\" with \"best friend forever\".\nReplaced \"TTYL\" with \"talk to you later\".\n";
+    correct = "Enter text:\nYou entered: JK, IDK if TMI BFF. TTYL\n";
+    correct += "\nReplaced \"BFF\" with \"best friend forever\".\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\nReplaced \"TMI\" with \"too much information\".\nReplaced \"TTYL\" with \"talk to you later\".\n";
+	correct += "\nExpanded: just kidding, I don't know if too much information best friend forever. talk to you later\n";
     result = getOutput();
     restoreSystem();
     if (result.equals(correct)){
