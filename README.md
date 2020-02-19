@@ -9,7 +9,7 @@ Made for Linux machines
 * .env
 	* Contains details for the program to access GitHub, and the prefix of repos to clone.
 * setup.sh
-	* sets up an empty CodeAnywhere container with Python, Java, and C++
+	* Sets up an empty CodeAnywhere container with Python, Java, and C++
 * grade.sh
 	* Runs simogit then autograde. Removes the cloned repos when finished.
 
