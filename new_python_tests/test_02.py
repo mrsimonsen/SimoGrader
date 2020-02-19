@@ -1,0 +1,1 @@
+import fortune_cookie as student

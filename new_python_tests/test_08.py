@@ -1,0 +1,1 @@
+import right_triangle as student
