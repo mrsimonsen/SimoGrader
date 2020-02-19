@@ -1,17 +1,46 @@
 #python grader
-import os, shutil, importlib.util, csv, subprocess, datetime, shelve, sys
+import os, csv, subprocess, datetime, shelve, sys
 from data_maker import Assignment,Student
 from data_maker import main as setup
 
 PIPE = subprocess.PIPE
 
+def multi_run(assign_list):
+	if assign_list == None:
+		assigns = sys.argv[1:]
+		assign_list = []
+		setup()
+		data = sheleve.open('grading_data')
+		for a in assigns:
+			assign_list.append(data[a])
+		return assign_list
+	elif len(assign_list):
+		setup()
+		return assign_list
+	else:
+		return None
+
+def git_log():
+	'''get the timestamp of the latest commit'''
+	cmd = "git log -1 --format=%ci"
+	p = subprocess.Popen(cmd,shell=True,stdout=PIPE,stderr=PIPE)
+	out,err = p.communicate()
+	if err:
+		print(err.decode())
+	return out.decode()
+	
 def intro():
-    print("Python Grader")
-    print("This program needs to be ran from the parent directory of the collection of student repos")
-    print()
     setup()
     n = True
-    while n:
+	if len(sys.argv)-1:
+		assign = sys.argv[1]
+		data = shelve.open('gradeing_data')
+		assign_obj = data[assign]
+		n = False
+	while n:
+    	print("Python Grader")
+    	print("This program needs to be ran from the parent directory of the collection of student repos")
+    	print()
         assign = input("What is the number of the assignment folder?\n")
         try:
             data = shelve.open('grading_data')
@@ -24,28 +53,25 @@ def intro():
 
 def gather(a):
     root = os.getcwd()
-    try:
-        shutil.rmtree('testing')
-    except:
-        pass#old testing folder already removed
-    finally:
-        os.mkdir("testing")
+	#make sure old folder is deleted
+    subprocess.run(['rm', '-rf', 'testing'])
+    os.mkdir("testing")
     data = shelve.open('grading_data')
     students = data['students']
     for s in students:
-        os.mkdir("testing\\"+s.github)
+		os.chdir('testing')
+		os.mkdir(s.github)
         if a.folder == "15-trivia-challenge-2.0":
-            shutil.copyfile(os.path.join(root,"hs_helper.py"), os.path.join(root,'testing',s.github,"hs_helper.py"))
-            shutil.copyfile(os.path.join(root,"trivia.txt"),os.path.join(root,'testing',s.github,"trivia.txt"))
-            shutil.copyfile(os.path.join(root,"highscores.dat"),os.path.join(root,'testing',s.github,"highscores.dat"))
-        shutil.copyfile(os.path.join(root,s.github,a.folder,a.file), os.path.join(root,'testing',s.github,a.file))
-        shutil.copyfile(os.path.join(root,"test_"+a.file), os.path.join(root,'testing',s.github,'Test.py'))
+            subprocess.run(['cp', "..\\hs_helper.py", f'{s.github}\\hs_helper.py'])
+           subprocess.run(['cp', '..\\trivia.txt', f'{s.github}\\trivia.txt'])
+           subprocess.run(['cp', '..\\highscores.dat', f'{s.github}\\highscores.dat'])
+			subprocess.run(['cp',  os.path.join(root,s.github,a.folder,a.file), os.path.join(root,'testing',s.github,a.file)])
+        subprocess.run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
+		os.chdir('..')
         os.chdir(s.github)
-        p = subprocess.Popen(["git","log","-1","--format=%ci"],stdout=PIPE)
-        out = p.communicate()[0].decode()
-        os.chdir(root)
-        s.submit = format_date(out)
-    data['students']=students
+		s.submit = format_date(git_log())
+		os.chdir(root)
+	data['students']=students
     data.close()
 
 def format_date(raw):
@@ -63,63 +89,79 @@ def format_date(raw):
 def grade(a):
     data = shelve.open('grading_data')
     s = data['students']
+	data.close()
     root = os.getcwd()
     os.chdir('testing')
-    with open('report.csv','w',newline='') as f:
+    with open(f'{a.folder[:02]}report.csv','w',newline='') as f:
         w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
         w.writerow(['Period','Student Name','assignment name','points earned','is late?'])
-
     folders = [f.name for f in os.scandir() if f.is_dir()]
-    for i in folders:
-        print(f"Grading: {i}")
-        os.chdir(i)
+    for f in folders:
+        print(f"Grading: {f}")
+        os.chdir(f)
         proc = subprocess.Popen("py test.py", shell=True,stdout=PIPE, stderr=PIPE)
         out,err = proc.communicate()
         if err:
+			#had an error - auto fail
             print(err.decode())
             points = 0
         else:
-            points = string_to_math(out.decode()[:-2])#remove /r/n
-        #seperate github username from 'github_file.py'
+			score = out.decode()
+            points = string_to_math(score)
+		os.chdir('..')
         for student in s:
-            if student.github == i:
+            if student.github == f:
                 student.set_grade(a, points)
-        os.chdir('..');#back to testing folder
-    f = open('report.csv','a',newline='')
+    f = open(f'{a.folder[:2]}report.csv','a',newline='')
     w = csv.writer(f,delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
     s.sort(key=lambda x: x.name)
     for i in s:
         w.writerow([i.period,i.name,i.assignment.folder,i.score,i.late])
     f.close()
     os.chdir(root)
-    data['students'] = s
-    data.close()
-    shutil.copyfile(os.path.join(root,'testing','report.csv'), os.path.join(root,'report.csv'))
-    shutil.rmtree('testing')
+	os.chdir('..')
+	subprocess.run(['cp', f"Repos/Testing/{a.folder[:2]}report.csv", f"{a.folder[:2]}report.csv"])
+    os.chdir(root)
 
 def string_to_math(thing):
-    if len(thing)%3==0:
-        #single digit values
-        total = int(thing[-1])
-        score = int(thing[0])
-    if len(thing)%5==0:
-        #double digit values
-        total = int(thing[-2:])
-        score = int(thing[:2])
-    if len(thing)%2==0:
-        #single digit score with 2 digit total
-        total = int(thing[-2:])
-        score = int(thing[0])
+	if "/" in thing:
+		thing = thing[:-1]#rm \n
+		if len(thing)%3==0:
+			#single digit values
+			total = int(thing[-1])
+			score = int(thing[0])
+		elif len(thing)%5==0:
+			#double digit values
+			total = int(thing[-2:])
+			score = int(thing[:2])
+		elif len(thing)%2==0:
+			#single digit score with 2 digit total
+			total = int(thing[-2:])
+			score = int(thing[0])
+	else:
+		return 0
     return round(score/total * 10,2)
 
 def main():
-    assign_obj = intro()
-    print("gathering files, please wait")
-    gather(assign_obj)
-    print('files gatherd, moving to grading')
-    grade(assign_obj)
-    print("Testing complete")
-    #input("Press enter to exit...")
+    assign_list = None
+	if len(sys.argv)-2:
+		assign_list = multi_run(assign_list)
+		while assign_list:
+			assign_obj = assign_list.pop(0)
+			print(assign_obj)
+			print(f"--Gathering Files {assign_obj.folder}--")	
+			gather(assign_obj)
+			print(f'--Starting Grading--')
+			grade(assign_obj)
+			print(f"--{assign_obj.folder} Complete--")
+			assign_list = multi_run(assign_list)
+	else:
+		assign_obj = intro()
+		print("--Gathering Files--")
+		gather(assign_obj)
+		print('--Starting Grading--')
+		grade(assign_obj)
+	print("--Testing Complete--")
 
 if __name__ == '__main__':
     main()
