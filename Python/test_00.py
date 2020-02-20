@@ -1,7 +1,9 @@
-import subprocess
+import subprocess, sys
+from io import StringIO
+original = sys.stdin
 file = "hello_world.py"
 
-# setup method
+# setup methods
 def catchOutput():
 	PIPE = subprocess.PIPE
 	cmd = f"python3 {file}"
@@ -10,6 +12,13 @@ def catchOutput():
 	if err:
 		print(err.decode())
 	return out.decode()
+
+def setInput(inp):
+	sys.stdin = StringIO(inp)
+	
+def resetInput():
+	sys.stdin = original
+
 
 def main():
 	total = 0
