@@ -1,21 +1,41 @@
+import subprocess
+file = "hello_world.py"
+
+# setup method
+def catchOutput():
+	PIPE = subprocess.PIPE
+	cmd = f"python3 {file}"
+	p = subprocess.Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
+	out,err = p.communicate()
+	if err:
+		print(err.decode())
+	return out.decode()
+
 def main():
-    total = 0
-    score = 0
+	total = 0
+	score = 0
+	#def test_1():
+	total += 1
+	correct = "Hello World!\n"
+	result = catchOutput()[:len(correct)]
+	if result == correct:
+		score += 1
 
-#def test_1():
-    total+=1
-    if student.hello('Mr. Simonsen', 1) == 'Hello World!\nMr. Simonsen\nPeriod 1':
-        score += 1
+	#def test_2():
+	total += 1
+	correct = "Hello World!\nNUAMES\n"
+	result = catchOutput()[:len(correct)]
+	if result == correct:
+		score += 1
 
-#def test_2():
-    total+=1
-    if student.hello('NUAMES', 14) == 'Hello World!\nNUAMES\nPeriod 14':
-        score += 1
-#hidden test
-    total+=1
-    if student.hello('D13',213) == 'Hello World!\nD13\nPeriod 213':
-        score+=1
-    print(f"{score}/{total}")
+	#def test_3():
+	total += 1
+	correct = "Hello World!\nNUAMES\nCS 1030\n"
+	result = catchOutput()
+	if result == correct:
+		score += 1
 
-if __name__ == '__main__':
-    main()
+	return f"{score}/{total}"
+
+if __name__ == "__main__":
+	print(main())
