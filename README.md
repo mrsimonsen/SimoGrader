@@ -18,4 +18,5 @@ Made for Linux machines
 * Edit grade.sh file to match assignment you're wanting to grade
 
 ## Todo 
-* Edit/upgrade Python Test files
+* Edit/upgrade Python assignments (AK, Test, Main, README, and grading test files)
+* move grading test files to the Python folder
