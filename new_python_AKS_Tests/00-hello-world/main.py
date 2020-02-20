@@ -1,5 +1,5 @@
-import pytest
-import hello_world as student
+from subprocess import run
+file = "hello_world.py"
 
 def main():
     a = ''
@@ -9,10 +9,10 @@ def main():
         a = a.lower()
     if a=="run":
         print("\n--Running Program--\n")
-        student.main()
+        run(["python3", "hello_world.py"])
     elif a=="test":
         print("\n--Testing Program--\n")
-        pytest.main(['-v'])
+        run(["python3", "test_00.py"])
 
 if __name__ == '__main__':
     main()
