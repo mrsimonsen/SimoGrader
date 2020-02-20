@@ -1,20 +1,15 @@
 #Mr. Simonsen
 #14
 
-def math(a,b):
-    a = int(a)
-    b = int(b)
-    add = a+b
-    sub = a-b
-    mul = a*b
-    div = round(a/b,2)
-    flr = a//b
-    mod = a%b
-    rep = f"addition is {add}\nsubtraction is {sub}\nmultiplication is {mul}\n"
-    rep += f"division is {div}\nfloor division {flr}\nmodulus division is {mod}"
-    return rep
+n1 = int(input("Enter a number: "))
+n2 = int(input("Enter a second number: "))
+print(f"Doing math for {n1} and {n2}.")
+print()
+print(f"Addition = {n1+n2}")
+print(f"Subtraction = {n1-n2}")
+print(f"Multiplication = {n1*n2}")
+print(f"Exponent = {n1**n2}")
+print(f"Division = {round(n1/n2,3)}")
+print(f"Floor Division = {n1//n2}")
+print(f"Modulus Division = {n1%n2}")
 
-def main():
-    a = input("enter a number: ")
-    b = input("enter a second number: ")
-    print(math(a,b))

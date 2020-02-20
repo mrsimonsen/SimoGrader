@@ -1,5 +1,6 @@
 from subprocess import run
-file = "hello_world.py"
+file = "hello_world"
+test = "00"
 
 def main():
     a = ''
@@ -9,10 +10,10 @@ def main():
         a = a.lower()
     if a=="run":
         print("\n--Running Program--\n")
-        run(["python3", "hello_world.py"])
+        run(["python3", f"{file}.py"])
     elif a=="test":
         print("\n--Testing Program--\n")
-        run(["python3", "test_00.py"])
+        run(["python3", f"test_{test}.py"])
 
 if __name__ == '__main__':
     main()

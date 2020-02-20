@@ -1,9 +1,7 @@
-import unittest, subprocess, sys
-from io import StringIO
+import unittest, subprocess
 
 class Tests(unittest.TestCase):
 	file = "hello_world.py"
-	original = sys.stdin
 	
 	def test_1(self):
 		correct = "Hello World!\n"
@@ -22,22 +20,12 @@ class Tests(unittest.TestCase):
 
 	# setup methods
 	@staticmethod
-	def catchOutput():
-		PIPE = subprocess.PIPE
+	def catchOutput(inputs=None):
 		cmd = f"python3 {Tests.file}"
-		p = subprocess.Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
-		out,err = p.communicate()
-		if err:
-			print(err.decode())
-		return out.decode()
-	
-	@staticmethod
-	def setInput(inp):
-		sys.stdin = StringIO(inp)
-	
-	@staticmethod
-	def resetInput():
-		sys.stdin = Tests.original
+		p = subprocess.run(cmd, shell=True, capture_output=True,input=inputs, text=True)
+		if err:=p.stderr:
+			print(err)
+		return p.stdout
 
 if __name__ == '__main__':
 	unittest.main()
