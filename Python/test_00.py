@@ -31,6 +31,9 @@ def main():
 	result = catchOutput()
 	if result == correct:
 		score += 1
+		
+	#hidden tests
+	#no hidden tests for this assignment
 
 	return f"{score}/{total}"
 
