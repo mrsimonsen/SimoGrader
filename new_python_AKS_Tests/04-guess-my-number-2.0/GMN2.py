@@ -3,38 +3,29 @@
 
 import random
 
-def get_guess():
-    user = int(input("Take a guess: "))
-    return user
+print("\tWelcome to 'Guess My Number 2.0'!")
+print("\nI'm thinking of a number between 1 and 100.")
+print("You have 6 attempts to guess my number.")
+seed = input("Press enter to begin.\n")
+if seed:
+	random.seed(seed)
+# set the initial values
+the_number = random.randint(1, 100)
+tries = 1
+guess = int(input(f"Take guess number {tries}:\n"))
 
-def hi_low(user, the_number, tries):
-    if tries >= 5:
-        play = False
-    else:
-        play = True
-    if user > the_number:
-        return "High", play
-    elif user < the_number:
-        return "Low", play
-    else:
-        return "Correct", False
+# guessing loop
+while guess != the_number and tries<6:    
+	if guess > the_number:
+		print("Lower...")
+	else:
+		print("Higher...")
+	tries += 1
+	guess = int(input(f"Take guess number {tries}:\n"))
+            
 
-def end(tries, hl, the_number):
-    if tries<=5 and hl=="Correct":
-        return f"You guessed it in {tries} tries! The number was {the_number}"
-    else:
-        return f"You ran out of tries! The number was {the_number}"
-
-def main():
-    print("I'm thinking of a number between 1 and 100")
-    print("You have 5 attemps to guess my number.")
-    the_number = random.randint(1,100)
-    play = True
-    tries = 0
-    while play:
-        tries += 1
-        print(f"Guess number {tries}")
-        user = get_guess()
-        hl, play = hi_low(user, the_number, tries)
-        print(f"Your guess was {hl}")
-    print(end(tries, hl, the_number))
+if tries <= 6 and guess == the_number:
+	print(f"You guessed it! The number was {the_number}.")
+	print(f"And it only took you {tries} tries!")
+else:
+	print(f"You ran out of tries! The number was {the_number}.")

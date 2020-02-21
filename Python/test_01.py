@@ -11,16 +11,16 @@ def catchOutput(inputs=None):
 def main():
 	total = 0
 	score = 0
-	#def test_1(self):
 	total += 1
+	#def test_1(self):
 	inputs = "1\n2\n"
 	correct = "Enter a number:\nEnter a second number:\nDoing math for 1 and 2.\n"
 	result = catchOutput(inputs)[:len(correct)]
 	if result == correct:
 		score += 1
 
-	#def test_2(self):
 	total += 1
+	#def test_2(self):
 	inputs = "1\n2\n"
 	correct = "Enter a number:\nEnter a second number:\nDoing math for 1 and 2.\n"
 	correct += "\nAddition = 3\nSubtraction = -1\nMultiplication = 2\nExponent = 1\nDivision = 0.5\nFloor Division = 0\nModulus Division = 1\n"
@@ -28,9 +28,8 @@ def main():
 	if result == correct:
 		score += 1
 
-
-	#def test_3(self):
 	total += 1
+	#def test_3(self):
 	inputs = "1\n16\n"
 	correct = "Enter a number:\nEnter a second number:\nDoing math for 1 and 16.\n"
 	correct+="\nAddition = 17\nSubtraction = -15\nMultiplication = 16\nExponent = 1\nDivision = 0.062\nFloor Division = 0\nModulus Division = 1\n"
