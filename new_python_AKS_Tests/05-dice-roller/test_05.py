@@ -21,7 +21,7 @@ class Tests(unittest.TestCase):
 		correct = "How many dice would you like to roll?\nHow many sides do the dice have?\nPress enter to roll 3x d4.\n"
 		correct += "Roll 1: 2\nRoll 2: 2\nRoll 3: 1\n"
 		correct += "Total: 5\n"
-		result = Tests.catchOutput(inputs)[:len(correct)]
+		result = Tests.catchOutput(inputs)
 		self.assertEqual(result, correct)
 		
 	# setup methods
