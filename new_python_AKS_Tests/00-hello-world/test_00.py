@@ -21,8 +21,7 @@ class Tests(unittest.TestCase):
 	# setup methods
 	@staticmethod
 	def catchOutput(inputs=None):
-		cmd = f"python3 {Tests.file}"
-		p = subprocess.run(cmd, shell=True, capture_output=True,input=inputs, text=True)
+		p = subprocess.run(["python3",Tests.file], shell=True, capture_output=True,input=inputs, text=True)
 		if err:=p.stderr:
 			print(err)
 		return p.stdout

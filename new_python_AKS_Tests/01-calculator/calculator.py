@@ -1,8 +1,8 @@
 #Mr. Simonsen
 #14
 
-n1 = int(input("Enter a number: "))
-n2 = int(input("Enter a second number: "))
+n1 = int(input("Enter a number:\n"))
+n2 = int(input("Enter a second number:\n"))
 print(f"Doing math for {n1} and {n2}.")
 print()
 print(f"Addition = {n1+n2}")
