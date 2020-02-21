@@ -5,34 +5,31 @@ class Tests(unittest.TestCase):
 	
 	def test_1(self):
 		inputs = "1\n2\n"
-		correct = "Enter a number: \ncorrect Enter a second number: \nDoing math for 1 and 2.\n"
+		correct = "Enter a number:\nEnter a second number:\nDoing math for 1 and 2.\n"
 		result = Tests.catchOutput(inputs)[:len(correct)]
 		self.assertEqual(result, correct)
-	'''
+
 	def test_2(self):
 		inputs = "1\n2\n"
-		correct = "Enter a number: \ncorrect Enter a second number: \nDoing math for 1 and 2.\n"
+		correct = "Enter a number:\nEnter a second number:\nDoing math for 1 and 2.\n"
 		correct += "\nAddition = 3\nSubtraction = -1\nMultiplication = 2\nExponent = 1\nDivision = 0.5\nFloor Division = 0\nModulus Division = 1\n"
 		result = Tests.catchOutput(inputs)
 		self.assertEqual(result, correct)
 	
 	def test_3(self):
 		inputs = "1\n16\n"
-		correct = "Enter a number: \ncorrect Enter a second number: \nDoing math for 1 and 16.\n""
+		correct = "Enter a number:\nEnter a second number:\nDoing math for 1 and 16.\n"
 		correct+="\nAddition = 17\nSubtraction = -15\nMultiplication = 16\nExponent = 1\nDivision = 0.062\nFloor Division = 0\nModulus Division = 1\n"
 		result = Tests.catchOutput(inputs)
 		self.assertEqual(result, correct)
-	'''	
+
 	# setup methods
 	@staticmethod
 	def catchOutput(inputs=None):
 		p = subprocess.run(["python3", Tests.file], capture_output=True, input=inputs, text=True)
-		print(f"OUTPUT:\n{p.stdout}")
 		if err:=p.stderr:
 			print(err)
 		return p.stdout
-#???????????
-#https://stackoverflow.com/questions/33984941/how-to-make-pythons-subprocess-interact-with-input
 
 if __name__ == '__main__':
 	unittest.main()
