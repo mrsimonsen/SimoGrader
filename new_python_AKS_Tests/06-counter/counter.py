@@ -1,18 +1,17 @@
 #Mr. Simonsen
 #14
 
-def count(start, end, step):
-    rep = ''
-    if step > 0:
-        end += 1
-    else:
-        end -= 1
-    for i in range(start, end, step):
-        rep += f"{i} "
-    return rep
+start = int(input("What is the starting number?\n"))
+end = int(input("What is the ending number?\n"))
+step = int(input("How much should I count by?\n"))
+print(f"Counting from {start} to {end} by {step}:")
 
-def main():
-    start = int(input("What is the starting number? "))
-    end = int(input("What is the ending number? "))
-    step = int(input("How much should I cound by? "))
-    print(count(start,end,step))
+if step > 0:
+	end += 1
+else:
+	end -= 1
+
+rep = ''
+for i in range(start, end, step):
+	rep += f"{i} "
+print(rep)
