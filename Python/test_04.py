@@ -1,12 +1,12 @@
-import subprocess
+from subprocess import run
+from os import getcwd
 file = "GMN2.py"
 
 # setup methods
-def catchOutput(inputs=None):
-		p = subprocess.run(["python3", file], capture_output=True, input=inputs, text=True)
-		if err:=p.stderr:
-			print(err)
-		return p.stdout
+def catchOutput(inputs=None, seed=None):
+	cwd = getcwd()
+	p = run(f"python3 {Tests.file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
+	return p.stdout
 
 def main():
 	total = 0
@@ -14,7 +14,7 @@ def main():
 	total += 1
 	#def test_1(self):
 	inputs = "0\n1\n1\n1\n1\n1\n1\n1\n"
-	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nPress enter to begin.\n"
+	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\n"
 	result = catchOutput(inputs)[:len(correct)]
 	if result == correct:
 		score += 1
@@ -22,7 +22,7 @@ def main():
 	total += 1
 	#def test_2(self):
 	inputs = "\n1\n1\n1\n1\n1\n1\n1\n"
-	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nPress enter to begin.\nTake guess number 1:\n"
+	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
 	result = catchOutput(inputs)[:len(correct)]
 	if result == correct:
 		score += 1
@@ -30,7 +30,7 @@ def main():
 	total += 1
 	#def test_3(self):
 	inputs = "0\n47\n"
-	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nPress enter to begin.\nTake guess number 1:\n"
+	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
 	correct += "You guessed it! The number was 47.\nAnd it only took you 1 tries!\n"
 	result = catchOutput(inputs)
 	if result == correct:
@@ -39,7 +39,7 @@ def main():
 	total += 1
 	#def test_4(self):
 	inputs = "1\n1\n1\n1\n1\n100\n1\n1\n"
-	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nPress enter to begin.\nTake guess number 1:\n"
+	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
 	correct += "Higher...\nTake guess number 2:\n" 
 	correct += "Higher...\nTake guess number 3:\n"
 	correct += "Higher...\nTake guess number 4:\n"
@@ -54,7 +54,7 @@ def main():
 	total += 1
 	def test_4(self):
 		inputs = "14\n50\n75\n90\n95\n93\n"
-		correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nPress enter to begin.\nTake guess number 1:\n"
+		correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
 		correct += "Higher...\nTake guess number 2:\n" 
 		correct += "Higher...\nTake guess number 3:\n"
 		correct += "Higher...\nTake guess number 4:\n"

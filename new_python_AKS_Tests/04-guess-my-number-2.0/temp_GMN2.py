@@ -1,11 +1,12 @@
-import random  
+#leave this code or testing won't work
+import random, sys
+if len(sys.argv)-1:
+	random.seed(int(sys.argv[1]))
+#########################################################
 
 print("\tWelcome to 'Guess My Number'!")
 print("\nI'm thinking of a number between 1 and 100.")
 print("Try to guess it in as few attempts as possible.")
-seed = input("Press enter to begin.\n")
-if seed:
-	random.seed(seed)
 
 # set the initial values
 the_number = random.randint(1, 100)

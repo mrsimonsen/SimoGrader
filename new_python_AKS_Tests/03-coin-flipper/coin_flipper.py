@@ -1,11 +1,11 @@
 #Mr. Simonsen
 #14
-import random
+import random, sys
+
+if len(sys.argv)-1:
+	random.seed(sys.argv[1])
 
 coins = int(input("How many times do you want to flip the coin?\n"))
-seed = input("Press enter to see the results.\n")
-if seed:
-	random.seed(int(seed))
 count = 0
 heads = 0
 while count < coins:

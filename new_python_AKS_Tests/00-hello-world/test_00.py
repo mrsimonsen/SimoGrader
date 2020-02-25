@@ -1,4 +1,6 @@
-import unittest, subprocess
+import unittest
+from subprocess import run
+from os import getcwd
 
 class Tests(unittest.TestCase):
 	file = "hello_world.py"
@@ -20,10 +22,9 @@ class Tests(unittest.TestCase):
 
 	# setup methods
 	@staticmethod
-	def catchOutput(inputs=None):
-		p = subprocess.run(["python3",Tests.file], shell=True, capture_output=True,input=inputs, text=True)
-		if err:=p.stderr:
-			print(err)
+	def catchOutput(inputs=None, seed=None):
+		cwd = getcwd()
+		p = run(f"python3 {Tests.file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
 		return p.stdout
 
 if __name__ == '__main__':
