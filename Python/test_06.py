@@ -1,5 +1,5 @@
-import unittest
 from subprocess import run
+from os import getcwd
 file = "counter.py"
 
 # setup methods

@@ -9,7 +9,6 @@ How many times do you want to flip the coin?
 ```
 How many times do you want to flip the coin?
 10
-Press enter to see the results
 
 The coin was flipped 10 times.
 Heads: 5	Tails: 5

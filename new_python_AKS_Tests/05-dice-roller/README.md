@@ -6,7 +6,7 @@ How many dice would you like to roll?
 5
 How many sides do the dice have?
 10
-Press enter to roll 5x d10.
+Rolling 5x d10.
 ```
 (2) Expand the program to use a for loop to roll the amount of times requested with the dice values requested.
 ```
@@ -14,7 +14,7 @@ How many dice would you like to roll?
 3
 How many sides do the dice have?
 4
-Press enter to roll 3x d4.
+Rolling 3x d4.
 Roll 1: 2
 Roll 2: 3
 Roll 4: 1
@@ -25,7 +25,7 @@ How many dice would you like to roll?
 3
 How many sides do the dice have?
 4
-Press enter to roll 3x d4.
+Rolling 3x d4.
 Roll 1: 2
 Roll 2: 3
 Roll 4: 1

@@ -1,5 +1,5 @@
-import unittest
 from subprocess import run
+from os import getcwd
 file = "right_triangle.py"
 
 # setup methods

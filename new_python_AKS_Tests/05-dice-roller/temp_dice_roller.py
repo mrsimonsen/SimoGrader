@@ -1,10 +1,14 @@
 #Name
 #Period
 
-import random
+#leave this code or testing won't work
+import random, sys
+if len(sys.argv)-1:
+	random.seed(int(sys.argv[1]))
+#########################################################
 dice = 0
 sides = 0
-seed = input(f"Press enter to roll {dice}x d{sides}.\n")
+print(f"Rolling {dice}x d{sides}.")
 if seed:
 	random.seed(seed)
 
