@@ -1,9 +1,12 @@
 #Name
 #Period
 
-import random
+#leave this code or testing won't work
+import random, sys
+if len(sys.argv)-1:
+	random.seed(int(sys.argv(sys.argv[1])))
+#########################################################
 
-seed = input("Press enter to crack open your cookie and read your fortune.\n")
-if seed:
-	random.seed(int(seed))
+
+print("You crack open your cookie and your fortune falls out:")
 print("Help! I’m being held prisoner in a fortune cookie bakery!")

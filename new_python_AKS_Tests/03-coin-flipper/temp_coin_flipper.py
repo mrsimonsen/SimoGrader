@@ -1,7 +1,11 @@
 #Name
 #Period
 
-import random
+#leave this code or testing won't work
+import random, sys
+if len(sys.argv)-1:
+	random.seed(int(sys.argv[1]))
+#########################################################
 
 seed = input("Press enter to see the results.\n")
 if seed:

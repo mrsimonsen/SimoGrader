@@ -1,59 +1,54 @@
-import subprocess
-file = "hello_world.py"
+from subprocess import run
+from os import getcwd
+file = "fortune_cookie.py"
 
 # setup methods
-def catchOutput(inputs=None):
-		p = subprocess.run(["python3", file], capture_output=True, input=inputs, text=True)
-		if err:=p.stderr:
-			print(err)
-		return p.stdout
+def catchOutput(inputs=None, seed=None):
+	cwd = getcwd()
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
+	return p.stdout
 
 def main():
 	total = 0
 	score = 0
+	
 	total += 1
 	#def test_1(self):
-	inputs = "2\n"
-	correct = "Press enter to crack open your cookie and read your fortune.\n"
+	correct = "You crack open your cookie and your fortune falls out:\n"
 	correct += "Help! I’m being held prisoner in a fortune cookie bakery!\n"
-	result = catchOutput(inputs)
+	result = catchOutput(seed = "2")
 	if result == correct:
 		score += 1
 
 	total += 1
 	#def test_2(self):
-	inputs = "1\n"
-	correct = "Press enter to crack open your cookie and read your fortune.\n"
+	correct = "You crack open your cookie and your fortune falls out:\n"
 	correct += "Cookie said: \"You really crack me up.\"\n"
-	result = catchOutput(inputs)
+	result = catchOutput(seed = "1")
 	if result == correct:
 		score += 1
 
-
 	total += 1
 	#def test_3(self):
-	inputs = "7\n"
-	correct = "Press enter to crack open your cookie and read your fortune.\n"
+	correct = "You crack open your cookie and your fortune falls out:\n"
 	correct += "You are not illiterate.\n"
-	result = catchOutput(inputs)
+	result = catchOutput(seed = "7")
 	if result == correct:
 		score += 1
 		
 	total += 1	
 	#def test_4(self):
-	inputs = "0\n"
-	correct = "Press enter to crack open your cookie and read your fortune.\n"
+	correct = "You crack open your cookie and your fortune falls out:\n"
 	correct += "You will read this and say \"Geez! I could come wp with better fortunes than that!\"\n"
-	result = catchOutput(inputs)
+	result = catchOutput(seed = "0")
 	if result == correct:
 		score += 1
 	
 	total += 1
 	#def test_5(self):
-	inputs = "5\n"
-	correct = "Press enter to crack open your cookie and read your fortune.\n"
+	correct = "You crack open your cookie and your fortune falls out:\n"
 	correct += "This cookie is never gonna give you up, never gonna let your down.\n"
-	result = catchOutput(inputs)
+	result = catchOutput(seed = "5")
 	if result == correct:
 		score += 1
 		

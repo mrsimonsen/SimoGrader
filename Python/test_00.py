@@ -1,12 +1,12 @@
-import subprocess
+from subprocess import run
+from os import getcwd
 file = "hello_world.py"
 
 # setup methods
-def catchOutput(inputs=None):
-		p = subprocess.run(["python3", file], capture_output=True, input=inputs, text=True)
-		if err:=p.stderr:
-			print(err)
-		return p.stdout
+def catchOutput(inputs=None, seed=None):
+	cwd = getcwd()
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
+	return p.stdout
 
 def main():
 	total = 0
