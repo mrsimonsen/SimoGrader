@@ -6,7 +6,6 @@
 
 I'm thinking of a number between 1 and 100.
 You have 6 attempts to guess my number.
-Press enter to begin.
 Take guess number 1:
 ```
 (2) Modify the input prompt so that it shows the guess number like the format below:
