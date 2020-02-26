@@ -1,4 +1,4 @@
-# 07-word-jumble-2.0
+# 09-word-jumble-2.0
 
 (1) Expand the branching so that when the player enters an empty string (just presses enter) "Goodbye." is displayed.
 ```

@@ -1,4 +1,4 @@
-# 08-sentence-scrambler
+# 10-sentence-scrambler
 
 (1) Create a program that prompts the user for a message then displays how many words are in that message.
 ```

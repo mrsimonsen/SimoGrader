@@ -1,4 +1,4 @@
-# 03-dice-roller
+# 05-dice-roller
 
 (1) Modify the program so that it prompts the user for a number of dice then asks how many sides the dice have.
 ```

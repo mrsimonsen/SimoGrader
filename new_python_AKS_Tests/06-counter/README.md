@@ -1,4 +1,4 @@
-# 05-counter
+# 06-counter
 
 (1) Create a program that prompts the user for 3 numbers then displays a message, formatted like below.
 ```
