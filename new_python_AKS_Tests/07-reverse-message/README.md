@@ -1,4 +1,4 @@
-# 06-reverse-message
+# 07-reverse-message
 
 (1) Create a program that prompts the user for a message, then displays the message reversed.
 ```
