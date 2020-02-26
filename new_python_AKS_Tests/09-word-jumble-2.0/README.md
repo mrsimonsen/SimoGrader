@@ -31,7 +31,7 @@ Your guess:
 ?
 a slithery coding language
 ```
-(4) Expand the guess correctly message so that an additional message is displayed depending on if they used a hint or not.
+(4 + 5) Expand the guess correctly message so that an additional message is displayed depending on if they used a hint or not.
 ```
 The jumble is: optynh
 Your guess:

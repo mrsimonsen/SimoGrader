@@ -1,20 +1,15 @@
 #Mr. Simonsen
 #14
 
-import random
+#leave this code or testing won't work
+import random, sys
+if len(sys.argv)-1:
+	random.seed(int(sys.argv[1]))
+#########################################################
 
-def scrambler(words):
-    random.shuffle(words)
-    rep = " ".join(words)
-    return rep
-
-def splitter(message):
-    words = message.split(" ")
-    return words, len(words)
-
-def main():
-    message = input("What is the message to scrable?\n")
-    words, num_words = splitter(message)
-    print(f"There are {num_words} words in the message")
-    print("Here they are shuffled:")
-    print(scrambler(words))
+message = input("What is the message to scramble?\n")
+words = message.split(" ")
+print(f"There are {len(words)} words in the message.")
+print("Here's the shuffeled message:")
+random.shuffle(words)
+print(" ".join(words))

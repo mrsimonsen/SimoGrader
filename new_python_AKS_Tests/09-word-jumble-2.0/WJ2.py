@@ -1,10 +1,11 @@
 #Mr. Simonsen
 #Period 14
 
+#leave this code or testing won't work
 import random, sys
-
 if len(sys.argv)-1:
 	random.seed(int(sys.argv[1]))
+#########################################################
 
 WORDS = ("answer", "difficult", "easy", "jumble", "python")
 HINTS = ("what you're looking for", 'not easy', 'not hard', 'the name of the game', 'a slithery coding language')

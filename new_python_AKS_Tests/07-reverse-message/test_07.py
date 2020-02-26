@@ -21,7 +21,7 @@ class Tests(unittest.TestCase):
 		
 	# setup methods
 	@staticmethod
-	def catchOutput(inputs=None, seed=None):
+	def catchOutput(inputs=None, seed=''):
 		cwd = getcwd()
 		p = run(f"python3 {Tests.file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
 		return p.stdout
