@@ -6,10 +6,11 @@
 # The computer picks a random word and then "jumbles" it
 # The player has to guess the original word
 
+#leave this code or testing won't work
 import random, sys
-
 if len(sys.argv)-1:
-	random.seed(sys.argv[1])
+	random.seed(int(sys.argv[1]))
+#########################################################
 
 # create a sequence of words to choose from
 WORDS = ("python", "jumble", "easy", "difficult", "answer")
