@@ -1,4 +1,4 @@
-# 11-character-creator
+# 12-character-creator
 
 (1) Create a program that displays a menu and prompts for user input until the user quits. Have a clause to catch if the user didn't enter a valid menu option.
 ```
