@@ -18,7 +18,7 @@ def add(attr, amt, atts):
 		else:
 			return f"{amt} is more points than you have left in your pool"
 	else:
-		return f"{attr} is not a valid attribute"
+		return f"'{attr}' is not a valid attribute"
 
 def remove(attr, amt, atts):
 	if attr in atts:
@@ -29,7 +29,7 @@ def remove(attr, amt, atts):
 		else:
 			return f"{amt} is more points than you have left in {attr}"
 	else:
-		return f"{attr} is not a valid attribute"
+		return f"'{attr}' is not a valid attribute"
 
 def table(atts):
 	rep = f'''
