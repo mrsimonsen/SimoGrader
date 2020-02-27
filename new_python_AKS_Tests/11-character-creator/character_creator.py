@@ -53,18 +53,18 @@ def main():
 		if choice == '1':
 			print(table(atts))
 		elif choice == '2':
-			attr = input("What attribute would like to add points to?\n").title()
+			attr = input("What attribute would you like to add points to?\n").title()
 			amt = int(input("How many points would you like to add?\n"))
 			print(add(attr, amt, atts))
 		elif choice == '3':
-			attr = input("What attribute would like to remove points from?\n").title()
+			attr = input("What attribute would you like to remove points from?\n").title()
 			amt = int(input("How many points would you like to remove?\n"))
 			print(remove(attr, amt, atts))
 		elif choice == '0':
 			print("Goodbye.")
 			play = False
 		else:
-			print(f"{choice} is not a valad menu option.")
+			print(f"'{choice}' is not a valid menu option.")
 
 if __name__=="__main__":
 	main()
