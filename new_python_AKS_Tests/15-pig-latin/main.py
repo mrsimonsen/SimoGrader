@@ -1,6 +1,6 @@
 from subprocess import run
-file = "character_creator.py"
-test = "11"
+file = "pig_latin.py"
+test = "15"
 
 def main():
     a = ''
