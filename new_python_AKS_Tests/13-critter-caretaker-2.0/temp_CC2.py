@@ -1,12 +1,18 @@
 #Name
 #Period
 
-class Critter(object):
+#leave this code or testing won't work
+import random, sys
+if len(sys.argv)-1:
+	random.seed(int(sys.argv[1]))
+#########################################################
+
+class Critter():
 	"""A virtual pet"""
-	def __init__(self, name, hunger = 0, boredom = 0):
+	def __init__(self, name):
 		self.name = name
-		self.hunger = hunger
-		self.boredom = boredom
+		self.hunger = 0
+		self.boredom = 0
 
 	def __pass_time(self):
 		self.hunger += 1
@@ -26,58 +32,65 @@ class Critter(object):
 		return m
 	
 	def talk(self):
-		print("I'm", self.name, "and I feel", self.mood, "now.\n")
+		rep = f"I'm {self.name} and I feel {self.mood} now."
 		self.__pass_time()
+		return rep
 	
 	def eat(self, food = 4):
-		print("Brruppp.  Thank you.")
+		rep = "Brruppp.  Thank you."
 		self.hunger -= food
 		if self.hunger < 0:
 			self.hunger = 0
 		self.__pass_time()
+		return rep
 
 	def play(self, fun = 4):
-		print("Wheee!")
+		rep = "Wheee!"
 		self.boredom -= fun
 		if self.boredom < 0:
 			self.boredom = 0
 		self.__pass_time()
+		return rep
 
+def main():
+	crit_name = input("What do you want to name your critter?\n")
+	crit = Critter(crit_name)
 
-crit_name = input("What do you want to name your critter?: ")
-crit = Critter(crit_name)
+	choice = None  
+	while choice != "0":
+		print \
+		("""
+Critter Caretaker
 
-choice = None  
-while choice != "0":
-	print \
-	("""
-	Critter Caretaker
+0 - Quit
+1 - Listen to your critter
+2 - Feed your critter
+3 - Play with your critter""")
 
-	0 - Quit
-	1 - Listen to your critter
-	2 - Feed your critter
-	3 - Play with your critter
-	""")
+		choice = input("Choice:\n")
 
-	choice = input("Choice: ")
-	print()
+		# exit
+		if choice == "0":
+			print("Goodbye.")
 
-	# exit
-	if choice == "0":
-		print("Good-bye.")
+		# listen to your critter
+		elif choice == "1":
+			print(crit.talk())
 
-	# listen to your critter
-	elif choice == "1":
-		crit.talk()
+		# feed your critter
+		elif choice == "2":
+			print(crit.eat())
 
-	# feed your critter
-	elif choice == "2":
-		crit.eat()
+		# play with your critter
+		elif choice == "3":
+			print(crit.play())
 
-	# play with your critter
-	elif choice == "3":
-		crit.play()
+		#secret backdoor
+		elif choice == "14":
+			print(crit)
 
-	# some unknown choice
-	else:
-		print("\nSorry, but", choice, "isn't a valid choice.")
+		# some unknown choice
+		else:
+			print(f"Sorry, but {choice} isn't a valid choice.")
+if __name__ == '__main__':
+	main()
