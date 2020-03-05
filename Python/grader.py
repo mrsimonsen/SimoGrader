@@ -1,9 +1,8 @@
 #python grader
-import os, csv, subprocess, datetime, shelve, sys
+import os, csv, datetime, shelve, sys
 from data_maker import Assignment,Student
 from data_maker import main as setup
-
-PIPE = subprocess.PIPE
+from subprocess import run
 
 def multi_run(assign_list):
 	if assign_list == None:
@@ -22,12 +21,10 @@ def multi_run(assign_list):
 
 def git_log():
 	'''get the timestamp of the latest commit'''
-	cmd = "git log -1 --format=%ci"
-	p = subprocess.Popen(cmd,shell=True,stdout=PIPE,stderr=PIPE)
-	out,err = p.communicate()
-	if err:
-		print(err.decode())
-	return out.decode()
+	p = run(f'git log -1 --format=%ci',shell=True,capture_output=True, text=True)
+	if e := p.stderr:
+		print(e)
+	return p.stdout
 	
 def intro():
     setup()
@@ -54,19 +51,15 @@ def intro():
 def gather(a):
     root = os.getcwd()
 	#make sure old folder is deleted
-    subprocess.run(['rm', '-rf', 'testing'])
+    run(['rm', '-rf', 'testing'])
     os.mkdir("testing")
     data = shelve.open('grading_data')
     students = data['students']
     for s in students:
 		os.chdir('testing')
 		os.mkdir(s.github)
-        if a.folder == "15-trivia-challenge-2.0":
-            subprocess.run(['cp', "..\\hs_helper.py", f'{s.github}\\hs_helper.py'])
-           subprocess.run(['cp', '..\\trivia.txt', f'{s.github}\\trivia.txt'])
-           subprocess.run(['cp', '..\\highscores.dat', f'{s.github}\\highscores.dat'])
-			subprocess.run(['cp',  os.path.join(root,s.github,a.folder,a.file), os.path.join(root,'testing',s.github,a.file)])
-        subprocess.run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
+        run(['cp',  os.path.join(root,s.github,a.folder,a.file), os.path.join(root,'testing',s.github,a.file)])
+        run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
 		os.chdir('..')
         os.chdir(s.github)
 		s.submit = format_date(git_log())
@@ -99,14 +92,13 @@ def grade(a):
     for f in folders:
         print(f"Grading: {f}")
         os.chdir(f)
-        proc = subprocess.Popen("py test.py", shell=True,stdout=PIPE, stderr=PIPE)
-        out,err = proc.communicate()
-        if err:
+        p = run("py test.py", shell=True, capture_output=True, text=True)
+        if e := p.stderr:
 			#had an error - auto fail
-            print(err.decode())
+            print(e)
             points = 0
         else:
-			score = out.decode()
+			score = p.stdout
             points = string_to_math(score)
 		os.chdir('..')
         for student in s:
@@ -120,7 +112,7 @@ def grade(a):
     f.close()
     os.chdir(root)
 	os.chdir('..')
-	subprocess.run(['cp', f"Repos/Testing/{a.folder[:2]}report.csv", f"{a.folder[:2]}report.csv"])
+	run(['cp', f"Repos/Testing/{a.folder[:2]}report.csv", f"{a.folder[:2]}report.csv"])
     os.chdir(root)
 
 def string_to_math(thing):
