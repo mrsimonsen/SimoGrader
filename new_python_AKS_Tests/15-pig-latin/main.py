@@ -1,5 +1,5 @@
 from subprocess import run
-file = "pig_latin.py"
+file = "pig_latin"
 test = "15"
 
 def main():
