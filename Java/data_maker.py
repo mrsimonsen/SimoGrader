@@ -39,8 +39,8 @@ def main():
     data = shelve.open('grading_data','n')
 
     #assignment details
-    assignments = ('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','1')
-    file_names = {"1":("Hi.java",),
+    assignments = ('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21')
+    file_names = {
     "00":("HelloWorld.java",),
     "01":("BasicInput.java",),
     "02":("PaintEstimator.java",),
@@ -62,8 +62,9 @@ def main():
     "18":("ParseStrings.java",),
     "19":("DataVisualizer.java",),
     "20":("CaesarCipher.java","ReadWrite.java","Support.java"),
-    "21":("Yahtzee.java",)}
-    folders = {"1":"test1",
+    "21":("Yahtzee.java",)
+	}
+    folders = {
     "00":"00HelloWorld",
     "01":"01BasicInput",
     "02":"02PaintEstimator",
@@ -85,8 +86,9 @@ def main():
     "18":"18ParseStrings",
     "19":"19DataVisualizer",
     "20":"20CaesarCipher",
-    "21":"21Yahtzee"}
-    due_dates = {'1':datetime.datetime.today(),
+    "21":"21Yahtzee"
+	}
+    due_dates = {
     '00':datetime.datetime(2020, 1, 26, 23, 59, 59),
     '01':datetime.datetime(2020, 2, 9, 23, 59, 59),
     '02':datetime.datetime(2020, 2 ,9 ,23, 59 ,59),
@@ -108,8 +110,9 @@ def main():
     '18':datetime.datetime(2020, 4 ,26 ,23, 59 ,59),
     '19':datetime.datetime(2020, 4 ,26 ,23, 59 ,59),
     '20':datetime.datetime(2020, 5 ,3 ,23, 59 ,59),
-    '21':datetime.datetime(2020, 5 ,17 ,23, 59 ,59)}
-    tests = {'1':'test_hi.java',
+    '21':datetime.datetime(2020, 5 ,17 ,23, 59 ,59)
+	}
+    tests = {
     '00':'Test00.java',
     '01':'Test01.java',
     '02':'Test02.java',
@@ -131,7 +134,8 @@ def main():
     '18':'Test18.java',
     '19':'Test19.java',
     '20':'Test20.java',
-    '21':'Test21.java',}
+    '21':'Test21.java'
+	}
 
     for i in assignments:
         data[i]=Assignment(folders[i],file_names[i],due_dates[i],tests[i])
