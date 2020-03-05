@@ -1,1 +1,0 @@
-import pig_latin as student
