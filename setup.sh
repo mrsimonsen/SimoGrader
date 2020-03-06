@@ -15,7 +15,7 @@ wget -O hamcrest-core-1.3.jar https://search.maven.org/remotecontent?filepath=or
 wget -O junit-4.13.jar https://search.maven.org/remotecontent?filepath=junit/junit/4.13/junit-4.13.jar
 tar -xf Python-3.8.1.tgz
 cd Python-3.8.1
-./configure --enable-eptimizations
+./configure --enable-optimizations
 make -j4
 sudo make install
 cd ..
@@ -28,10 +28,4 @@ chmod +x grade.sh
 sudo python3 -m pip install --upgrade pip
 sudo python3 -m pip install PyGithub
 sudo python3 -m pip install python-dotenv
-mkdir "Testing Files"
-mv TF.tar.gz Testing\ Files/TF.tar.gz
-cd "Testing Files"
-tar -xf TF.tar.gz
-cd ..
-mv env .env
 echo "Restart the terminal to complete setup"
