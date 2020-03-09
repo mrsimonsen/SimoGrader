@@ -18,14 +18,16 @@ public class Test09 {
     setOutput();
     //test1
     total++;
+	  setInput("1 4 6 9 21 5 47 8 83 2 q");
     student.main(args);
     String correct = "Enter player 1's jersey number:\nEnter player 1's rating:\n\nEnter player 2's jersey number:\nEnter player 2's rating:\n\nEnter player 3's jersey number:\nEnter player 3's rating:\n\nEnter player 4's jersey number:\nEnter player 4's rating:\n\nEnter player 5's jersey number:\nEnter player 5's rating:\n\n";
-    correct += "ROSTER\nPlayer 1 -- Jersey number: 84, Rating: 7\nPlayer 2 -- Jersey number: 23, Rating: 4\nPlayer 3 -- Jersey number: 4, Rating: 5\nPlayer 4 -- Jersey number: 30, Rating: 2\nPlayer 5 -- Jersey number: 66, Rating: 9\n";
+    correct += "ROSTER\nPlayer 1 -- Jersey number: 1, Rating: 4\nPlayer 2 -- Jersey number: 6, Rating: 9\nPlayer 3 -- Jersey number: 21, Rating: 5\nPlayer 4 -- Jersey number: 47, Rating: 8\nPlayer 5 -- Jersey number: 83, Rating: 2\n";
     String result = getOutput().substring(0,correct.length());
     restoreSystem();
     if (result.equals(correct)){
       score++;
     }
+
     //test2
     setOutput();
     total++;
@@ -38,6 +40,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test3
     setOutput();
     total++;
@@ -51,6 +54,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test4
     setOutput();
     total++;
@@ -66,6 +70,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test5
     setOutput();
     total++;
@@ -83,6 +88,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test6
     setOutput();
     total++;
@@ -98,6 +104,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test7
     setOutput();
     total++;
@@ -111,6 +118,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test8
     setOutput();
     total++;
@@ -128,6 +136,7 @@ public class Test09 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test9
     setOutput();
     total++;
@@ -146,15 +155,16 @@ public class Test09 {
       score++;
     }
 
+
     //hidden tests
     setOutput();
     total++;
     setInput("1 1 2 2 3 3 4 4 5 5 r 5 6 6 o q");
     student.main(args);
     correct = "Enter player 1's jersey number:\nEnter player 1's rating:\n\nEnter player 2's jersey number:\nEnter player 2's rating:\n\nEnter player 3's jersey number:\nEnter player 3's rating:\n\nEnter player 4's jersey number:\nEnter player 4's rating:\n\nEnter player 5's jersey number:\nEnter player 5's rating:\n";
-    correct += "\nROSTER\nPlayer 1 -- Jersey number: 1, Rating: \nPlayer 2 -- Jersey number: 2, Rating: 2\nPlayer 3 -- Jersey number: 3, Rating: 3\nPlayer 4 -- Jersey number: 4, Rating: 4\nPlayer 5 -- Jersey number: 5, Rating: 5\n";
+    correct += "\nROSTER\nPlayer 1 -- Jersey number: 1, Rating: 1\nPlayer 2 -- Jersey number: 2, Rating: 2\nPlayer 3 -- Jersey number: 3, Rating: 3\nPlayer 4 -- Jersey number: 4, Rating: 4\nPlayer 5 -- Jersey number: 5, Rating: 5\n";
     correct += "\nMENU\nu - Update player rating\na - Output players above a rating\nr - Replace player\no - Output roster\nq - Quit\n\nChoose an option:\n";
-    correct += "Enter a jersey number:\n";
+    correct += "Enter a jersey number:\nEnter a new jersey number:\nEnter a rating for the new player:\n";
     correct += "\nMENU\nu - Update player rating\na - Output players above a rating\nr - Replace player\no - Output roster\nq - Quit\n\nChoose an option:\n";
     correct += "ROSTER\nPlayer 1 -- Jersey number: 1, Rating: 1\nPlayer 2 -- Jersey number: 2, Rating: 2\nPlayer 3 -- Jersey number: 3, Rating: 3\nPlayer 4 -- Jersey number: 4, Rating: 4\nPlayer 5 -- Jersey number: 6, Rating: 6\n";
     correct += "\nMENU\nu - Update player rating\na - Output players above a rating\nr - Replace player\no - Output roster\nq - Quit\n\nChoose an option:\n";
@@ -181,6 +191,7 @@ public class Test09 {
       score++;
     }
 
+
     setOutput();
     total++;
     setInput("84 7 23 4 4 5 30 2 66 9 a 7 q");
@@ -188,7 +199,7 @@ public class Test09 {
     correct = "Enter player 1's jersey number:\nEnter player 1's rating:\n\nEnter player 2's jersey number:\nEnter player 2's rating:\n\nEnter player 3's jersey number:\nEnter player 3's rating:\n\nEnter player 4's jersey number:\nEnter player 4's rating:\n\nEnter player 5's jersey number:\nEnter player 5's rating:\n";
     correct += "\nROSTER\nPlayer 1 -- Jersey number: 84, Rating: 7\nPlayer 2 -- Jersey number: 23, Rating: 4\nPlayer 3 -- Jersey number: 4, Rating: 5\nPlayer 4 -- Jersey number: 30, Rating: 2\nPlayer 5 -- Jersey number: 66, Rating: 9\n";
     correct += "\nMENU\nu - Update player rating\na - Output players above a rating\nr - Replace player\no - Output roster\nq - Quit\n\nChoose an option:\n";
-    correct += "Enter a rating:\n\nABOVE 4\nPlayer 1 -- Jersey number: 84, Rating: 7\nPlayer 5 -- Jersey number: 66, Rating: 9\n";
+    correct += "Enter a rating:\n\nABOVE 7\nPlayer 5 -- Jersey number: 66, Rating: 9\n";
     correct += "\nMENU\nu - Update player rating\na - Output players above a rating\nr - Replace player\no - Output roster\nq - Quit\n\nChoose an option:\n";
     result = getOutput();
     restoreSystem();
