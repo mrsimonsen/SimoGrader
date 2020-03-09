@@ -103,7 +103,7 @@ public class Test08 {
     setInput("1.2 3.5 6.7 8.9 0.0");
     student.main(args);
     correct = "Enter weight 1:\nEnter weight 2:\nEnter weight 3:\nEnter weight 4:\nEnter weight 5:\n";
-    correct += "You entered: 1.2 3.5 6.7 8.9 0.0";
+    correct += "You entered: 1.2 3.5 6.7 8.9 0.0 \n";
     correct += "\nTotal weight: 20.3\n";
     correct += "Average weight: 4.0600000000000005\n";
     correct += "Max weight: 8.9\n";
@@ -118,7 +118,7 @@ public class Test08 {
     setInput("60 60 20 50 70");
     student.main(args);
     correct = "Enter weight 1:\nEnter weight 2:\nEnter weight 3:\nEnter weight 4:\nEnter weight 5:\n";
-    correct += "You entered: 60.0 60.0 20.0 50.0 70.0";
+    correct += "You entered: 60.0 60.0 20.0 50.0 70.0 \n";
     correct += "\nTotal weight: 260.0\n";
     correct += "Average weight: 52.0\n";
     correct += "Max weight: 70.0\n";
