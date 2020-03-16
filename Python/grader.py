@@ -31,7 +31,7 @@ def intro():
     n = True
 	if len(sys.argv)-1:
 		assign = sys.argv[1]
-		data = shelve.open('gradeing_data')
+		data = shelve.open('grading_data')
 		assign_obj = data[assign]
 		n = False
 	while n:

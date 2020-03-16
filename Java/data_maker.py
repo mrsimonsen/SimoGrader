@@ -77,7 +77,7 @@ def main():
     "09":"09PlayerRoster",
     "10":"10CoinFlipper",
     "11":"11ReverseMessage",
-    "12":"12DiceStats",
+    "12":"12DiceStatistics",
     "13":"13TextAnalyzer",
     "14":"14AuthoringAssistant",
     "15":"15ShoppingCartPrinter",

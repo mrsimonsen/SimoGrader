@@ -9,20 +9,36 @@ public class Test12 {
     int total = 0;
     int score = 0;
     //test1
+	boolean result = true;
     total++;
-    boolean result = student.cont(1);
+	try{
+    result = student.cont(1);
+	}
+	catch(Exception e){
+	result = false;
+	}
     if (result){
       score++;
     }
     //test2
     total++;
+	try{
     result = student.cont(0);
+	}
+	catch(Exception e){
+	result = false;
+	}
     if (!result){
       score++;
     }
     //test3
     total++;
+    try{
     result = student.cont(10);
+	}
+	catch(Exception e){
+	result = false;
+	}
     if (result){
       score++;
     }
@@ -42,7 +58,14 @@ public class Test12 {
     c += "10: "+star;
     c += "11: "+star;
     c += "12: "+star;
-    String r = student.histogram(totals);
+    String r;
+	try{
+    r = student.histogram(totals);
+	}
+	catch(Exception e){
+	r = "nope";
+	}
+	  
     if (r.equals(c)){
       score++;
     }
@@ -62,8 +85,13 @@ public class Test12 {
     c += "10: "+star;
     c += "11: "+star;
     c += "12: "+star;
-
+	try{
     r = student.histogram(total2);
+	}
+	catch(Exception e){
+	r = "nope";
+	}
+    
     if (r.equals(c)){
       score++;
     }
@@ -82,8 +110,13 @@ public class Test12 {
     c += "10: ****\n";
     c += "11: *\n";
     c += "12: ***\n";
-
+	try{
     r = student.histogram(total3);
+	}
+	catch(Exception e){
+	r = "nope";
+	}
+    
     if (r.equals(c)){
       score++;
     }
@@ -103,14 +136,19 @@ public class Test12 {
     c += "10: *********\n";
     c += "11: **********\n";
     c += "12: ***********\n";
-
+	try{
     r = student.histogram(total4);
+	}
+	catch(Exception e){
+	r = "nope";
+	}
+    
     if (r.equals(c)){
       score++;
     }
 
     total++;
-    int[] total6 = {12,10,9,8,7,6,5,4,3,2};
+    int[] total6 = {11,10,9,8,7,6,5,4,3,2,1};
     c = "Dice roll histogram:\n\n";
     c += "2:  ***********\n";
     c += "3:  **********\n";
@@ -123,7 +161,14 @@ public class Test12 {
     c += "10: ***\n";
     c += "11: **\n";
     c += "12: *\n";
+    
+	try{
     r = student.histogram(total6);
+	}
+	catch(Exception e){
+	r = "nope";
+	}
+	  
     if (r.equals(c)){
       score++;
     }
