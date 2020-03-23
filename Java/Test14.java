@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Test14 {
   static AuthoringAssistant student = new AuthoringAssistant();
@@ -26,7 +27,7 @@ public class Test14 {
     if (result.equals(correct)){
       score++;
     }
-    //test2
+    //test2a
     setOutput();
     total++;
     setInput("Testing that menu is called and can quit.\nq\n");
@@ -39,6 +40,15 @@ public class Test14 {
     if (result.equals(correct)){
       score++;
     }
+	//test2b
+	total++;
+	Scanner s = new Scanner("1\nq\n");
+	char res = student.printMenu(s);
+	char cor = 'q';
+	if (res == cor){
+		score++;
+	}
+	 
     //test3
     total++;
     int r = student.getNumOfNonWSCharacters("This is a   test.");

@@ -111,23 +111,13 @@ def grade(a):
 	os.chdir(root)
 
 def string_to_math(thing):
-	if "/" in thing:
-		thing = thing[:-1]#rm /n
-		if len(thing)%3==0:
-			#single digit values
-			total = int(thing[-1])
-			score = int(thing[0])
-		elif len(thing)%5==0:
-			#double digit values
-			total = int(thing[-2:])
-			score = int(thing[:2])
-		elif len(thing)%2==0:
-			#single digit score with 2 digit total
-			total = int(thing[-2:])
-			score = int(thing[0])
-	else:
+	x = thing.split("/")
+	try:
+		score = int(x[0])
+		total = int(x[1])
+		return round(score/total * 10,2)
+	except:
 		return 0
-	return round(score/total * 10,2)
 
 def main():
 	assign_list = None
