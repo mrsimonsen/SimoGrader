@@ -26,6 +26,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	 
     //test2
     setOutput();
     total++;
@@ -39,6 +40,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	 
     //test3
     setOutput();
     total++;
@@ -53,6 +55,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	 
     //test4
     setOutput();
     total++;
@@ -69,6 +72,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	 
     //test5
     setOutput();
     total++;
@@ -85,6 +89,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test6
     setOutput();
     total++;
@@ -102,6 +107,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	  
     //test7
     setOutput();
     total++;
@@ -124,11 +130,15 @@ public class Test19 {
     correct += "Stephen King        |                     54\n";
     correct += "Oscar Wilde         |                      1\n";
     result = getOutput();
-    result = result.substring(result.length()-correct.length()-545,result.length()-545);
+	//cut length of entering data
+  	result = result.substring(1832, result.length());
+	//cut off end
+	result = result.substring(0, 709);
     restoreSystem();
     if (result.equals(correct)){
       score++;
     }
+
     //test8
     setOutput();
     total++;
@@ -173,7 +183,7 @@ public class Test19 {
     //hidden test
     setOutput();
     total++;
-    setInput("Ages of Simonsens\nName\nAge\nJohn Simonsen, 31\n,Teresa Simonsen, 32\n,Emily Simonsen, 4\n-1\n");
+    setInput("Ages of Simonsens\nName\nAge\nJohn Simonsen, 31\nTeresa Simonsen, 32\nEmily Simonsen, 4\n-1\n");
     student.main(args);
     correct = "Enter a title for the data:\nYou entered: Ages of Simonsens\n\nEnter the column 1 header:\nYou entered: Name\n\nEnter the column 2 header:\nYou entered: Age\n\nEnter a data point (-1 to stop input):\nData string: John Simonsen\nData integer: 31\n\nEnter a data point (-1 to stop input):\nData string: Teresa Simonsen\nData integer: 32\n\nEnter a data point (-1 to stop input):\nData string: Emily Simonsen\nData integer: 4\n\nEnter a data point (-1 to stop input):\n\n";
     correct += "                Ages of Simonsens\n";
@@ -181,7 +191,7 @@ public class Test19 {
     correct += "--------------------------------------------\n";
     correct += "John Simonsen       |                     31\n";
     correct += "Teresa Simonsen     |                     32\n";
-    correct += "Emily Simonsen      |                      4";
+    correct += "Emily Simonsen      |                      4\n\n";
     correct += "       John Simonsen *******************************\n";
     correct += "     Teresa Simonsen ********************************\n";
     correct += "      Emily Simonsen ****\n";
@@ -193,7 +203,7 @@ public class Test19 {
 
     total++;
     setOutput();
-    setInput("Ages of Simonsens\nName\nAge\nJohn Simonsen, 27\n,Teresa Simonsen, 28\n,Emily Simonsen, 0\n-1\n");
+    setInput("Ages of Simonsens\nName\nAge\nJohn Simonsen, 27\nTeresa Simonsen, 28\nEmily Simonsen, 0\n-1\n");
     student.main(args);
     correct = "Enter a title for the data:\nYou entered: Ages of Simonsens\n\nEnter the column 1 header:\nYou entered: Name\n\nEnter the column 2 header:\nYou entered: Age\n\nEnter a data point (-1 to stop input):\nData string: John Simonsen\nData integer: 27\n\nEnter a data point (-1 to stop input):\nData string: Teresa Simonsen\nData integer: 28\n\nEnter a data point (-1 to stop input):\nData string: Emily Simonsen\nData integer: 0\n\nEnter a data point (-1 to stop input):\n\n";
     correct += "                Ages of Simonsens\n";
@@ -201,7 +211,7 @@ public class Test19 {
     correct += "--------------------------------------------\n";
     correct += "John Simonsen       |                     27\n";
     correct += "Teresa Simonsen     |                     28\n";
-    correct += "Emily Simonsen      |                      0\n";
+    correct += "Emily Simonsen      |                      0\n\n";
     correct += "       John Simonsen ***************************\n";
     correct += "     Teresa Simonsen ****************************\n";
     correct += "      Emily Simonsen \n";
@@ -210,6 +220,7 @@ public class Test19 {
     if (result.equals(correct)){
       score++;
     }
+	  	 
 
     //testing complete
     String rep = ""+ score +"/"+total;
