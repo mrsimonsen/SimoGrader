@@ -4,5 +4,5 @@ python3 grader.py 12
 #cp -r testing ../testing
 cd ..
 rm -rf Repos
-grep Daniel 12*
+grep Tyler 12*
 rm *.csv
