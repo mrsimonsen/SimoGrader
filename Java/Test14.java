@@ -79,6 +79,28 @@ public class Test14 {
     if (result.equals("There are too many spaces here. Why?")){
       score++;
     }
+	
+	//test 8
+	total++;
+	setOutput();
+	  setInput("We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\nc\nw\nf\nmore\nr\ns\nq\n");
+		correct = "Enter a sample text:\n\nYou entered: We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\n";
+   		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Number of non-whitespace characters: 181\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Number of words: 35\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Enter a word or phrase to be found:\n\"more\" instances: 5\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Edited text: We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue.\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Edited text: We'll continue our quest in space. There will be more shuttle flights and more shuttle crews and, yes, more volunteers, more civilians, more teachers in space. Nothing ends here; our hopes and our journeys continue.\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		student.main(args);
+		result = getOutput();
+	  if (result.equals(correct)){
+      score++;
+    }
 
     //hidden tests
     setOutput();
