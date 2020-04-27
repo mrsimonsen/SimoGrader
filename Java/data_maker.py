@@ -58,7 +58,7 @@ def main():
     "14":("AuthoringAssistant.java",),
     "15":("ShoppingCartPrinter.java","ItemToPurchase.java"),
     "16":("ShoppingCartManager.java","ItemToPurchase.java","ShoppingCart.java"),
-    "17":("BinaryConverter.java",),
+    "17":("BinConverter.java",),
     "18":("ParseStrings.java",),
     "19":("DataVisualizer.java",),
     "20":("CaesarCipher.java","ReadWrite.java","Support.java"),
@@ -84,7 +84,7 @@ def main():
     "16":"16OnlineShoppingCartPt2",
     "17":"17BinaryConverter",
     "18":"18ParseStrings",
-    "19":"19DataVisualizer",
+    "19":"19DataVisulation",
     "20":"20CaesarCipher",
     "21":"21Yahtzee"
 	}
