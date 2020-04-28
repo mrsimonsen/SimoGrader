@@ -49,7 +49,7 @@ public class Test20 {
     total++;
     Scanner sinput = null;
     String fname = "secret.txt";
-    sinput = ReadWrite.openFile(fname,sinput);
+    sinput = ReadWrite.open_file(fname,sinput);
     File file =	new File(fname);
     Scanner cinput	= new	Scanner(file);
 
