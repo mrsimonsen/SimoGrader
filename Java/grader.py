@@ -53,7 +53,9 @@ def gather(a):
 		os.chdir('testing')
 		os.mkdir(s.github)
 		if a.folder == "20CaesarCipher":
-			run(["cp", "..\\test.txt", f"{s.github}\\test.txt"])
+			run(["cp", os.path.join(root,"test.txt"),os.path.join(root,'testing',s.github,"test.txt")])
+			run(["cp", os.path.join(root,"secret.txt"),os.path.join(root,'testing',s.github,"secret.txt")])
+			
 		for i in a.file:
 			run(["cp", os.path.join(root,s.github,a.folder,i), os.path.join(root,'testing',s.github,i)])
 			run(["cp", os.path.join(root,a.test), os.path.join(root,'testing',s.github,a.test)])

@@ -15,10 +15,10 @@ public class Test20 {
   static private final InputStream SIn = System.in;
 
   public static void main(String[] args){
-    System.out.println(tests());
+	  System.out.println(tests());    
   }
 
-  public static String tests() throws FileNotFoundException{
+  public static String tests(){
     int total = 0;
     int score = 0;
     //test1
@@ -49,12 +49,19 @@ public class Test20 {
     total++;
     Scanner sinput = null;
     String fname = "secret.txt";
-    sinput = ReadWrite.open_file(fname,sinput);
-    File file =	new File(fname);
-    Scanner cinput	= new	Scanner(file);
+	String rout = "result";
+	String cout = "correct";
+	 try{
+		sinput = ReadWrite.open_file(fname,sinput);
+    	File file =	new File(fname);
+    	Scanner cinput	= new	Scanner(file);	 
+		rout = sinput.nextLine();
+    	cout = cinput.nextLine();
+	 }
+	  catch (FileNotFoundException e){
+		  System.out.println(e);
+	  }
 
-    String rout = sinput.nextLine();
-    String cout = cinput.nextLine();
 
     if (rout.equals(cout)){
       score++;
@@ -68,13 +75,14 @@ public class Test20 {
     setInput("4\ntest.txt\nn\n5\ny\ntext.txt\nn\n0\n");
     correct = "a:   2|**\nb:   1|*\nc:   0|\nd:   2|**\ne:   5|*****\nf:   2|**\ng:   1|*\nh:   1|*\ni:   2|**\nj:   0|\nk:   0|\nl:   2|**\nm:   0|\nn:   0|\no:   6|******\np:   0|\nq:   0|\nr:   3|***\ns:   1|*\nt:   2|**\nu:   2|**\nv:   0|\nw:   1|*\nx:   0|\ny:   2|**\nz:   0|\nWould you like to see the menu again?: \nWhat is your choice?: \nThank you for using the utility and goodbye~\n";
     result = getOutput();
-    result = result.substring(result.length()-correct.length(),result.length());
+    //result = result.substring(result.length()-correct.length(),result.length());
+    restoreSystem();
+	  System.out.println("hello");
     if (result.equals(correct)){
       score++;
     }
 
     //testing complete
-    restoreSystem();
     String rep = ""+ score +"/"+total;
     return rep;
   }
