@@ -1,16 +1,28 @@
-from grader import gather
 from subprocess import run
 from data_maker import Assignment, Student
 from data_maker import main as setup
 import SystemCommands as sc
 import shelve, os
+from time import sleep
 
+def gather(a, students):
+	for s in students:
+		os.mkdir(s.github)
+		if a.folder == "20CaesarCipher":
+			run(["cp", "test.txt", os.path.join(s.github,".")])
+			run(["cp", "secret.txt", os.path.join(s.github,".")])
+			
+		for i in a.file:
+			run(["cp", os.path.join("Repos",s.github,a.folder,i), os.path.join(s.github,".")])
+		run(["cp", a.test, os.path.join(s.github,".")])
 
 setup()
 data = shelve.open('grading_data')
-a = data['14']
+a = data['20']
 s = data['students']
 data.close()
+gather(a,s)
+
 folders = [f.name for f in os.scandir() if f.is_dir()]
 for f in folders:
 	not_found = True
@@ -29,4 +41,4 @@ for f in folders:
 			print("didn't compile")
 		os.chdir('..')
 	except:
-		print('0')
+		print('0 - error')
