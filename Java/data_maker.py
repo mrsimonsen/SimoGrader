@@ -86,7 +86,7 @@ def main():
     "18":"18ParseStrings",
     "19":"19DataVisulation",
     "20":"20CaesarCipher",
-    "21":"21Yahtzee"
+    "21":"21Yahtzee-Final"
 	}
     due_dates = {
     '00':datetime.datetime(2020, 1, 26, 23, 59, 59),
