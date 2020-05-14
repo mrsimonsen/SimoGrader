@@ -87,7 +87,7 @@ public class Test21 {
     total++;
     int[] k = {2,3,4,4,6};
     int[] c8 = {0,1,1,2,0,1};
-    int[] r8 = student.kinds(g);
+    int[] r8 = student.kinds(k);
     if (Arrays.equals(c8,r8)){
       score++;
     }
@@ -210,7 +210,7 @@ public class Test21 {
 
       //no hidden tests
       //testing complete
-      String rep = ""+ score +"/"+total;
+      String rep = "" + score +"/"+total;
       return rep;
     }
 }

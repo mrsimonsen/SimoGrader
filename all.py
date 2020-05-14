@@ -18,7 +18,7 @@ def gather(a, students):
 
 setup()
 data = shelve.open('grading_data')
-a = data['20']
+a = data['21']
 s = data['students']
 data.close()
 gather(a,s)

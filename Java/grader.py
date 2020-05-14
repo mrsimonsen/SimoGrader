@@ -53,16 +53,15 @@ def gather(a):
 		os.chdir('testing')
 		os.mkdir(s.github)
 		if a.folder == "20CaesarCipher":
-			run(["cp", os.path.join(root,"test.txt"),os.path.join(root,'testing',s.github,"test.txt")])
-			run(["cp", os.path.join(root,"secret.txt"),os.path.join(root,'testing',s.github,"secret.txt")])
+			run(["cp", os.path.join(root,"test.txt"),os.path.join(s.github,"test.txt")])
+			run(["cp", os.path.join(root,"secret.txt"),os.path.join(s.github,"secret.txt")])
 			
 		for i in a.file:
-			run(["cp", os.path.join(root,s.github,a.folder,i), os.path.join(root,'testing',s.github,i)])
-			run(["cp", os.path.join(root,a.test), os.path.join(root,'testing',s.github,a.test)])
-			os.chdir('..')
-			os.chdir(s.github)
+			run(["cp", os.path.join(root,s.github,a.folder,i), os.path.join(s.github,i)])
+			run(["cp", os.path.join(root,a.test), os.path.join(s.github,a.test)])
+			os.chdir(os.path.join('..',s.github))
 			s.submit = format_date(sc.git_log())
-		os.chdir(root)
+		os.chdir('..')
 	data['students']=students
 	data.close()
 
@@ -115,10 +114,15 @@ def grade(a):
 def string_to_math(thing):
 	x = thing.split("/")
 	try:
-		score = int(x[0])
+		if len(x[0])>2:
+			score = int(x[0][-2:])
+		else:
+			score = int(x[0])
 		total = int(x[1])
-		return round(score/total * 10,2)
+		y = round(score/total * 10,2)
+		return y
 	except:
+		print('error')
 		return 0
 
 def main():
