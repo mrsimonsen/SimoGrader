@@ -1,8 +1,8 @@
 python3 simogit.py
 cd Repos
-python3 grader.py 12
+python3 grader.py 21
 #cp -r testing ../testing
 cd ..
 rm -rf Repos
-grep Tyler 12*
-rm *.csv
+#grep Fink 18*
+#rm *.csv

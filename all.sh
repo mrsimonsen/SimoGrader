@@ -6,3 +6,5 @@ cd testing/
 cp Repos/* .
 clear
 python3 all.py
+cd ..
+rm -rf testing/
