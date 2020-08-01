@@ -13,8 +13,8 @@ sudo apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libns
 wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
 wget -O hamcrest-core-1.3.jar https://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
 wget -O junit-4.13.jar https://search.maven.org/remotecontent?filepath=junit/junit/4.13/junit-4.13.jar
-tar -xf Python-3.8.1.tgz
-cd Python-3.8.1
+tar -xf Python-3.8.5.tgz
+cd Python-3.8.5
 ./configure --enable-optimizations
 make -j4
 sudo make install
@@ -23,7 +23,7 @@ sudo apt install -y default-jre
 sudo apt install -y default-jdk
 sudo cp junit-4.13.jar /usr/lib/jvm/default-java/jre/lib/ext/junit-4.13.jar
 sudo cp hamcrest-core-1.3.jar /usr/lib/jvm/default-java/jre/lib/ext/hamcrest-core-1.3.jar
-sudo rm -rf Python-3.8.1 Python-3.8.1.tgz junit-4.13.jar hamcrest-core-1.3.jar
+sudo rm -rf Python-3.8.5 Python-3.8.5.tgz junit-4.13.jar hamcrest-core-1.3.jar
 chmod +x grade.sh
 sudo python3 -m pip install --upgrade pip
 sudo python3 -m pip install PyGithub
