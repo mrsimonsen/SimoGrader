@@ -2,32 +2,31 @@
 import csv, shelve, datetime
 #support classes
 class Assignment(object):
-	'''an assignment with a folder, file name, and due date'''
+	'''an assignment with a file name, due date, and testing file'''
 
-	def __init__(self, folder ,file, due, test):
-		self.folder = folder
+	def __init__(self, file, due, test):
 		self.file = file
 		self.due = due
 		self.test = test
 
 	def __str__(self):
-		rep = f"{self.folder}\\{self.file}\n{self.due}\n{self.test}"
+		rep = f"{self.file}\n{self.due}\n{self.test}"
 		return rep
 
 class Student(object):
-	'''a student with name, weber username, and github username'''
+	'''a student with name, class period, and github username'''
 
 	def __init__(self, name, period, github):
 		self.name = name
-		self.github = github
 		self.period = period
-		self.assignment = Assignment('error','',datetime.datetime.today(),'')
-		self.score = 0
-		self.late = True
-		self.submit = None
+    self.github = github
+		self.assignment = Assignment('error',datetime.datetime.today(),'') #default assignment object
+		self.score = 0 #default score
+		self.late = True #default late status
+		self.submit = None #default submisison time
 
 	def __str__(self):
-		rep = f"{self.name}, Period {self.period}\n{self.github}\n--Current Assignment--\n{self.assignment.folder}\\{self.assignment.file}\n{self.score} points\nSubmitted:{self.submit}\nLate = {self.late}"
+		rep = f"{self.name}, Period {self.period}\n{self.github}\n--Current Assignment--\n{self.assignment.file}\n{self.score} points\nSubmitted:{self.submit}\nLate = {self.late}"
 		return rep
 
 	def set_grade(self, assign_obj, score):
@@ -41,23 +40,6 @@ def main():
 
 	#assignment details
 	assignments = ('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15')
-	folders = {'00':'00-hello-world',
-			   '01':'01-calculator',
-			   '02':'02-fortune-cookie',
-			   '03':'03-coin-flipper',
-			   '04':'04-guess-my-number-2.0',
-			   '05':'05-dice-roller',
-			   '06':'06-counter',
-			   '07':'07-reverse-message',
-			   '08':'08-right-triangle',
-			   '09':'09-word-jumble-2.0',
-			   '10':'10-sentence-scrambler',
-			   '11':'11-character-creator',
-			   '12':'12-guess-your-number',
-			   '13':'13-critter-caretaker-2.0',
-			   '14':'14-tv-remote',
-			   '15':'15-pig-latin'
-			  }
 	file_names = {'00':'hello_world.py',
 				  '01':'calculator.py',
 				  '02':'fortune_cookie.py',
@@ -69,11 +51,11 @@ def main():
 				  '08':'right_triangle.py',
 				  '09':'WJ2.py',
 				  '10':'scrambler.py',
-				  '11':'character_creator.py',
-				  '12':'guess_AI.py',
-				  '13':'13-critter-caretaker-2.0',
-				  '14':'14-tv-remote',
-				  '15':'15-pig-latin'
+				  '11':'guess_AI.py',
+				  '12':'character_creator.py',
+				  '13':'CC2.py',
+				  '14':'tv-remote.py',
+				  '15':'pig-latin.py'
 				 }
 	due_dates = {'00':datetime.datetime(2019, 9, 1, 23, 59,59),
 				 '01':datetime.datetime(2019, 9, 8, 23, 59,59),
@@ -110,18 +92,18 @@ def main():
 			 '15': 'test_15.py',
 			}
 	for i in assignments:
-		data[i]=Assignment(folders[i],file_names[i],due_dates[i],tests[i])
+		data[i]=Assignment(file_names[i],due_dates[i],tests[i])
 
 	#student details
 	names = {}
 	students = []
 	with open('usernames - Form Responses 1.csv','r',newline='') as f:
-		#format = time,first,last,git,weber
+		#format = time,first,last,period,git
 		raw = csv.reader(f,delimiter=',',quotechar='"')
 		for row in raw:
-			if row[1] == "What is your First Name?":
+			if row[0] == "Timestamp":
 				continue#skip the first row/header
-			students.append(Student(f"{row[2]}, {row[1]}",row[3],row[4]))
+			students.append(Student(f"{row[2]}, {row[1]}",row[4],row[3]))
 	data['students'] = students
 
 	#save all the things
