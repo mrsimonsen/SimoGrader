@@ -1,7 +1,7 @@
 #chmod +x setup.sh
 #./setup.sh
 #
-# python3 version 3.8.1
+# python3 version 3.8.5
 # javac version 1.8.0_242
 # java version openjdk 1.8.0_242
 # g++ version 5.4.0
@@ -10,7 +10,7 @@
 
 sudo apt update
 sudo apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
-wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
+wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
 wget -O hamcrest-core-1.3.jar https://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
 wget -O junit-4.13.jar https://search.maven.org/remotecontent?filepath=junit/junit/4.13/junit-4.13.jar
 tar -xf Python-3.8.1.tgz
