@@ -87,7 +87,7 @@ def grade(a):
     os.chdir('testing')
     with open(f'{a.folder[:02]}report.csv','w',newline='') as f:
         w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        w.writerow(['Period','Student Name','assignment name','points earned','is late?'])
+        w.writerow(['Period','Student Name','Assignment Name','Points Earned','Is Late?'])
     folders = [f.name for f in os.scandir() if f.is_dir()]
     for f in folders:
         print(f"Grading: {f}")

@@ -2,22 +2,22 @@
 import csv, shelve, datetime
 #support classes
 class Assignment(object):
-	'''an assignment with a file name, due date, and testing file'''
+  '''an assignment with a file name, due date, and testing file'''
 
-	def __init__(self, file, due, test):
-		self.file = file
-		self.due = due
-		self.test = test
+  def __init__(self, file, due, test):
+    self.file = file
+    self.due = due
+    self.test = test
 
-	def __str__(self):
-		rep = f"{self.file}\n{self.due}\n{self.test}"
-		return rep
+  def __str__(self):
+    rep = f"{self.file}\n{self.due}\n{self.test}"
+    return rep
 
 class Student(object):
-	'''a student with name, class period, and github username'''
+  '''a student with name, class period, and github username'''
 
-	def __init__(self, name, period, github):
-		self.name = name
+  def __init__(self, name, period, github):
+    self.name = name
 		self.period = period
     self.github = github
 		self.assignment = Assignment('error',datetime.datetime.today(),'') #default assignment object
@@ -97,7 +97,7 @@ def main():
 	#student details
 	names = {}
 	students = []
-	with open('usernames - Form Responses 1.csv','r',newline='') as f:
+	with open("What's in a Username_ (Responses) - Form Responses 1.csv",'r',newline='') as f:
 		#format = time,first,last,period,git
 		raw = csv.reader(f,delimiter=',',quotechar='"')
 		for row in raw:
