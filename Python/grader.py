@@ -51,10 +51,6 @@ def intro():
 def gather(a):
 	root = os.getcwd()
 	#make sure old folder is deleted
-	try:
-		run(['rm', '-rf', 'testing'])
-	except:
-		print("old testing folder deleted")
 	os.mkdir("testing")
 	data = shelve.open('grading_data')
 	students = data['students']
