@@ -99,16 +99,16 @@ def main():
 		data[i]=Assignment(file_names[i],due_dates[i],tests[i])
 
 	#student details
-	names = {}
 	students = []
-	with open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='') as f:
+	f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
 		#format = time,first,last,period,git
-		raw = csv.reader(f,delimiter=',',quotechar='"')
-		for row in raw:
-			if row[0] == "Timestamp":
-				continue#skip the first row/header
-				students.append(Student(f"{row[2]}, {row[1]}",row[3],row[4]))
-				data['students'] = students
+	raw = csv.reader(f,delimiter=',',quotechar='"')
+	for row in raw:
+		if row[0] == "Timestamp":
+			continue#skip the first row/header
+		students.append(Student(f"{row[2]}, {row[1]}",row[3],row[4]))
+	f.close()
+	data['students'] = students
 
 	#save all the things
 	data.close()
