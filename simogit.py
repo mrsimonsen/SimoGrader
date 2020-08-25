@@ -42,7 +42,7 @@ repos = g.get_user().get_repos()
 #clone those starting with prefix
 for r in repos:
 	if pre in r.name:
-		run(["git", "clone", r.clone_url, r.name[len(pre):]])
+		run(["git", "clone", r.ssh_url, r.name[len(pre)+1:]])
 		sleep(1)
 chdir('..')
 run(["clear"])
