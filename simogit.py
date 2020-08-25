@@ -7,13 +7,13 @@ from time import sleep
 from sys import exit
 
 def verify_pre():
-	valid = False
+	notValid = True
 	p = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
 	j = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
-	while !valid:
+	while notValid:
 		pre = input("Enter repository prefix (assignment code): ")
 		if pre in (j,p):
-			valid = True
+			notValid = False
 	return pre
 
 status = ""
