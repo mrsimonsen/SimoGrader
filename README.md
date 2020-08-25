@@ -1,7 +1,7 @@
 # AutoGrader
 Autograder and testing files for CS 1030 (python), CS 1400 (Java), and CS 1410 (C++)
 
-Made for Repl.it
+Made for Ubuntu for Windows
 
 ## TOC
 * simogit.py
@@ -10,10 +10,6 @@ Made for Repl.it
 	* Contains details for the program to access GitHub, and the prefix of repos to clone.
 * setup.sh
 	* Sets up a Linux machine (empty CodeAnywhere container) with Python, Java, and C++
-    * do not run in replit, already has python 3.8.3 + openjdk 11.0.7
-    * no sudo access
-    * pip --upgrade pip, install PyGithub, python-dotenv
-    * unsure about adding hamcrest and junit to java path
 * grade.sh
 	* Runs simogit then autograde. Removes the cloned repos when finished.
 
