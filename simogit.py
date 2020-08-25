@@ -12,7 +12,7 @@ def verify_pre():
 	j = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
 	while notValid:
 		pre = input("Enter repository prefix (assignment code): ")
-		if pre in (j,p):
+		if pre in p or pre in j:
 			notValid = False
 	return pre
 
