@@ -12,8 +12,8 @@ status = ""
 load_dotenv()
 if (user := env.get('USERNAME')) == None:
 		user = input("Enter Username: ")
-if (token := env.get('PASSWORD')) == None:
-		token = input("Enter Password or Token: ")
+if (password := env.get('PASSWORD')) == None:
+		password = input("Enter Password:")
 if (org := env.get('ORG')) == None:
 		org = input("Enter Organization name or press enter to skip: ")
 if (pre := env.get('PRE')) == None:
@@ -27,7 +27,7 @@ g = Github(user, password)
 makedirs("Repos")
 #cd into folder
 chdir("Repos")
-#get list of repos 
+#get list of repos
 repos = g.get_user().get_repos()
 #clone those starting with prefix
 for r in repos:
@@ -55,5 +55,3 @@ status += "\nTest files copied"
 run(["clear"])
 print(status)
 print("\nReady to Grade!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
-
