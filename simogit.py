@@ -12,7 +12,7 @@ status = ""
 load_dotenv()
 if (user := env.get('USERNAME')) == None:
 		user = input("Enter Username: ")
-if (token := env.get('TOKEN')) == None:
+if (token := env.get('PASSWORD')) == None:
 		token = input("Enter Password or Token: ")
 if (org := env.get('ORG')) == None:
 		org = input("Enter Organization name or press enter to skip: ")
@@ -22,7 +22,7 @@ status += f"Loaded credentials for {user}\n"
 status += f"Organization: {org}\nRepo prefix: \"{pre}\""
 print(status)
 #make github object
-g = Github(token)
+g = Github(user, password)
 #makedir for clone - set name to current date time
 makedirs("Repos")
 #cd into folder
