@@ -6,6 +6,16 @@ from subprocess import run
 from time import sleep
 from sys import exit
 
+def verify_pre():
+	valid = False
+	p = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
+	j = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
+	while !valid:
+		pre = input("Enter repository prefix (assignment code): ")
+		if pre in (j,p):
+			valid = True
+	return pre
+
 status = ""
 
 #get user credentials from .env
@@ -17,7 +27,7 @@ if (password := env.get('PASSWORD')) == None:
 if (org := env.get('ORG')) == None:
 		org = input("Enter Organization name or press enter to skip: ")
 if (pre := env.get('PRE')) == None:
-		pre = input("Enter repository prefix or press enter to skip: ")
+		pre = verify_pre()
 status += f"Loaded credentials for {user}\n"
 status += f"Organization: {org}\nRepo prefix: \"{pre}\""
 print(status)
@@ -39,12 +49,10 @@ run(["clear"])
 status+="\nAll repos cloned"
 print(status)
 print("copying testing files")
-if pre == "1030-assignments-":
+if pre[2] == "p":
 	loc = "Python"
-elif pre == "1400-assignments-":
+elif pre[2] == "j":
 	loc = "Java"
-elif pre == "1410-assignments-":
-	loc = "C++"
 else:
 	print("Location not defined")
 	exit()
