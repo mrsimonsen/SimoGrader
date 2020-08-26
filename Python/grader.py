@@ -34,12 +34,12 @@ def gather(a):
 		run(['cp',  os.path.join(root,s.github,a.file), os.path.join(root,'testing',s.github,a.file)])
 		run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
 		os.chdir('..')
-                try:
-        	    os.chdir(s.github)
-                    s.submit = format_date(git_log())
-                except:
-                    print(f'{s.github} not found')
-                    students.remove(s)
+		try:
+			os.chdir(s.github)
+			s.submit = format_date(git_log())
+		except:
+			print(f'{s.github} not found')
+			students.remove(s)
 		os.chdir(root)
 	data['students']=students
 	data.close()
