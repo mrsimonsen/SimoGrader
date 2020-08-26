@@ -4,21 +4,6 @@ from data_maker import Assignment,Student
 from data_maker import main as setup
 from subprocess import run
 
-def multi_run(assign_list):
-	if assign_list == None:
-		assigns = sys.argv[1:]
-		assign_list = []
-		setup()
-		data = shelve.open('grading_data')
-		for a in assigns:
-			assign_list.append(data[a])
-		return assign_list
-	elif len(assign_list):
-		setup()
-		return assign_list
-	else:
-		return None
-
 def git_log():
 	'''get the timestamp of the latest commit'''
 	p = run(f'git log -1 --format=%ci',shell=True,capture_output=True, text=True)
@@ -28,24 +13,13 @@ def git_log():
 
 def intro():
 	setup()
-	n = True
-	if len(sys.argv)-1:
-		assign = sys.argv[1]
-		data = shelve.open('grading_data')
-		assign_obj = data[assign]
-		n = False
-	while n:
-		print("Python Grader")
-		print("This program needs to be ran from the parent directory of the collection of student repos")
-		print()
-		assign = input("What is the number of the assignment?\n")
-		try:
-			data = shelve.open('grading_data')
-			assign_obj = data[assign]
-			n = False
-		except:
-			print("That wasn't a valid assignment number!")
-		data.close()
+	print("Python Grader")
+	print("This program needs to be ran from the parent directory of the collection of student repos")
+	print()
+	assign = input("What is the number of the assignment?\n")
+        data = shelve.open('grading_data')
+        assign_obj = data[assign]
+	data.close()
 	return assign_obj
 
 def gather(a):
@@ -60,8 +34,12 @@ def gather(a):
 		run(['cp',  os.path.join(root,s.github,a.file), os.path.join(root,'testing',s.github,a.file)])
 		run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
 		os.chdir('..')
-		os.chdir(s.github)
-		s.submit = format_date(git_log())
+                try:
+        	    os.chdir(s.github)
+                    s.submit = format_date(git_log())
+                except:
+                    print(f'{s.github} not found')
+                    students.remove(s)
 		os.chdir(root)
 	data['students']=students
 	data.close()
