@@ -17,8 +17,8 @@ def intro():
 	print("This program needs to be ran from the parent directory of the collection of student repos")
 	print()
 	assign = input("What is the number of the assignment?\n")
-        data = shelve.open('grading_data')
-        assign_obj = data[assign]
+	data = shelve.open('grading_data')
+	assign_obj = data[assign]
 	data.close()
 	return assign_obj
 
