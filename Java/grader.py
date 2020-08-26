@@ -55,7 +55,7 @@ def gather(a):
 		if a.folder == "20CaesarCipher":
 			run(["cp", os.path.join(root,"test.txt"),os.path.join(s.github,"test.txt")])
 			run(["cp", os.path.join(root,"secret.txt"),os.path.join(s.github,"secret.txt")])
-			
+
 		for i in a.file:
 			run(["cp", os.path.join(root,s.github,a.folder,i), os.path.join(s.github,i)])
 			run(["cp", os.path.join(root,a.test), os.path.join(s.github,a.test)])
@@ -127,12 +127,12 @@ def string_to_math(thing):
 
 def main():
 	assign_list = None
-	if len(sys.argv)-2:
+	if len(sys.argv)< 1:
 		assign_list = multi_run(assign_list)
 		while assign_list:
 			assign_obj = assign_list.pop(0)
 			print(assign_obj)
-			print(f"--Gathering Files {assign_obj.folder}--")	
+			print(f"--Gathering Files {assign_obj.folder}--")
 			gather(assign_obj)
 			print(f'--Starting Grading--')
 			grade(assign_obj)
