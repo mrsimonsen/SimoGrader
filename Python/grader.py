@@ -3,6 +3,22 @@ import os, csv, datetime, shelve, sys
 from data_maker import Assignment,Student
 from data_maker import main as setup
 from subprocess import run
+import simogit
+
+def multi_run(assign_list):
+	if assign_list == None:
+		assigns = sys.argv[1:]
+		assign_list = []
+		setup()
+		data = shelve.open('grading_data')
+		for a in assigns:
+			assign_list.append(data[a])
+		return assign_list
+	elif len(assign_list):
+		setup()
+		return assign_list
+	else:
+		return None
 
 def git_log():
 	'''get the timestamp of the latest commit'''
@@ -14,9 +30,9 @@ def git_log():
 def intro():
 	setup()
 	print("Python Grader")
-	print("This program needs to be ran from the parent directory of the collection of student repos")
+	pre = simogit.main()
 	print()
-	assign = input("What is the number of the assignment?\n")
+	assign = pre[:2]
 	data = shelve.open('grading_data')
 	assign_obj = data[assign]
 	data.close()

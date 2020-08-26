@@ -16,50 +16,44 @@ def verify_pre():
 			notValid = False
 	return pre
 
-status = ""
+def main():
+	#get user credentials from .env
+	load_dotenv()
+	if (user := env.get('USERNAME')) == None:
+			user = input("Enter Username: ")
+	if (password := env.get('PASSWORD')) == None:
+			password = input("Enter Password:")
+	if (org := env.get('ORG')) == None:
+			org = input("Enter Organization name or press enter to skip: ")
+	if (pre := env.get('PRE')) == None:
+			pre = verify_pre()
 
-#get user credentials from .env
-load_dotenv()
-if (user := env.get('USERNAME')) == None:
-		user = input("Enter Username: ")
-if (password := env.get('PASSWORD')) == None:
-		password = input("Enter Password:")
-if (org := env.get('ORG')) == None:
-		org = input("Enter Organization name or press enter to skip: ")
-if (pre := env.get('PRE')) == None:
-		pre = verify_pre()
-status += f"Loaded credentials for {user}\n"
-status += f"Organization: {org}\nRepo prefix: \"{pre}\""
-print(status)
-#make github object
-g = Github(user, password)
-#makedir for clone - set name to current date time
-makedirs("Repos")
-#cd into folder
-chdir("Repos")
-#get list of repos
-repos = g.get_user().get_repos()
-#clone those starting with prefix
-for r in repos:
-	if pre in r.name:
-		run(["git", "clone", r.ssh_url, r.name[len(pre)+1:]])
-		sleep(1)
-chdir('..')
-run(["clear"])
-status+="\nAll repos cloned"
-print(status)
-print("copying testing files")
-if pre[2] == "p":
-	loc = "Python"
-elif pre[2] == "j":
-	loc = "Java"
-else:
-	print("Location not defined")
-	exit()
-chdir(loc)
-for f in listdir():
-	run(["cp", f, path.join('..',"Repos", f)])
-status += "\nTest files copied"
-run(["clear"])
-print(status)
-print("\nReady to Grade!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	print(f"Loaded credentials for {user}\nOrganization: {org}\nRepo prefix: \"{pre}\"")
+	#make github object
+	g = Github(user, password)
+	#makedir for clone - set name to current date time
+	makedirs("Repos")
+	#cd into folder
+	chdir("Repos")
+	#get list of repos
+	repos = g.get_user().get_repos()
+	#clone those starting with prefix
+	for r in repos:
+		if pre in r.name:
+			run(["git", "clone", r.ssh_url, r.name[len(pre)+1:]])
+			sleep(1)
+	chdir('..')
+	print("\nAll repos cloned")
+	print("copying testing files")
+	if pre[2] == "p":
+		loc = "Python"
+	elif pre[2] == "j":
+		loc = "Java"
+	else:
+		print("Location not defined")
+		exit()
+	chdir(loc)
+	for f in listdir():
+		run(["cp", f, path.join('..',"Repos", f)])
+	print("\nTest files copied")
+	return pre
