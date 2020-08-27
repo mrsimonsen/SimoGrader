@@ -3,22 +3,11 @@ import os, csv, datetime, shelve, sys
 from data_maker import Assignment,Student
 from data_maker import main as setup
 from subprocess import run
-import simogit
 
-def multi_run(assign_list):
-	if assign_list == None:
-		assigns = sys.argv[1:]
-		assign_list = []
-		setup()
-		data = shelve.open('grading_data')
-		for a in assigns:
-			assign_list.append(data[a])
-		return assign_list
-	elif len(assign_list):
-		setup()
-		return assign_list
-	else:
-		return None
+def get_assign():
+	f = open('assignment.txt','r')
+	assign = f.read()
+	return assign
 
 def git_log():
 	'''get the timestamp of the latest commit'''
@@ -30,9 +19,8 @@ def git_log():
 def intro():
 	setup()
 	print("Python Grader")
-	pre = simogit.main()
 	print()
-	assign = pre[:2]
+	assign = get_assign()
 	data = shelve.open('grading_data')
 	assign_obj = data[assign]
 	data.close()
@@ -77,15 +65,16 @@ def grade(a):
 	s = data['students']
 	data.close()
 	root = os.getcwd()
+	assign_name = get_assign()
 	os.chdir('testing')
-	with open(f'{a.test[-5:-3]}report.csv','w',newline='') as f:
+	with open(f'{assign_name}report.csv','w',newline='') as f:
 		w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		w.writerow(['Period','Student Name','Assignment Name','Points Earned','Is Late?'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
 	for f in folders:
 		print(f"Grading: {f}")
 		os.chdir(f)
-		p = run("py test.py", shell=True, capture_output=True, text=True)
+		p = run("python3 Test.py", shell=True, capture_output=True, text=True)
 		if e := p.stderr:
 			#had an error - auto fail
 			print(e)
@@ -97,15 +86,15 @@ def grade(a):
 		for student in s:
 			if student.github == f:
 				student.set_grade(a, points)
-	f = open(f'{a.test[-5:-3]}report.csv','a',newline='')
+	f = open(f'{assign_name}report.csv','a',newline='')
 	w = csv.writer(f,delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
 	s.sort(key=lambda x: x.name)
 	for i in s:
 		w.writerow([i.period,i.name,i.assignment.file[-5:-3],i.score,i.late])
-		f.close()
-		os.chdir(root)
+	f.close()
+	os.chdir(root)
 	os.chdir('..')
-	run(['cp', f"Repos/Testing/{a.file[:2]}report.csv", f"{a.file[:2]}report.csv"])
+	run(['cp', f"Repos/testing/{assign_name}report.csv", f"{assign_name}report.csv"])
 	os.chdir(root)
 
 def string_to_math(thing):
