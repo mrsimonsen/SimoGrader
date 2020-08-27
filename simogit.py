@@ -45,7 +45,7 @@ def main():
 	for r in repos:
 		if pre in r.name:
 			run(["git", "clone", r.ssh_url, r.name[len(pre)+1:]])
-			sleep(1)
+			sleep(2)
 	chdir('..')
 	print("\nAll repos cloned")
 	print("copying testing files")
