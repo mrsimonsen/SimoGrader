@@ -99,6 +99,9 @@ def grade(a):
 		w.writerow([i.period,i.name,assign_name,i.score,i.late])
 	f.close()
 	os.chdir(root)
+	data = shelve.open('grading_data')
+	data['students'] = s
+	data.close()
 	os.chdir('..')
 	run(['cp', f"Repos/testing/{assign_name}report.csv", f"{assign_name}report.csv"])
 	os.chdir(root)

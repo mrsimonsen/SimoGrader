@@ -4,8 +4,8 @@ import csv, shelve, datetime
 class Assignment(object):
 	'''an assignment with a file name, due date, and testing file'''
 
-	def __init__(self, file, due, test):
-		self.file = file
+	def __init__(self, afile, due, test):
+		self.file = afile
 		self.due = due
 		self.test = test
 
