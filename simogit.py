@@ -36,6 +36,7 @@ def main():
 	g = Github(user, password)
 	#makedir for clone - set name to current date time
 	makedirs("Repos")
+	run(['cp','assignment.txt','Repos/assignment.txt'])
 	#cd into folder
 	chdir("Repos")
 	#get list of repos
@@ -59,4 +60,6 @@ def main():
 	for f in listdir():
 		run(["cp", f, path.join('..',"Repos", f)])
 	print("\nTest files copied")
-	return pre
+
+if __name__ == "__main__":
+	main()
