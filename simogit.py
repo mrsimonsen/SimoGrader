@@ -14,6 +14,9 @@ def verify_pre():
 		pre = input("Enter repository prefix (assignment code): ")
 		if pre in p or pre in j:
 			notValid = False
+	f = open('assignment.txt','w')
+	f.write(pre[:2])
+	f.close
 	return pre
 
 def main():
