@@ -43,7 +43,7 @@ def gather(a):
 			s.submit = format_date(git_log())
 		except:
 			print(f'{s.github} not found')
-			s.sumit = "not found"
+			s.sumit = datetime.datetime.today()
 		os.chdir(root)
 	data['students']=students
 	data.close()
@@ -83,7 +83,7 @@ def grade(a):
 			#had an error - auto fail
 			print(e)
 			points = 0
-		elif notfoud:
+		elif notfound:
 			points = 0
 		else:
 			score = p.stdout
@@ -113,24 +113,11 @@ def string_to_math(thing):
 		return 0
 
 def main():
-	assign_list = None
-	if len(sys.argv) < 1:
-		assign_list = multi_run(assign_list)
-		while assign_list:
-			assign_obj = assign_list.pop(0)
-			print(assign_obj)
-			print(f"--Gathering Files {assign_obj.folder}--")
-			gather(assign_obj)
-			print(f'--Starting Grading--')
-			grade(assign_obj)
-			print(f"--{assign_obj.folder} Complete--")
-			assign_list = multi_run(assign_list)
-	else:
-		assign_obj = intro()
-		print("--Gathering Files--")
-		gather(assign_obj)
-		print('--Starting Grading--')
-		grade(assign_obj)
+	assign_obj = intro()
+	print("--Gathering Files--")
+	gather(assign_obj)
+	print('--Starting Grading--')
+	grade(assign_obj)
 	print("--Testing Complete--")
 
 if __name__ == '__main__':
