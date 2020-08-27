@@ -43,7 +43,7 @@ def gather(a):
 			s.submit = format_date(git_log())
 		except:
 			print(f'{s.github} not found')
-			students.remove(s)
+			s.sumit = "not found"
 		os.chdir(root)
 	data['students']=students
 	data.close()
@@ -72,12 +72,18 @@ def grade(a):
 		w.writerow(['Period','Student Name','Assignment Name','Points Earned','Is Late?'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
 	for f in folders:
+		notfound = False
 		print(f"Grading: {f}")
-		os.chdir(f)
-		p = run("python3 Test.py", shell=True, capture_output=True, text=True)
+		try:
+			os.chdir(f)
+			p = run("python3 Test.py", shell=True, capture_output=True, text=True)
+		except:
+			notfound = True
 		if e := p.stderr:
 			#had an error - auto fail
 			print(e)
+			points = 0
+		elif notfoud:
 			points = 0
 		else:
 			score = p.stdout
@@ -90,7 +96,7 @@ def grade(a):
 	w = csv.writer(f,delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
 	s.sort(key=lambda x: x.name)
 	for i in s:
-		w.writerow([i.period,i.name,i.assignment.file[-5:-3],i.score,i.late])
+		w.writerow([i.period,i.name,assign_name,i.score,i.late])
 	f.close()
 	os.chdir(root)
 	os.chdir('..')
