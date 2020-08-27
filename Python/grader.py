@@ -43,7 +43,7 @@ def gather(a):
 			s.submit = format_date(git_log())
 		except:
 			print(f'{s.github} not found')
-			s.sumit = datetime.datetime.today()
+			s.submit = datetime.datetime.today()
 		os.chdir(root)
 	data['students']=students
 	data.close()
