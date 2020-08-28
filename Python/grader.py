@@ -86,7 +86,7 @@ def grade(a):
 		elif notfound:
 			points = 0
 		else:
-			score = p.stdout
+			score = p.stdout.strip()
 			points = string_to_math(score)
 		os.chdir('..')
 		for student in s:
@@ -108,12 +108,9 @@ def grade(a):
 
 def string_to_math(thing):
 	x = thing.split("/")
-	try:
-		x = int(x[0])
-		x = int(x[1])
-		return round(score/total * 10,2)
-	except:
-		return 0
+	score = int(x[0])
+	total = int(x[1])
+	return round(score/total * 10,2)
 
 def main():
 	assign_obj = intro()
