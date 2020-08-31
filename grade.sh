@@ -3,6 +3,6 @@ cd Repos
 python3 grader.py
 #cp -r testing ../testing
 cd ..
-rm -rf Repos assignment.txt
+rm -rf assignment.txt
 #grep Fink 18*
 #rm *.csv
