@@ -29,9 +29,9 @@ def main():
 
 	total += 1
 	#def test_3(self):
-	inputs = "0\n47\n"
+	inputs = "0\n50\n"
 	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
-	correct += "You guessed it! The number was 47.\nAnd it only took you 1 tries!\n"
+	correct += "You guessed it! The number was 50.\nAnd it only took you 1 tries!\n"
 	result = catchOutput(inputs)
 	if result == correct:
 		score += 1
@@ -45,7 +45,7 @@ def main():
 	correct += "Higher...\nTake guess number 4:\n"
 	correct += "Higher...\nTake guess number 5:\n"
 	correct += "Lower...\nTake guess number 6:\n"
-	correct += "You ran out of tries! The number was 62.\n"
+	correct += "You ran out of tries! The number was 18.\n"
 	result = catchOutput(inputs)
 	if result == correct:
 		score += 1
@@ -53,7 +53,7 @@ def main():
 	#hidden tests
 	total += 1
 	def test_4(self):
-		inputs = "14\n50\n75\n90\n95\n93\n"
+		inputs = "20\n50\n75\n90\n95\n93\n"
 		correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
 		correct += "Higher...\nTake guess number 2:\n" 
 		correct += "Higher...\nTake guess number 3:\n"
