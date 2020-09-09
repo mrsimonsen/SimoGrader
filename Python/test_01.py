@@ -1,6 +1,6 @@
 from subprocess import run
 from os import getcwd
-file = "hello_world.py"
+file = "calculator.py"
 
 # setup methods
 def catchOutput(inputs=None, seed=''):
