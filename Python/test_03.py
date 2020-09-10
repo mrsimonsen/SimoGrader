@@ -23,6 +23,7 @@ def main():
 	#def test_2(self):
 	inputs = "10\n"
 	correct = "How many times do you want to flip the coin?\n"
+	correct += "Press enter to see the results.\n"
 	correct += "The coin was flipped 10 times.\nHeads: 5\tTails: 5\n"
 	result = catchOutput(inputs, '1')
 	if result == correct:
@@ -32,6 +33,7 @@ def main():
 	#def test_3(self):
 	inputs = "100\n"
 	correct = "How many times do you want to flip the coin?\n"
+	correct += "Press enter to see the results.\n"
 	correct += "The coin was flipped 100 times.\nHeads: 50\tTails: 50\n"
 	result = catchOutput(inputs, '0')
 	if result == correct:
@@ -42,6 +44,7 @@ def main():
 	total += 1
 	inputs = "10\n"
 	correct = "How many times do you want to flip the coin?\n"
+	correct += "Press enter to see the results.\n"
 	correct += "The coin was flipped 10 times.\nHeads: 7\tTails: 3\n"
 	result = catchOutput(inputs, '14')
 	if result == correct:
