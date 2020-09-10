@@ -73,14 +73,14 @@ def main():
 	total += 2
 	inputs = "guess\n?\n?\npython\n"
 	correct = "\t\tWelcome to Word Jumble!\n\n\tUnscramble the letters to make a word.\n(Press the enter key at the prompt to quit.)\n\n"
-	correct += "The jumble is: thpoyn\n\nYour guess:\n"
+	correct += "The jumble is: pyotnh\n\nYour guess:\n"
 	correct += "Sorry, that's not it.\nType '?' if you want a hint.\n"
 	correct += "Your guess:\na slithery coding language\n"
 	correct += "Your guess:\na slithery coding language\n"
 	correct += "Your guess:\nThat's it! You guessed it!\n"
 	correct += "Try to not use a hint next time.\n"
 	correct += "Thanks for playing.\n"
-	result = catchOutput(inputs, '5')
+	result = catchOutput(inputs, '2')
 	if result == correct:
 		score += 2
 		
