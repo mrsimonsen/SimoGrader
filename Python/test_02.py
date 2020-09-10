@@ -15,9 +15,10 @@ def main():
 	total += 1
 	#def test_1(self):
 	correct = "You crack open your cookie and your fortune falls out:\n"
-	correct += "Help! I’m being held prisoner in a fortune cookie bakery!\n"
+	correct1 = correct + "Help! I’m being held prisoner in a fortune cookie bakery!\n"
+	correct2 = correct + "Help! I'm being help prisoner in a fortune cookie bakery!\n"
 	result = catchOutput(seed = "2")
-	if result == correct:
+	if result == correct1 or result == correct2:
 		score += 1
 
 	total += 1
