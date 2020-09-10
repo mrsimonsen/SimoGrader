@@ -25,7 +25,7 @@ def main():
 	#def test_2(self):
 	inputs = "blah\n\n"
 	correct = "\t\tWelcome to Word Jumble!\n\n\tUnscramble the letters to make a word.\n(Press the enter key at the prompt to quit.)\n\n"
-	correct += "The jumble is: thpoyn\n\nYour guess:\n"
+	correct += "The jumble is: swaenr\n\nYour guess:\n"
 	correct += "Sorry, that's not it.\nType '?' if you want a hint.\n"
 	correct += "Your guess:\nGoodbye.\n"
 	result = catchOutput(inputs, '5')
@@ -36,18 +36,18 @@ def main():
 	#def test_3(self):
 	inputs = "?\n\n"
 	correct = "\t\tWelcome to Word Jumble!\n\n\tUnscramble the letters to make a word.\n(Press the enter key at the prompt to quit.)\n\n"
-	correct += "The jumble is: bjlemu\n\nYour guess:\n"
+	correct += "The jumble is: ljbuem\n\nYour guess:\n"
 	correct += "the name of the game\n"
 	correct += "Your guess:\nGoodbye.\n"
-	result = catchOutput(inputs, '0')
+	result = catchOutput(inputs, '1')
 	if result == correct:
 		score += 1
 		
 	total += 1
 	#def test_4(self):
-	inputs="answer\n"
+	inputs="python\n"
 	correct = "\t\tWelcome to Word Jumble!\n\n\tUnscramble the letters to make a word.\n(Press the enter key at the prompt to quit.)\n\n"
-	correct += "The jumble is: anesrw\n\nYour guess:\n"
+	correct += "The jumble is: pyotnh\n\nYour guess:\n"
 	correct += "That's it! You guessed it!\n"
 	correct += "Good job not using a hint!\n"
 	correct += "Thanks for playing.\n"
@@ -59,13 +59,13 @@ def main():
 	#def test_5(self):
 	inputs="?\ndifficult\n"
 	correct = "\t\tWelcome to Word Jumble!\n\n\tUnscramble the letters to make a word.\n(Press the enter key at the prompt to quit.)\n\n"
-	correct += "The jumble is: icdultiff\n\nYour guess:\n"
+	correct += "The jumble is: udflctfii\n\nYour guess:\n"
 	correct += "not easy\n"
 	correct += "Your guess:\n"
 	correct += "That's it! You guessed it!\n"
 	correct += "Try to not use a hint next time.\n"
 	correct += "Thanks for playing.\n"
-	result = catchOutput(inputs, '1')
+	result = catchOutput(inputs, '0')
 	if result == correct:
 		score += 1
 		
