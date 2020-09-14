@@ -15,8 +15,8 @@ def main():
 	total += 1
 	#def test_1(self):
 	correct = "You crack open your cookie and your fortune falls out:\n"
-	correct1 = correct + "Help! I’m being held prisoner in a fortune cookie bakery!\n"
-	correct2 = correct + "Help! I'm being help prisoner in a fortune cookie bakery!\n"
+	correct1 = correct + "Help! I'm being held prisoner in a fortune cookie bakery!\n"
+	correct2 = correct + "Help! I’m being held prisoner in a fortune cookie bakery!\n"
 	result = catchOutput(seed = "2")
 	if result == correct1 or result == correct2:
 		score += 1
@@ -40,17 +40,19 @@ def main():
 	total += 1	
 	#def test_4(self):
 	correct = "You crack open your cookie and your fortune falls out:\n"
-	correct += "You will read this and say \"Geez! I could come wp with better fortunes than that!\"\n"
+	correct1 = correct + "You will read this and say \"Geez! I could come up with better fortunes than that!\"\n"
+	correct2 = correct + "You will read this and say \"Geez! I could come wp with better fortunes than that!\"\n"
 	result = catchOutput(seed = "0")
-	if result == correct:
+	if result == correct1 or result == correct2:
 		score += 1
 	
 	total += 1
 	#def test_5(self):
 	correct = "You crack open your cookie and your fortune falls out:\n"
-	correct += "This cookie is never gonna give you up, never gonna let your down.\n"
+	correct1 = correct + "This cookie is never gonna give you up, never gonna let you down.\n"
+	correct2 = correct + "This cookie is never gonna give you up, never gonna let your down.\n"
 	result = catchOutput(seed = "5")
-	if result == correct:
+	if result == correct1 or result == correct2:
 		score += 1
 		
 	#hidden tests
