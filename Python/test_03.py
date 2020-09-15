@@ -43,7 +43,7 @@ def main():
 	inputs = "10\n"
 	correct = "How many times do you want to flip the coin?\n"
 	correct1 = correct + "The coin was flipped 10 times.\nHeads: 7\tTails: 3\n"
-	correct2 = correct + "The coin was flipped 10 times.\nHeads: 7\tTails: 3\n"
+	correct2 = correct + "The coin was flipped 10 times.\nHeads: 3\tTails: 7\n"
 	result = catchOutput(inputs, '14')
 	if result == correct1 or result == correct2:
 		score += 1
