@@ -1,7 +1,6 @@
 *.class
 __pycache__
 .pytest_cache
-*report.csv
 Repos/
 */grading_data
 gradign_data
