@@ -28,7 +28,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Hardyman, Nathanial",03,0.0,True
 7,"Harris, Marley",03,2.5,True
 4,"Hartner, Nathan",03,0.0,True
-8,"Hayward, Isaac",03,0.0,True
+8,"Hayward, Isaac",03,10.0,True
 8,"Hibbert, Conner",03,0.0,True
 7,"Humphreys, Chloe",03,0.0,True
 8,"Hunt, Brandon",03,0.0,True
@@ -67,7 +67,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Rosas, Christopher",03,0.0,True
 7,"Rosas, Kassandra",03,0.0,True
 8,"Salazar, Anastasia ",03,0.0,True
-8,"Saoit, Jeniene",03,0.0,True
+8,"Saoit, Jeniene",03,10.0,True
 4,"Schofield, Jayden",03,0.0,True
 4,"Schulz, Tobias",03,0.0,True
 4,"Slater, Nathan",03,0.0,True
