@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Akelbek, Sabina",01,10.0,False
 7,"Ashton, Tannen",01,0.0,True
-6,"Avendano, Cristian",01,0.0,False
+6,"Avendano, Cristian",01,10.0,True
 8,"Bench, Owen",01,0.0,True
 4,"Bingham, Kaycee",01,10.0,False
 8,"Bolton, Elijah",01,10.0,True
@@ -23,7 +23,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 7,"Gill, Felicity",01,10.0,False
 8,"Gomez-Pritt, Natalia",01,10.0,False
 8,"Grether, Max",01,10.0,True
-4,"Guarin, Sheik",01,0.0,False
+4,"Guarin, Sheik",01,0.0,True
 7,"Hansen, Hayden",01,10.0,False
 6,"Hardyman, Nathanial",01,10.0,True
 7,"Harris, Marley",01,10.0,True
