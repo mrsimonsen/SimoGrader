@@ -6,7 +6,7 @@ file = "dice_roller.py"
 # setup methods
 def catchOutput(inputs=None, seed=''):
 	cwd = getcwd()
-	p = run(f"python3 {Tests.file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
 	return p.stdout
 
 def main():
