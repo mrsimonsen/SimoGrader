@@ -22,7 +22,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 8,"Garcia, Rudy",03,10.0,True
 7,"Gill, Felicity",03,10.0,True
 8,"Gomez-Pritt, Natalia",03,10.0,True
-8,"Grether, Max",03,0.0,True
+8,"Grether, Max",03,10.0,True
 4,"Guarin, Sheik",03,0.0,True
 7,"Hansen, Hayden",03,10.0,True
 6,"Hardyman, Nathanial",03,0.0,True
@@ -43,7 +43,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 8,"Kohl, Gavin",03,0.0,True
 8,"Lappi, Sophie",03,0.0,True
 6,"Leonard, Kaitlyn",03,0.0,True
-8,"Lopez, Alair",03,0.0,True
+8,"Lopez, Alair",03,2.5,True
 6,"Marshall, Zach",03,10.0,True
 6,"Mason, Hyrum",03,10.0,True
 4,"Mayhue, Logan",03,10.0,True
@@ -58,8 +58,8 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Nyre, Kendall",03,0.0,True
 7,"Patton, Caiden",03,2.5,True
 4,"Peterson, Elliott",03,7.5,True
-6,"Phiromnut, Jasmine",03,0.0,True
-8,"Plane, Hallie",03,0.0,True
+6,"Phiromnut, Jasmine",03,2.5,True
+8,"Plane, Hallie",03,2.5,True
 6,"Pogue, Joey",03,0.0,True
 4,"Powell, Thaddeus",03,0.0,True
 4,"Provenzano, Anthony",03,7.5,True
