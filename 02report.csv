@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Akelbek, Sabina",02,10.0,False
 7,"Ashton, Tannen",02,0.0,True
-6,"Avendano, Cristian",02,0.0,True
+6,"Avendano, Cristian",02,10.0,True
 8,"Bench, Owen",02,0.0,True
 4,"Bingham, Kaycee",02,10.0,True
 8,"Bolton, Elijah",02,8.0,True
@@ -30,7 +30,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Hartner, Nathan",02,0.0,True
 8,"Hayward, Isaac",02,10.0,False
 8,"Hibbert, Conner",02,10.0,False
-7,"Humphreys, Chloe",02,0.0,False
+7,"Humphreys, Chloe",02,10.0,True
 8,"Hunt, Brandon",02,10.0,True
 6,"Jacobsen, Rowan",02,2.0,False
 4,"Jasmin, Keanna ",02,2.0,False
@@ -55,7 +55,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 7,"Nguyen, Julie",02,0.0,True
 7,"Nielsen, Amond",02,10.0,False
 8,"Nye, Carson",02,10.0,False
-4,"Nyre, Kendall",02,2.0,False
+4,"Nyre, Kendall",02,6.0,True
 7,"Patton, Caiden",02,10.0,True
 4,"Peterson, Elliott",02,10.0,False
 6,"Phiromnut, Jasmine",02,10.0,False
@@ -79,7 +79,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Swenson, Kyle",02,10.0,False
 6,"Tiede, Kaytee",02,10.0,False
 6,"Tracy, Kyle",02,10.0,False
-8,"Vaca, Sami",02,2.0,True
+8,"Vaca, Sami",02,0.0,True
 4,"Wageman, Makayla",02,2.0,False
 4,"Watt, Coleton",02,10.0,False
 7,"Watts, Carter",02,0.0,True

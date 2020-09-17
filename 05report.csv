@@ -19,7 +19,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 7,"Gable, Ethan",05,0.0,False
 4,"Gaither, Brandon",05,0.0,False
 6,"Garcia, Noah ",05,0.0,False
-8,"Garcia, Rudy",05,7.5,False
+8,"Garcia, Rudy",05,10.0,False
 7,"Gill, Felicity",05,0.0,False
 8,"Gomez-Pritt, Natalia",05,0.0,False
 8,"Grether, Max",05,0.0,False
@@ -77,7 +77,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 8,"Strauch, Raphael",05,0.0,False
 4,"Suarez, Tristan",05,0.0,False
 6,"Swenson, Kyle",05,0.0,False
-6,"Tiede, Kaytee",05,0,False
+6,"Tiede, Kaytee",05,7.5,False
 6,"Tracy, Kyle",05,0.0,False
 8,"Vaca, Sami",05,0.0,False
 4,"Wageman, Makayla",05,0.0,False

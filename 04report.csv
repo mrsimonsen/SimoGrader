@@ -1,18 +1,18 @@
 Period,Student Name,Assignment Name,Points Earned,Is Late?
-6,"Akelbek, Sabina",04,2.0,False
+6,"Akelbek, Sabina",04,10.0,False
 7,"Ashton, Tannen",04,0.0,False
 6,"Avendano, Cristian",04,0.0,False
 8,"Bench, Owen",04,0.0,False
 4,"Bingham, Kaycee",04,0.0,False
 8,"Bolton, Elijah",04,0.0,False
-7,"Brown, Johnathan",04,0.0,False
+7,"Brown, Johnathan",04,10.0,False
 8,"Carrion, Joshua",04,0.0,False
 7,"Castillo, Tony",04,10.0,False
-6,"Cote, Austin",04,0.0,False
+6,"Cote, Austin",04,2.0,False
 7,"Cox, Shotaro",04,0.0,False
 7,"Davis, Croydon",04,10.0,False
 4,"Del Valle, Arielle",04,0.0,False
-7,"Dickson, Luke",04,0.0,False
+7,"Dickson, Luke",04,10.0,False
 6,"Edwards, Jonathan",04,0.0,False
 6,"Edwards, Talmage",04,0.0,False
 6,"Ford, Riley",04,0.0,False
@@ -43,10 +43,10 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 8,"Kohl, Gavin",04,0.0,False
 8,"Lappi, Sophie",04,0.0,False
 6,"Leonard, Kaitlyn",04,0.0,False
-8,"Lopez, Alair",04,0.0,False
+8,"Lopez, Alair",04,10.0,False
 6,"Marshall, Zach",04,10.0,False
-6,"Mason, Hyrum",04,0.0,False
-4,"Mayhue, Logan",04,2.0,False
+6,"Mason, Hyrum",04,10.0,False
+4,"Mayhue, Logan",04,10.0,False
 4,"Moore, Elliott",04,0.0,False
 4,"Morrison, Alyssa",04,0.0,False
 6,"Moyano, Sebastian",04,10.0,False
@@ -58,13 +58,13 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Nyre, Kendall",04,0.0,False
 7,"Patton, Caiden",04,0.0,False
 4,"Peterson, Elliott",04,10.0,False
-6,"Phiromnut, Jasmine",04,2.0,False
+6,"Phiromnut, Jasmine",04,8.0,False
 8,"Plane, Hallie",04,0.0,False
 6,"Pogue, Joey",04,0.0,False
 4,"Powell, Thaddeus",04,10.0,False
 4,"Provenzano, Anthony",04,0.0,False
 8,"Remley, Traiven ",04,0.0,False
-6,"Rosas, Christopher",04,0.0,False
+6,"Rosas, Christopher",04,2.0,False
 7,"Rosas, Kassandra",04,0.0,False
 8,"Salazar, Anastasia ",04,0.0,False
 8,"Saoit, Jeniene",04,0.0,False
