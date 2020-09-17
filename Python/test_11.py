@@ -18,10 +18,10 @@ def main():
 	#def test_1(self):
 	inputs = "yo\nLOW\n"
 	correct = INTRO
-	correct += "For try 1 I guess 14\n"
+	correct += "For try 1 I guess 47\n"
 	correct += "Am I 'high', 'low', or 'correct'?\n"
 	correct += "Am I 'high', 'low', or 'correct'?\n"
-	result = catchOutput(inputs, '14')[:len(correct)]
+	result = catchOutput(inputs, '0')[:len(correct)]
 	if result == correct:
 		score += 1
 	
