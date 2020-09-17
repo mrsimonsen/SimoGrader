@@ -34,7 +34,7 @@ def main():
 	inputs = "3\n4\n"
 	correct = "How many dice would you like to roll?\nHow many sides do the dice have?\nRolling 3x d4.\n"
 	correct += "Roll 1: 2\nRoll 2: 1\nRoll 3: 3\n"
-	correct += "Total: 5\n"
+	correct += "Total: 6\n"
 	result = catchOutput(inputs, '1')
 	if result == correct:
 		score += 1
