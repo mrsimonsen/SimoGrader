@@ -74,12 +74,12 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Steed, Ryan",02,10.0,False
 8,"Strand, Blake",02,10.0,False
 6,"Strauch, John",02,0.0,True
-8,"Strauch, Raphael",02,0.0,True
+8,"Strauch, Raphael",02,10.0,True
 4,"Suarez, Tristan",02,0.0,True
 6,"Swenson, Kyle",02,10.0,False
 6,"Tiede, Kaytee",02,10.0,False
 6,"Tracy, Kyle",02,10.0,False
-8,"Vaca, Sami",02,0.0,True
+8,"Vaca, Sami",02,8.0,True
 4,"Wageman, Makayla",02,2.0,False
 4,"Watt, Coleton",02,10.0,False
 7,"Watts, Carter",02,0.0,True
