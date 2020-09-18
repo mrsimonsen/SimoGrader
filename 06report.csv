@@ -35,7 +35,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Jacobsen, Rowan",06,0.0,False
 4,"Jasmin, Keanna ",06,0.0,False
 4,"Jensen, Evan",06,0.0,False
-4,"Jeppsen, Carter",06,0.0,False
+4,"Jeppsen, Carter",06,10.0,False
 7,"Johnson, Alexis",06,0.0,False
 6,"Johnson, Lillyan",06,0.0,False
 6,"Kelley, Kaleb",06,0.0,False
@@ -77,7 +77,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 8,"Strauch, Raphael",06,0.0,False
 4,"Suarez, Tristan",06,0.0,False
 6,"Swenson, Kyle",06,0.0,False
-6,"Tiede, Kaytee",06,0.0,False
+6,"Tiede, Kaytee",06,2.5,False
 6,"Tracy, Kyle",06,0.0,False
 8,"Vaca, Sami",06,0.0,False
 4,"Wageman, Makayla",06,0.0,False
