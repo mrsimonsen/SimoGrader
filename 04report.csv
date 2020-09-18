@@ -20,7 +20,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Gaither, Brandon",04,0.0,False
 6,"Garcia, Noah ",04,10.0,False
 8,"Garcia, Rudy",04,10.0,False
-7,"Gill, Felicity",04,0.0,False
+7,"Gill, Felicity",04,10.0,False
 8,"Gomez-Pritt, Natalia",04,10.0,False
 8,"Grether, Max",04,0.0,False
 4,"Guarin, Sheik",04,0.0,False
@@ -29,7 +29,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 7,"Harris, Marley",04,0.0,False
 4,"Hartner, Nathan",04,0.0,False
 8,"Hayward, Isaac",04,0.0,False
-8,"Hibbert, Conner",04,0.0,False
+8,"Hibbert, Conner",04,10.0,False
 7,"Humphreys, Chloe",04,0.0,False
 8,"Hunt, Brandon",04,0.0,False
 6,"Jacobsen, Rowan",04,0.0,False
@@ -50,21 +50,21 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Moore, Elliott",04,0.0,False
 4,"Morrison, Alyssa",04,0.0,False
 6,"Moyano, Sebastian",04,10.0,False
-8,"Nay, Andrew",04,0.0,False
+8,"Nay, Andrew",04,10.0,False
 8,"Nettle, Mikayla",04,0.0,False
 7,"Nguyen, Julie",04,0.0,False
 7,"Nielsen, Amond",04,10.0,False
 8,"Nye, Carson",04,0.0,False
 4,"Nyre, Kendall",04,0.0,False
-7,"Patton, Caiden",04,0.0,False
+7,"Patton, Caiden",04,10.0,False
 4,"Peterson, Elliott",04,10.0,False
 6,"Phiromnut, Jasmine",04,8.0,False
 8,"Plane, Hallie",04,0.0,False
 6,"Pogue, Joey",04,0.0,False
 4,"Powell, Thaddeus",04,10.0,False
-4,"Provenzano, Anthony",04,0.0,False
-8,"Remley, Traiven ",04,0.0,False
-6,"Rosas, Christopher",04,2.0,False
+4,"Provenzano, Anthony",04,10.0,False
+8,"Remley, Traiven ",04,10.0,False
+6,"Rosas, Christopher",04,0.0,False
 7,"Rosas, Kassandra",04,0.0,False
 8,"Salazar, Anastasia ",04,0.0,False
 8,"Saoit, Jeniene",04,0.0,False
@@ -72,7 +72,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 4,"Schulz, Tobias",04,0.0,False
 4,"Slater, Nathan",04,0.0,False
 4,"Steed, Ryan",04,10.0,False
-8,"Strand, Blake",04,2.0,False
+8,"Strand, Blake",04,10.0,False
 6,"Strauch, John",04,0.0,False
 8,"Strauch, Raphael",04,0.0,False
 4,"Suarez, Tristan",04,0.0,False

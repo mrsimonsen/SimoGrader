@@ -48,7 +48,7 @@ Period,Student Name,Assignment Name,Points Earned,Is Late?
 6,"Mason, Hyrum",01,10.0,False
 4,"Mayhue, Logan",01,10.0,False
 4,"Moore, Elliott",01,10.0,True
-4,"Morrison, Alyssa",01,0.0,False
+4,"Morrison, Alyssa",01,10.0,True
 6,"Moyano, Sebastian",01,10.0,True
 8,"Nay, Andrew",01,10.0,False
 8,"Nettle, Mikayla",01,0.0,True
