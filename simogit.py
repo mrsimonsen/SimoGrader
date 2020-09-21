@@ -8,12 +8,18 @@ from sys import exit
 import sys
 
 def verify_pre():
-	notValid = True
+	notValid = False
 	p = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
 	j = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
-	if pre:= sys.argv[1]:
+	pre = None
+	try:
+		f = open('assignment.txt','r')
+		pre = f.read()
+		f.close()
 		print(f"Running for repo prefix {pre}")
-		notValid = False
+	except:
+		notValid=True
+
 	while notValid:
 		pre = input("Enter repository prefix (assignment code): ")
 		if pre in p or pre in j:
