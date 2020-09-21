@@ -1,5 +1,5 @@
 #python grader
-import os, csv, datetime, shelve, sys
+import os, csv, shelve, sys
 from data_maker import Assignment,Student
 from data_maker import main as setup
 from subprocess import run
@@ -8,13 +8,6 @@ def get_assign():
 	f = open('assignment.txt','r')
 	assign = f.read()
 	return assign
-
-def git_log():
-	'''get the timestamp of the latest commit'''
-	p = run(f'git log -1 --format=%ci',shell=True,capture_output=True, text=True)
-	if e := p.stderr:
-		print(e)
-	return p.stdout
 
 def intro():
 	setup()
@@ -37,28 +30,9 @@ def gather(a):
 		os.mkdir(s.github)
 		run(['cp',  os.path.join(root,s.github,a.file), os.path.join(root,'testing',s.github,a.file)])
 		run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
-		os.chdir('..')
-		try:
-			os.chdir(s.github)
-			s.submit = format_date(git_log())
-		except:
-			print(f'{s.github} not found')
-			s.submit = datetime.datetime.today()
 		os.chdir(root)
 	data['students']=students
 	data.close()
-
-def format_date(raw):
-	#format '2019-08-28 14:46:11 -0600'
-	#index:  0123456789012345678901234
-	year = int(raw[:4])
-	month = int(raw[5:7])
-	day = int(raw[8:10])
-	hour = int(raw[11:13])
-	minute = int(raw[14:16])
-	second = int(raw[17:19])
-	date = datetime.datetime(year, month, day, hour, minute, second)
-	return date
 
 def grade(a):
 	data = shelve.open('grading_data')
@@ -69,7 +43,7 @@ def grade(a):
 	os.chdir('testing')
 	with open(f'{assign_name}report.csv','w',newline='') as f:
 		w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-		w.writerow(['Period','Student Name','Assignment Name','Points Earned','Is Late?'])
+		w.writerow(['Period','Student Name','Assignment Name','Points Earned'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
 	for f in folders:
 		notfound = False
@@ -96,7 +70,7 @@ def grade(a):
 	w = csv.writer(f,delimiter=',',quotechar='"', quoting=csv.QUOTE_MINIMAL)
 	s.sort(key=lambda x: x.name)
 	for i in s:
-		w.writerow([i.period,i.name,assign_name,i.score,i.late])
+		w.writerow([i.period,i.name,assign_name,i.score])
 	f.close()
 	os.chdir(root)
 	data = shelve.open('grading_data')
