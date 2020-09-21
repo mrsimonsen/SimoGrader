@@ -1,44 +1,27 @@
 from subprocess import run
-from data_maker import Assignment, Student
-from data_maker import main as setup
-import SystemCommands as sc
-import shelve, os
-from time import sleep
+from os import chdir
+p = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
+j = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
+assignments = []
+notFinished = True
 
-def gather(a, students):
-	for s in students:
-		os.mkdir(s.github)
-		if a.folder == "20CaesarCipher":
-			run(["cp", "test.txt", os.path.join(s.github,".")])
-			run(["cp", "secret.txt", os.path.join(s.github,".")])
-			
-		for i in a.file:
-			run(["cp", os.path.join("Repos",s.github,a.folder,i), os.path.join(s.github,".")])
-		run(["cp", a.test, os.path.join(s.github,".")])
-
-setup()
-data = shelve.open('grading_data')
-a = data['21']
-s = data['students']
-data.close()
-gather(a,s)
-
-folders = [f.name for f in os.scandir() if f.is_dir()]
-for f in folders:
-	not_found = True
-	for i in s:
-		if i.github == f:
-			print(f"Gradign {i.name}")
-			#print(i.github)
-			not_found = False
-	if not_found:
-		continue
-	try:
-		os.chdir(f)
-		if sc.compile_java(a.test):
-			print(sc.run_java(a.test[:-5]))
+while notFinished:
+	notValid = True
+	while notValid:
+		pre = input("Enter repository prefix (assignment code)(type 'done' when finished): ")
+		if (pre in p or pre in j) or pre == 'done':
+			notValid = False
 		else:
-			print("didn't compile")
-		os.chdir('..')
-	except:
-		print('0 - error')
+			print(f"\"{pre}\" is not valid, try again.")
+	if pre != 'done':
+		assignments.append(pre)
+	else: 
+		notFinished = False
+	print(assignments)
+run(['python3','simogit.py',assignments[0]])
+for i in assignments:
+	f = open('assignment.txt','w')
+	f.write(i)
+	f.close()
+	run(['./all.sh'])
+run(['rm','-rf','Repos','assignment.txt'])
