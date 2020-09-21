@@ -20,7 +20,7 @@ while notFinished:
 	print(assignments)
 for i in assignments:
 	f = open('assignment.txt','w')
-	f.write(i[:2])
+	f.write(i)
 	f.close()
 	system('./all.sh')
 print('Operation Complete',assignments)
