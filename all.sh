@@ -1,6 +1,5 @@
-cp assignment.txt Repos/.
+python3 simogit.py
 cd Repos
 python3 grader.py
-rm -rf testing
 cd ..
-
+rm -rf Repos assignment.txt
