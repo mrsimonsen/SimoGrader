@@ -21,8 +21,8 @@ def verify_pre():
 		notValid=True
 
 	while notValid:
-		pre = input("Enter repository prefix (assignment code): ")
-		if pre in p or pre in j:
+		pre = input("Enter repository prefix (assignment code): ").upper()
+		if pre in p or pre in j or pre.upper() == 'CSP':
 			notValid = False
 	f = open('assignment.txt','w')
 	f.write(pre)
