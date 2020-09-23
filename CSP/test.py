@@ -29,7 +29,7 @@ def main():
 	d = inputs.split('\n')
 	name = d[0]
 	
-	correct = f"Hi. What's your name?\nHello {name}! I'm going to calculate your stats on the planets in our Solar System.\nFirst I'll need some information, let's start with your birthday.\nWhat year were your born (YYYY)?\nWhat month were you born in (MM)?\nWhat day were you born (DD)?\nOkay, last question. What is your weight?\n"
+	correct = f"Hi. What's your name?\nHello {name}! I'm going to calculate your stats on the planets in our Solar System.\nFirst I'll need some information, let's start with your birthday.\nWhat year were you born (YYYY)?\nWhat month were you born in (MM)?\nWhat day were you born (DD)?\nOkay, last question. What is your weight?\n"
 	result = Tests.catchOutput(inputs)[:len(correct)]
 	if result == correct:
 		score += 1
@@ -44,7 +44,7 @@ def main():
 	earth_age = round(earth_days/Earth_orbit,1)
 	seconds = earth_days*24*60*60
 	
-	correct = f"Hi. What's your name?\nHello {name}! I'm going to calculate your stats on the planets in our Solar System.\nFirst I'll need some information, let's start with your birthday.\nWhat year were your born (YYYY)?\nWhat month were you born in (MM)?\nWhat day were you born (DD)?\nOkay, last question. What is your weight?\n\nEarth Stats for {name}\nYou've been on this planet for {earth_days} days, which makes you over {seconds} seconds old or {earth_age} years old.\nWith this gravity your weight is {earth_weight} lbs.\n"
+	correct = f"Hi. What's your name?\nHello {name}! I'm going to calculate your stats on the planets in our Solar System.\nFirst I'll need some information, let's start with your birthday.\nWhat year were you born (YYYY)?\nWhat month were you born in (MM)?\nWhat day were you born (DD)?\nOkay, last question. What is your weight?\n\nEarth Stats for {name}\nYou've been on this planet for {earth_days} days, which makes you over {seconds} seconds old or {earth_age} years old.\nWith this gravity your weight is {earth_weight} lbs.\n"
 	result = Tests.catchOutput(inputs)[:len(correct)]
 	if result == correct:
 		score += 1
@@ -59,7 +59,7 @@ def main():
 	earth_age = round(earth_days/Earth_orbit,1)
 	seconds = earth_days*24*60*60
 	
-	correct = f"Hi. What's your name?\nHello {name}! I'm going to calculate your stats on the planets in our Solar System.\nFirst I'll need some information, let's start with your birthday.\nWhat year were your born (YYYY)?\nWhat month were you born in (MM)?\nWhat day were you born (DD)?\nOkay, last question. What is your weight?\n\nEarth Stats for {name}\nYou've been on this planet for {earth_days} days, which makes you over {seconds} seconds old or {earth_age} years old.\nWith this gravity your weight is {earth_weight} lbs.\n"
+	correct = f"Hi. What's your name?\nHello {name}! I'm going to calculate your stats on the planets in our Solar System.\nFirst I'll need some information, let's start with your birthday.\nWhat year were you born (YYYY)?\nWhat month were you born in (MM)?\nWhat day were you born (DD)?\nOkay, last question. What is your weight?\n\nEarth Stats for {name}\nYou've been on this planet for {earth_days} days, which makes you over {seconds} seconds old or {earth_age} years old.\nWith this gravity your weight is {earth_weight} lbs.\n"
 	for i in data:
 		planet,orbit,gravity = i
 		age = round(earth_age / orbit,1)
