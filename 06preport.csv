@@ -7,10 +7,10 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Bolton, Elijah",06p,0.0
 7,"Brown, Johnathan",06p,0.0
 8,"Carrion, Joshua",06p,0.0
-7,"Castillo, Tony",06p,0.0
-6,"Cote, Austin",06p,0.0
+7,"Castillo, Tony",06p,10.0
+6,"Cote, Austin",06p,7.5
 7,"Cox, Shotaro",06p,0.0
-7,"Davis, Croydon",06p,0.0
+7,"Davis, Croydon",06p,10.0
 4,"Del Valle, Arielle",06p,0.0
 7,"Dickson, Luke",06p,0.0
 6,"Edwards, Jonathan",06p,0.0
@@ -18,7 +18,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Ford, Riley",06p,0.0
 7,"Gable, Ethan",06p,0.0
 4,"Gaither, Brandon",06p,0.0
-6,"Garcia, Noah ",06p,0.0
+6,"Garcia, Noah ",06p,10.0
 8,"Garcia, Rudy",06p,10.0
 7,"Gill, Felicity",06p,0.0
 8,"Gomez-Pritt, Natalia",06p,0.0
@@ -29,22 +29,22 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Harris, Marley",06p,0.0
 4,"Hartner, Nathan",06p,0.0
 8,"Hayward, Isaac",06p,0.0
-8,"Hibbert, Conner",06p,0.0
+8,"Hibbert, Conner",06p,10.0
 7,"Humphreys, Chloe",06p,0.0
 8,"Hunt, Brandon",06p,0.0
 6,"Jacobsen, Rowan",06p,0.0
 4,"Jasmin, Keanna ",06p,0.0
-4,"Jensen, Evan",06p,0.0
+4,"Jensen, Evan",06p,2.5
 4,"Jeppsen, Carter",06p,10.0
 7,"Johnson, Alexis",06p,0.0
 6,"Johnson, Lillyan",06p,0.0
-6,"Kelley, Kaleb",06p,0.0
+6,"Kelley, Kaleb",06p,5.0
 6,"Kemp, Zander",06p,0.0
 8,"Kohl, Gavin",06p,0.0
 8,"Lappi, Sophie",06p,0.0
 6,"Leonard, Kaitlyn",06p,0.0
 8,"Lopez, Alair",06p,0.0
-6,"Marshall, Zach",06p,0.0
+6,"Marshall, Zach",06p,10.0
 6,"Mason, Hyrum",06p,0.0
 4,"Mayhue, Logan",06p,0.0
 4,"Moore, Elliott",06p,0.0
@@ -75,9 +75,9 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Strand, Blake",06p,0.0
 8,"Strauch, Raphael",06p,0.0
 4,"Suarez, Tristan",06p,0.0
-6,"Swenson, Kyle",06p,0.0
-6,"Tiede, Kaytee",06p,2.5
-6,"Tracy, Kyle",06p,0.0
+6,"Swenson, Kyle",06p,10.0
+6,"Tiede, Kaytee",06p,7.5
+6,"Tracy, Kyle",06p,10.0
 8,"Vaca, Sami",06p,0.0
 4,"Wageman, Makayla",06p,0.0
 4,"Watt, Coleton",06p,0.0
