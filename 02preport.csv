@@ -6,15 +6,15 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Bingham, Kaycee",02p,10.0
 8,"Bolton, Elijah",02p,8.0
 7,"Brown, Johnathan",02p,10.0
-8,"Carrion, Joshua",02p,0.0
+8,"Carrion, Joshua",02p,10.0
 7,"Castillo, Tony",02p,10.0
 6,"Cote, Austin",02p,10.0
 7,"Cox, Shotaro",02p,0.0
 7,"Davis, Croydon",02p,10.0
 4,"Del Valle, Arielle",02p,10.0
 7,"Dickson, Luke",02p,10.0
-6,"Edwards, Jonathan",02p,0.0
-6,"Edwards, Talmage",02p,0.0
+6,"Edwards, Jonathan",02p,10.0
+6,"Edwards, Talmage",02p,10.0
 6,"Ford, Riley",02p,10.0
 7,"Gable, Ethan",02p,10.0
 4,"Gaither, Brandon",02p,10.0
@@ -68,7 +68,6 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Rosas, Kassandra",02p,0.0
 8,"Salazar, Anastasia ",02p,10.0
 8,"Saoit, Jeniene",02p,10.0
-4,"Schofield, Jayden",02p,0.0
 4,"Schulz, Tobias",02p,10.0
 4,"Slater, Nathan",02p,10.0
 4,"Steed, Ryan",02p,10.0
