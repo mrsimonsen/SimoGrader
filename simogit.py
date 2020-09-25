@@ -32,18 +32,15 @@ def verify_pre():
 def main():
 	#get user credentials from .env
 	load_dotenv()
-	if (user := env.get('USERNAME')) == None:
-			user = input("Enter Username: ")
-	if (password := env.get('PASSWORD')) == None:
-			password = input("Enter Password:")
-	if (org := env.get('ORG')) == None:
-			org = input("Enter Organization name or press enter to skip: ")
+	if (token := env.get('TOKEN')) ==None:
+		print("Edit .env file to have your personal access token.")
+		exit()
 	if (pre := env.get('PRE')) == None:
 			pre = verify_pre()
 
-	print(f"Loaded credentials for {user}\nOrganization: {org}\nRepo prefix: \"{pre}\"")
 	#make github object
-	g = Github(user, password)
+	g = Github(token)
+	print(f"Loaded credentials for {g.get_user().name}")
 	#makedir for clone - set name to current date time
 	makedirs("Repos")
 	run(['cp','assignment.txt','Repos/assignment.txt'])
@@ -51,6 +48,7 @@ def main():
 	chdir("Repos")
 	#get list of repos
 	repos = g.get_user().get_repos()
+	print(f"Gathering repos with prefix: \"{pre}\"")
 	#clone those starting with prefix
 	for r in repos:
 		if pre in r.name:
