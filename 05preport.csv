@@ -5,14 +5,14 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Bench, Owen",05p,0.0
 4,"Bingham, Kaycee",05p,10.0
 8,"Bolton, Elijah",05p,0.0
-7,"Brown, Johnathan",05p,2.5
+7,"Brown, Johnathan",05p,0.0
 8,"Carrion, Joshua",05p,0.0
 7,"Castillo, Tony",05p,10.0
 6,"Cote, Austin",05p,10.0
 7,"Cox, Shotaro",05p,0.0
 7,"Davis, Croydon",05p,10.0
 4,"Del Valle, Arielle",05p,0.0
-7,"Dickson, Luke",05p,0.0
+7,"Dickson, Luke",05p,10.0
 6,"Edwards, Jonathan",05p,0.0
 6,"Edwards, Talmage",05p,0.0
 6,"Ford, Riley",05p,0.0
@@ -21,7 +21,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Garcia, Noah ",05p,10.0
 8,"Garcia, Rudy",05p,10.0
 7,"Gill, Felicity",05p,0.0
-8,"Gomez-Pritt, Natalia",05p,0.0
+8,"Gomez-Pritt, Natalia",05p,10.0
 8,"Grether, Max",05p,0.0
 4,"Guarin, Sheik",05p,0.0
 7,"Hansen, Hayden",05p,0.0
@@ -62,13 +62,12 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Plane, Hallie",05p,0.0
 6,"Pogue, Joey",05p,0.0
 4,"Powell, Thaddeus",05p,10.0
-4,"Provenzano, Anthony",05p,0.0
+4,"Provenzano, Anthony",05p,10.0
 8,"Remley, Traiven ",05p,10.0
 6,"Rosas, Christopher",05p,0.0
 7,"Rosas, Kassandra",05p,0.0
 8,"Salazar, Anastasia ",05p,0.0
 8,"Saoit, Jeniene",05p,0.0
-4,"Schofield, Jayden",05p,0.0
 4,"Schulz, Tobias",05p,0.0
 4,"Slater, Nathan",05p,10.0
 4,"Steed, Ryan",05p,10.0
@@ -80,6 +79,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Tracy, Kyle",05p,10.0
 8,"Vaca, Sami",05p,0.0
 4,"Wageman, Makayla",05p,0.0
-4,"Watt, Coleton",05p,0.0
+4,"Watt, Coleton",05p,10.0
 7,"Watts, Carter",05p,0.0
 4,"Young, Christopher",05p,0.0
