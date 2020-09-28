@@ -37,12 +37,12 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Jensen, Evan",01p,10.0
 4,"Jeppsen, Carter",01p,10.0
 7,"Johnson, Alexis",01p,10.0
-6,"Johnson, Lillyan",01p,0.0
+6,"Johnson, Lillyan",01p,10.0
 6,"Kelley, Kaleb",01p,10.0
 6,"Kemp, Zander",01p,10.0
 8,"Kohl, Gavin",01p,10.0
 8,"Lappi, Sophie",01p,10.0
-6,"Leonard, Kaitlyn",01p,0.0
+6,"Leonard, Kaitlyn",01p,2.5
 8,"Lopez, Alair",01p,10.0
 6,"Marshall, Zach",01p,10.0
 6,"Mason, Hyrum",01p,10.0
@@ -80,5 +80,5 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Vaca, Sami",01p,10.0
 4,"Wageman, Makayla",01p,2.5
 4,"Watt, Coleton",01p,10.0
-7,"Watts, Carter",01p,0.0
+7,"Watts, Carter",01p,10.0
 4,"Young, Christopher",01p,0.0
