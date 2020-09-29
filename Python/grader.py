@@ -2,7 +2,7 @@
 import os, csv, shelve, sys
 from data_maker import Assignment,Student
 from data_maker import main as setup
-from subprocess import run
+from subprocess import run, TimeoutExpired
 
 def get_assign():
 	f = open('assignment.txt','r')
@@ -50,7 +50,10 @@ def grade(a):
 		print(f"Grading: {f}")
 		try:
 			os.chdir(f)
-			p = run("python3 Test.py", shell=True, capture_output=True, text=True)
+			p = run("python3 Test.py", shell=True, capture_output=True, text=True, timeout=5)
+		except TimeoutExpired:
+			print("Took too long - terminated")
+			notfound = True
 		except:
 			notfound = True
 		if e := p.stderr:
