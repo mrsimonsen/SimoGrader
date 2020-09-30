@@ -10,19 +10,16 @@ def catchOutput(inputs=None, seed=''):
 
 
 def table(earth_age, earth_weight, earth_days):
-	rows = ["Planet\t|","Age\t|","Weight\t|","Days\t|"]
+	rows = ["Planet |","Age    |","Weight |","Days   |"]
 	for entry in data:
 		planet, orbit, gravity, rotation = entry
 		age = round(earth_age / orbit, 1)
 		weight = round(earth_weight * gravity, 2)
 		days = int(earth_days / rotation)
-		if len(planet)<7:
-			rows[0] += f"{planet}\t|"
-		else:
-			rows[0] += f"{planet}|"
-		rows[1] += f"{age}\t|"
-		rows[2] += f"{weight}\t|"
-		rows[3] += f"{days}\t|"
+		rows[0] += f"{planet:7}|"
+		rows[1] += f"{age:7}|"
+		rows[2] += f"{weight:7}|"
+		rows[3] += f"{days:7}|"
 
 	for i in range(len(rows)):
 		rows[i] += "\n"
