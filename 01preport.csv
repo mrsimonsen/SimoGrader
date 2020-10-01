@@ -33,7 +33,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Humphreys, Chloe",01p,10.0
 8,"Hunt, Brandon",01p,10.0
 6,"Jacobsen, Rowan",01p,0.0
-4,"Jasmin, Keanna ",01p,0.0
+4,"Jasmin, Keanna ",01p,10.0
 4,"Jensen, Evan",01p,10.0
 4,"Jeppsen, Carter",01p,10.0
 7,"Johnson, Alexis",01p,10.0
@@ -50,6 +50,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Moore, Elliott",01p,10.0
 4,"Morrison, Alyssa",01p,10.0
 6,"Moyano, Sebastian",01p,10.0
+4,"Muegge, Breahna ",01p,0.0
 8,"Nay, Andrew",01p,10.0
 8,"Nettle, Mikayla",01p,0.0
 7,"Nguyen, Julie",01p,10.0
@@ -78,7 +79,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Tiede, Kaytee",01p,10.0
 6,"Tracy, Kyle",01p,10.0
 8,"Vaca, Sami",01p,10.0
-4,"Wageman, Makayla",01p,2.5
+4,"Wageman, Makayla",01p,10.0
 4,"Watt, Coleton",01p,10.0
 7,"Watts, Carter",01p,10.0
 4,"Young, Christopher",01p,0.0
