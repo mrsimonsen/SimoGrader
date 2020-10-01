@@ -33,7 +33,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Humphreys, Chloe",04p,10.0
 8,"Hunt, Brandon",04p,10.0
 6,"Jacobsen, Rowan",04p,0.0
-4,"Jasmin, Keanna ",04p,0.0
+4,"Jasmin, Keanna ",04p,10.0
 4,"Jensen, Evan",04p,4.0
 4,"Jeppsen, Carter",04p,10.0
 7,"Johnson, Alexis",04p,10.0
@@ -47,9 +47,10 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Marshall, Zach",04p,10.0
 6,"Mason, Hyrum",04p,10.0
 4,"Mayhue, Logan",04p,10.0
-4,"Moore, Elliott",04p,4.0
+4,"Moore, Elliott",04p,10.0
 4,"Morrison, Alyssa",04p,0.0
 6,"Moyano, Sebastian",04p,10.0
+4,"Muegge, Breahna ",04p,0.0
 8,"Nay, Andrew",04p,10.0
 8,"Nettle, Mikayla",04p,0.0
 7,"Nguyen, Julie",04p,10.0
@@ -77,8 +78,8 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Swenson, Kyle",04p,10.0
 6,"Tiede, Kaytee",04p,10.0
 6,"Tracy, Kyle",04p,10.0
-8,"Vaca, Sami",04p,0.0
-4,"Wageman, Makayla",04p,0.0
+8,"Vaca, Sami",04p,8.0
+4,"Wageman, Makayla",04p,10.0
 4,"Watt, Coleton",04p,10.0
 7,"Watts, Carter",04p,0.0
 4,"Young, Christopher",04p,0.0
