@@ -2,16 +2,14 @@
 import csv, shelve, datetime
 #support classes
 class Assignment(object):
-    '''an assignment with a folder, file name, and due date'''
+    '''an assignment with a folder, file name'''
 
-    def __init__(self,folder,file,due,test):
-        self.folder = folder
+    def __init__(self,file,test):
         self.file = file
-        self.due = due
         self.test = test
 
     def __str__(self):
-        rep = f"{self.folder}\\{self.file}\n{self.due}\n{self.test}"
+        rep = f"{self.file}\n{self.test}"
         return rep
 class Student(object):
     '''a student with name, weber username, and github username'''
@@ -20,26 +18,23 @@ class Student(object):
         self.name = name
         self.github = github
         self.period = period
-        self.assignment = Assignment('error','',datetime.datetime.today(),'')
+        self.assignment = Assignment('error','')
         self.score = 0
-        self.late = True
-        self.submit = None
 
     def __str__(self):
-        rep = f"{self.name}, Period {self.period}\n{self.github}\n--Current Assignment--\n{self.assignment.folder}\\{self.assignment.file}\n{self.score} points\nSubmitted:{self.submit}\nLate = {self.late}"
+        rep = f"{self.name}, Period {self.period}\n{self.github}\n--Current Assignment--\n{self.assignment.file}\n{self.score} points"
         return rep
 
     def set_grade(self, assign_obj, score):
         self.assignment = assign_obj
         self.score = score
-        if assign_obj.due > self.submit:
-            self.late = False
+        
 def main():
     #create shelve file, overwrite old file if exists
     data = shelve.open('grading_data','n')
 
     #assignment details
-    assignments = ('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21')
+    assignments = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
     file_names = {
     "00":("HelloWorld.java",),
     "01":("BasicInput.java",),
@@ -63,54 +58,6 @@ def main():
     "19":("DataVisualizer.java",),
     "20":("CaesarCipher.java","ReadWrite.java","Support.java"),
     "21":("Yahtzee.java",)
-	}
-    folders = {
-    "00":"00HelloWorld",
-    "01":"01BasicInput",
-    "02":"02PaintEstimator",
-    "03":"03TextMsgAbbreviation",
-    "04":"04TextMsgDecoder",
-    "05":"05TextMsgExpander",
-    "06":"06DrawRightTriangle",
-    "07":"07DrawHalfArrow",
-    "08":"08PeopleWeights",
-    "09":"09PlayerRoster",
-    "10":"10CoinFlipper",
-    "11":"11ReverseMessage",
-    "12":"12DiceStatistics",
-    "13":"13TextAnalyzer",
-    "14":"14AuthoringAssistant",
-    "15":"15OnlineShoppingCartPt1",
-    "16":"16OnlineShoppingCartPt2",
-    "17":"17BinaryConverter",
-    "18":"18ParseStrings",
-    "19":"19DataVisulation",
-    "20":"20CaesarCipher",
-    "21":"21Yahtzee-Final"
-	}
-    due_dates = {
-    '00':datetime.datetime(2020, 1, 26, 23, 59, 59),
-    '01':datetime.datetime(2020, 2, 9, 23, 59, 59),
-    '02':datetime.datetime(2020, 2 ,9 ,23, 59 ,59),
-    '03':datetime.datetime(2020, 2 ,16 ,23, 59 ,59),
-    '04':datetime.datetime(2020, 2 ,16 ,23, 59 ,59),
-    '05':datetime.datetime(2020, 2 ,16 ,23, 59 ,59),
-    '06':datetime.datetime(2020, 2 ,23 ,23, 59 ,59),
-    '07':datetime.datetime(2020, 2 ,23 ,23, 59 ,59),
-    '08':datetime.datetime(2020, 3 ,8 ,23, 59 ,59),
-    '09':datetime.datetime(2020, 3 ,8 ,23, 59 ,59),
-    '10':datetime.datetime(2020, 3 ,15 ,23, 59 ,59),
-    '11':datetime.datetime(2020, 3 ,15 ,23, 59 ,59),
-    '12':datetime.datetime(2020, 3 ,15 ,23, 59 ,59),
-    '13':datetime.datetime(2020, 3 ,22 ,23, 59 ,59),
-    '14':datetime.datetime(2020, 3 ,22 ,23, 59 ,59),
-    '15':datetime.datetime(2020, 4 ,12 ,23, 59 ,59),
-    '16':datetime.datetime(2020, 4 ,12 ,23, 59 ,59),
-    '17':datetime.datetime(2020, 4 ,26 ,23, 59 ,59),
-    '18':datetime.datetime(2020, 4 ,26 ,23, 59 ,59),
-    '19':datetime.datetime(2020, 4 ,26 ,23, 59 ,59),
-    '20':datetime.datetime(2020, 5 ,3 ,23, 59 ,59),
-    '21':datetime.datetime(2020, 5 ,17 ,23, 59 ,59)
 	}
     tests = {
     '00':'Test00.java',
@@ -138,18 +85,18 @@ def main():
 	}
 
     for i in assignments:
-        data[i]=Assignment(folders[i],file_names[i],due_dates[i],tests[i])
+        data[i]=Assignment(folders[i],file_names[i],tests[i])
 
     #student details
     names = {}
     students = []
-    with open('username - Form Responses 1.csv','r',newline='') as f:
-        #format = time,first,last,git,weber
+    with open('What's in a Username_ (Responses) - Copy of Form Responses 1.csv','r',newline='') as f:
+        #format = time,first,last,period,git
         raw = csv.reader(f,delimiter=',',quotechar='"')
         for row in raw:
-            if row[1] == "What is your first name?":
+            if row[0] == "Timestamp":
                 continue#skip the first row/header
-            students.append(Student(f"{row[2]}, {row[1]}",int(row[3]),row[4]))
+            students.append(Student(f"{row[2]}, {row[1]}",row[3],row[4]))
     data['students'] = students
     #save all the things
     data.close()
