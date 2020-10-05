@@ -42,7 +42,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Kemp, Zander",02p,10.0
 8,"Kohl, Gavin",02p,10.0
 8,"Lappi, Sophie",02p,10.0
-6,"Leonard, Kaitlyn",02p,2.0
+6,"Leonard, Kaitlyn",02p,10.0
 8,"Lopez, Alair",02p,10.0
 6,"Marshall, Zach",02p,10.0
 6,"Mason, Hyrum",02p,10.0
@@ -52,7 +52,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Moyano, Sebastian",02p,10.0
 4,"Muegge, Breahna ",02p,0.0
 8,"Nay, Andrew",02p,10.0
-8,"Nettle, Mikayla",02p,2.0
 7,"Nguyen, Julie",02p,10.0
 7,"Nielsen, Amond",02p,10.0
 8,"Nye, Carson",02p,10.0
@@ -81,5 +80,5 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Vaca, Sami",02p,10.0
 4,"Wageman, Makayla",02p,2.0
 4,"Watt, Coleton",02p,10.0
-7,"Watts, Carter",02p,0.0
+7,"Watts, Carter",02p,10.0
 4,"Young, Christopher",02p,2.0
