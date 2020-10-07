@@ -5,8 +5,15 @@ file = "calculator.py"
 # setup methods
 def catchOutput(inputs=None, seed=''):
 	cwd = getcwd()
-	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
-	return p.stdout
+	result = None
+	try:
+		p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs, timeout=5)
+	except TimeoutExpired:
+		result = ""
+	else:
+		result = p.stdout
+	return result
+
 def main():
 	total = 0
 	score = 0
