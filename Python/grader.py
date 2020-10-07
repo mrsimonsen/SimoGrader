@@ -28,7 +28,7 @@ def gather(a):
 	for s in students:
 		os.chdir('testing')
 		os.mkdir(s.github)
-		run(['cp',  os.path.join(root,s.github,a.file), os.path.join(root,'testing',s.github,a.file)])
+		run(['cp', os.path.join(root,s.github,a.file), os.path.join(root,'testing',s.github,a.file)])
 		run(['cp', os.path.join(root,a.test), os.path.join(root,'testing',s.github,'Test.py')])
 		os.chdir(root)
 	data['students']=students
@@ -46,25 +46,11 @@ def grade(a):
 		w.writerow(['Period','Student Name','Assignment Name','Points Earned'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
 	for f in folders:
-		notfound = False
 		print(f"Grading: {f}")
-		try:
-			os.chdir(f)
-			p = run("python3 Test.py", shell=True, capture_output=True, text=True, timeout=5)
-		except TimeoutExpired:
-			print("Took too long - terminated")
-			notfound = True
-		except:
-			notfound = True
-		if e := p.stderr:
-			#had an error - auto fail
-			print(e)
-			points = 0
-		elif notfound:
-			points = 0
-		else:
-			score = p.stdout.strip()
-			points = string_to_math(score)
+		os.chdir(f)
+		p = run("python3 Test.py", shell=True, capture_output=True, text=True)
+		score = p.stdout.strip()
+		points = string_to_math(score)
 		os.chdir('..')
 		for student in s:
 			if student.github == f:
