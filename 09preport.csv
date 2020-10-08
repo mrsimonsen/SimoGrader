@@ -16,11 +16,11 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Edwards, Jonathan",09p,0.0
 6,"Edwards, Talmage",09p,0.0
 6,"Ford, Riley",09p,0.0
-7,"Gable, Ethan",09p,0.0
+7,"Gable, Ethan",09p,10.0
 4,"Gaither, Brandon",09p,0.0
 6,"Garcia, Noah ",09p,0.0
 8,"Garcia, Rudy",09p,10.0
-7,"Gill, Felicity",09p,5.71
+7,"Gill, Felicity",09p,10.0
 8,"Gomez-Pritt, Natalia",09p,0.0
 8,"Grether, Max",09p,0.0
 4,"Guarin, Sheik",09p,0.0
@@ -58,13 +58,13 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Nyre, Kendall",09p,0.0
 7,"Patton, Caiden",09p,0.0
 4,"Peterson, Elliott",09p,10.0
-6,"Phiromnut, Jasmine",09p,4.29
+6,"Phiromnut, Jasmine",09p,10.0
 8,"Plane, Hallie",09p,0.0
-6,"Pogue, Joey",09p,0.0
+6,"Pogue, Joey",09p,10.0
 4,"Powell, Thaddeus",09p,7.14
 4,"Provenzano, Anthony",09p,0.0
 8,"Remley, Traiven ",09p,1.43
-6,"Rosas, Christopher",09p,0.0
+6,"Rosas, Christopher",09p,10.0
 7,"Rosas, Kassandra",09p,0.0
 8,"Salazar, Anastasia ",09p,0.0
 8,"Saoit, Jeniene",09p,0.0
@@ -79,6 +79,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Tracy, Kyle",09p,10.0
 8,"Vaca, Sami",09p,0.0
 4,"Wageman, Makayla",09p,0.0
-4,"Watt, Coleton",09p,0.0
+4,"Watt, Coleton",09p,10.0
 7,"Watts, Carter",09p,0.0
 4,"Young, Christopher",09p,0.0
