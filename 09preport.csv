@@ -13,8 +13,8 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Davis, Croydon",09p,10.0
 4,"Del Valle, Arielle",09p,0.0
 7,"Dickson, Luke",09p,10.0
-6,"Edwards, Jonathan",09p,0.0
-6,"Edwards, Talmage",09p,0.0
+6,"Edwards, Jonathan",09p,7.14
+6,"Edwards, Talmage",09p,7.14
 6,"Ford, Riley",09p,0.0
 7,"Gable, Ethan",09p,10.0
 4,"Gaither, Brandon",09p,0.0
@@ -22,7 +22,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Garcia, Rudy",09p,10.0
 7,"Gill, Felicity",09p,10.0
 8,"Gomez-Pritt, Natalia",09p,7.14
-8,"Grether, Max",09p,7.14
+8,"Grether, Max",09p,10.0
 4,"Guarin, Sheik",09p,0.0
 7,"Hansen, Hayden",09p,10.0
 6,"Hardyman, Nathanial",09p,0.0
@@ -45,7 +45,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Leonard, Kaitlyn",09p,0.0
 8,"Lopez, Alair",09p,0.0
 6,"Marshall, Zach",09p,10.0
-6,"Mason, Hyrum",09p,7.14
+6,"Mason, Hyrum",09p,10.0
 4,"Mayhue, Logan",09p,4.29
 4,"Moore, Elliott",09p,0.0
 4,"Morrison, Alyssa",09p,0.0
