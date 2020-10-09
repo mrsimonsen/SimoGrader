@@ -50,7 +50,10 @@ def grade(a):
 		os.chdir(f)
 		p = run("python3 Test.py", shell=True, capture_output=True, text=True)
 		score = p.stdout.strip()
-		points = string_to_math(score)
+		if score:
+			points = string_to_math(score)
+		else:
+			points = 0.0
 		os.chdir('..')
 		for student in s:
 			if student.github == f:
