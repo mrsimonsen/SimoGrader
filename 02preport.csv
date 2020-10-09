@@ -23,7 +23,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Gill, Felicity",02p,10.0
 8,"Gomez-Pritt, Natalia",02p,10.0
 8,"Grether, Max",02p,10.0
-4,"Guarin, Sheik",02p,0.0
+4,"Guarin, Sheik",02p,10.0
 7,"Hansen, Hayden",02p,10.0
 6,"Hardyman, Nathanial",02p,0.0
 7,"Harris, Marley",02p,10.0
@@ -48,9 +48,9 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Mason, Hyrum",02p,10.0
 4,"Mayhue, Logan",02p,10.0
 4,"Moore, Elliott",02p,10.0
-4,"Morrison, Alyssa",02p,0
+4,"Morrison, Alyssa",02p,0.0
 6,"Moyano, Sebastian",02p,10.0
-4,"Muegge, Breahna ",02p,0.0
+4,"Muegge, Breahna ",02p,2.0
 8,"Nay, Andrew",02p,10.0
 7,"Nguyen, Julie",02p,10.0
 7,"Nielsen, Amond",02p,10.0
