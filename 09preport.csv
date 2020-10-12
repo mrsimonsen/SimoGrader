@@ -11,7 +11,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Cote, Austin",09p,10.0
 7,"Cox, Shotaro",09p,0.0
 7,"Davis, Croydon",09p,10.0
-4,"Del Valle, Arielle",09p,0.0
+4,"Del Valle, Arielle",09p,1.43
 7,"Dickson, Luke",09p,10.0
 6,"Edwards, Jonathan",09p,7.14
 6,"Edwards, Talmage",09p,7.14
@@ -29,7 +29,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Harris, Marley",09p,0.0
 4,"Hartner, Nathan",09p,0.0
 8,"Hayward, Isaac",09p,10.0
-8,"Hibbert, Conner",09p,0.0
+8,"Hibbert, Conner",09p,7.14
 7,"Humphreys, Chloe",09p,0.0
 8,"Hunt, Brandon",09p,0.0
 6,"Jacobsen, Rowan",09p,0.0
@@ -51,10 +51,10 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Morrison, Alyssa",09p,0.0
 6,"Moyano, Sebastian",09p,0.0
 4,"Muegge, Breahna ",09p,0.0
-8,"Nay, Andrew",09p,0.0
+8,"Nay, Andrew",09p,10.0
 7,"Nguyen, Julie",09p,0.0
 7,"Nielsen, Amond",09p,0.0
-8,"Nye, Carson",09p,0.0
+8,"Nye, Carson",09p,10.0
 4,"Nyre, Kendall",09p,0.0
 7,"Patton, Caiden",09p,10.0
 4,"Peterson, Elliott",09p,10.0
@@ -62,12 +62,12 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Plane, Hallie",09p,0.0
 6,"Pogue, Joey",09p,10.0
 4,"Powell, Thaddeus",09p,7.14
-4,"Provenzano, Anthony",09p,0.0
+4,"Provenzano, Anthony",09p,10.0
 8,"Remley, Traiven ",09p,10.0
 6,"Rosas, Christopher",09p,10.0
 7,"Rosas, Kassandra",09p,0.0
 8,"Salazar, Anastasia ",09p,0.0
-8,"Saoit, Jeniene",09p,0.0
+8,"Saoit, Jeniene",09p,10.0
 4,"Schulz, Tobias",09p,0.0
 4,"Slater, Nathan",09p,10.0
 4,"Steed, Ryan",09p,10.0
@@ -80,5 +80,5 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Vaca, Sami",09p,0.0
 4,"Wageman, Makayla",09p,0.0
 4,"Watt, Coleton",09p,10.0
-7,"Watts, Carter",09p,0.0
+7,"Watts, Carter",09p,2.86
 4,"Young, Christopher",09p,0.0
