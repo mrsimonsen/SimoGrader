@@ -11,7 +11,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Cote, Austin",09p,10.0
 7,"Cox, Shotaro",09p,0.0
 7,"Davis, Croydon",09p,10.0
-4,"Del Valle, Arielle",09p,1.43
+4,"Del Valle, Arielle",09p,0.0
 7,"Dickson, Luke",09p,10.0
 6,"Edwards, Jonathan",09p,7.14
 6,"Edwards, Talmage",09p,7.14
@@ -27,7 +27,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Hansen, Hayden",09p,10.0
 6,"Hardyman, Nathanial",09p,0.0
 7,"Harris, Marley",09p,0.0
-4,"Hartner, Nathan",09p,0.0
+4,"Hartner, Nathan",09p,10.0
 8,"Hayward, Isaac",09p,10.0
 8,"Hibbert, Conner",09p,7.14
 7,"Humphreys, Chloe",09p,0.0
@@ -42,10 +42,10 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Kohl, Gavin",09p,10.0
 8,"Lappi, Sophie",09p,10.0
 6,"Leonard, Kaitlyn",09p,0.0
-8,"Lopez, Alair",09p,1.43
+8,"Lopez, Alair",09p,0.0
 6,"Marshall, Zach",09p,10.0
 6,"Mason, Hyrum",09p,10.0
-4,"Mayhue, Logan",09p,4.29
+4,"Mayhue, Logan",09p,10.0
 4,"Moore, Elliott",09p,10.0
 4,"Morrison, Alyssa",09p,0.0
 6,"Moyano, Sebastian",09p,0.0
@@ -70,7 +70,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Schulz, Tobias",09p,0.0
 4,"Slater, Nathan",09p,10.0
 4,"Steed, Ryan",09p,10.0
-8,"Strand, Blake",09p,0.0
+8,"Strand, Blake",09p,10.0
 8,"Strauch, Raphael",09p,0.0
 4,"Suarez, Tristan",09p,0.0
 6,"Swenson, Kyle",09p,7.14
