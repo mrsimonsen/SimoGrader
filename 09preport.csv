@@ -4,7 +4,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Avendano, Cristian",09p,0.0
 8,"Bench, Owen",09p,0.0
 4,"Bingham, Kaycee",09p,10.0
-8,"Bolton, Elijah",09p,0.0
+8,"Bolton, Elijah",09p,10.0
 7,"Brown, Johnathan",09p,10.0
 8,"Carrion, Joshua",09p,0.0
 7,"Castillo, Tony",09p,10.0
@@ -36,7 +36,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Jensen, Evan",09p,5.71
 4,"Jeppsen, Carter",09p,10.0
 7,"Johnson, Alexis",09p,0.0
-6,"Johnson, Lillyan",09p,0.0
+6,"Johnson, Lillyan",09p,10.0
 6,"Kelley, Kaleb",09p,10.0
 6,"Kemp, Zander",09p,0.0
 8,"Kohl, Gavin",09p,10.0
@@ -54,7 +54,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Nguyen, Julie",09p,0.0
 7,"Nielsen, Amond",09p,0.0
 8,"Nye, Carson",09p,10.0
-4,"Nyre, Kendall",09p,0.0
+4,"Nyre, Kendall",09p,7.14
 7,"Patton, Caiden",09p,10.0
 4,"Peterson, Elliott",09p,10.0
 6,"Phiromnut, Jasmine",09p,10.0
@@ -79,5 +79,5 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Vaca, Sami",09p,0.0
 4,"Wageman, Makayla",09p,0.0
 4,"Watt, Coleton",09p,10.0
-7,"Watts, Carter",09p,2.86
+7,"Watts, Carter",09p,7.14
 4,"Young, Christopher",09p,0.0
