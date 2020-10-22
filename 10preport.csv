@@ -10,13 +10,13 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Castillo, Tony",10p,10.0
 6,"Cote, Austin",10p,0.0
 7,"Cox, Shotaro",10p,0.0
-7,"Davis, Croydon",10p,0.0
+7,"Davis, Croydon",10p,10.0
 4,"Del Valle, Arielle",10p,0.0
 7,"Dickson, Luke",10p,10.0
 6,"Edwards, Jonathan",10p,0.0
 6,"Edwards, Talmage",10p,0.0
 6,"Ford, Riley",10p,0.0
-7,"Gable, Ethan",10p,0.0
+7,"Gable, Ethan",10p,10.0
 4,"Gaither, Brandon",10p,0.0
 6,"Garcia, Noah ",10p,0.0
 8,"Garcia, Rudy",10p,6.67
@@ -45,7 +45,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Lopez, Alair",10p,0.0
 6,"Marshall, Zach",10p,10.0
 6,"Mason, Hyrum",10p,10.0
-4,"Mayhue, Logan",10p,0.0
+4,"Mayhue, Logan",10p,3.33
 4,"Moore, Elliott",10p,0.0
 4,"Morrison, Alyssa",10p,0.0
 6,"Moyano, Sebastian",10p,0.0
