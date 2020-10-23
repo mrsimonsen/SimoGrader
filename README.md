@@ -16,6 +16,9 @@ alias all="python3 all.py"
 * sudo apt install python3-pip
 * pip3 install pygithub
 * pip3 install python-dotenv
+* [install GitHub CLI](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
+	* use ssh
+* Setup a new [SSH key](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh) and link to account 
 ##TOC
 
 ## Notes
