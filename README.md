@@ -4,6 +4,7 @@ Autograder and testing files for CS 1030 (python), CS 1400 (Java), and CS 1410 (
 Made for Ubuntu for Windows
 
 ## Setup
+* cp .vimrc ../.
 * edit .bashrc and add the following to the end of the file:
 ```
 alias all="python3 all.py"

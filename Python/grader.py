@@ -74,9 +74,12 @@ def grade(a):
 
 def string_to_math(thing):
 	x = thing.split("/")
-	score = int(x[0])
-	total = int(x[1])
-	return round(score/total * 10,2)
+	if x[0].isdigit() and x[1].isdigit():
+		score = int(x[0])
+		total = int(x[1])
+		return round(score/total * 10,2)
+	else:
+		return 0
 
 def main():
 	assign_obj = intro()
