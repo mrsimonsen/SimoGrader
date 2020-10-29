@@ -24,7 +24,7 @@ def main():
 	#def test_1(self):
 	inputs = "yo\nLOW\n"
 	correct = INTRO
-	correct += "For try 1 I guess 47\n"
+	correct += "For try 1 I guess 50\n"
 	correct += "Am I 'high', 'low', or 'correct'?\n"
 	correct += "Am I 'high', 'low', or 'correct'?\n"
 	result = catchOutput(inputs, '0')[:len(correct)]
