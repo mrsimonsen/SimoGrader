@@ -4,7 +4,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Avendano, Cristian",10p,0.0
 8,"Bench, Owen",10p,0.0
 4,"Bingham, Kaycee",10p,10.0
-8,"Bolton, Elijah",10p,0.0
+8,"Bolton, Elijah",10p,10.0
 7,"Brown, Johnathan",10p,10.0
 8,"Carrion, Joshua",10p,0.0
 7,"Castillo, Tony",10p,10.0
@@ -18,8 +18,8 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Ford, Riley",10p,0.0
 7,"Gable, Ethan",10p,10.0
 4,"Gaither, Brandon",10p,0.0
-6,"Garcia, Noah ",10p,3.33
-8,"Garcia, Rudy",10p,3.33
+6,"Garcia, Noah ",10p,10.0
+8,"Garcia, Rudy",10p,10.0
 7,"Gill, Felicity",10p,10.0
 8,"Gomez-Pritt, Natalia",10p,10.0
 8,"Grether, Max",10p,10.0
@@ -54,7 +54,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Nguyen, Julie",10p,0.0
 7,"Nielsen, Amond",10p,0.0
 8,"Nye, Carson",10p,10.0
-4,"Nyre, Kendall",10p,0.0
+4,"Nyre, Kendall",10p,10.0
 7,"Patton, Caiden",10p,10.0
 4,"Peterson, Elliott",10p,10.0
 6,"Phiromnut, Jasmine",10p,10.0
@@ -66,7 +66,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Rosas, Christopher",10p,10.0
 7,"Rosas, Kassandra",10p,0.0
 8,"Salazar, Anastasia ",10p,0.0
-8,"Saoit, Jeniene",10p,0.0
+8,"Saoit, Jeniene",10p,10.0
 4,"Schulz, Tobias",10p,3.33
 4,"Slater, Nathan",10p,10.0
 4,"Steed, Ryan",10p,10.0
@@ -80,4 +80,4 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Wageman, Makayla",10p,0.0
 4,"Watt, Coleton",10p,0.0
 7,"Watts, Carter",10p,0.0
-4,"Young, Christopher",10p,0.0
+4,"Young, Christopher",10p,10.0
