@@ -1,6 +1,6 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",11p,8.0
-7,"Ashton, Tannen",11p,0.0
+7,"Ashton, Tannen",11p,2.0
 6,"Avendano, Cristian",11p,0.0
 8,"Bench, Owen",11p,0.0
 4,"Bingham, Kaycee",11p,10.0
@@ -26,14 +26,14 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Guarin, Sheik",11p,0.0
 7,"Hansen, Hayden",11p,8.0
 6,"Hardyman, Nathanial",11p,0.0
-7,"Harris, Marley",11p,0.0
+7,"Harris, Marley",11p,2.0
 4,"Hartner, Nathan",11p,0.0
 8,"Hayward, Isaac",11p,10.0
 8,"Hibbert, Conner",11p,0.0
 7,"Humphreys, Chloe",11p,2.0
 8,"Hunt, Brandon",11p,0.0
 4,"Jasmin, Keanna ",11p,0.0
-4,"Jensen, Evan",11p,0.0
+4,"Jensen, Evan",11p,0
 4,"Jeppsen, Carter",11p,10.0
 7,"Johnson, Alexis",11p,0.0
 6,"Johnson, Lillyan",11p,8.0
@@ -46,7 +46,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Marshall, Zach",11p,10.0
 6,"Mason, Hyrum",11p,8.0
 4,"Mayhue, Logan",11p,2.0
-4,"Moore, Elliott",11p,0.0
+4,"Moore, Elliott",11p,2.0
 4,"Morrison, Alyssa",11p,0.0
 6,"Moyano, Sebastian",11p,2.0
 4,"Muegge, Breahna ",11p,0.0
@@ -56,8 +56,8 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Nye, Carson",11p,2.0
 4,"Nyre, Kendall",11p,0.0
 7,"Patton, Caiden",11p,10.0
-4,"Peterson, Elliott",11p,8.0
-6,"Phiromnut, Jasmine",11p,0
+4,"Peterson, Elliott",11p,9.0
+6,"Phiromnut, Jasmine",11p,10.0
 8,"Plane, Hallie",11p,10.0
 6,"Pogue, Joey",11p,0.0
 4,"Powell, Thaddeus",11p,10.0
@@ -73,7 +73,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Strand, Blake",11p,0.0
 8,"Strauch, Raphael",11p,0.0
 4,"Suarez, Tristan",11p,0.0
-6,"Swenson, Kyle",11p,2.0
+6,"Swenson, Kyle",11p,10.0
 6,"Tiede, Kaytee",11p,10.0
 6,"Tracy, Kyle",11p,10.0
 8,"Vaca, Sami",11p,0.0
