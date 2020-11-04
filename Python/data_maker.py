@@ -51,8 +51,8 @@ def main():
 	'11p':'guess_AI.py',
 	'12p':'character_creator.py',
 	'13p':'CC2.py',
-	'14p':'tv-remote.py',
-	'15p':'pig-latin.py'
+	'14p':'tv_remote.py',
+	'15p':'pig_latin.py'
 	}
 	tests = {'00p': 'test_00.py',
 	'01p': 'test_01.py',
