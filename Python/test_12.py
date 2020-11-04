@@ -44,20 +44,21 @@ def main():
 	result = catchOutput(inputs)
 	if result == correct:
 		score += 1
+
 	total += 1
 	#def test_2(self):A
 	inputs = "1\n0\n"
 	correct = MENU
 	correct += "What's your choice?\n"
-	correct += '''
+	correct += f'''
 ______________________________
-Strength\t|\t0
-Dexterity\t|\t0
-Constitution\t|\t0
-Wisdom\t\t|\t0
-Intelligence\t|\t0
-Charisma\t|\t0
-Pool\t\t|\t72
+{"Strength":12}|\t0
+{"Dexterity":12}|\t0
+{"Constitution":12}|\t0
+{"Wisdom":12}|\t0
+{"Intelligence":12}|\t0
+{"Charisma":12}|\t0
+{"Pool":12}|\t72
 ______________________________\n'''
 	correct += MENU
 	correct += "What's your choice?\n"
@@ -76,21 +77,21 @@ ______________________________\n'''
 		'Intelligence':10,
 		'Charisma': 10,
 		'Pool':2}
-	correct = '''
+	correct = f'''
 ______________________________
-Strength\t|\t10
-Dexterity\t|\t10
-Constitution\t|\t10
-Wisdom\t\t|\t10
-Intelligence\t|\t10
-Charisma\t|\t10
-Pool\t\t|\t2
+{"Strength":12}|\t10
+{"Dexterity":12}|\t10
+{"Constitution":12}|\t10
+{"Wisdom":12}|\t10
+{"Intelligence":12}|\t10
+{"Charisma":12}|\t10
+{"Pool":12}|\t2
 ______________________________'''
 	result = character_creator.table(test_dict)
 	if result == correct:
 		score += 1
-	
-	total += 1
+
+	total+= 1
 		#def test_3(self):A
 	test_dict = {'Something': 0,
 				 'Pool': 10}
@@ -99,12 +100,14 @@ ______________________________'''
 	result = character_creator.add('Something', 5, test_dict)
 	if result == correct:
 		score += 1
+
 	total += 1
 	#with self.subTest():B
 	correct = "6 is more points than you have left in your pool"
 	result = character_creator.add('Something', 6, test_dict)
 	if result == correct:
 		score += 1
+
 	total += 1
 	#with self.subTest():C
 	correct = "'this' is not a valid attribute"
@@ -122,15 +125,15 @@ ______________________________'''
 	correct += "10 added to Intelligence\n"
 	correct += MENU
 	correct += "What's your choice?\n"
-	correct += '''
+	correct += f'''
 ______________________________
-Strength\t|\t0
-Dexterity\t|\t0
-Constitution\t|\t0
-Wisdom\t\t|\t0
-Intelligence\t|\t10
-Charisma\t|\t0
-Pool\t\t|\t62
+{"Strength":12}|\t0
+{"Dexterity":12}|\t0
+{"Constitution":12}|\t0
+{"Wisdom":12}|\t0
+{"Intelligence":12}|\t10
+{"Charisma":12}|\t0
+{"Pool":12}|\t62
 ______________________________\n'''
 	correct += MENU
 	correct += "What's your choice?\n"
@@ -148,12 +151,14 @@ ______________________________\n'''
 	result = character_creator.remove('Something', 5, test_dict)
 	if result == correct:
 		score += 1
+
 	total += 1
 	#with self.subTest():B
 	correct = "6 is more points than you have left in Something"
 	result = character_creator.remove('Something', 6, test_dict)
 	if result == correct:
 		score += 1
+
 	total += 1
 	#with self.subTest():C
 	correct = "'this' is not a valid attribute"
@@ -176,15 +181,15 @@ ______________________________\n'''
 	correct += "5 removed from Wisdom\n"
 	correct += MENU
 	correct += "What's your choice?\n"
-	correct += '''
+	correct += f'''
 ______________________________
-Strength\t|\t0
-Dexterity\t|\t0
-Constitution\t|\t0
-Wisdom\t\t|\t10
-Intelligence\t|\t0
-Charisma\t|\t0
-Pool\t\t|\t62
+{"Strength":12}|\t0
+{"Dexterity":12}|\t0
+{"Constitution":12}|\t0
+{"Wisdom":12}|\t10
+{"Intelligence":12}|\t0
+{"Charisma":12}|\t0
+{"Pool":12}|\t62
 ______________________________\n'''
 	correct += MENU
 	correct += "What's your choice?\n"
@@ -292,13 +297,13 @@ How many points would you like to add?
 What's your choice?
 
 ______________________________
-Strength	|	15
-Dexterity	|	14
-Constitution	|	13
-Wisdom		|	12
-Intelligence	|	10
-Charisma	|	13
-Pool		|	0
+Strength    |	15
+Dexterity   |	14
+Constitution|	13
+Wisdom      |	12
+Intelligence|	10
+Charisma    |	8
+Pool        |	0
 ______________________________
 
 			 ____
@@ -376,13 +381,13 @@ How many points would you like to remove?
 What's your choice?
 
 ______________________________
-Strength	|	1
-Dexterity	|	1
-Constitution	|	1
-Wisdom		|	1
-Intelligence	|	1
-Charisma	|	1
-Pool		|	66
+Strength    |	1
+Dexterity   |	1
+Constitution|	1
+Wisdom      |	1
+Intelligence|	1
+Charisma    |	1
+Pool        |	66
 ______________________________
 
 			 ____
