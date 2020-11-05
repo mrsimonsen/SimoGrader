@@ -39,7 +39,7 @@ def main():
 	correct += "There are 5 words in the message.\n"
 	correct += "Here's the shuffled message:\n"
 	correct += "my is This  message.\n"
-	correct2 += "What is the message to scramble?\nThere are 5 words in the message.\nHere's the shuffeled message:\nmy is This  message.\n"
+	correct2 = "What is the message to scramble?\nThere are 5 words in the message.\nHere's the shuffeled message:\nmy is This  message.\n"
 	result = catchOutput(inputs, '0')
 	if result == correct or result == correct2:
 		score += 1
@@ -52,7 +52,7 @@ def main():
 	correct += "There are 7 words in the message.\n"
 	correct += "Here's the shuffled message:\n"
 	correct += "message. multi   space  Wacky\n"
-	correct2 = "What is the message to scramble?\nThere are 7 words in the message.\nHere's the shuffled message:\nmessage. multi   space  Wacky\n"
+	correct2 = "What is the message to scramble?\nThere are 7 words in the message.\nHere's the shuffeled message:\nmessage. multi   space  Wacky\n"
 	result = catchOutput(inputs, '14')
 	if result == correct or result == correct2:
 		score += 1
