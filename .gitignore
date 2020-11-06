@@ -2,6 +2,5 @@
 __pycache__
 .pytest_cache
 Repos/
-*/grading_data
-gradign_data
+grading_data
 assignment.txt
