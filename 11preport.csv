@@ -5,7 +5,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Bingham, Kaycee",11p,10.0
 8,"Bolton, Elijah",11p,2.0
 7,"Brown, Johnathan",11p,8.0
-8,"Carrion, Joshua",11p,0.0
+8,"Carrion, Joshua",11p,2.0
 7,"Castillo, Tony",11p,10.0
 6,"Cote, Austin",11p,8.0
 7,"Cox, Shotaro",11p,0.0
@@ -21,7 +21,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Garcia, Rudy",11p,10.0
 7,"Gill, Felicity",11p,2.0
 8,"Gomez-Pritt, Natalia",11p,10.0
-8,"Grether, Max",11p,2.0
+8,"Grether, Max",11p,10.0
 4,"Guarin, Sheik",11p,0.0
 7,"Hansen, Hayden",11p,8.0
 6,"Hardyman, Nathanial",11p,0.0
@@ -67,7 +67,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Salazar, Anastasia ",11p,0.0
 8,"Saoit, Jeniene",11p,8.0
 4,"Schulz, Tobias",11p,2.0
-4,"Slater, Nathan",11p,0
+4,"Slater, Nathan",11p,2.0
 4,"Steed, Ryan",11p,10.0
 8,"Strand, Blake",11p,0.0
 8,"Strauch, Raphael",11p,0.0
@@ -77,6 +77,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Tracy, Kyle",11p,10.0
 8,"Vaca, Sami",11p,0.0
 4,"Wageman, Makayla",11p,2.0
-4,"Watt, Coleton",11p,0.0
+4,"Watt, Coleton",11p,2.0
 7,"Watts, Carter",11p,0.0
 4,"Young, Christopher",11p,2.0
