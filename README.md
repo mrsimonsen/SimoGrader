@@ -14,7 +14,7 @@ alias all="python3 all.py"
 	```TOKEN=your_token
 	```
 	where your_token is replaced with a GitHub Personal Access Token.
-* sudo apt install python3-pip
+* sudo apt install python3-pip default-jdk
 * pip3 install pygithub
 * pip3 install python-dotenv
 * [install GitHub CLI](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
