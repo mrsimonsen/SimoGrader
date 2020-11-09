@@ -71,7 +71,6 @@ Critter Caretaker
 Choice:
 I'm Dog and I feel okay now.
 
-
 Critter Caretaker
 
 0 - Quit
@@ -114,7 +113,7 @@ Critter Caretaker
 Choice:
 Goodbye.
 '''
-	result = catchOutput(inputs)
+	result = catchOutput(inputs, 4)
 	if result == correct:
 		score += 1
 	
