@@ -1,4 +1,4 @@
-from subprocess import run, TimeoutExpired, Popen, PIPE
+from subprocess import run
 from os import getcwd
 
 file = "dice_roller.py"
@@ -6,20 +6,8 @@ file = "dice_roller.py"
 # setup methods
 def catchOutput(inputs=None, seed=''):
 	cwd = getcwd()
-	result = None
-	p = Popen(f"python3 {file} {seed}",stdin=PIPE,stdout=PIPE,shell=True,cwd=cwd, text=True)
-	try:
-		out = p.communicate(input=inputs, timeout=3)
-		result = out[0]
-	except TimeoutExpired:
-		result = ""
-		p.kill()
-		run("ps fjx > kill.txt ", shell=True)
-		with open('kill.txt','r') as f:
-			data = f.readlines()
-		k = data[-1].split(" ")
-		run(f"kill {k[5]}",shell=True)
-	return result
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
+	return p.stdout
 
 def main():
 	total = 0
