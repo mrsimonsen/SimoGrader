@@ -7,10 +7,10 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Bolton, Elijah",13p,0.0
 7,"Brown, Johnathan",13p,0.0
 8,"Carrion, Joshua",13p,0.0
-7,"Castillo, Tony",13p,0.0
+7,"Castillo, Tony",13p,5.0
 6,"Cote, Austin",13p,0.0
 7,"Cox, Shotaro",13p,0.0
-7,"Davis, Croydon",13p,0.0
+7,"Davis, Croydon",13p,10.0
 4,"Del Valle, Arielle",13p,0.0
 7,"Dickson, Luke",13p,0.0
 6,"Edwards, Jonathan",13p,0.0
@@ -34,17 +34,17 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Hunt, Brandon",13p,0.0
 4,"Jasmin, Keanna ",13p,0.0
 4,"Jensen, Evan",13p,0.0
-4,"Jeppsen, Carter",13p,0.0
+4,"Jeppsen, Carter",13p,5.0
 7,"Johnson, Alexis",13p,0.0
-6,"Johnson, Lillyan",13p,0.0
-6,"Kelley, Kaleb",13p,0.0
+6,"Johnson, Lillyan",13p,2.5
+6,"Kelley, Kaleb",13p,5.0
 6,"Kemp, Zander",13p,0.0
 8,"Kohl, Gavin",13p,0.0
 8,"Lappi, Sophie",13p,0.0
 6,"Leonard, Kaitlyn",13p,0.0
 8,"Lopez, Alair",13p,0.0
-6,"Marshall, Zach",13p,0.0
-6,"Mason, Hyrum",13p,0.0
+6,"Marshall, Zach",13p,5.0
+6,"Mason, Hyrum",13p,5.0
 4,"Mayhue, Logan",13p,2.5
 4,"Moore, Elliott",13p,0.0
 4,"Morrison, Alyssa",13p,0.0
@@ -60,7 +60,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Plane, Hallie",13p,0.0
 6,"Pogue, Joey",13p,0.0
 4,"Powell, Thaddeus",13p,10.0
-4,"Provenzano, Anthony",13p,0.0
+4,"Provenzano, Anthony",13p,10.0
 8,"Remley, Traiven ",13p,0.0
 6,"Rosas, Christopher",13p,0.0
 7,"Rosas, Kassandra",13p,0.0
@@ -68,13 +68,13 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Saoit, Jeniene",13p,0.0
 4,"Schulz, Tobias",13p,0.0
 4,"Slater, Nathan",13p,0.0
-4,"Steed, Ryan",13p,0.0
+4,"Steed, Ryan",13p,2.5
 8,"Strand, Blake",13p,0.0
 8,"Strauch, Raphael",13p,0.0
 4,"Suarez, Tristan",13p,0.0
 6,"Swenson, Kyle",13p,0.0
 6,"Tiede, Kaytee",13p,0.0
-6,"Tracy, Kyle",13p,0.0
+6,"Tracy, Kyle",13p,10.0
 8,"Vaca, Sami",13p,0.0
 4,"Wageman, Makayla",13p,0.0
 4,"Watt, Coleton",13p,0.0
