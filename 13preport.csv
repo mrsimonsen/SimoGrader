@@ -3,9 +3,9 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Ashton, Tannen",13p,0.0
 6,"Avendano, Cristian",13p,0.0
 8,"Bench, Owen",13p,0.0
-4,"Bingham, Kaycee",13p,5.0
+4,"Bingham, Kaycee",13p,10.0
 8,"Bolton, Elijah",13p,0.0
-7,"Brown, Johnathan",13p,0.0
+7,"Brown, Johnathan",13p,10.0
 8,"Carrion, Joshua",13p,0.0
 7,"Castillo, Tony",13p,10.0
 6,"Cote, Austin",13p,0.0
@@ -21,10 +21,10 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Garcia, Noah ",13p,0.0
 8,"Garcia, Rudy",13p,2.5
 7,"Gill, Felicity",13p,0.0
-8,"Gomez-Pritt, Natalia",13p,0.0
+8,"Gomez-Pritt, Natalia",13p,10.0
 8,"Grether, Max",13p,0.0
 4,"Guarin, Sheik",13p,0.0
-7,"Hansen, Hayden",13p,0.0
+7,"Hansen, Hayden",13p,10.0
 6,"Hardyman, Nathanial",13p,0.0
 7,"Harris, Marley",13p,0.0
 4,"Hartner, Nathan",13p,0.0
@@ -54,7 +54,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Nielsen, Amond",13p,0.0
 8,"Nye, Carson",13p,10.0
 4,"Nyre, Kendall",13p,0.0
-7,"Patton, Caiden",13p,0.0
+7,"Patton, Caiden",13p,2.5
 4,"Peterson, Elliott",13p,0.0
 6,"Phiromnut, Jasmine",13p,0.0
 8,"Plane, Hallie",13p,0.0
@@ -62,7 +62,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Powell, Thaddeus",13p,10.0
 4,"Provenzano, Anthony",13p,10.0
 8,"Remley, Traiven ",13p,10.0
-6,"Rosas, Christopher",13p,0.0
+6,"Rosas, Christopher",13p,0
 7,"Rosas, Kassandra",13p,0.0
 8,"Salazar, Anastasia ",13p,0.0
 8,"Saoit, Jeniene",13p,0.0
