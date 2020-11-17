@@ -1,7 +1,6 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",12p,10.0
 7,"Ashton, Tannen",12p,0.0
-6,"Avendano, Cristian",12p,0.0
 8,"Bench, Owen",12p,0.0
 4,"Bingham, Kaycee",12p,10.0
 8,"Bolton, Elijah",12p,0.0
@@ -11,7 +10,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Cote, Austin",12p,10.0
 7,"Cox, Shotaro",12p,0.0
 7,"Davis, Croydon",12p,10.0
-4,"Del Valle, Arielle",12p,0.0
 7,"Dickson, Luke",12p,10.0
 6,"Edwards, Jonathan",12p,5.0
 6,"Edwards, Talmage",12p,10.0
@@ -66,7 +64,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Rosas, Kassandra",12p,0.0
 8,"Salazar, Anastasia ",12p,0.0
 8,"Saoit, Jeniene",12p,0.0
-4,"Schulz, Tobias",12p,0.0
+4,"Schulz, Tobias",12p,0
 4,"Slater, Nathan",12p,0.0
 4,"Steed, Ryan",12p,10.0
 8,"Strand, Blake",12p,0.0
