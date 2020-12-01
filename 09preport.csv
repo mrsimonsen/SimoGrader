@@ -1,7 +1,6 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",09p,10.0
 7,"Ashton, Tannen",09p,0.0
-6,"Avendano, Cristian",09p,0.0
 8,"Bench, Owen",09p,10.0
 4,"Bingham, Kaycee",09p,10.0
 8,"Bolton, Elijah",09p,10.0
@@ -11,11 +10,10 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Cote, Austin",09p,10.0
 7,"Cox, Shotaro",09p,0.0
 7,"Davis, Croydon",09p,10.0
-4,"Del Valle, Arielle",09p,0.0
 7,"Dickson, Luke",09p,10.0
 6,"Edwards, Jonathan",09p,7.14
 6,"Edwards, Talmage",09p,7.14
-6,"Ford, Riley",09p,0.0
+6,"Ford, Riley",09p,10.0
 7,"Gable, Ethan",09p,10.0
 4,"Gaither, Brandon",09p,10.0
 6,"Garcia, Noah ",09p,10.0
@@ -25,7 +23,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Grether, Max",09p,10.0
 4,"Guarin, Sheik",09p,0.0
 7,"Hansen, Hayden",09p,10.0
-6,"Hardyman, Nathanial",09p,0.0
+6,"Hardyman, Nathanial",09p,7.14
 7,"Harris, Marley",09p,10.0
 4,"Hartner, Nathan",09p,10.0
 8,"Hayward, Isaac",09p,10.0
