@@ -3,7 +3,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Ashton, Tannen",13p,0.0
 8,"Bench, Owen",13p,0.0
 4,"Bingham, Kaycee",13p,10.0
-8,"Bolton, Elijah",13p,2.5
+8,"Bolton, Elijah",13p,5.0
 7,"Brown, Johnathan",13p,10.0
 8,"Carrion, Joshua",13p,0.0
 7,"Castillo, Tony",13p,10.0
@@ -16,16 +16,16 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Ford, Riley",13p,0.0
 7,"Gable, Ethan",13p,10.0
 4,"Gaither, Brandon",13p,0.0
-6,"Garcia, Noah ",13p,0.0
+6,"Garcia, Noah ",13p,10.0
 8,"Garcia, Rudy",13p,10.0
-7,"Gill, Felicity",13p,0.0
+7,"Gill, Felicity",13p,2.5
 8,"Gomez-Pritt, Natalia",13p,10.0
 8,"Grether, Max",13p,10.0
 4,"Guarin, Sheik",13p,0.0
 7,"Hansen, Hayden",13p,10.0
-6,"Hardyman, Nathanial",13p,0.0
+6,"Hardyman, Nathanial",13p,7.5
 7,"Harris, Marley",13p,0.0
-4,"Hartner, Nathan",13p,0.0
+4,"Hartner, Nathan",13p,10.0
 8,"Hayward, Isaac",13p,10.0
 8,"Hibbert, Conner",13p,10.0
 7,"Humphreys, Chloe",13p,0.0
@@ -39,7 +39,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Kemp, Zander",13p,0.0
 8,"Kohl, Gavin",13p,0.0
 8,"Lappi, Sophie",13p,0.0
-6,"Leonard, Kaitlyn",13p,0.0
+6,"Leonard, Kaitlyn",13p,7.5
 8,"Lopez, Alair",13p,0.0
 6,"Marshall, Zach",13p,10.0
 6,"Mason, Hyrum",13p,10.0
@@ -47,15 +47,15 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Moore, Elliott",13p,2.5
 4,"Morrison, Alyssa",13p,0.0
 6,"Moyano, Sebastian",13p,0.0
-8,"Nay, Andrew",13p,0.0
+8,"Nay, Andrew",13p,10.0
 7,"Nguyen, Julie",13p,0.0
-7,"Nielsen, Amond",13p,0.0
+7,"Nielsen, Amond",13p,10.0
 8,"Nye, Carson",13p,10.0
 4,"Nyre, Kendall",13p,0.0
 7,"Patton, Caiden",13p,2.5
 4,"Peterson, Elliott",13p,10.0
 6,"Phiromnut, Jasmine",13p,7.5
-8,"Plane, Hallie",13p,0.0
+8,"Plane, Hallie",13p,10.0
 6,"Pogue, Joey",13p,0.0
 4,"Powell, Thaddeus",13p,10.0
 4,"Provenzano, Anthony",13p,10.0
@@ -75,6 +75,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Tracy, Kyle",13p,10.0
 8,"Vaca, Sami",13p,0.0
 4,"Wageman, Makayla",13p,0.0
-4,"Watt, Coleton",13p,0.0
+4,"Watt, Coleton",13p,10.0
 7,"Watts, Carter",13p,0.0
 4,"Young, Christopher",13p,0.0
