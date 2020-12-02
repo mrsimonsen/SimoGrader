@@ -65,7 +65,7 @@ def main():
 	ins = inputs.split('\n')
 	n = ins[0]
 	w = int(ins[4])
-	d = (self.today-datetime.date(int(ins[1]),int(ins[2]),int(ins[3]))).days
+	d = (today-datetime.date(int(ins[1]),int(ins[2]),int(ins[3]))).days
 	a = round(d/Earth_orbit,1)
 
 	correct = start(n)
@@ -83,7 +83,7 @@ def main():
 	ins = inputs.split('\n')
 	n = ins[0]
 	w = int(ins[4])
-	d = (self.today-datetime.date(int(ins[1]),int(ins[2]),int(ins[3]))).days
+	d = (today-datetime.date(int(ins[1]),int(ins[2]),int(ins[3]))).days
 	a = round(d/Earth_orbit,1)
 
 	correct = start(n)
@@ -98,4 +98,4 @@ def main():
 	return f"{score}/{total}"
 
 if __name__ == '__main__':
-	unittest.main()
+	print(main())
