@@ -18,7 +18,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Gaither, Brandon",11p,2.0
 6,"Garcia, Noah ",11p,10.0
 8,"Garcia, Rudy",11p,10.0
-7,"Gill, Felicity",11p,0
+7,"Gill, Felicity",11p,10.0
 8,"Gomez-Pritt, Natalia",11p,10.0
 8,"Grether, Max",11p,10.0
 4,"Guarin, Sheik",11p,0.0
@@ -30,7 +30,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Hibbert, Conner",11p,10.0
 7,"Humphreys, Chloe",11p,8.0
 8,"Hunt, Brandon",11p,10.0
-4,"Jasmin, Keanna ",11p,2.0
+4,"Jasmin, Keanna ",11p,10.0
 4,"Jensen, Evan",11p,0
 4,"Jeppsen, Carter",11p,10.0
 7,"Johnson, Alexis",11p,10.0
@@ -46,7 +46,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Mayhue, Logan",11p,10.0
 4,"Moore, Elliott",11p,10.0
 4,"Morrison, Alyssa",11p,0.0
-6,"Moyano, Sebastian",11p,2.0
+6,"Moyano, Sebastian",11p,10.0
 8,"Nay, Andrew",11p,10.0
 7,"Nguyen, Julie",11p,0.0
 7,"Nielsen, Amond",11p,10.0
@@ -74,7 +74,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Tiede, Kaytee",11p,10.0
 6,"Tracy, Kyle",11p,10.0
 8,"Vaca, Sami",11p,8.0
-4,"Wageman, Makayla",11p,2.0
+4,"Wageman, Makayla",11p,8.0
 4,"Watt, Coleton",11p,10.0
 7,"Watts, Carter",11p,10.0
 4,"Young, Christopher",11p,2.0
