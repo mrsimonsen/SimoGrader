@@ -56,7 +56,7 @@ def main():
 
 	total += 1
 	#B
-	pig_latin.write("Some message!\nwith 2 lines!\n")
+	pig_latin.write(["Some message!\nwith 2 lines!\n"])
 	result = pig_latin.read('pig.txt')
 	correct = ["Some message!", "with 2 lines!"]
 	if result == correct:
