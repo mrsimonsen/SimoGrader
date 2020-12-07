@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",11p,8.0
 7,"Ashton, Tannen",11p,2.0
-8,"Bench, Owen",11p,2.0
+8,"Bench, Owen",11p,0
 4,"Bingham, Kaycee",11p,10.0
 8,"Bolton, Elijah",11p,10.0
 7,"Brown, Johnathan",11p,8.0
@@ -13,7 +13,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Dickson, Luke",11p,10.0
 6,"Edwards, Jonathan",11p,10.0
 6,"Edwards, Talmage",11p,10.0
-6,"Ford, Riley",11p,0.0
+6,"Ford, Riley",11p,2.0
 7,"Gable, Ethan",11p,10.0
 4,"Gaither, Brandon",11p,2.0
 6,"Garcia, Noah ",11p,10.0
@@ -21,7 +21,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Gill, Felicity",11p,10.0
 8,"Gomez-Pritt, Natalia",11p,10.0
 8,"Grether, Max",11p,10.0
-4,"Guarin, Sheik",11p,0.0
+4,"Guarin, Sheik",11p,8.0
 7,"Hansen, Hayden",11p,8.0
 6,"Hardyman, Nathanial",11p,10.0
 7,"Harris, Marley",11p,0
@@ -67,7 +67,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Schulz, Tobias",11p,3.0
 4,"Slater, Nathan",11p,10.0
 4,"Steed, Ryan",11p,10.0
-8,"Strand, Blake",11p,2.0
+8,"Strand, Blake",11p,10.0
 8,"Strauch, Raphael",11p,0.0
 4,"Suarez, Tristan",11p,0.0
 6,"Swenson, Kyle",11p,10.0
