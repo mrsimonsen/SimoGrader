@@ -48,7 +48,6 @@ def main():
 	inputs = "nothing.txt"
 	out = "Welcome to the Pig Latin Translator!\n"
 	out += "What is the name of the file:\n"
-	out += "--Could not open file!--\n"
 	correct = (out, '1error')
 	result = (catchOutput(inputs), pig_latin.read('nothing.txt'))
 	if result == correct:
