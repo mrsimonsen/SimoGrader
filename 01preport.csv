@@ -1,7 +1,6 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",01p,10.0
 7,"Ashton, Tannen",01p,2.5
-6,"Avendano, Cristian",01p,10.0
 8,"Bench, Owen",01p,10.0
 4,"Bingham, Kaycee",01p,10.0
 8,"Bolton, Elijah",01p,10.0
@@ -11,7 +10,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Cote, Austin",01p,10.0
 7,"Cox, Shotaro",01p,0.0
 7,"Davis, Croydon",01p,10.0
-4,"Del Valle, Arielle",01p,10.0
 7,"Dickson, Luke",01p,10.0
 6,"Edwards, Jonathan",01p,10.0
 6,"Edwards, Talmage",01p,10.0
@@ -79,4 +77,4 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Wageman, Makayla",01p,10.0
 4,"Watt, Coleton",01p,10.0
 7,"Watts, Carter",01p,10.0
-4,"Young, Christopher",01p,0.0
+4,"Young, Christopher",01p,10.0
