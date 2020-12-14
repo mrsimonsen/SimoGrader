@@ -48,8 +48,12 @@ def grade(a):
 	for f in folders:
 		print(f"Grading: {f}")
 		os.chdir(f)
-		p = run("python3 Test.py", shell=True, capture_output=True, text=True)
-		score = p.stdout.strip()
+		try:
+			p = run("python3 Test.py", shell=True, capture_output=True, text=True)
+			score = p.stdout.strip()
+		except KeyboardInterrupt:
+			print('student test halted')
+			score = None
 		if score:
 			points = string_to_math(score)
 		else:
