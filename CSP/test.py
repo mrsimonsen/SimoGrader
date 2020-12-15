@@ -46,10 +46,9 @@ file = "solar_trivia.py"
 today = datetime.date.today()
 
 def main():
-	total = 0
+	total = 80
 	score = 0
 
-	total += 1
 	#def test_1(self):
 	inputs = "Teresa\n1987\n01\n17\n200\n"
 	ins = inputs.split('\n')
@@ -57,9 +56,8 @@ def main():
 	correct = start(n)
 	result = catchOutput(inputs)[:len(correct)]
 	if result == correct:
-		score += 1
+		score += 24
 
-	total += 1
 	#def test_2(self):
 	inputs = "Emliy\n2015\n08\n17\n42\n"
 	ins = inputs.split('\n')
@@ -75,9 +73,8 @@ def main():
 
 	result = catchOutput(inputs)[:len(correct)]
 	if result == correct:
-		score += 1
+		score += 40
 
-	total += 1
 	#Hidden test
 	inputs = "Simonsen\n1988\n03\n01\n275\n"
 	ins = inputs.split('\n')
@@ -93,7 +90,7 @@ def main():
 
 	result = catchOutput(inputs)
 	if result == correct:
-		score += 1
+		score += 16
 
 	return f"{score}/{total}"
 
