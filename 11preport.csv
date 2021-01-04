@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",11p,8.0
 7,"Ashton, Tannen",11p,2.0
-8,"Bench, Owen",11p,0
+8,"Bench, Owen",11p,8.0
 4,"Bingham, Kaycee",11p,10.0
 8,"Bolton, Elijah",11p,10.0
 7,"Brown, Johnathan",11p,8.0
@@ -45,7 +45,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Mason, Hyrum",11p,8.0
 4,"Mayhue, Logan",11p,10.0
 4,"Moore, Elliott",11p,10.0
-4,"Morrison, Alyssa",11p,0.0
+4,"Morrison, Alyssa",11p,2.0
 6,"Moyano, Sebastian",11p,10.0
 8,"Nay, Andrew",11p,10.0
 7,"Nguyen, Julie",11p,0.0
@@ -62,7 +62,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Remley, Traiven ",11p,10.0
 6,"Rosas, Christopher",11p,8.0
 7,"Rosas, Kassandra",11p,0.0
-8,"Salazar, Anastasia ",11p,2.0
+8,"Salazar, Anastasia ",11p,10.0
 8,"Saoit, Jeniene",11p,8.0
 4,"Schulz, Tobias",11p,10.0
 4,"Slater, Nathan",11p,10.0
@@ -77,4 +77,4 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Wageman, Makayla",11p,8.0
 4,"Watt, Coleton",11p,10.0
 7,"Watts, Carter",11p,10.0
-4,"Young, Christopher",11p,2.0
+4,"Young, Christopher",11p,8.0
