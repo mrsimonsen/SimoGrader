@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned
 6,"Akelbek, Sabina",12p,10.0
 7,"Ashton, Tannen",12p,0.0
-8,"Bench, Owen",12p,0.0
+8,"Bench, Owen",12p,0
 4,"Bingham, Kaycee",12p,10.0
 8,"Bolton, Elijah",12p,10.0
 7,"Brown, Johnathan",12p,10.0
@@ -23,8 +23,8 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Grether, Max",12p,10.0
 4,"Guarin, Sheik",12p,0.0
 7,"Hansen, Hayden",12p,10.0
-6,"Hardyman, Nathanial",12p,0.0
-7,"Harris, Marley",12p,0.0
+6,"Hardyman, Nathanial",12p,5.62
+7,"Harris, Marley",12p,0
 4,"Hartner, Nathan",12p,10.0
 8,"Hayward, Isaac",12p,10.0
 8,"Hibbert, Conner",12p,10.0
@@ -33,7 +33,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Jasmin, Keanna ",12p,10.0
 4,"Jensen, Evan",12p,0.0
 4,"Jeppsen, Carter",12p,10.0
-7,"Johnson, Alexis",12p,0.0
+7,"Johnson, Alexis",12p,10.0
 6,"Johnson, Lillyan",12p,10.0
 6,"Kelley, Kaleb",12p,10.0
 6,"Kemp, Zander",12p,0.0
@@ -62,7 +62,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Remley, Traiven ",12p,10.0
 6,"Rosas, Christopher",12p,10.0
 7,"Rosas, Kassandra",12p,0.0
-8,"Salazar, Anastasia ",12p,0.0
+8,"Salazar, Anastasia ",12p,10.0
 8,"Saoit, Jeniene",12p,10.0
 4,"Schulz, Tobias",12p,0
 4,"Slater, Nathan",12p,10.0
