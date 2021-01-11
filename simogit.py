@@ -44,6 +44,7 @@ def main():
 	#makedir for clone - set name to current date time
 	makedirs("Repos")
 	run(['cp','assignment.txt','Repos/assignment.txt'])
+	run(['cp',"What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'Repos/.'])
 	#cd into folder
 	chdir("Repos")
 	#get list of repos
