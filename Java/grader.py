@@ -29,14 +29,14 @@ def gather(a):
 	for s in students:
 		os.chdir('testing')
 		os.mkdir(s.github)
-		if a.folder == "20CaesarCipher":
+		if a.file == "20CaesarCipher":
 			run(["cp", os.path.join(root,"test.txt"),os.path.join(s.github,"test.txt")])
 			run(["cp", os.path.join(root,"secret.txt"),os.path.join(s.github,"secret.txt")])
 
 		for i in a.file:
 			run(["cp", os.path.join(root,s.github,i), os.path.join(s.github,i)])
 			run(["cp", os.path.join(root,a.test), os.path.join(s.github,a.test)])
-		os.chdir('root')
+		os.chdir(root)
 	data['students']=students
 	data.close()
 
@@ -47,7 +47,7 @@ def grade(a):
 	root = os.getcwd()
 	assign_name = get_assign()
 	os.chdir('testing')
-	with open(f'{a.folder[:2]}report.csv','w',newline='') as f:
+	with open(f'{a.file[:2]}report.csv','w',newline='') as f:
 		w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		w.writerow(['Period','Student Name','Assignment Name','Points Earned'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
