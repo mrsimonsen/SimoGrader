@@ -1,4 +1,4 @@
-from subprocess import run
+rom subprocess import run
 from os import getcwd
 file = "tv_remote.py"
 import tv_remote
@@ -30,10 +30,30 @@ def main():
 	result = catchOutput(inputs)
 	if result == correct:
 		score += 1
-	
+
 	total += 1
-	#def test_2(self):
-	r = tv_remote.Remote()
+	#test1 part 2
+	x = None
+	r = tv_remove.Remote()
+	try:
+		x = r._Remote__channel
+	except:
+		pass
+	if x == 3:
+		score += 1
+
+	total += 1
+	#test1 part 3
+	x = None
+	try:
+		x = r.volume
+	except:
+		pass
+	if x == None:
+		score += 1
+
+	total += 1
+	#def test_2(self)
 	for i in range(6):
 		r.volume_up()
 	result = r.__str__()
