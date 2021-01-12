@@ -47,25 +47,27 @@ def grade(a):
 	root = os.getcwd()
 	assign_name = get_assign()
 	os.chdir('testing')
-	with open(f'{a.file[:2]}report.csv','w',newline='') as f:
+	with open(f'{assign_name}report.csv','w',newline='') as f:
 		w = csv.writer(f,delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		w.writerow(['Period','Student Name','Assignment Name','Points Earned'])
 	folders = [f.name for f in os.scandir() if f.is_dir()]
 	for f in folders:
-		notfound = False
 		print(f"Grading {f}")
+		os.chdir(f)
 		try:
-			os.chdir(f)
-		except:
-			notfound = True
-		else:
 			if sc.compile_java(a.test):
-				score = sc.run_java(a.test[:-5])
-				points = string_to_math(score.strip())
+				score = sc.run_java(a.test[:-5]).strip()
 			else:#didn't compile - auto fail
 				print("didn't compile")
-				points = 0
-			os.chdir("..")
+				score = None
+		except KeyboardInterrupt:
+			print('student test halted')
+			score = None
+		if score:
+			points = string_to_math(score)
+		else:
+			points = 0.0
+		os.chdir("..")
 		for student in s:
 			if student.github == f:
 				student.set_grade(a, points)
@@ -85,9 +87,12 @@ def grade(a):
 
 def string_to_math(thing):
 	x = thing.split("/")
-	score = int(x[0])
-	total = int(x[1])
-	return round(score/total * 10,2)
+	if x[0].isdigit() and x[1].isdigit():
+		score = int(x[0])
+		total = int(x[1])
+		return round(score/total * 10,2)
+	else:
+		return 0
 
 def main():
 	assign_obj = intro()
