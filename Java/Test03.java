@@ -115,4 +115,20 @@ public class Test03 {
     System.setOut(SOut);
     System.setIn(SIn);
   }
+  public static void toFile(String correct, String result){
+	try{
+		File c = new File("correct.txt");
+		File r = new File("result.txt");
+		PrintWriter wc = new PrintWriter(c);
+		wc.print(correct);
+		wc.close();
+		PrintWriter wr = new PrintWriter(r);
+		wr.print(result);
+		wr.close();
+	}
+	catch (FileNotFoundException e){
+		System.out.println("Couldn't create files.");
+		System.out.println(e);
+	}
+  }
 }
