@@ -1,5 +1,5 @@
 #data maker for java
-import csv, shelve, datetime
+import csv, shelve, pickle
 #support classes
 class Assignment(object):
     '''an assignment with a file name'''
@@ -86,9 +86,17 @@ def main():
 
     for i in assignments:
         data[i]=Assignment(file_names[i],tests[i])
+	
+	#load list of periods that are java
+	f = open('classes.dat','rb')
+	classes = pickle.load(f)
+	f.close()
+	periods = []
+	for i in classes.keys():
+		if classes[i] == 'j':
+			periods.append(i)
 
     #student details
-    names = {}
     students = []
     with open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='') as f:
         #format = time,first,last,period,git
@@ -96,7 +104,10 @@ def main():
         for row in raw:
             if row[0] == "Timestamp":
                 continue#skip the first row/header
+			if row[3] not in periods:
+				continue#skip non-java students
             students.append(Student(f"{row[2]}, {row[1]}",row[3],row[4]))
     data['students'] = students
     #save all the things
     data.close()
+
