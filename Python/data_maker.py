@@ -81,7 +81,7 @@ def main():
 	periods = []
 	for i in classes.keys():
 		if classes[i] == 'p':
-			periods.append(i)
+			periods.append(str(i))
 	#student details
 	students = []
 	f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
