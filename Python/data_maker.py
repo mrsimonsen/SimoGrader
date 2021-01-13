@@ -1,5 +1,5 @@
 #data maker for python
-import csv, shelve
+import csv, shelve, pickle
 #support classes
 class Assignment(object):
 	'''an assignment with a file name, due date, and testing file'''
@@ -74,6 +74,14 @@ def main():
 	for i in assignments:
 		data[i]=Assignment(file_names[i],tests[i])
 
+	#load list of periods that are python
+	f = open("classes.dat",'rb')
+	classes = pickle.load(f)
+	f.close()
+	periods = []
+	for i in classes.keys():
+		if classes[i] == 'p':
+			periods.append(i)
 	#student details
 	students = []
 	f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
@@ -82,9 +90,12 @@ def main():
 	for row in raw:
 		if row[0] == "Timestamp":
 			continue#skip the first row/header
+		if row[3] not in periods:
+			continue#skip non-python students
 		students.append(Student(f"{row[2]}, {row[1]}",row[3],row[4]))
 	f.close()
 	data['students'] = students
 
 	#save all the things
 	data.close()
+	
