@@ -9,7 +9,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Davis, Croydon",01j,0.0
 4,"Dickson, Luke",01j,0.0
 8,"Ford, Riley",01j,0.0
-6,"Gable, Ethan",01j,0.0
+6,"Gable, Ethan",01j,10.0
 6,"Gaither, Brandon",01j,0.0
 6,"Garcia, Noah ",01j,10.0
 6,"Garcia, Rudy",01j,10.0
@@ -54,7 +54,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Stulp, Ethan",01j,0.0
 4,"Suarez, Tristan",01j,0.0
 6,"Swenson, Kyle",01j,10.0
-4,"Tiede, Kaytee",01j,5.0
+4,"Tiede, Kaytee",01j,10.0
 4,"Tracy, Kyle",01j,10.0
 8,"Watt, Coleton",01j,0.0
 7,"Watts, Carter",01j,0.0
