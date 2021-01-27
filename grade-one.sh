@@ -1,5 +1,6 @@
 read -p "assignment code: " code
-export name=$code-#github-username
+read -p "GitHub username: " username
+export name=$code-$username
 gh repo clone NUAMES-CS/$name
 export code=${code:0:2}
 cp ../AutoGrader/Python/test_$code.py $name/.
