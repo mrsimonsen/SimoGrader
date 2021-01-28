@@ -5,7 +5,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Carrion, Drake",02j,0.0
 6,"Castillo, Tony",02j,10.0
 4,"Cote, Austin",02j,0.0
-7,"Davis, Croydon",02j,0.0
+7,"Davis, Croydon",02j,10.0
 4,"Dickson, Luke",02j,0.0
 8,"Ford, Riley",02j,0.0
 6,"Gable, Ethan",02j,10.0
@@ -14,14 +14,14 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Garcia, Rudy",02j,10.0
 7,"Gomez-Pritt, Natalia",02j,10.0
 6,"Guarin Cardenas, Sheik",02j,0.0
-8,"Hansen, Hayden",02j,0.0
+8,"Hansen, Hayden",02j,10.0
 6,"Hardyman, Nathanial",02j,0.0
 7,"Harris, Marley",02j,0.0
 7,"Hartner, Nathan",02j,0.0
 8,"Hibbert, Conner",02j,0.0
 8,"Hunt, Brandon",02j,0.0
 4,"Jeppsen, Carter",02j,10.0
-6,"Johnson, Lillyan",02j,0.0
+6,"Johnson, Lillyan",02j,10.0
 6,"Kelley, Kaleb",02j,10.0
 6,"Kemp, Zander",02j,0.0
 7,"Langham, Quinn",02j,0.0
@@ -36,11 +36,11 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Nye, Carson",02j,7.5
 6,"Nyre, Kendall",02j,0.0
 6,"Parsons, Koby",02j,0.0
-7,"Peterson, Elliott",02j,0.0
+7,"Peterson, Elliott",02j,10.0
 8,"Phiromnut, Jasmine",02j,0.0
 8,"Pogue, Joey",02j,0.0
 8,"Powell, Thaddeus",02j,10.0
-6,"Provenzano, Anthony",02j,0.0
+6,"Provenzano, Anthony",02j,10.0
 6,"Romero, Cole",02j,10.0
 8,"Rosas, Christopher",02j,10.0
 8,"Salazar, Anastasia",02j,0.0
@@ -55,6 +55,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Swenson, Kyle",02j,10.0
 4,"Tiede, Kaytee",02j,10.0
 4,"Tracy, Kyle",02j,10.0
-8,"Watt, Coleton",02j,0.0
+8,"Watt, Coleton",02j,10.0
 7,"Watts, Carter",02j,0.0
 6,"Young, Christopher ",02j,0.0
