@@ -43,7 +43,9 @@ public class Test14 {
 	//test2b
 	total++;
 	Scanner s = new Scanner("1\nq\n");
+	setOutput();
 	char res = student.printMenu(s);
+	restoreSystem();
 	char cor = 'q';
 	if (res == cor){
 		score++;
