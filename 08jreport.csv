@@ -1,5 +1,4 @@
 Period,Student Name,Assignment Name,Points Earned
-4,"Ashton, Tannen",08j,0.0
 8,"Bench, Owen",08j,0.0
 8,"Bolton, Elijah",08j,0.0
 7,"Brown, Johnathan",08j,0.0
@@ -13,7 +12,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Gaither, Brandon",08j,0.0
 6,"Garcia, Noah ",08j,0.0
 6,"Garcia, Rudy",08j,10.0
-7,"Gomez-Pritt, Natalia",08j,0.0
+7,"Gomez-Pritt, Natalia",08j,10.0
 6,"Guarin Cardenas, Sheik",08j,0.0
 8,"Hansen, Hayden",08j,0.0
 6,"Hardyman, Nathanial",08j,0.0
@@ -26,11 +25,12 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Kelley, Kaleb",08j,0.0
 6,"Kemp, Zander",08j,0.0
 7,"Langham, Quinn",08j,0.0
-8,"Marshall, Zach",08j,0.0
+8,"Lopez, Alair",08j,0.0
+4,"Marshall, Zach",08j,0.0
 4,"Mason, Hyrum",08j,0.0
 6,"Mayhue, Logan",08j,0.0
 4,"Moore, Elliott",08j,0.0
-7,"Moyano, Sebastian ",08j,0.0
+7,"Moyano, Sebastian",08j,0.0
 7,"Nay, Andrew",08j,0.0
 6,"Nielsen, Amond",08j,0.0
 7,"Nye, Carson",08j,0.0
@@ -49,6 +49,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Shaw, Collin",08j,0.0
 7,"Slater, Nathan",08j,0.0
 6,"Steed, Ryan",08j,0.0
+4,"Strauch, Raphael",08j,0.0
 7,"Stulp, Ethan",08j,0.0
 4,"Suarez, Tristan",08j,0.0
 6,"Swenson, Kyle",08j,0.0
