@@ -32,9 +32,10 @@ def main():
 	#def test_3(self):
 	inputs = "100\n"
 	correct = "How many times do you want to flip the coin?\n"
-	correct += "The coin was flipped 100 times.\nHeads: 50\tTails: 50\n"
-	result = catchOutput(inputs, '0')
-	if result == correct:
+	correct1 = correct + "The coin was flipped 100 times.\nHeads: 40\tTails: 60\n"
+	correct2 = correct + "The coin was flipped 100 times.\nHeads: 60\tTails: 40\n"
+	result = catchOutput(inputs, '9')
+	if (result == correct1) or (result == correct2):
 		score += 1
 		
 		
@@ -42,12 +43,12 @@ def main():
 	total += 1
 	inputs = "10\n"
 	correct = "How many times do you want to flip the coin?\n"
-	correct1 = correct + "The coin was flipped 10 times.\nHeads: 7\tTails: 3\n"
-	correct2 = correct + "The coin was flipped 10 times.\nHeads: 3\tTails: 7\n"
+	correct1 = correct + "The coin was flipped 10 times.\nHeads: 3\tTails: 7\n"
+	correct2 = correct + "The coin was flipped 10 times.\nHeads: 7\tTails: 3\n"
 	result = catchOutput(inputs, '14')
-	if result == correct1 or result == correct2:
+	if (result == correct1) or (result == correct2):
 		score += 1
-	
+
 	return f"{score}/{total}"
 
 if __name__ == "__main__":

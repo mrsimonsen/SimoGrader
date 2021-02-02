@@ -4,11 +4,11 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Brown, Johnathan",03j,0.0
 4,"Carrion, Drake",03j,0.0
 6,"Castillo, Tony",03j,10.0
-4,"Cote, Austin",03j,0.0
+4,"Cote, Austin",03j,10.0
 7,"Davis, Croydon",03j,0.0
 4,"Dickson, Luke",03j,0.0
 8,"Ford, Riley",03j,0.0
-6,"Gable, Ethan",03j,0.0
+6,"Gable, Ethan",03j,10.0
 6,"Gaither, Brandon",03j,0.0
 6,"Garcia, Noah ",03j,0.0
 6,"Garcia, Rudy",03j,10.0
@@ -20,8 +20,8 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Hartner, Nathan",03j,0.0
 8,"Hibbert, Conner",03j,0.0
 8,"Hunt, Brandon",03j,0.0
-4,"Jeppsen, Carter",03j,0.0
-6,"Johnson, Lillyan",03j,0.0
+4,"Jeppsen, Carter",03j,10.0
+6,"Johnson, Lillyan",03j,10.0
 6,"Kelley, Kaleb",03j,10.0
 6,"Kemp, Zander",03j,0.0
 7,"Langham, Quinn",03j,0.0
@@ -36,7 +36,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Nye, Carson",03j,10.0
 6,"Nyre, Kendall",03j,0.0
 6,"Parsons, Koby",03j,0.0
-7,"Peterson, Elliott",03j,0.0
+7,"Peterson, Elliott",03j,10.0
 8,"Phiromnut, Jasmine",03j,0.0
 8,"Pogue, Joey",03j,0.0
 8,"Powell, Thaddeus",03j,10.0
@@ -48,7 +48,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Schulz, Tobias",03j,0.0
 6,"Shaw, Collin",03j,0.0
 7,"Slater, Nathan",03j,10.0
-6,"Steed, Ryan",03j,0.0
+6,"Steed, Ryan",03j,10.0
 4,"Strauch, Raphael",03j,0.0
 7,"Stulp, Ethan",03j,0.0
 4,"Suarez, Tristan",03j,0.0
