@@ -5,10 +5,8 @@ Made for Ubuntu for Windows
 
 ## Setup
 * cp .vimrc ../.
-* edit .bashrc and add the following to the end of the file:
-```
-alias all="python3 all.py"
-```
+* cp .bashrc ../.
+* cp .profile ../.
 * .env
 	* Must be created with the contents of
 	```TOKEN=your_token

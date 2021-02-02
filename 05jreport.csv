@@ -4,11 +4,11 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Brown, Johnathan",05j,0.0
 4,"Carrion, Drake",05j,0.0
 6,"Castillo, Tony",05j,10.0
-4,"Cote, Austin",05j,0.0
+4,"Cote, Austin",05j,8.0
 7,"Davis, Croydon",05j,0.0
 4,"Dickson, Luke",05j,0.0
 8,"Ford, Riley",05j,0.0
-6,"Gable, Ethan",05j,0.0
+6,"Gable, Ethan",05j,10.0
 6,"Gaither, Brandon",05j,0.0
 6,"Garcia, Noah ",05j,0.0
 6,"Garcia, Rudy",05j,10.0
@@ -22,13 +22,13 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Hunt, Brandon",05j,0.0
 4,"Jeppsen, Carter",05j,0.0
 6,"Johnson, Lillyan",05j,0.0
-6,"Kelley, Kaleb",05j,0.0
+6,"Kelley, Kaleb",05j,8.0
 6,"Kemp, Zander",05j,0.0
 7,"Langham, Quinn",05j,0.0
 8,"Lopez, Alair",05j,0.0
 4,"Marshall, Zach",05j,10.0
 4,"Mason, Hyrum",05j,10.0
-6,"Mayhue, Logan",05j,0.0
+6,"Mayhue, Logan",05j,2.0
 4,"Moore, Elliott",05j,0.0
 7,"Moyano, Sebastian",05j,0.0
 7,"Nay, Andrew",05j,0.0
@@ -54,7 +54,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Suarez, Tristan",05j,0.0
 6,"Swenson, Kyle",05j,10.0
 4,"Tiede, Kaytee",05j,10.0
-4,"Tracy, Kyle",05j,0.0
+4,"Tracy, Kyle",05j,8.0
 8,"Watt, Coleton",05j,0.0
 7,"Watts, Carter",05j,0.0
 6,"Young, Christopher ",05j,0.0
