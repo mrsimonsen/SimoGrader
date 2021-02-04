@@ -1,5 +1,4 @@
 Period,Student Name,Assignment Name,Points Earned
-4,"Ashton, Tannen",10j,0.0
 8,"Bench, Owen",10j,0.0
 8,"Bolton, Elijah",10j,0.0
 7,"Brown, Johnathan",10j,0.0
@@ -17,7 +16,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Guarin Cardenas, Sheik",10j,0.0
 8,"Hansen, Hayden",10j,0.0
 6,"Hardyman, Nathanial",10j,0.0
-7,"Harris, Marley",10j,0.0
+6,"Harris, Marley",10j,0.0
 7,"Hartner, Nathan",10j,0.0
 8,"Hibbert, Conner",10j,0.0
 8,"Hunt, Brandon",10j,0.0
@@ -26,11 +25,12 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Kelley, Kaleb",10j,0.0
 6,"Kemp, Zander",10j,0.0
 7,"Langham, Quinn",10j,0.0
-8,"Marshall, Zach",10j,0.0
+8,"Lopez, Alair",10j,0.0
+4,"Marshall, Zach",10j,0.0
 4,"Mason, Hyrum",10j,0.0
 6,"Mayhue, Logan",10j,0.0
 4,"Moore, Elliott",10j,0.0
-7,"Moyano, Sebastian ",10j,0.0
+7,"Moyano, Sebastian",10j,0.0
 7,"Nay, Andrew",10j,0.0
 6,"Nielsen, Amond",10j,0.0
 7,"Nye, Carson",10j,0.0
@@ -49,9 +49,10 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Shaw, Collin",10j,0.0
 7,"Slater, Nathan",10j,0.0
 6,"Steed, Ryan",10j,0.0
+4,"Strauch, Raphael",10j,0.0
 7,"Stulp, Ethan",10j,0.0
 4,"Suarez, Tristan",10j,0.0
-6,"Swenson, Kyle",10j,0.0
+6,"Swenson, Kyle",10j,10.0
 4,"Tiede, Kaytee",10j,0.0
 4,"Tracy, Kyle",10j,0.0
 8,"Watt, Coleton",10j,0.0
