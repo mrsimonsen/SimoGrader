@@ -1,5 +1,4 @@
 Period,Student Name,Assignment Name,Points Earned
-4,"Ashton, Tannen",09j,0.0
 8,"Bench, Owen",09j,0.0
 8,"Bolton, Elijah",09j,0.0
 7,"Brown, Johnathan",09j,0.0
@@ -17,7 +16,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Guarin Cardenas, Sheik",09j,0.0
 8,"Hansen, Hayden",09j,0.0
 6,"Hardyman, Nathanial",09j,0.0
-7,"Harris, Marley",09j,0.0
+6,"Harris, Marley",09j,0.0
 7,"Hartner, Nathan",09j,0.0
 8,"Hibbert, Conner",09j,0.0
 8,"Hunt, Brandon",09j,0.0
@@ -26,11 +25,12 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Kelley, Kaleb",09j,0.0
 6,"Kemp, Zander",09j,0.0
 7,"Langham, Quinn",09j,0.0
-8,"Marshall, Zach",09j,0.0
+8,"Lopez, Alair",09j,0.0
+4,"Marshall, Zach",09j,0.0
 4,"Mason, Hyrum",09j,0.0
 6,"Mayhue, Logan",09j,0.0
 4,"Moore, Elliott",09j,0.0
-7,"Moyano, Sebastian ",09j,0.0
+7,"Moyano, Sebastian",09j,0.0
 7,"Nay, Andrew",09j,0.0
 6,"Nielsen, Amond",09j,0.0
 7,"Nye, Carson",09j,0.0
@@ -49,10 +49,11 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Shaw, Collin",09j,0.0
 7,"Slater, Nathan",09j,0.0
 6,"Steed, Ryan",09j,0.0
+4,"Strauch, Raphael",09j,0.0
 7,"Stulp, Ethan",09j,0.0
 4,"Suarez, Tristan",09j,0.0
 6,"Swenson, Kyle",09j,0.0
-4,"Tiede, Kaytee",09j,0.0
+4,"Tiede, Kaytee",09j,2.5
 4,"Tracy, Kyle",09j,0.0
 8,"Watt, Coleton",09j,0.0
 7,"Watts, Carter",09j,0.0
