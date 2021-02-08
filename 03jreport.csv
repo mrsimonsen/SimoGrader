@@ -15,11 +15,11 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Gomez-Pritt, Natalia",03j,10.0
 6,"Guarin Cardenas, Sheik",03j,0.0
 8,"Hansen, Hayden",03j,10.0
-6,"Hardyman, Nathanial",03j,0.0
+6,"Hardyman, Nathanial",03j,10.0
 6,"Harris, Marley",03j,0.0
 7,"Hartner, Nathan",03j,0.0
-8,"Hibbert, Conner",03j,0.0
-8,"Hunt, Brandon",03j,0.0
+8,"Hibbert, Conner",03j,10.0
+8,"Hunt, Brandon",03j,10.0
 4,"Jeppsen, Carter",03j,10.0
 6,"Johnson, Lillyan",03j,10.0
 6,"Kelley, Kaleb",03j,10.0
@@ -31,21 +31,21 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Mayhue, Logan",03j,10.0
 4,"Moore, Elliott",03j,0.0
 7,"Moyano, Sebastian",03j,10.0
-7,"Nay, Andrew",03j,0.0
+7,"Nay, Andrew",03j,10.0
 6,"Nielsen, Amond",03j,10.0
 7,"Nye, Carson",03j,10.0
 6,"Nyre, Kendall",03j,0.0
 6,"Parsons, Koby",03j,0.0
 7,"Peterson, Elliott",03j,10.0
-8,"Phiromnut, Jasmine",03j,0.0
+8,"Phiromnut, Jasmine",03j,10.0
 8,"Pogue, Joey",03j,10.0
 8,"Powell, Thaddeus",03j,10.0
 6,"Provenzano, Anthony",03j,10.0
 6,"Romero, Cole",03j,10.0
 8,"Rosas, Christopher",03j,0.0
-8,"Salazar, Anastasia",03j,0.0
+8,"Salazar, Anastasia",03j,10.0
 6,"Savage, Kitrina",03j,0.0
-7,"Schulz, Tobias",03j,0.0
+7,"Schulz, Tobias",03j,10.0
 6,"Shaw, Collin",03j,0.0
 7,"Slater, Nathan",03j,10.0
 6,"Steed, Ryan",03j,10.0
@@ -55,6 +55,6 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Swenson, Kyle",03j,10.0
 4,"Tiede, Kaytee",03j,10.0
 4,"Tracy, Kyle",03j,10.0
-8,"Watt, Coleton",03j,0.0
+8,"Watt, Coleton",03j,10.0
 7,"Watts, Carter",03j,0.0
 6,"Young, Christopher ",03j,0.0
