@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias all='python3 all.py'
+alias all='cd AutoGrader;python3 all.py'
 alias rmc="find . -type f -name '*.class' -delete"
 #https://www.cyberciti.biz/open-source/cbonsai-linux-bonsai-tree-generator-for-cli-lovers-for-fun/
 alias bonsai="~/.local/bin/cbonsai -S"
