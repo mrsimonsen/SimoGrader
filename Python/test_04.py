@@ -13,7 +13,7 @@ def main():
 	score = 0
 	total += 1
 	#def test_1(self):
-	inputs = "1\n1\n1\n1\n1\n1\n1\n"
+	inputs = "50\n1\n1\n1\n1\n1\n1\n"
 	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\n"
 	result = catchOutput(inputs,"0")[:len(correct)]
 	if result == correct:
@@ -21,9 +21,9 @@ def main():
 
 	total += 1
 	#def test_2(self):
-	inputs = "1\n1\n1\n1\n1\n1\n1\n"
+	inputs = "50\n1\n1\n1\n1\n1\n1\n"
 	correct = "\tWelcome to 'Guess My Number 2.0'!\n\nI'm thinking of a number between 1 and 100.\nYou have 6 attempts to guess my number.\nTake guess number 1:\n"
-	result = catchOutput(inputs, )[:len(correct)]
+	result = catchOutput(inputs,'0')[:len(correct)]
 	if result == correct:
 		score += 1
 
