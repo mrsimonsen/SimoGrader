@@ -6,10 +6,10 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Castillo, Tony",05j,10.0
 4,"Cote, Austin",05j,8.0
 7,"Davis, Croydon",05j,10.0
-4,"Dickson, Luke",05j,0.0
+4,"Dickson, Luke",05j,10.0
 8,"Ford, Riley",05j,0.0
 6,"Gable, Ethan",05j,10.0
-6,"Gaither, Brandon",05j,0.0
+6,"Gaither, Brandon",05j,2.0
 6,"Garcia, Noah ",05j,10.0
 6,"Garcia, Rudy",05j,10.0
 7,"Gomez-Pritt, Natalia",05j,10.0
@@ -17,7 +17,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Hansen, Hayden",05j,10.0
 6,"Hardyman, Nathanial",05j,10.0
 6,"Harris, Marley",05j,0.0
-7,"Hartner, Nathan",05j,0.0
+7,"Hartner, Nathan",05j,10.0
 8,"Hibbert, Conner",05j,10.0
 8,"Hunt, Brandon",05j,0.0
 4,"Jeppsen, Carter",05j,10.0
@@ -37,13 +37,13 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Nyre, Kendall",05j,0.0
 6,"Parsons, Koby",05j,0.0
 7,"Peterson, Elliott",05j,10.0
-8,"Phiromnut, Jasmine",05j,2.0
+8,"Phiromnut, Jasmine",05j,10.0
 8,"Pogue, Joey",05j,10.0
 8,"Powell, Thaddeus",05j,10.0
 6,"Provenzano, Anthony",05j,10.0
 6,"Romero, Cole",05j,10.0
-8,"Rosas, Christopher",05j,0.0
-8,"Salazar, Anastasia",05j,0.0
+8,"Rosas, Christopher",05j,8.0
+8,"Salazar, Anastasia",05j,10.0
 6,"Savage, Kitrina",05j,10.0
 7,"Schulz, Tobias",05j,10.0
 6,"Shaw, Collin",05j,0.0
