@@ -9,7 +9,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Dickson, Luke",03j,10.0
 8,"Ford, Riley",03j,0.0
 6,"Gable, Ethan",03j,10.0
-6,"Gaither, Brandon",03j,0.0
+6,"Gaither, Brandon",03j,10.0
 6,"Garcia, Noah ",03j,10.0
 6,"Garcia, Rudy",03j,10.0
 7,"Gomez-Pritt, Natalia",03j,10.0
@@ -17,7 +17,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Hansen, Hayden",03j,10.0
 6,"Hardyman, Nathanial",03j,10.0
 6,"Harris, Marley",03j,0.0
-7,"Hartner, Nathan",03j,0.0
+7,"Hartner, Nathan",03j,10.0
 8,"Hibbert, Conner",03j,10.0
 8,"Hunt, Brandon",03j,10.0
 4,"Jeppsen, Carter",03j,10.0
@@ -34,7 +34,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Nay, Andrew",03j,10.0
 6,"Nielsen, Amond",03j,10.0
 7,"Nye, Carson",03j,10.0
-6,"Nyre, Kendall",03j,0.0
+6,"Nyre, Kendall",03j,10.0
 6,"Parsons, Koby",03j,0.0
 7,"Peterson, Elliott",03j,10.0
 8,"Phiromnut, Jasmine",03j,10.0
@@ -56,5 +56,5 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Tiede, Kaytee",03j,10.0
 4,"Tracy, Kyle",03j,10.0
 8,"Watt, Coleton",03j,10.0
-7,"Watts, Carter",03j,0.0
+7,"Watts, Carter",03j,10.0
 6,"Young, Christopher ",03j,0.0

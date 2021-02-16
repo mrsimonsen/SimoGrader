@@ -1,5 +1,4 @@
 Period,Student Name,Assignment Name,Points Earned
-4,"Ashton, Tannen",13j,0.0
 8,"Bench, Owen",13j,0.0
 8,"Bolton, Elijah",13j,0.0
 7,"Brown, Johnathan",13j,0.0
@@ -17,7 +16,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Guarin Cardenas, Sheik",13j,0.0
 8,"Hansen, Hayden",13j,0.0
 6,"Hardyman, Nathanial",13j,0.0
-7,"Harris, Marley",13j,0.0
+6,"Harris, Marley",13j,0.0
 7,"Hartner, Nathan",13j,0.0
 8,"Hibbert, Conner",13j,0.0
 8,"Hunt, Brandon",13j,0.0
@@ -26,11 +25,12 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Kelley, Kaleb",13j,0.0
 6,"Kemp, Zander",13j,0.0
 7,"Langham, Quinn",13j,0.0
-8,"Marshall, Zach",13j,0.0
+8,"Lopez, Alair",13j,0.0
+4,"Marshall, Zach",13j,0.0
 4,"Mason, Hyrum",13j,0.0
 6,"Mayhue, Logan",13j,0.0
 4,"Moore, Elliott",13j,0.0
-7,"Moyano, Sebastian ",13j,0.0
+7,"Moyano, Sebastian",13j,0.0
 7,"Nay, Andrew",13j,0.0
 6,"Nielsen, Amond",13j,0.0
 7,"Nye, Carson",13j,0.0
@@ -41,7 +41,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Pogue, Joey",13j,0.0
 8,"Powell, Thaddeus",13j,0.0
 6,"Provenzano, Anthony",13j,0.0
-6,"Romero, Cole",13j,0.0
+6,"Romero, Cole",13j,10.0
 8,"Rosas, Christopher",13j,0.0
 8,"Salazar, Anastasia",13j,0.0
 6,"Savage, Kitrina",13j,0.0
@@ -49,6 +49,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Shaw, Collin",13j,0.0
 7,"Slater, Nathan",13j,0.0
 6,"Steed, Ryan",13j,0.0
+4,"Strauch, Raphael",13j,0.0
 7,"Stulp, Ethan",13j,0.0
 4,"Suarez, Tristan",13j,0.0
 6,"Swenson, Kyle",13j,0.0
