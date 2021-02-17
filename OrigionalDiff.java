@@ -1,8 +1,6 @@
-import java.io.*;
-
 public class Diff{
 	public static String difference(String result, String correct) {
-		int i, j;
+		int i;
 		int at = -1;//index of the different character in the whole string
 		int line = 0;//number of lines
 		int index = 0;//index of different character in the line
@@ -10,18 +8,18 @@ public class Diff{
 		String diffc = "";//what the character was supposed to be
 		String diffr = "";//what the character was
 		String surroundings = "";//a line before or a line after (or both) to give context
+			
 
-		//split both strings into arrays at \n
-		String[] rList = Str.split("\n");
-		String[] cList = Str.split("\n");
-		//iterate through the list of strings
-		for (j = 0; j < rList.length && j < cList.length; j++){
-			//iterate through the strings
-			for (i = 0; i < rList[j].length() && i < cList[j].length(); i++) {
-				//stop if the characters don't match
-				if (result.charAt(i) != correct.charAt(i)) {
-					break;
-				}
+		//iterate through the strings
+		for (i = 0; i < result.length() && i < correct.length(); i++) {
+			//count the nuber of lines in the correct string
+			if (correct.charAt(i)=='\n'){
+				line++;
+			}
+			//stop if the characters don't match
+			if (result.charAt(i) != correct.charAt(i)) {
+				break;
+			}
 		}
 		//where we broke is where the strings were different
 		if (i < result.length() || i < correct.length()) {
