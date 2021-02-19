@@ -2,94 +2,112 @@ import java.io.*;
 
 public class Diff{
 	public static String difference(String result, String correct) {
-		int i, j;
-		int at = -1;//index of the different character in the whole string
-		int line = 0;//number of lines
+		int line = -1;//line number
 		int index = 0;//index of different character in the line
 		String message = "";//helpful display message for students
-		String diffc = "";//what the character was supposed to be
-		String diffr = "";//what the character was
-		String surroundings = "";//a line before or a line after (or both) to give context
+		String cdiff = "";//what the character was supposed to be
+		String rdiff = "";//what the character was
+		char cchar;
+		char rchar;
 
 		//split both strings into arrays at \n
-		String[] rList = Str.split("\n");
-		String[] cList = Str.split("\n");
+		String[] rList = result.split("\n");
+		String[] cList = correct.split("\n");
+
 		//iterate through the list of strings
-		for (j = 0; j < rList.length && j < cList.length; j++){
-			//iterate through the strings
-			for (i = 0; i < rList[j].length() && i < cList[j].length(); i++) {
+		boolean notFound = true;
+		
+
+		//iterate through the list of strings
+		while (notFound){
+			line++;
+			for(index = 0; index < rList[line].length() && index < cList[line].length();index++){
 				//stop if the characters don't match
-				if (result.charAt(i) != correct.charAt(i)) {
+				if (rList[line].charAt(index) != cList[line].charAt(index)) {
+					notFound = false;
 					break;
 				}
+			}
 		}
-		//where we broke is where the strings were different
-		if (i < result.length() || i < correct.length()) {
-			at = i;
-		}
+		
 		//if the strings were different
-		if (at >= 0) {
+		if (index >= 0 && line >= 0) {
+			//get the different characters
+			cchar = cList[line].charAt(index);
+			rchar = rList[line].charAt(index);
+
 			//display escape sequence if it's a whitespace character
-			if (Character.isWhitespace(correct.charAt(at))){
-				switch (correct.charAt(at)){
+			if (Character.isWhitespace(cchar)){//check the correct character
+				switch (cchar){
 					case '\t':
-						diffc = "\\t";
+						cdiff = "\\t";
 						break;
 					case '\n':
-						diffc = "\\n";
+						cdiff = "\\n";
 						break;
 					case '\r':
-						diffc = "\\r";
-						break;
-					default:
-						diffc = " ";
-						break;
-				}
-			}
-			else{//not a whitespace character
-				diffc += correct.charAt(at);
-			}
-			//do the same for the result
-			if (Character.isWhitespace(result.charAt(at))){
-				switch (result.charAt(at)){
-					case '\t':
-						diffr = "\\t";
-						break;
-					case '\n':
-						diffr = "\\n";
-						break;
-					case '\r':
-						diffr = "\\r";
-						break;
-					default:
-						diffr = " ";
+						cdiff = "\\r";
 						break;
 				}
 			}
 			else{
-				diffr += correct.charAt(at);
+				cdiff += cchar;
 			}
-			//find the index on the line
-
-
-				//make the message
-				message += "Expected '"+diffc+"', but was '"+diffr+"'\n";
-				message += "On line "+line+", index "+index"
-				message += "\nReference to difference from ";
-				if (at > correct.length()/2){
-					rest = "ending: "+result.substring(at);
+			if (Character.isWhitespace(rchar)){
+				switch (rchar){//check the result character
+					case '\t':
+						rdiff = "\\t";
+						break;
+					case '\n':
+						rdiff = "\\n";
+						break;
+					case '\r':
+						rdiff = "\\r";
+						break;
+				}
+			}
+			else{
+				rdiff += rchar;
+			}
+		
+			String mark = "";
+			for(int i=0; i<rList[line].length();i++){
+				if(i == index){
+					mark += "^";
 				}
 				else{
-					rest = "beginning: "+result.substring(0,at+1);
+					mark += " ";
 				}
-				message+=rest;
 			}
-			return message;
+				
+			String[] context = {"","","",""};
+			if(line > 0){
+				context[0] ="Line "+(line-1)+":" +"\t"+ rList[line-1];
+			}
+			context[1] = "Line "+(line)+":"+"\t"+rList[line];
+			context[2] = "\t"+mark;
+			if(line < (rList.length-1)){
+				context[3] = "Line "+(line+1)+":"+"\t"+rList[line+1];
+			}
+
+			//make the message
+			message += "Expected '"+cdiff+"', but was '"+rdiff+"'\n";
+			message += "On line "+line+", index "+index+"\n";
+			message += "Context:\n";
+			for(String i: context){
+				message += i+"\n";
+			}
+		}
+		else{
+			message = "";
+		}
+		return message;
 	}
 
 	public static void main(String[] args){
-		String correct = "line 1\nline 2\nline 3\nline 4\nHello World!";
-		String result = "line 1\nline 2\nline 3\nline 4\nHello\tWOrld";
+		String correct = "line 1\nline 2\nline 3\nline 4\nHello World!\nanother\nline";
+		String result = "line 1\nline 2\nline 3\nline 4\nHello WOrld\nanother\nline";
 		System.out.println(difference(result, correct));
 	}
 }
+
