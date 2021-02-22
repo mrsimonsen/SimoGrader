@@ -1,4 +1,4 @@
-rom subprocess import run
+from subprocess import run
 from os import getcwd
 file = "tv_remote.py"
 import tv_remote
@@ -34,7 +34,7 @@ def main():
 	total += 1
 	#test1 part 2
 	x = None
-	r = tv_remove.Remote()
+	r = tv_remote.Remote()
 	try:
 		x = r._Remote__channel
 	except:
