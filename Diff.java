@@ -1,18 +1,39 @@
-import java.io.*;
+import java.util.ArrayList;
 
 public class Diff{
+	public static ArrayList<String> splitter (String thing){
+		ArrayList<String> list = new ArrayList<String>();
+		int last = 0;
+		for (int i=0; i<thing.length();i++){
+			if(thing.charAt(i) == '\n'){
+				list.add(thing.substring(last, i));
+				last = i;
+			}
+		}
+		return list;
+	}
+
+	public static int[] locate(ArrayList<String> rList, ArrayList<String> cList){
+		int[] locations = {0,0};//line, index
+		int line = -1;
+		int index = 0;
+
+		return locations;
+	}
+
 	public static String difference(String result, String correct) {
-		int line = -1;//line number
-		int index = 0;//index of different character in the line
+		int line;//line number
+		int index;//index of different character in the line
 		String message = "";//helpful display message for students
 		String cdiff = "";//what the character was supposed to be
 		String rdiff = "";//what the character was
 		char cchar;
 		char rchar;
+		int i;
 
 		//split both strings into arrays at \n
-		String[] rList = result.split("\n");
-		String[] cList = correct.split("\n");
+		ArrayList<String> rList = splitter(result);
+		ArrayList<String> cList = splitter(correct);
 
 		//iterate through the list of strings
 		boolean notFound = true;
@@ -21,16 +42,17 @@ public class Diff{
 		//iterate through the list of strings
 		while (notFound){
 			line++;
-			for(index = 0; index < rList[line].length() && index < cList[line].length();index++){
+			for(index = 0; index < rList.get(line).length() && index < cList.get(line).length();index++){
 				//stop if the characters don't match
-				if (rList[line].charAt(index) != cList[line].charAt(index)) {
+				if (rList.get(line).charAt(index) != cList.get(line).charAt(index)) {
 					notFound = false;
 					break;
 				}
 			}
+			notFound = false;
 		}
 		
-		//if the strings were different
+		/*//if the strings were different
 		if (index >= 0 && line >= 0) {
 			//get the different characters
 			cchar = cList[line].charAt(index);
@@ -71,7 +93,7 @@ public class Diff{
 			}
 		
 			String mark = "";
-			for(int i=0; i<rList[line].length();i++){
+			for(i=0; i<rList[line].length();i++){
 				if(i == index){
 					mark += "^";
 				}
@@ -90,24 +112,26 @@ public class Diff{
 				context[3] = "Line "+(line+1)+":"+"\t"+rList[line+1];
 			}
 
+			//TODO: Add color - https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 			//make the message
 			message += "Expected '"+cdiff+"', but was '"+rdiff+"'\n";
 			message += "On line "+line+", index "+index+"\n";
 			message += "Context:\n";
-			for(String i: context){
-				message += i+"\n";
+			for(String in: context){
+				message += in+"\n";
 			}
 		}
 		else{
 			message = "";
-		}
+		*/
 		return message;
 	}
 
 	public static void main(String[] args){
 		String correct = "line 1\nline 2\nline 3\nline 4\nHello World!\nanother\nline";
-		String result = "line 1\nline 2\nline 3\nline 4\nHello WOrld\nanother\nline";
-		System.out.println(difference(result, correct));
+		String result = "line 1\nline 2\nline 3\nline 4 Hello WOrld\nanother\nline";
+		//System.out.println(difference(result, correct));
+		System.out.println(splitter(correct));
 	}
 }
 
