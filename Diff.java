@@ -14,12 +14,50 @@ public class Diff{
 	}
 
 	public static int[] locate(ArrayList<String> rList, ArrayList<String> cList){
-		int[] locations = {0,0};//line, index
-		int line = -1;
-		int index = 0;
-
-		return locations;
+		//iterate through the lines until the first difference
+		for(int line = 0; line < rList.size() && line < cList.size();line++){
+			for(int index = 0; index < rList.get(line).length() && index < cList.get(line).length();index++){
+				//stop if the characters don't match
+				if (rList.get(line).charAt(index) != cList.get(line).charAt(index)) {
+					int[] locations = {line,index};
+					return locations;
+				}
+			}
+		}
+		int[] notFound = {-1,-1};
+		return notFound;
 	}
+
+	public static String getChar(char thing){
+		//display escape sequence if it's a whitespace character
+		if (Character.isWhitespace(thing)){//check the correct character
+			switch (thing){
+				case '\t':
+					return "\\t"; 
+				case '\n':
+					return "\\n";
+				case '\r':
+					return "\\r";
+			}
+		}
+		else{
+			return ""+thing;
+		}
+	}
+
+	public static String mark(String rLine, int index){
+			//return a carrot pointing to the different character in the line
+			String mark = "";
+			for(int i=0; i<rLine.length(); i++){
+				if(i == index){
+					mark += "^";
+				}
+				else{
+					mark += " ";	
+				}
+			}
+			return mark;
+		}
 
 	public static String difference(String result, String correct) {
 		int line;//line number
@@ -27,87 +65,28 @@ public class Diff{
 		String message = "";//helpful display message for students
 		String cdiff = "";//what the character was supposed to be
 		String rdiff = "";//what the character was
-		char cchar;
-		char rchar;
-		int i;
 
 		//split both strings into arrays at \n
 		ArrayList<String> rList = splitter(result);
 		ArrayList<String> cList = splitter(correct);
 
-		//iterate through the list of strings
-		boolean notFound = true;
+		//find the line and index number of the first difference
+		int[] temp = locate(rList,cList);
+		line = temp[0];
+		index = temp[1];
 		
-
-		//iterate through the list of strings
-		while (notFound){
-			line++;
-			for(index = 0; index < rList.get(line).length() && index < cList.get(line).length();index++){
-				//stop if the characters don't match
-				if (rList.get(line).charAt(index) != cList.get(line).charAt(index)) {
-					notFound = false;
-					break;
-				}
-			}
-			notFound = false;
-		}
-		
-		/*//if the strings were different
+		//if the strings were different
 		if (index >= 0 && line >= 0) {
 			//get the different characters
-			cchar = cList[line].charAt(index);
-			rchar = rList[line].charAt(index);
-
-			//display escape sequence if it's a whitespace character
-			if (Character.isWhitespace(cchar)){//check the correct character
-				switch (cchar){
-					case '\t':
-						cdiff = "\\t";
-						break;
-					case '\n':
-						cdiff = "\\n";
-						break;
-					case '\r':
-						cdiff = "\\r";
-						break;
-				}
-			}
-			else{
-				cdiff += cchar;
-			}
-			if (Character.isWhitespace(rchar)){
-				switch (rchar){//check the result character
-					case '\t':
-						rdiff = "\\t";
-						break;
-					case '\n':
-						rdiff = "\\n";
-						break;
-					case '\r':
-						rdiff = "\\r";
-						break;
-				}
-			}
-			else{
-				rdiff += rchar;
-			}
-		
-			String mark = "";
-			for(i=0; i<rList[line].length();i++){
-				if(i == index){
-					mark += "^";
-				}
-				else{
-					mark += " ";
-				}
-			}
+			cdiff = getChar(cList[line].charAt(index));
+			rchar = getChar(rList[line].charAt(index));
 				
 			String[] context = {"","","",""};
 			if(line > 0){
 				context[0] ="Line "+(line-1)+":" +"\t"+ rList[line-1];
 			}
 			context[1] = "Line "+(line)+":"+"\t"+rList[line];
-			context[2] = "\t"+mark;
+			context[2] = "       "+mark(rLine[line],index);
 			if(line < (rList.length-1)){
 				context[3] = "Line "+(line+1)+":"+"\t"+rList[line+1];
 			}
@@ -130,8 +109,7 @@ public class Diff{
 	public static void main(String[] args){
 		String correct = "line 1\nline 2\nline 3\nline 4\nHello World!\nanother\nline";
 		String result = "line 1\nline 2\nline 3\nline 4 Hello WOrld\nanother\nline";
-		//System.out.println(difference(result, correct));
-		System.out.println(splitter(correct));
+		System.out.println(difference(result, correct));
 	}
 }
 
