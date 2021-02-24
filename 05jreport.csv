@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned
 8,"Bench, Owen",05j,10.0
 8,"Bolton, Elijah",05j,0.0
-7,"Brown, Johnathan",05j,0.0
+7,"Brown, Johnathan",05j,10.0
 4,"Carrion, Drake",05j,0.0
 6,"Castillo, Tony",05j,10.0
 4,"Cote, Austin",05j,10.0
@@ -56,5 +56,5 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Tiede, Kaytee",05j,10.0
 4,"Tracy, Kyle",05j,10.0
 8,"Watt, Coleton",05j,10.0
-7,"Watts, Carter",05j,0.0
+7,"Watts, Carter",05j,2.0
 6,"Young, Christopher ",05j,10.0
