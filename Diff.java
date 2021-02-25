@@ -114,7 +114,7 @@ public class Diff{
 	return highlight;
 	}
 
-	public static String difference(String result, String correct) {
+	public static String diff(String result, String correct) {
 		int line;//line number
 		int index;//index of different character in the line
 		String message = "";//helpful display message for students
@@ -165,10 +165,10 @@ public class Diff{
 		return message;
 	}
 
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		String correct = "line 1\nline 2\nline 3\nline 4\nHello World!\nanother\nline";
 		String result = "line 1\nline 2\nline 3\nline 4\nHello WOrld\nanother\nline";
-		System.out.println(difference(result, correct));
-	}
+		System.out.println(diff(result, correct));
+	}*/
 }
 
