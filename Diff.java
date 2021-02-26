@@ -1,6 +1,98 @@
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Diff{
+  public static final String CHECK = "\u2714";
+  public static final String CROSS = "\u274C";
+  //text color
+	public static final String RESET = "\u001B[0m";
+	public static final String BLACK = "\u001B[30m";
+	public static final String RED = "\u001B[31m";
+	public static final String GREEN = "\u001B[32m";
+	public static final String YELLOW = "\u001B[33m";
+	public static final String BLUE = "\u001B[34m";
+	public static final String PURPLE = "\u001B[35m";
+	public static final String CYAN = "\u001B[36m";
+	public static final String WHITE = "\u001B[37m";
+	//background color
+	public static final String BLACK_BACKGROUND = "\u001B[40m";
+	public static final String RED_BACKGROUND = "\u001B[41m";
+	public static final String GREEN_BACKGROUND = "\u001B[42m";
+	public static final String YELLOW_BACKGROUND = "\u001B[43m";
+	public static final String BLUE_BACKGROUND = "\u001B[44m";
+	public static final String PURPLE_BACKGROUND = "\u001B[45m";
+	public static final String CYAN_BACKGROUND = "\u001B[46m";
+	public static final String WHITE_BACKGROUND = "\u001B[47m";
+
+//compare ints
+  public static String comapre(String testName, int result, int correct){
+		if(result == correct){
+      return GREEN+CHECK+"  "+testName+" Passed"+RESET;
+    }
+ 		return RED+CROSS+"  "+testName+" Failed"+RESET+"\n\tExpected: "+correct+"\n\tBut was: "+result;
+  }
+//compare bools
+	public static String compare(String testName, boolean result, boolean correct){
+		if(result == correct){
+      return GREEN+CHECK+"  "+testName+" Passed"+RESET;
+    }
+ 		return RED+CROSS+"  "+testName+" Failed"+RESET+"\n\tExpected: "+correct+"\n\tBut was: "+result;
+	}
+//compare char
+	public static String compare(String testName,char result, char correct){
+		if(result == correct){
+      return GREEN+CHECK+"  "+testName+" Passed"+RESET;
+    }
+ 		return RED+CROSS+"  "+testName+" Failed"+RESET+"\n\tExpected: "+correct+"\n\tBut was: "+result;
+	}
+//compare int[]
+	public static String compare(String testName, int[] result, int[] correct){
+		if(Arrays.equals(result, correct)){
+			return GREEN+CHECK+"  "+testName+" Passed"+RESET;
+		}
+		return RED+CROSS+"  "+testName+" Failed"+RESET+"\n"+diff(result,correct);
+	}
+
+	public static String diff(int[] result, int[] correct){
+		if (result.length != correct.length){
+			return "\tArray lengths differ!\n\tExpected: "+correct.length+" elements\n\tBut was: "+result.length+" elements";
+		}
+		for(int i = 0; i<correct.length;i++){
+			if(correct[i]!=result[i]){
+				return "\tArrays differ at index "+i+"\n\tExpected: "+correct[1]+"\n\tBut was: "+result[i];
+			}
+		}
+		return "error comparing int[]";
+	}
+//compare string[]
+	public static String compare(String testName, String[] result, String[] correct){
+			if(Arrays.equals(result, correct)){
+				return GREEN+CHECK+"  "+testName+" Passed"+RESET;
+			}
+			return RED+CROSS+"  "+testName+" Failed"+RESET+"\n"+diff(result,correct);
+		}
+
+		public static String diff(String[] result, String[] correct){
+			if (result.length != correct.length){
+				return "\tArray lengths differ!\n\tExpected: "+correct.length+" elements\n\tBut was: "+result.length+" elements";
+			}
+			for(int i = 0; i<correct.length;i++){
+				if(!correct[i].equals(result[i])){
+					return "\tArrays differ at index "+i+"\n\tExpected: "+correct[1]+"\n\tBut was: "+result[i];
+				}
+			}
+			return "error comparing int[]";
+		}
+//compare strings
+		public static String compare(String testName, String result, String correct){
+		if(result.equals(correct)){
+			return GREEN+CHECK+"  "+testName+" Passed"+RESET;
+		}
+		String r = RED+CROSS+"  "+testName+" Failed"+RESET+"\n";
+		r += diff(result, correct);
+		return r;
+	}
+
 	public static ArrayList<String> splitter (String thing){
 		ArrayList<String> list = new ArrayList<String>();
 		int last = 0;
@@ -9,6 +101,9 @@ public class Diff{
 				list.add(thing.substring(last, i)+"\n");
 				last = i+1;
 			}
+		}
+		if(list.size()<1){
+			list.add(thing);
 		}
 		return list;
 	}
@@ -27,20 +122,6 @@ public class Diff{
 		int[] notFound = {-1,-1};
 		return notFound;
 	}
-
-	public static String mark(String rLine, int index){
-			//return a carrot pointing to the different character in the line
-			String mark = " ";
-			for(int i=0; i<rLine.length(); i++){
-				if(i == index){
-					mark += "^";
-				}
-				else{
-					mark += " ";	
-				}
-			}
-			return mark;
-		}
 
 	public static String convertChar(char current){
 		String converted = "";
@@ -88,26 +169,6 @@ public class Diff{
 	}
 
 	public static String color(String line, int index, String rdiff){
-	//text color
-	String RESET = "\u001B[0m";
-	String BLACK = "\u001B[30m";
-	String RED = "\u001B[31m";
-	String GREEN = "\u001B[32m";
-	String YELLOW = "\u001B[33m";
-	String BLUE = "\u001B[34m";
-	String PURPLE = "\u001B[35m";
-	String CYAN = "\u001B[36m";
-	String WHITE = "\u001B[37m";
-	//background color
-	String BLACK_BACKGROUND = "\u001B[40m";
-	String RED_BACKGROUND = "\u001B[41m";
-	String GREEN_BACKGROUND = "\u001B[42m";
-	String YELLOW_BACKGROUND = "\u001B[43m";
-	String BLUE_BACKGROUND = "\u001B[44m";
-	String PURPLE_BACKGROUND = "\u001B[45m";
-	String CYAN_BACKGROUND = "\u001B[46m";
-	String WHITE_BACKGROUND = "\u001B[47m";
-
 	String highlight = BLUE_BACKGROUND+RED+line.substring(0,index);
 	highlight += BLACK_BACKGROUND+WHITE + rdiff + BLUE_BACKGROUND+RED;
 	highlight += line.substring(index + rdiff.length(),line.length())+RESET;
@@ -133,7 +194,7 @@ public class Diff{
 		int[] temp = locate(rList,cList);
 		line = temp[0];
 		index = temp[1];
-		
+
 		//if the strings were different
 		if (index >= 0 && line >= 0) {
 			//get the different characters
@@ -151,12 +212,23 @@ public class Diff{
 				context[0] ="Line "+(line-1)+": "+ rList.get(line-1);
 			}
 			context[1] = "Line "+(line)+": "+highlight;
-			context[2] = "       "+mark(rList.get(line),index);
+			String mark = " ";
+			for(int i=0; i<rList.get(line).length(); i++){
+				if(i == index){
+					mark += "^";
+				}
+				else{
+					mark += " ";	
+				}
+			}
+			context[2] = "       "+mark;
 			if(line < (rList.size()-1)){
 				context[3] = "Line "+(line+1)+": "+rList.get(line+1);
 			}
 			for(String in: context){
-				message += in+"\n";
+				if(in.length()>0){
+					message += in+"\n";
+				}
 			}
 		}
 		else{
@@ -165,10 +237,12 @@ public class Diff{
 		return message;
 	}
 
-/*	public static void main(String[] args){
-		String correct = "line 1\nline 2\nline 3\nline 4\nHello World!\nanother\nline";
-		String result = "line 1\nline 2\nline 3\nline 4\nHello WOrld\nanother\nline";
-		System.out.println(diff(result, correct));
-	}*/
-}
 
+//testing
+  public static void main(String[] args){
+	String[] x = {"abc","d","e"};
+	String[] y = {"abc","fun","e"};
+  System.out.println(compare("sample1",x,x));
+  System.out.println(compare("sample2",x,y));
+  }
+}
