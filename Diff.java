@@ -1,5 +1,8 @@
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Diff{
   public static final String CHECK = "\u2714";
@@ -95,32 +98,69 @@ public class Diff{
 
 	public static ArrayList<String> splitter (String thing){
 		ArrayList<String> list = new ArrayList<String>();
-		int last = 0;
-		for (int i=0; i<thing.length();i++){
-			if(thing.charAt(i) == '\n'){
-				list.add(thing.substring(last, i)+"\n");
-				last = i+1;
+		String temp = "";
+		char current;
+		for(int i = 0; i<thing.length(); i++){
+			current = thing.charAt(i);
+			temp += current;
+			if(current == '\n'){
+				list.add(temp);
+				temp = "";
 			}
 		}
 		if(list.size()<1){
-			list.add(thing);
+			list.add(temp);
 		}
 		return list;
 	}
-
+//TODO FIXME
 	public static int[] locate(ArrayList<String> rList, ArrayList<String> cList){
-		//iterate through the lines until the first difference
-		for(int line = 0; line < rList.size() && line < cList.size();line++){
-			for(int index = 0; index < rList.get(line).length() && index < cList.get(line).length();index++){
-				//stop if the characters don't match
-				if (rList.get(line).charAt(index) != cList.get(line).charAt(index)) {
-					int[] locations = {line,index};
-					return locations;
+		//if the arraylist sizes aren't the same
+		int rs = rList.size();
+		int cs = cList.size();
+		int[] loc = {-1,-1};
+		//the longer arraylist is the difference
+		if(rs > cs){
+			loc[0] = rs;
+		}
+		else if(rs < cs){
+			loc[0] = cs;
+		}
+		else{//same arraylist lengh, need to check lines
+			//for loop through the size of the array (they're the same)
+			String rline;
+			String cline;
+			for(int i = 0; i < cs; i++){
+				//if the current line in each array has a different size
+				System.out.println("yy");
+				rline = rList.get(i);
+				cline = cList.get(i);
+				cs = rline.length();
+				rs = rline.length();
+				if(rs != cs){
+					//if the last char is not the same
+					if(rline.charAt(rs) != cline.charAt(cs)){
+						loc[0] = i;
+						if(rs > cs){
+							loc[1] = rs;
+						}
+						else{
+							loc[1] = cs;
+						}
+						return loc;
+					}
+				}
+				//scan the list to find the difference
+				for(int j = 0; j < rs && j < cs; j++){
+					if(rline.charAt(j) != cline.charAt(j)){
+						loc[0] = i;
+						loc[1] = j;
+						return loc;
+					}
 				}
 			}
 		}
-		int[] notFound = {-1,-1};
-		return notFound;
+		return loc;
 	}
 
 	public static String convertChar(char current){
@@ -185,11 +225,11 @@ public class Diff{
 		//split both strings into arrays at \n but keep the newline
 		ArrayList<String> rList = splitter(result);
 		ArrayList<String> cList = splitter(correct);
-
+		
 		//convert lines to use escape characters for whitespace
 		convertLines(rList);
 		convertLines(cList);
-	
+		
 		//find the line and index number of the first difference
 		int[] temp = locate(rList,cList);
 		line = temp[0];
@@ -232,7 +272,7 @@ public class Diff{
 			}
 		}
 		else{
-			message = "";
+			message = "something went wrong, use diffchecker.com";
 		}
 		return message;
 	}
@@ -240,9 +280,25 @@ public class Diff{
 
 //testing
   public static void main(String[] args){
-	String[] x = {"abc","d","e"};
-	String[] y = {"abc","fun","e"};
-  System.out.println(compare("sample1",x,x));
-  System.out.println(compare("sample2",x,y));
+  	String correct = read("1.txt");//correct.txt");
+	String result = read("2.txt");//result.txt");
+	System.out.println(diff(result,correct));
+  }
+
+  public static String read(String name){
+	Scanner reader;
+	File file;
+	String text = "";
+	try{
+		file = new File(name);
+		reader = new Scanner(file);
+		reader.useDelimiter("\\Z");
+		text += reader.next();
+		reader.close();
+	}
+	catch(FileNotFoundException e){
+		System.out.println("Can't find "+name);
+	}
+	return text;
   }
 }
