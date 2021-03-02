@@ -130,13 +130,15 @@ public class Diff{
 			//for loop through the size of the array (they're the same)
 			String rline;
 			String cline;
-			for(int i = 0; i < cs; i++){
+			for(int i = 0; i < cList.size(); i++){
 				//if the current line in each array has a different size
-				System.out.println("yy");
 				rline = rList.get(i);
 				cline = cList.get(i);
 				cs = rline.length();
 				rs = rline.length();
+				System.out.println(rline);
+				System.out.println(cline);
+				System.out.println(rs+", "+cs);
 				if(rs != cs){
 					//if the last char is not the same
 					if(rline.charAt(rs) != cline.charAt(cs)){
