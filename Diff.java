@@ -113,7 +113,7 @@ public class Diff{
 		}
 		return list;
 	}
-//TODO FIXME
+
 	public static int[] locate(ArrayList<String> rList, ArrayList<String> cList){
 		//if the arraylist sizes aren't the same
 		int rs = rList.size();
@@ -134,14 +134,11 @@ public class Diff{
 				//if the current line in each array has a different size
 				rline = rList.get(i);
 				cline = cList.get(i);
-				cs = rline.length();
+				cs = cline.length();
 				rs = rline.length();
-				System.out.println(rline);
-				System.out.println(cline);
-				System.out.println(rs+", "+cs);
 				if(rs != cs){
 					//if the last char is not the same
-					if(rline.charAt(rs) != cline.charAt(cs)){
+					if(rline.charAt(rs-1) != cline.charAt(cs-1)){
 						loc[0] = i;
 						if(rs > cs){
 							loc[1] = rs;
@@ -164,7 +161,7 @@ public class Diff{
 		}
 		return loc;
 	}
-
+//FIXME
 	public static String convertChar(char current){
 		String converted = "";
 		if(Character.isWhitespace(current)){
@@ -203,18 +200,28 @@ public class Diff{
 
 	public static String getDiff(ArrayList<String> lines, int line, int index){
 		String diff = "";
+		if(index >= lines.get(line).length()){
+			index = lines.get(line).length() - 1;
+		}
 		diff += lines.get(line).charAt(index);
 		if (diff.equals("\\")){
 			diff += lines.get(line).charAt(index+1);
 		}
+		System.out.println(diff);
 		return diff;
 	}
 
 	public static String color(String line, int index, String rdiff){
-	String highlight = BLUE_BACKGROUND+RED+line.substring(0,index);
-	highlight += BLACK_BACKGROUND+WHITE + rdiff + BLUE_BACKGROUND+RED;
-	highlight += line.substring(index + rdiff.length(),line.length())+RESET;
-	return highlight;
+		String highlight = "";
+		if(index >= line.length()){
+			highlight = BLUE_BACKGROUND+RED+line+RESET;
+		}
+		else{
+			highlight = BLUE_BACKGROUND+RED+line.substring(0,index);
+			highlight += BLACK_BACKGROUND+WHITE + rdiff + BLUE_BACKGROUND+RED;
+			highlight += line.substring(index + rdiff.length(),line.length())+RESET;
+		}
+		return highlight;
 	}
 
 	public static String diff(String result, String correct) {
@@ -236,7 +243,7 @@ public class Diff{
 		int[] temp = locate(rList,cList);
 		line = temp[0];
 		index = temp[1];
-
+		
 		//if the strings were different
 		if (index >= 0 && line >= 0) {
 			//get the different characters
@@ -282,9 +289,13 @@ public class Diff{
 
 //testing
   public static void main(String[] args){
-  	String correct = read("1.txt");//correct.txt");
+  	/*String correct = read("1.txt");//correct.txt");
 	String result = read("2.txt");//result.txt");
-	System.out.println(diff(result,correct));
+	System.out.println(diff(result,correct));*/
+	ArrayList<String> x = new ArrayList<String>();
+	x.add("abc\n");
+	convertLines(x);
+	System.out.println(x);
   }
 
   public static String read(String name){
