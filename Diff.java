@@ -116,15 +116,17 @@ public class Diff{
 
 	public static int[] locate(ArrayList<String> rList, ArrayList<String> cList){
 		//if the arraylist sizes aren't the same
-		int rs = rList.size();
-		int cs = cList.size();
+		int rs = rList.size()-1;
+		int cs = cList.size()-1;
 		int[] loc = {-1,-1};
 		//the longer arraylist is the difference
 		if(rs > cs){
-			loc[0] = rs;
+			loc[0] = cs;
+			loc[1] = 0;
 		}
 		else if(rs < cs){
-			loc[0] = cs;
+			loc[0] = rs;
+			loc[1] = 0;
 		}
 		else{//same arraylist lengh, need to check lines
 			//for loop through the size of the array (they're the same)
@@ -134,11 +136,11 @@ public class Diff{
 				//if the current line in each array has a different size
 				rline = rList.get(i);
 				cline = cList.get(i);
-				cs = cline.length();
-				rs = rline.length();
+				cs = cline.length()-1;
+				rs = rline.length()-1;
 				if(rs != cs){
 					//if the last char is not the same
-					if(rline.charAt(rs-1) != cline.charAt(cs-1)){
+					if(rline.charAt(rs) != cline.charAt(cs)){
 						loc[0] = i;
 						if(rs > cs){
 							loc[1] = rs;
@@ -150,7 +152,7 @@ public class Diff{
 					}
 				}
 				//scan the list to find the difference
-				for(int j = 0; j < rs && j < cs; j++){
+				for(int j = 0; j <= rs && j <= cs; j++){
 					if(rline.charAt(j) != cline.charAt(j)){
 						loc[0] = i;
 						loc[1] = j;
@@ -161,7 +163,7 @@ public class Diff{
 		}
 		return loc;
 	}
-//FIXME
+
 	public static String convertChar(char current){
 		String converted = "";
 		if(Character.isWhitespace(current)){
@@ -201,13 +203,20 @@ public class Diff{
 	public static String getDiff(ArrayList<String> lines, int line, int index){
 		String diff = "";
 		if(index >= lines.get(line).length()){
-			index = lines.get(line).length() - 1;
+			diff = "<nothing>";
+			index = lines.get(line).length()-1;
 		}
-		diff += lines.get(line).charAt(index);
-		if (diff.equals("\\")){
-			diff += lines.get(line).charAt(index+1);
+		else{
+			diff += lines.get(line).charAt(index);
 		}
-		System.out.println(diff);
+		if (index > 0){
+			if(diff.equals("\\")){
+				diff += lines.get(line).charAt(index+1);
+			}
+			else if(lines.get(line).charAt(index-1) == '\\'){
+				diff = "\\" + lines.get(line).charAt(index);
+			}
+		}
 		return diff;
 	}
 
@@ -230,20 +239,31 @@ public class Diff{
 		String message = "";//helpful display message for students
 		String cdiff = "";//what the character was supposed to be
 		String rdiff = "";//what the character was
-
+		
 		//split both strings into arrays at \n but keep the newline
 		ArrayList<String> rList = splitter(result);
 		ArrayList<String> cList = splitter(correct);
-		
-		//convert lines to use escape characters for whitespace
-		convertLines(rList);
-		convertLines(cList);
 		
 		//find the line and index number of the first difference
 		int[] temp = locate(rList,cList);
 		line = temp[0];
 		index = temp[1];
+//TODO
+		char rchar = rList.get(line).charAt(index);
+		char cchar = cList.get(line).charAt(index);
+		char[] whitespace = {'\n','\t','\r'};
 		
+		if(whitespace.indexOf(rchar)!= -1){
+			index += 1
+		}
+
+		//convert lines to use escape characters for whitespace
+		convertLines(rList);
+		convertLines(cList);
+
+		//FIXME
+		System.out.println(line+" "+index);
+
 		//if the strings were different
 		if (index >= 0 && line >= 0) {
 			//get the different characters
@@ -262,10 +282,10 @@ public class Diff{
 			}
 			context[1] = "Line "+(line)+": "+highlight;
 			String mark = " ";
-			for(int i=0; i<rList.get(line).length(); i++){
+			for(int i=0; i<cList.get(line).length(); i++){
 				if(i == index){
 					mark += "^";
-				}
+				:}
 				else{
 					mark += " ";	
 				}
@@ -289,13 +309,9 @@ public class Diff{
 
 //testing
   public static void main(String[] args){
-  	/*String correct = read("1.txt");//correct.txt");
-	String result = read("2.txt");//result.txt");
-	System.out.println(diff(result,correct));*/
-	ArrayList<String> x = new ArrayList<String>();
-	x.add("abc\n");
-	convertLines(x);
-	System.out.println(x);
+  	String correct = read("correct.txt");
+	String result = read("result.txt");
+	System.out.println(diff(result,correct));
   }
 
   public static String read(String name){
@@ -305,7 +321,7 @@ public class Diff{
 	try{
 		file = new File(name);
 		reader = new Scanner(file);
-		reader.useDelimiter("\\Z");
+		reader.useDelimiter("\\z");
 		text += reader.next();
 		reader.close();
 	}
