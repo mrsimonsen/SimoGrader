@@ -115,47 +115,55 @@ public class Diff{
 	}
 
 	public static int[] locate(ArrayList<String> rList, ArrayList<String> cList){
-		//if the arraylist sizes aren't the same
-		int rs = rList.size()-1;
-		int cs = cList.size()-1;
 		int[] loc = {-1,-1};
-		//the longer arraylist is the difference
-		if(rs > cs){
-			loc[0] = cs;
-			loc[1] = 0;
+		int rl = rList.size();
+		int cl = cList.size();
+		int small;
+		int smallA;
+		String rline;
+		String cline;
+		char rc;
+		char cc;
+		if(rl<cl){
+			smallA = rl;
 		}
-		else if(rs < cs){
-			loc[0] = rs;
-			loc[1] = 0;
+		else{
+			smallA = cl;
 		}
-		else{//same arraylist lengh, need to check lines
-			//for loop through the size of the array (they're the same)
-			String rline;
-			String cline;
-			for(int i = 0; i < cList.size(); i++){
-				//if the current line in each array has a different size
-				rline = rList.get(i);
-				cline = cList.get(i);
-				cs = cline.length()-1;
-				rs = rline.length()-1;
-				if(rs != cs){
-					//if the last char is not the same
-					if(rline.charAt(rs) != cline.charAt(cs)){
-						loc[0] = i;
-						if(rs > cs){
-							loc[1] = rs;
-						}
-						else{
-							loc[1] = cs;
-						}
+		for(int line = 0; line < smallA; line++){
+			rline = rList.get(line);
+			cline = cList.get(line);
+			loc[0] = line;
+			if(rline.equals(cline)){
+				//lines are the same - skip
+				continue;
+			}
+			else{
+				rl = rline.length();
+				cl = cline.length();
+				if(rl < cl){
+					small = rl;
+				}
+				else{
+					small = cl;
+				}
+				//search the smallest length for differences
+				for(int index = 0; index < small; index++){
+					rc = rline.charAt(index);
+					cc = cline.charAt(index);
+					if(rc != cc){						
+						loc[1] = index;
 						return loc;
 					}
 				}
-				//scan the list to find the difference
-				for(int j = 0; j <= rs && j <= cs; j++){
-					if(rline.charAt(j) != cline.charAt(j)){
-						loc[0] = i;
-						loc[1] = j;
+				//if the lines aren't the same length, that's the difference
+				if(rl != cl){
+					if(rl < cl){
+						loc[1] = rl-1;
+						return loc;
+					}
+					else{
+						loc[1] = cl-1;
 						return loc;
 					}
 				}
@@ -200,26 +208,6 @@ public class Diff{
 		}
 	}
 
-	public static String getDiff(ArrayList<String> lines, int line, int index){
-		String diff = "";
-		if(index >= lines.get(line).length()){
-			diff = "<nothing>";
-			index = lines.get(line).length()-1;
-		}
-		else{
-			diff += lines.get(line).charAt(index);
-		}
-		if (index > 0){
-			if(diff.equals("\\")){
-				diff += lines.get(line).charAt(index+1);
-			}
-			else if(lines.get(line).charAt(index-1) == '\\'){
-				diff = "\\" + lines.get(line).charAt(index);
-			}
-		}
-		return diff;
-	}
-
 	public static String color(String line, int index, String rdiff){
 		String highlight = "";
 		if(index >= line.length()){
@@ -249,26 +237,46 @@ public class Diff{
 		line = temp[0];
 		index = temp[1];
 //TODO
-		char rchar = rList.get(line).charAt(index);
-		char cchar = cList.get(line).charAt(index);
-		char[] whitespace = {'\n','\t','\r'};
-		
-		if(whitespace.indexOf(rchar)!= -1){
-			index += 1
+		char rchar;
+		char cchar;
+		int rl = rList.get(line).length()-1;
+		int cl = cList.get(line).length()-1;
+System.out.println("\uf4a9");
+		if(index == -1){
+			if(rl < cl){
+				rchar = rList.get(line).charAt(rl);
+				try{
+					cchar = cList.get(line).charAt(rl+1);
+				}
+				catch (StringIndexOutOfBoundsException e){
+					cchar = 157;
+				}
+			}
+			else{
+				cchar = cList.get(line).charAt(cl);
+				try{
+					rchar = rList.get(line).charAt(cl+1);
+				}
+				catch (StringIndexOutOfBoundsException e){
+					rchar = 157;
+				}
+			}
 		}
-
+		else{
+			rchar = rList.get(line).charAt(index);
+			cchar = cList.get(line).charAt(index);
+		}
+	
+		System.out.println(rchar+ ":"+cchar);
 		//convert lines to use escape characters for whitespace
 		convertLines(rList);
 		convertLines(cList);
+//FIXME		convertchar
 
-		//FIXME
-		System.out.println(line+" "+index);
 
 		//if the strings were different
 		if (index >= 0 && line >= 0) {
 			//get the different characters
-			cdiff = getDiff(cList, line, index);
-			rdiff = getDiff(rList, line, index);
 			
 			//Add color to affected line- https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 			String highlight = color(rList.get(line),index,rdiff);
@@ -285,7 +293,7 @@ public class Diff{
 			for(int i=0; i<cList.get(line).length(); i++){
 				if(i == index){
 					mark += "^";
-				:}
+				}
 				else{
 					mark += " ";	
 				}
