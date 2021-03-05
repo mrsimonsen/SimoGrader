@@ -172,25 +172,20 @@ public class Diff{
 		return loc;
 	}
 
-	public static String convertChar(char current){
-		String converted = "";
-		if(Character.isWhitespace(current)){
-			switch(current){
-				case '\t':
-					converted += "\\t";
-					break;
-				case '\n':
-					converted += "\\n";
-					break;
-				case '\r':
-					converted += "\\r";
-					break;
-				default:
-					converted += current;
-			}
-		}
-		else{
-			converted += current;
+	public static String convertChar(String diff){
+		String converted;
+		switch(diff.charAt(0)){
+			case '\t':
+				converted = "\\t";
+				break;
+			case '\n':
+				converted = "\\n";
+				break;
+			case '\r':
+				converted = "\\r";
+				break;
+			default:
+				converted = diff;
 		}
 		return converted;
 	}
@@ -202,7 +197,7 @@ public class Diff{
 			converted = "";
 			line = lines.get(i);
 			for(int j = 0; j<line.length();j++){
-				converted += convertChar(line.charAt(j));
+				converted += convertChar(""+line.charAt(j));
 			}
 			lines.set(i,converted);
 		}
@@ -210,7 +205,7 @@ public class Diff{
 
 	public static String color(String line, int index, String rdiff){
 		String highlight = "";
-		if(index >= line.length()){
+		if(index == -1){
 			highlight = BLUE_BACKGROUND+RED+line+RESET;
 		}
 		else{
@@ -236,80 +231,80 @@ public class Diff{
 		int[] temp = locate(rList,cList);
 		line = temp[0];
 		index = temp[1];
-//TODO
-		char rchar;
-		char cchar;
+		
 		int rl = rList.get(line).length()-1;
 		int cl = cList.get(line).length()-1;
-System.out.println("\uf4a9");
-		if(index == -1){
+		
+		if(index == -1){//get the diff if string lengths were different
 			if(rl < cl){
-				rchar = rList.get(line).charAt(rl);
+				rdiff += rList.get(line).charAt(rl);
 				try{
-					cchar = cList.get(line).charAt(rl+1);
+					cdiff += cList.get(line).charAt(rl+1);
 				}
 				catch (StringIndexOutOfBoundsException e){
-					cchar = 157;
+					cdiff += "<nothing>";//not found - doesn't exist
 				}
 			}
 			else{
-				cchar = cList.get(line).charAt(cl);
+				cdiff += cList.get(line).charAt(cl);
 				try{
-					rchar = rList.get(line).charAt(cl+1);
+					rdiff += rList.get(line).charAt(cl+1);
 				}
 				catch (StringIndexOutOfBoundsException e){
-					rchar = 157;
+					rdiff += "<nothing>";//not found - doesn't exist
 				}
 			}
 		}
-		else{
-			rchar = rList.get(line).charAt(index);
-			cchar = cList.get(line).charAt(index);
+		else{//get the diff
+			rdiff += rList.get(line).charAt(index);
+			cdiff += cList.get(line).charAt(index);
 		}
+
+		//make whitespace chars visible
+		rdiff = convertChar(rdiff);
+		cdiff = convertChar(cdiff);
 	
-		System.out.println(rchar+ ":"+cchar);
 		//convert lines to use escape characters for whitespace
 		convertLines(rList);
 		convertLines(cList);
-//FIXME		convertchar
 
-
-		//if the strings were different
-		if (index >= 0 && line >= 0) {
-			//get the different characters
-			
-			//Add color to affected line- https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
-			String highlight = color(rList.get(line),index,rdiff);
-			//make the message
-			message += "Expected '"+cdiff+"', but was '"+rdiff+"'\n";
-			message += "On line "+line+", index "+index+"\n";
-			message += "Context:\n";
-			String[] context = {"","","",""};
-			if(line > 0){
-				context[0] ="Line "+(line-1)+": "+ rList.get(line-1);
-			}
-			context[1] = "Line "+(line)+": "+highlight;
-			String mark = " ";
-			for(int i=0; i<cList.get(line).length(); i++){
-				if(i == index){
-					mark += "^";
-				}
-				else{
-					mark += " ";	
-				}
-			}
-			context[2] = "       "+mark;
-			if(line < (rList.size()-1)){
-				context[3] = "Line "+(line+1)+": "+rList.get(line+1);
-			}
-			for(String in: context){
-				if(in.length()>0){
-					message += in+"\n";
-				}
-			}
+		//Add color to affected line- https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+		String highlight = color(rList.get(line),index,rdiff);
+		//make the message
+		message += "Expected '"+cdiff+"', but was '"+rdiff+"'\n";
+		message += "On line "+line;
+		if(index==-1){
+			message += '\n';
 		}
 		else{
-			message = "something went wrong, use diffchecker.com";
+			message += ", index "+index+"\n";
+		}
+		message += "Context:\n";
+		String[] context = {"","","",""};
+		if(line > 0){
+			context[0] ="Line "+(line-1)+": "+ rList.get(line-1);
+		}
+		context[1] = "Line "+(line)+": "+highlight;
+		String mark = " ";
+		for(int i=0; i<cList.get(line).length(); i++){
+			if(i == index){
+				mark += "^";
+			}
+			else{
+				mark += " ";	
+			}
+		}
+		if(index == -1){
+			mark += "^";
+		}
+		context[2] = "       "+mark;
+		if(line < (rList.size()-1)){
+			context[3] = "Line "+(line+1)+": "+rList.get(line+1);
+		}
+		for(String in: context){
+			if(in.length()>0){
+				message += in+"\n";
+			}
 		}
 		return message;
 	}
