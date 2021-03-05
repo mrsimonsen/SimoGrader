@@ -9,7 +9,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Dickson, Luke",10j,0.0
 8,"Ford, Riley",10j,0.0
 6,"Gable, Ethan",10j,0
-6,"Gaither, Brandon",10j,0.0
+6,"Gaither, Brandon",10j,10.0
 6,"Garcia, Noah ",10j,0.0
 6,"Garcia, Rudy",10j,10.0
 7,"Gomez-Pritt, Natalia",10j,10.0
@@ -42,7 +42,7 @@ Period,Student Name,Assignment Name,Points Earned
 8,"Powell, Thaddeus",10j,10.0
 6,"Provenzano, Anthony",10j,0.0
 6,"Romero, Cole",10j,10.0
-8,"Rosas, Christopher",10j,0.0
+8,"Rosas, Christopher",10j,10.0
 8,"Salazar, Anastasia",10j,0.0
 6,"Savage, Kitrina",10j,0.0
 7,"Schulz, Tobias",10j,0.0
