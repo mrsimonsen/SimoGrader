@@ -23,15 +23,14 @@ public class Test20 {
     int score = 0;
     //test1
     total++;
+	setOutput();
     String message = "Holy letters Batman, this is a string.";
     int[] r = Support.letterDistr(message);
     int[] c = {3,1,0,0,2,0,1,2,3,0,0,2,1,2,1,0,0,2,4,5,0,0,0,0,1,0};
+
     if (Arrays.equals(r,c)){
       score++;
     }
-	  else{
-		  System.out.println("fail 1");
-	  }
     //test2
     total++;
     message = "This is my message.";
@@ -40,9 +39,6 @@ public class Test20 {
     if (result.equals(correct)){
       score++;
     }
-	  else{
-		  System.out.println("fail 2");
-	  }
     //test3
     total++;
     message = "Hvwg wg am asggous.";
@@ -51,9 +47,6 @@ public class Test20 {
     if (result.equals(correct)){
       score++;
     }
-	  else{
-		  System.out.println("fail 3");
-	  }
     //test4
     total++;
     Scanner sinput = null;
@@ -75,9 +68,6 @@ public class Test20 {
     if (rout.equals(cout)){
       score++;
     }
-	else{
-		System.out.println("fail 4");
-	}
 /*
     //hidden test
     total++;
@@ -94,6 +84,7 @@ public class Test20 {
     }
 
   */  //testing complete
+  	restoreSystem();
     String rep = ""+ score +"/"+total;
     return rep;
   }
