@@ -119,5 +119,5 @@ fi
 alias all='cd AutoGrader;python3 all.py'
 alias rmc="find . -type f -name '*.class' -delete"
 #https://www.cyberciti.biz/open-source/cbonsai-linux-bonsai-tree-generator-for-cli-lovers-for-fun/
-alias bonsai="~/.local/bin/cbonsai -S"
+alias bonsai="~/.local/bin/cbonsai -S -t 0.1 -L 50"
 
