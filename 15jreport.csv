@@ -4,7 +4,7 @@ Period,Student Name,Assignment Name,Points Earned
 7,"Brown, Johnathan",15j,0.0
 4,"Carrion, Drake",15j,0.0
 6,"Castillo, Tony",15j,10.0
-4,"Cote, Austin",15j,0.0
+4,"Cote, Austin",15j,10.0
 7,"Davis, Croydon",15j,10.0
 4,"Dickson, Luke",15j,0.0
 8,"Ford, Riley",15j,0.0
@@ -19,9 +19,9 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Harris, Marley",15j,0.0
 7,"Hartner, Nathan",15j,0.0
 8,"Hibbert, Conner",15j,0.0
-8,"Hunt, Brandon",15j,0.0
+8,"Hunt, Brandon",15j,10.0
 4,"Jeppsen, Carter",15j,10.0
-6,"Johnson, Lillyan",15j,0.0
+6,"Johnson, Lillyan",15j,6.67
 6,"Kelley, Kaleb",15j,10.0
 6,"Kemp, Zander",15j,0.0
 7,"Langham, Quinn",15j,0.0
@@ -37,7 +37,7 @@ Period,Student Name,Assignment Name,Points Earned
 6,"Nyre, Kendall",15j,0.0
 6,"Parsons, Koby",15j,0.0
 7,"Peterson, Elliott",15j,10.0
-8,"Phiromnut, Jasmine",15j,0.0
+8,"Phiromnut, Jasmine",15j,10.0
 8,"Pogue, Joey",15j,0.0
 8,"Powell, Thaddeus",15j,10.0
 6,"Provenzano, Anthony",15j,10.0
