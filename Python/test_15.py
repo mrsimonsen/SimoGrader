@@ -48,7 +48,8 @@ def main():
 	inputs = "nothing.txt"
 	out = "Welcome to the Pig Latin Translator!\n"
 	out += "What is the name of the file:\n"
-	correct = (out, '1error')
+	out += "Message stored in 'pig.txt'\n"
+	correct = (out, ['1error'])
 	result = (catchOutput(inputs), pig_latin.read('nothing.txt'))
 	if result == correct:
 		score += 1
@@ -57,7 +58,7 @@ def main():
 	#B
 	pig_latin.write(["Some message!\nwith 2 lines!\n"])
 	result = pig_latin.read('pig.txt')
-	correct = ["Some message!", "with 2 lines!"]
+	correct = ["Some message!\n", "with 2 lines!\n"]
 	if result == correct:
 		score += 1
 
