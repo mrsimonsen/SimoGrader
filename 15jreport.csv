@@ -1,7 +1,7 @@
 Period,Student Name,Assignment Name,Points Earned
 8,"Bench, Owen",15j,0.0
-8,"Bolton, Elijah",15j,0.0
-7,"Brown, Johnathan",15j,0.0
+8,"Bolton, Elijah",15j,10.0
+7,"Brown, Johnathan",15j,10.0
 4,"Carrion, Drake",15j,0.0
 6,"Castillo, Tony",15j,10.0
 4,"Cote, Austin",15j,10.0
@@ -30,7 +30,7 @@ Period,Student Name,Assignment Name,Points Earned
 4,"Mason, Hyrum",15j,0.0
 6,"Mayhue, Logan",15j,10.0
 4,"Moore, Elliott",15j,0.0
-7,"Moyano, Sebastian",15j,0.0
+7,"Moyano, Sebastian",15j,10.0
 7,"Nay, Andrew",15j,0.0
 6,"Nielsen, Amond",15j,10.0
 7,"Nye, Carson",15j,10.0
