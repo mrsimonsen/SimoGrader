@@ -37,3 +37,19 @@ class Student():
 	def clone(self, tag):
 		return f"nuames-cs/{tag}-{self.github}"
 	
+	def print_assignments(self):
+		rep = "|Tag|Score|Late?|\t|Tag|Score|Late?|\n"
+		rep +="________________\t________________\n"
+		odd = len(self.assignments)%2
+		if odd:
+			length = len(self.assignments)-1
+		else:
+			length = len(self.assignments)
+		for i in range(0,length,2):
+			a1 = self.assignments[i]
+			a2 = self.assignments[i+1]
+			rep += f"|{a1.tag}|{a1.score:>5}|{str(a1.late):>5}|\t|{a2.tag}|{a2.score:>5}|{str(a2.late):>5}|\n"
+		if odd:
+			a = self.assignments[-1]
+			rep += f"|{a.tag}|{a.score>5}|{str(a.late):>5}|"
+		return rep
