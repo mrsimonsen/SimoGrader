@@ -93,8 +93,7 @@ def display_student():
 		stu = select_student()
 		if stu:
 			print(f"{stu.name} Assignments")
-			for i in stu.assignments:
-				print(i)
+			print(stu.print_assignments())
 		if ask_yn("Go back to main menu?") == 'y':
 			done = True
 	
@@ -148,7 +147,7 @@ def mod_student():
 			for i in range(len(students)):
 				if students[i].name == stu.name:
 					students[i] = stu
-					break;
+					break
 			d['students'] = students
 			d.close()
 			print('Data saved')
@@ -159,7 +158,7 @@ def	drop(stu):
 	for i in range(len(students)):
 		if students[i].name == stu.name:
 			students.pop(i)
-			break;
+			break
 	d['students'] = students
 	d.close()
 	f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
@@ -186,6 +185,35 @@ def change(q1, thing):
 		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
 	return new
 
+def mod_assign():
+	stu = select_student()
+	choice = -1
+	while choice != 0 and stu:
+		print(stu)
+		print(stu.print_assignments())
+		print("0 - Save/Back to Main Menu")
+		print("1 - Change a score")
+		print("2 - Set as late")
+		choice = -1
+		while choice not in (0,1,2):
+			choice = validate_num("What would you like to do?")
+		if choice == 1:
+			print("TODO")
+		elif choice == 2:
+			print("TODO")
+		elif choice == 0:
+			d = shelve.open('data.dat')
+			students = d['students']
+			for i in range(len(students)):
+				if students[i].name == stu.name:
+					students[i] = stu
+					break
+			d['students'] = students
+			d.close()
+			print('Data saved')
+
+
+
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
 	c = 14
@@ -195,7 +223,7 @@ def main():
 		print("2 - View Classes")
 		print("3 - Set Classes")
 		print("4 - Set All Students")
-		print("5 - View a Student Assignment")
+		print("5 - View a Student's Assignments")
 		print("6 - Modify a Student")
 		print("7 - Modify a Student's Assignment")
 		c = input("What's your selection?\n")
