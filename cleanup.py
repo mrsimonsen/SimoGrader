@@ -2,9 +2,7 @@ from github import Github
 from dotenv import load_dotenv
 from os import environ as env
 from subprocess import run
-from time import sleep
 from sys import exit
-import sys
 import datetime
 
 java = ('00j', '01j', '02j', '03j', '04j', '05j', '06j', '07j', '08j', '09j', '10j', '11j', '12j', '13j', '14j', '15j', '16j', '17j', '18j', '19j', '20j', '21j')

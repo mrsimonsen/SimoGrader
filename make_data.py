@@ -260,6 +260,7 @@ def main():
 		print("5 - View a Student's Assignments")
 		print("6 - Modify a Student")
 		print("7 - Modify a Student's Assignment")
+		print("8 - Delete old Repos")
 		c = input("What's your selection?\n")
 
 		if c =='0':
