@@ -89,27 +89,103 @@ def set_students():
 
 def display_student():
 	done = False
-	d = shelve.open('data.dat')
-	students = d['students']
-	d.close()
 	while not done:
-		search = input("Enter a part of a student name:\n")
-		results = []
-		for i in students:
-			if search in i.name.lower():
-				results.append(i)
-		if len(results):
-			for i in range(len(results)):
-				print(f"{i+1} - {results[i].name}")
-			choice = results[validate_num("Which student?")-1]
-			print(f"{choice.name} Assignments")
-			for i in choice.assignments:
+		stu = select_student()
+		if stu:
+			print(f"{stu.name} Assignments")
+			for i in stu.assignments:
 				print(i)
-		else:
-			print("No students matched \"{search}\"")
 		if ask_yn("Go back to main menu?") == 'y':
 			done = True
 	
+def select_student():
+	d = shelve.open('data.dat')
+	students = d['students']
+	d.close()
+	search = input("Enter a part of a student name:\n")
+	results = []
+	for i in students:
+		if search in i.name.lower():
+			results.append(i)
+	if len(results):
+		for i in range(len(results)):
+			print(f"{i+1} - {results[i].name}")
+		return results[validate_num("Which student?")-1]
+	else:
+		print(f"No students matched \"{search}\"")
+		return None
+
+def mod_student():
+	stu = select_student()
+	choice = -1
+	while choice != 0 and stu:
+		print(stu)
+		print("0 - Save/Back to Main Menu")
+		print("1 - Change name")
+		print("2 - Change github username")
+		print("3 - Change class period")
+		print("4 - Drop student")
+		choice = -1
+		while choice not in (0,1,2,3,4):
+			choice = validate_num("What would you like to change?")
+		if choice == 1:
+			print(f"Changing {stu.name} name:")
+			stu.name = change("Enter a new name:",stu.name)
+		elif choice == 2:
+			print(f"Changing {stu.name} username:")
+			stu.github = change("Enter a new github username:",stu.github)
+		elif choice == 3:
+			print(f"Changing {stu.name} period:")
+			stu.period = change("Enter a new period for username:",stu.period)
+		elif choice == 4:
+			print(f"Drop {stu.name}")
+			if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
+				drop(stu)
+				choice = 0
+		elif choice == 0:
+			d = shelve.open('data.dat')
+			students = d['students']
+			for i in range(len(students)):
+				if students[i].name == stu.name:
+					students[i] = stu
+					break;
+			d['students'] = students
+			d.close()
+			print('Data saved')
+
+def	drop(stu):
+	d = shelve.open('data.dat')
+	students = d['students']
+	for i in range(len(students)):
+		if students[i].name == stu.name:
+			students.pop(i)
+			break;
+	d['students'] = students
+	d.close()
+	f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
+	raw = csv.reader(f, delimiter= ',', quotechar = '"')
+	new = []
+	for row in raw:
+		name = f"{row[2]}, {row[1]}"
+		if name != stu.name:
+			new.append(row)
+		else:
+			print(f"{stu.name} dropped")
+	f.close()
+	a = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'w',newline='')
+	w = csv.writer(a, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
+	for row in new:
+		w.writerow(row)
+	a.close()
+	
+
+def change(q1, thing):
+	complete = 'n'
+	while complete == 'n':
+		new = input(f"{q1}\n")
+		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
+	return new
+
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
 	c = 14
@@ -136,6 +212,10 @@ def main():
 			set_students()
 		elif c == '5':
 			display_student()
+		elif c == '6':
+			mod_student()
+		elif c == '7':
+			mod_assign()
 		else:
 			print("That's not a valid menu option.")
 
