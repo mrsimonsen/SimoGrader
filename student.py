@@ -1,4 +1,5 @@
 import shelve
+from assignment import Assignment
 
 class Student():
 	def __init__(self, name = "Student, Sample", period = 0, github = 'username'):
@@ -6,6 +7,7 @@ class Student():
 		self.period = period
 		self.github = github
 		self.assignments = []
+		self.add_assignments()
 	
 	def __str__(self):
 		rep = f"{self.name}: {self.github}\n"
@@ -18,17 +20,19 @@ class Student():
 	def add_assignments(self):
 		d = shelve.open('data.dat')
 		course = d['periods'][self.period-1]
-		d.close()
+		tags = []
 		if course == '1030':
-			for tag in d['python']:
-				self.assignments.append(Assignment(tag))
+			tags = d['python']
 		elif course == '1400':
-			for tag in d['java']:
-				self.assignments.append(Assignment(tag))
+			tags = d['java']
 		else:
 			print(f"Error - {self.period} not set as a programming class")
 			print(f"Check entry for {self.name}")
+			d.close()
 			exit()
+		d.close()
+		for t in tags:
+			self.assignments.append(Assignment(t))
 
 	def clone(self, tag):
 		return f"nuames-cs/{tag}-{self.github}"
