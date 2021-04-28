@@ -1,4 +1,6 @@
-import shelve
+import shelve, csv
+from student import Student
+from assignment import Assignment
 
 def reset_data():
 	d = shelve.open('data.dat')
@@ -11,6 +13,7 @@ def reset_data():
 	for i in range(8):
 		periods.append('empty')
 	d['periods'] = periods
+	d['students'] = []
 	d.close()
 
 def validate_num(question):
@@ -49,7 +52,7 @@ def set_periods():
 	d.close()
 	print("Course periods have been saved")
 
-def display():
+def display_classes():
 	with shelve.open('data.dat') as f:
 		periods = f['periods']
 		p = []
@@ -62,25 +65,77 @@ def display():
 		print(f"{len(p)} Python classes, {len(j)} Java classes")
 		print(f"\tPython periods: {p}")
 		print(f"\tJava periods: {j}")
+
+def set_students():
+	students = []
+	try:
+		f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
+		print("Loading students...")
+		#format: time, first, last, period, github
+		raw = csv.reader(f, delimiter= ',', quotechar = '"')
+		for row in raw:
+			if row[0] == "Timestamp":
+				continue #skip the header
+			students.append(Student(f"{row[2]}, {row[1]}", int(row[3]), row[4]))
+		f.close()
+		d = shelve.open('data.dat')
+		d['students'] = students
+		d.close()
+		print(f"{len(students)} loaded")
+	except FileNotFoundError as e:
+		print(e)
+		print("Exiting program -- goodbye.")
+		exit()
+
+def display_student():
+	done = False
+	d = shelve.open('data.dat')
+	students = d['students']
+	d.close()
+	while not done:
+		search = input("Enter a part of a student name:\n")
+		results = []
+		for i in students:
+			if search in i.name.lower():
+				results.append(i)
+		if len(results):
+			for i in range(len(results)):
+				print(f"{i+1} - {results[i].name}")
+			choice = results[validate_num("Which student?")-1]
+			print(f"{choice.name} Assignments")
+			for i in choice.assignments:
+				print(i)
+		else:
+			print("No students matched \"{search}\"")
+		if ask_yn("Go back to main menu?") == 'y':
+			done = True
 	
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
-	c = 0
-	while c != 'q':
-		print("q - Quit")
-		print("v - View Classes")
-		print("s - Set Classes")
-		print("r - Reset Data")
+	c = 14
+	while c != '0':
+		print("0 - Quit")
+		print("1 - Reset Data")
+		print("2 - View Classes")
+		print("3 - Set Classes")
+		print("4 - Set All Students")
+		print("5 - View a Student Assignment")
+		print("6 - Modify a Student")
+		print("7 - Modify a Student's Assignment")
 		c = input("What's your selection?\n")
 
-		if c =='q':
+		if c =='0':
 			print("Goodbye")
-		elif c == 'v':
-			display()
-		elif c == 's':
-			set_periods()
-		elif c == 'r':
+		elif c == '1':
 			reset_data()
+		elif c == '2':
+			display_classes()
+		elif c == '3':
+			set_periods()
+		elif c == '4':
+			set_students()
+		elif c == '5':
+			display_student()
 		else:
 			print("That's not a valid menu option.")
 
