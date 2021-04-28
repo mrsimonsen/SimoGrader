@@ -6,8 +6,11 @@ def reset_data():
 	d['python'] = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
 	#list of 1400 assignment prefixes
 	d['java'] = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
-	#dictionary of course periods
-	d['periods'] = {'1030':[],'1400':[]}
+	#list of course periods
+	periods = []
+	for i in range(8):
+		periods.append('empty')
+	d['periods'] = periods
 	d.close()
 
 def validate_num(question):
@@ -28,25 +31,34 @@ def ask_yn(question):
 
 def set_periods():
 	r = 'n'
+	d = shelve.open('data.dat')
+	periods = d['periods']
+	#while not correct
 	while r == 'n':
 		n = validate_num("How many 1030 sections this semester?")
-		python = []
 		for i in range(n):
-			python.append(validate_num(f"Enter class period for 1030 section number {i+1}:"))
+			x = validate_num(f"Enter class period for 1030 section number {i+1}:")
+			periods[x-1] = '1030'
 		n = validate_num("How many 1400 sections this semester?")
-		java = []
 		for i in range(n):
-			java.append(validate_num(f"Enter class period for 1400 section number {i+1}:"))
-		print(f"1030 sections: {python}\n1400 sections: {java}")
+			x = validate_num(f"Enter class period for 1400 section number {i+1}:")
+			periods[x-1] = '1400'
+		print(f"Periods: {periods}")
 		r = ask_yn("Is this correct?")
-	with shelve.open('data.dat') as f:
-		f['periods'] = {'1030':python, '1400':java}
+	d['periods'] = periods
+	d.close()
 	print("Course periods have been saved")
 
 def display():
 	with shelve.open('data.dat') as f:
-		p = f['periods']['1030']
-		j = f['periods']['1400']
+		periods = f['periods']
+		p = []
+		j = []
+		for i in range(len(periods)):
+			if periods[i] == '1030':
+				p.append(i+1)
+			elif periods[i] == '1400':
+				j.append(i+1)
 		print(f"{len(p)} Python classes, {len(j)} Java classes")
 		print(f"\tPython periods: {p}")
 		print(f"\tJava periods: {j}")
