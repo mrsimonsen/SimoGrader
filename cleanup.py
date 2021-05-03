@@ -4,9 +4,7 @@ from os import environ as env
 from subprocess import run
 from sys import exit
 import datetime
-
-java = ('00j', '01j', '02j', '03j', '04j', '05j', '06j', '07j', '08j', '09j', '10j', '11j', '12j', '13j', '14j', '15j', '16j', '17j', '18j', '19j', '20j', '21j')
-python = ('00p', '01p', '02p', '03p', '04p', '05p', '06p', '07p', '08p', '09p', '10p', '11p', '12p', '13p', '14p', '15p')
+from alive_progress import alive_bar
 
 def validate(prompt):
 	not_valid = True
@@ -20,16 +18,22 @@ def validate(prompt):
 	return number
 
 def get_date():
-	year = validate("Year:\n")
-	month = validate("Month:\n")
-	day = validate("Day:\n")
+	year = validate("Year:(####)\n")
+	month = validate("Month:(##)\n")
+	day = validate("Day:(##)\n")
 	return datetime.datetime(year, month, day)
 
+def not_template(name):
+	py = ".py"
+	java = ".java"
+	if name[-3:] != py and name[-5:] != java:
+			return True
+	return False
 
 def main():
 	#get user credentials from .env
 	load_dotenv()
-	if (token := env.get('TOKEN')) ==None:
+	if (token := env.get('TOKEN')) == None:
 		print("Edit .env file to have your personal access token.")
 		exit()
 
@@ -40,17 +44,25 @@ def main():
 	repos = g.get_user().get_repos()
 	print("Gathering all repos older than what date?")
 	date = get_date()
+	print("Gathering Repos...")
 	old = []
-	for r in repos:
-		if r.updated_at < date and (r.name[:3] in java or r.name[:3] in python):
-			old.append(r)
-			print(r)
+	total = len(list(repos))
+	print("Starting Search..")
+	with alive_bar(total, bar='classic', spinner='classic') as bar:
+		for r in repos:
+			if r.organization == "NUAMES-CS" and not_template(r.name) and r.updated_at < date:
+				old.append(r)
+			bar()
+	for i in old:
+		print(i)
 	print(f"{len(old)} repos collected")
-	if input("Delete?").lower() in ('yes','y'):
+	if a := (input("Delete?\n").lower() in ('yes','y')):
 		for i in old:
 			print(f"deleting {i.name}")
 			i.delete()
+	if not a:
+		print("Nothing Deleted.")
+	print("Done.")
 
 if __name__ == "__main__":
 	main()
-	print("Done.")

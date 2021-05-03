@@ -1,6 +1,7 @@
 import shelve, csv
 from student import Student
 from assignment import Assignment
+from cleanup import main as clean
 
 def reset_data():
 	d = shelve.open('data.dat')
@@ -246,7 +247,6 @@ def tag_to_index(tags):
 		tag = input("What's the assignment tag?\n")
 	code = int(tag[:-1])
 	return code, tag
-
 	
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
@@ -279,6 +279,8 @@ def main():
 			mod_student()
 		elif c == '7':
 			mod_assign()
+		elif c == '8':
+			clean()
 		else:
 			print("That's not a valid menu option.")
 
