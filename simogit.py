@@ -2,9 +2,7 @@ from github import Github
 from dotenv import load_dotenv
 from os import chdir, makedirs, path, listdir, getcwd
 from os import environ as env
-from subprocess import run
 from time import sleep
-from sys import exit
 import sys
 
 def verify_pre():
@@ -21,8 +19,8 @@ def verify_pre():
 		notValid=True
 
 	while notValid:
-		pre = input("Enter repository prefix (assignment code): ")
-		if pre in p or pre in j or pre == 'CSP':
+		pre = input("Enter repository prefix (assignment code): ").lower()
+		if pre in p or pre in j or pre == 'csp':
 			notValid = False
 	f = open('assignment.txt','w')
 	f.write(pre)
@@ -34,7 +32,7 @@ def main():
 	load_dotenv()
 	if (token := env.get('TOKEN')) ==None:
 		print("Edit .env file to have your personal access token.")
-		exit()
+		sys.exit()
 	if (pre := env.get('PRE')) == None:
 			pre = verify_pre()
 
