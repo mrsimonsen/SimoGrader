@@ -154,7 +154,8 @@ def mod_student():
 			d.close()
 			print('Data saved')
 
-def	drop(stu):
+def	drop():
+	stu = select_student()
 	d = shelve.open('data.dat')
 	students = d['students']
 	for i in range(len(students)):
@@ -279,7 +280,36 @@ def main():
 
 				if a=='0':
 					print("Returning to Main Menu")
-				if a == '
+				elif a == '1':
+					#verify assignment code
+					#grade that assignment
+						#for each student
+							#if student score for that assignment is not max
+								#add student url to list
+						#clone list
+						#for each repo in list
+							#replace test file with mine
+							#run test
+							#update student assignment score
+				elif a == '2':
+					#validate a student
+					#validate an assignment for that student
+					#grade that student's assignment
+						#clone url
+						#replace test with mine
+						#run test
+						#update student assignment score
+				elif a == '3':
+					# ask for (python, java, all)
+					#create a CSV file w/ header
+						#header.append(period, student)
+						#for assign in ask:
+							#header.append(assign.code)
+					#for each student
+						#list.append(stu.period, stu.name)
+						#for each assignment in stu.assign
+							#list.append(stu.assign.score)
+						#append data to CSV
 				else:
 					print("That's not a valid menu option.")
 		elif c == '2':
