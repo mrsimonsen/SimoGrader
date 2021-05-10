@@ -37,9 +37,8 @@ def main():
 	total += 1
 	#def test_4(self):
 	correct = ["appyhay 5 applesway\n"]
-	correct2 = ["appyhay 5 applesway"]
 	result = pig_latin.translate(["Happy 5 appLes"])
-	if result == correct or result == correct2:
+	if result == correct:
 		score += 1
 
 	total += 1
