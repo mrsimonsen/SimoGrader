@@ -74,10 +74,13 @@ def students_for_grading(tag):
 	periods = d['periods']
 	if tag[-1] == 'j':
 		grading = '1400'
+		ext = '.java'
 	elif tag[-1] == 'p':
 		grading = '1030'
+		ext = '.py'
 	else:
 		grading = None
+		ext = None
 	p = 1
 	plist = []
 	for i in periods:
@@ -89,7 +92,7 @@ def students_for_grading(tag):
 		if i.period in plist:
 			if i.assignment(tag).score != 10:
 				stus.append(i)
-	return stus
+	return stus, ext
 
 def set_periods():
 	r = 'n'

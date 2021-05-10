@@ -1,4 +1,4 @@
-import shelve, csv
+import shelve, csv, os
 from make_data import *
 from student import Student
 from assignment import Assignment
@@ -86,17 +86,25 @@ def mod_assign():
 def grade_assignment():
 	tag = validate_assign()
 	print(f"Gathering students to grade {tag}")
-	students = students_for_grading(tag)
+	students,ext = students_for_grading(tag)
 	for stu in students:
 		print(f"Cloning {stu.name}")
-		run(['gh','repo','clone',stu.clone(tag)],'student')
+		run(['gh','repo','clone',stu.clone(tag),'student'])
 		print("Testing...")
-		run(['cp','
-		
-		#overwrite testing file
-		#run test
-		#update student score
-		#delete clone folder
+		run(['cp',f'Testing/{tag}{ext}', f'student/Tests{ext}'])
+		os.chdir('student')
+		stu.assignments[tag].score = run_python()
+		os.chdir('..')
+		run(['rm','-rf','student'])
+
+def run_python():
+	try:
+		p = run("python3 Tests.py",shell=True,capture_output=True,text=True)
+		score = p.stdout.strip()
+	except KeyboardInterrupt:
+		print("Student test terminated")
+		score = None
+	return score
 	
 	
 def main():
