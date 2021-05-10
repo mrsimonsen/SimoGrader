@@ -1,7 +1,4 @@
-import shelve, csv
-from student import Student
-from assignment import Assignment
-from cleanup import main as clean
+import shelve
 
 def reset_data():
 	d = shelve.open('data.dat')
@@ -32,6 +29,67 @@ def ask_yn(question):
 	while r not in ('y','n'):
 		r = input(f"{question} (Y/n)\n").lower()
 	return r
+
+def change_float(q1, thing):
+	complete = 'n'
+	while complete == 'n':
+		new = input(f"{q1}\n")
+		try:
+			new = float(new)
+			complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
+		except ValueError:
+			print("That wasn't a number")
+	return new
+
+def change(q1, thing, num = False):
+	complete = 'n'
+	while complete == 'n':
+		if num:
+			new = validate_num(q1)
+		else:
+			new = input(f"{q1}\n")
+		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
+	return new
+
+def tag_to_index(tags):
+	tag = None
+	while tag not in tags:
+		tag = input("What's the assignment tag?\n")
+	code = int(tag[:-1])
+	return code, tag
+
+def validate_assign():
+	assigns = []
+	with shelve.open('data.dat') as d:
+		assign += d['java']
+		assign += d['python']
+	a = ''
+	while a not in assigns:
+		a = input("Enter an assignment tag:\n")
+	return tag
+
+def students_for_grading(tag):
+	d = shelve.open('data.dat')
+	students = d['students']
+	periods = d['periods']
+	if tag[-1] == 'j':
+		grading = '1400'
+	elif tag[-1] == 'p':
+		grading = '1030'
+	else:
+		grading = None
+	p = 1
+	plist = []
+	for i in periods:
+		if i == grading:
+			plist.append(p)
+		p+=1
+	stus = []
+	for i in students:
+		if i.period in plist:
+			if i.assignment(tag).score != 10:
+				stus.append(i)
+	return stus
 
 def set_periods():
 	r = 'n'
@@ -116,45 +174,9 @@ def select_student():
 		print(f"No students matched \"{search}\"")
 		return None
 
-def mod_student():
-	stu = select_student()
-	choice = -1
-	while choice != 0 and stu:
-		print(stu)
-		print("0 - Save/Back to Main Menu")
-		print("1 - Change name")
-		print("2 - Change github username")
-		print("3 - Change class period")
-		print("4 - Drop student")
-		choice = -1
-		while choice not in (0,1,2,3,4):
-			choice = validate_num("What would you like to change?")
-		if choice == 1:
-			print(f"Changing {stu.name} name:")
-			stu.name = change("Enter a new name:",stu.name)
-		elif choice == 2:
-			print(f"Changing {stu.name} username:")
-			stu.github = change("Enter a new github username:",stu.github)
-		elif choice == 3:
-			print(f"Changing {stu.name} period:")
-			stu.period = change("Enter a new period for username:",stu.period)
-		elif choice == 4:
-			print(f"Drop {stu.name}")
-			if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
-				drop(stu)
-				choice = 0
-		elif choice == 0:
-			d = shelve.open('data.dat')
-			students = d['students']
-			for i in range(len(students)):
-				if students[i].name == stu.name:
-					students[i] = stu
-					break
-			d['students'] = students
-			d.close()
-			print('Data saved')
 
-def	drop(stu):
+def drop():
+	stu = select_student()
 	d = shelve.open('data.dat')
 	students = d['students']
 	for i in range(len(students)):
@@ -179,111 +201,4 @@ def	drop(stu):
 		w.writerow(row)
 	a.close()
 
-def change_float(q1, thing):
-	complete = 'n'
-	while complete == 'n':
-		new = input(f"{q1}\n")
-		try:
-			new = float(new)
-			complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
-		except ValueError:
-			print("That wasn't a number")
-	return new
-
-def change(q1, thing, num = False):
-	complete = 'n'
-	while complete == 'n':
-		if num:
-			new = validate_num(q1)
-		else:
-			new = input(f"{q1}\n")
-		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
-	return new
-
-def mod_assign():
-	stu = select_student()
-	choice = None
-	if stu:
-		index = stu.period-1
-		d = shelve.open('data.dat')
-		if d['periods'][index] == '1030':
-			tags = d['python']
-		elif d['periods'][index] == '1400':
-			tags = d['java']
-		else:
-			print(f"{index} isn't set as a programming class")
-			choice = 0
-		d.close()
-	while choice != 0 and stu:
-		print(stu)
-		print(stu.print_assignments())
-		print("0 - Save/Back to Main Menu")
-		print("1 - Change a score")
-		print("2 - Set as late")
-		choice = -1
-		while choice not in (0,1,2):
-			choice = validate_num("What would you like to do?")
-		if choice == 1:
-			code, tag = tag_to_index(tags)
-			stu.assignments[code].score = change_float("Enter a new score:", stu.assignments[code].score)
-		elif choice == 2:
-			code = tag_to_index(tags)
-			if ask_yn(f"Set {tag} to late?") == 'y':
-				stu.assignments[code].set_late()
-		elif choice == 0:
-			d = shelve.open('data.dat')
-			students = d['students']
-			for i in range(len(students)):
-				if students[i].name == stu.name:
-					students[i] = stu
-					break
-			d['students'] = students
-			d.close()
-			print('Data saved')
-
-def tag_to_index(tags):
-	tag = None
-	while tag not in tags:
-		tag = input("What's the assignment tag?\n")
-	code = int(tag[:-1])
-	return code, tag
-	
-def main():
-	print("Welcome to the Simonsen AutoGrater Data Utility")
-	c = 14
-	while c != '0':
-		print("0 - Quit")
-		print("1 - Reset Data")
-		print("2 - View Classes")
-		print("3 - Set Classes")
-		print("4 - Set All Students")
-		print("5 - View a Student's Assignments")
-		print("6 - Modify a Student")
-		print("7 - Modify a Student's Assignment")
-		print("8 - Delete old Repos")
-		c = input("What's your selection?\n")
-
-		if c =='0':
-			print("Goodbye")
-		elif c == '1':
-			reset_data()
-		elif c == '2':
-			display_classes()
-		elif c == '3':
-			set_periods()
-		elif c == '4':
-			set_students()
-		elif c == '5':
-			display_student()
-		elif c == '6':
-			mod_student()
-		elif c == '7':
-			mod_assign()
-		elif c == '8':
-			clean()
-		else:
-			print("That's not a valid menu option.")
-
-if __name__ == "__main__":
-	main()
 
