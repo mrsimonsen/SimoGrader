@@ -1,7 +1,5 @@
-import shelve, csv, os
+import shelve
 from make_data import *
-from student import Student
-from assignment import Assignment
 from cleanup import main as clean
 
 def mod_student():
@@ -85,64 +83,36 @@ def mod_assign():
 
 def grade_assignment():
 	tag = validate_assign()
-	if tag[-1] == 'j':
-		grading = '1400'
-		ext = '.java'
-	elif tag[-1] == 'p':
-		grading = '1030'
-		ext = '.py'
-	else:
-		grading = None
-		ext = None
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
+	if tag[-1] == 'j':
+		grading = '1400'
+	elif tag[-1] == 'p':
+		grading = '1030'
+	else:
+		grading = None
 	for stu in students:
 		if stu.course == grading:
 			a = stu.assignments[tag]
 			if a.score < 5 and a.late:
-				print(f"Cloning {stu.name} - late")
-				run(['gh','repo','clone',stu.clone(tag),'student'])
-				print("Testing...")
-				run(['cp',f'Testing/{tag}{ext}', f'student/Tests{ext}'])
-				os.chdir('student')
-				if ext == '.java':
-					a.set_score(run_java())
-				elif exit == '.py':
-					a.set_score(run_python())
-				os.chdir('..')
-				print(f"{stu.name}: {tag} - {a.score}/5")
-				run(['rm','-rf','student'])
+				print(f"Grading {stu.name} - late")
+				grade(stu,tag)
+				print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
 			elif a.score < 10 and not a.late:
 				print(f"Cloning {stu.name} - on time")
-				run(['gh','repo','clone',stu.clone(tag),'student'])
-				print("Testing...")
-				run(['cp',f'Testing/{tag}{ext}', f'student/Tests{ext}'])
-				os.chdir('student')
-				if ext == '.java':
-					a.set_score(run_java())
-				elif exit == '.py':
-					a.set_score(run_python())
-				os.chdir('..')
-				print(f"{stu.name}: {tag} - {a.score}/10")
-				run(['rm','-rf','student'])
+				grade(stu,tag)
+				print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
 			elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
 				print(f"{sut.name} already has completed assignment")
 			else:
 				print("something strange happened in SimoGrader.grade_assignment()")
-			#save the assignment back into the student
+	print("Grading complete -- saving...")
+	d = shelve.open('data.dat')
+	d['students'] = students
+	d.close()
+	print("finished")
 
-
-def run_python():
-	try:
-		p = run("python3 Tests.py",shell=True,capture_output=True,text=True)
-		score = p.stdout.strip()
-	except KeyboardInterrupt:
-		print("Student test terminated")
-		score = None
-	return score
-	
-	
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
 	c = 14

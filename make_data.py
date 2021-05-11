@@ -1,4 +1,7 @@
-import shelve
+import shelve, csv, os
+from student import Student
+from assignment import Assignment
+from subprocess import run
 
 def reset_data():
 	d = shelve.open('data.dat')
@@ -13,6 +16,7 @@ def reset_data():
 	d['periods'] = periods
 	d['students'] = []
 	d.close()
+	print("Data has been reset")
 
 def validate_num(question):
 	ok = False
@@ -59,14 +63,14 @@ def tag_to_index(tags):
 	return code, tag
 
 def validate_assign():
-	assigns = []
+	assign = []
 	with shelve.open('data.dat') as d:
 		assign += d['java']
 		assign += d['python']
 	a = ''
-	while a not in assigns:
+	while a not in assign:
 		a = input("Enter an assignment tag:\n")
-	return tag
+	return a
 
 
 def set_periods():
@@ -179,4 +183,42 @@ def drop():
 		w.writerow(row)
 	a.close()
 
+def run_python():
+	try:
+		p = run("python3 Tests.py",shell=True,capture_output=True,text=True)
+		if p.stderr:
+			print("Tests didn't run")
+			score = None
+		else:
+			score = p.stdout.strip()
+	except KeyboardInterrupt:
+		print("Student test terminated")
+		score = None
+	return score
+
+def run_java():
+	try:
+		p = run(f'javac Tests.java;java Tests',shell=True,capture_output=True)
+		if p.stderr:
+			print("Tests didn't compile")
+			score = None
+		else:
+			score = p.stdout
+	except KeyboardInterrupt:
+		print("Student test terminated")
+		score = None
+	return score
+
+def grade(stu,tag):
+	os.system(f"gh repo clone {stu.clone(tag)} student")
+	print("Testing...")
+	os.chdir('student')
+	if tag[-1] == 'j':
+		os.system(f"cp ../Testing/{tag}.java Tests.java")
+		stu.assignments[tag].set_score(run_java())
+	elif tag[-1] == 'p':
+		os.system(f"cp ../Testing/{tag}.py Tests.py")
+		stu.assignments[tag].set_score(run_python())
+	os.chdir('..')
+	run(['rm','-rf','student'])
 

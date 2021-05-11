@@ -6,7 +6,7 @@ class Student():
 		self.name = name
 		self.period = period
 		self.github = github
-		self.assignments = []
+		self.assignments = {}
 		self.add_assignments()
 	
 	def __str__(self):
@@ -40,7 +40,7 @@ class Student():
 			exit()
 		d.close()
 		for t in tags:
-			self.assignments.append(Assignment(t))
+			self.assignments[t]=Assignment(t)
 
 	def clone(self, tag):
 		return f"nuames-cs/{tag}-{self.github}"
@@ -53,9 +53,10 @@ class Student():
 			length = len(self.assignments)-1
 		else:
 			length = len(self.assignments)
+		keys = list(self.assignments.keys())
 		for i in range(0,length,2):
-			a1 = self.assignments[i]
-			a2 = self.assignments[i+1]
+			a1 = self.assignments[keys[i]]
+			a2 = self.assignments[keys[i+1]]
 			rep += f"|{a1.tag}|{a1.score:>5}|{str(a1.late):>5}|\t|{a2.tag}|{a2.score:>5}|{str(a2.late):>5}|\n"
 		if odd:
 			a = self.assignments[-1]
