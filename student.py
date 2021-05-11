@@ -16,6 +16,14 @@ class Student():
 		d.close()
 		rep += f"{self.period} - {course}\n"
 		return rep
+
+	@property
+	def course(self):
+		d = shelve.open('data.dat')
+		p = d['periods']
+		d.close()
+		return p[self.period - 1]
+
 	
 	def add_assignments(self):
 		d = shelve.open('data.dat')

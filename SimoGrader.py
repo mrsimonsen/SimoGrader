@@ -85,17 +85,53 @@ def mod_assign():
 
 def grade_assignment():
 	tag = validate_assign()
-	print(f"Gathering students to grade {tag}")
-	students,ext = students_for_grading(tag)
+	if tag[-1] == 'j':
+		grading = '1400'
+		ext = '.java'
+	elif tag[-1] == 'p':
+		grading = '1030'
+		ext = '.py'
+	else:
+		grading = None
+		ext = None
+	d = shelve.open('data.dat')
+	students = d['students']
+	d.close()
 	for stu in students:
-		print(f"Cloning {stu.name}")
-		run(['gh','repo','clone',stu.clone(tag),'student'])
-		print("Testing...")
-		run(['cp',f'Testing/{tag}{ext}', f'student/Tests{ext}'])
-		os.chdir('student')
-		stu.assignments[tag].score = run_python()
-		os.chdir('..')
-		run(['rm','-rf','student'])
+		if stu.course == grading:
+			a = stu.assignments[tag]
+			if a.score < 5 and a.late:
+				print(f"Cloning {stu.name} - late")
+				run(['gh','repo','clone',stu.clone(tag),'student'])
+				print("Testing...")
+				run(['cp',f'Testing/{tag}{ext}', f'student/Tests{ext}'])
+				os.chdir('student')
+				if ext == '.java':
+					a.set_score(run_java())
+				elif exit == '.py':
+					a.set_score(run_python())
+				os.chdir('..')
+				print(f"{stu.name}: {tag} - {a.score}/5")
+				run(['rm','-rf','student'])
+			elif a.score < 10 and not a.late:
+				print(f"Cloning {stu.name} - on time")
+				run(['gh','repo','clone',stu.clone(tag),'student'])
+				print("Testing...")
+				run(['cp',f'Testing/{tag}{ext}', f'student/Tests{ext}'])
+				os.chdir('student')
+				if ext == '.java':
+					a.set_score(run_java())
+				elif exit == '.py':
+					a.set_score(run_python())
+				os.chdir('..')
+				print(f"{stu.name}: {tag} - {a.score}/10")
+				run(['rm','-rf','student'])
+			elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
+				print(f"{sut.name} already has completed assignment")
+			else:
+				print("something strange happened in SimoGrader.grade_assignment()")
+			#save the assignment back into the student
+
 
 def run_python():
 	try:
