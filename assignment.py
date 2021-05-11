@@ -24,7 +24,7 @@ class Assignment():
 	def set_score(self, result):
 		if "/" in result:
 			points, total = result.split("/")
-			score = round(points/total*10,2)
+			score = round(int(points)/int(total)*10,2)
 		else:#something went wrong, no score
 			score = 0
 		self.score = score
