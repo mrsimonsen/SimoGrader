@@ -43,17 +43,6 @@ def mod_student():
 def mod_assign():
 	stu = select_student()
 	choice = None
-	if stu:
-		index = stu.period-1
-		d = shelve.open('data.dat')
-		if d['periods'][index] == '1030':
-			tags = d['python']
-		elif d['periods'][index] == '1400':
-			tags = d['java']
-		else:
-			print(f"{index} isn't set as a programming class")
-			choice = 0
-		d.close()
 	while choice != 0 and stu:
 		print(stu)
 		print(stu.print_assignments())
@@ -64,12 +53,12 @@ def mod_assign():
 		while choice not in (0,1,2):
 			choice = validate_num("What would you like to do?")
 		if choice == 1:
-			code, tag = tag_to_index(tags)
-			stu.assignments[code].score = change_float("Enter a new score:", stu.assignments[code].score)
+			tag = validate_assign()
+			stu.assignments[tag].score = change_float("Enter a new score:", stu.assignments[tag].score)
 		elif choice == 2:
-			code = tag_to_index(tags)
+			tag = validate_assign()
 			if ask_yn(f"Set {tag} to late?") == 'y':
-				stu.assignments[code].set_late()
+				stu.assignments[tag].set_late()
 		elif choice == 0:
 			d = shelve.open('data.dat')
 			students = d['students']
@@ -104,7 +93,7 @@ def grade_assignment():
 				grade(stu,tag)
 				print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
 			elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
-				print(f"{sut.name} already has completed assignment")
+				print(f"{stu.name} already has completed assignment")
 			else:
 				print("something strange happened in SimoGrader.grade_assignment()")
 	print("Grading complete -- saving...")
