@@ -55,13 +55,6 @@ def change(q1, thing, num = False):
 		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
 	return new
 
-def tag_to_index(tags):
-	tag = None
-	while tag not in tags:
-		tag = input("What's the assignment tag?\n")
-	code = int(tag[:-1])
-	return code, tag
-
 def validate_assign():
 	assign = []
 	with shelve.open('data.dat') as d:
@@ -71,7 +64,6 @@ def validate_assign():
 	while a not in assign:
 		a = input("Enter an assignment tag:\n")
 	return a
-
 
 def set_periods():
 	r = 'n'
@@ -211,14 +203,17 @@ def run_java():
 
 def grade(stu,tag):
 	os.system(f"gh repo clone {stu.clone(tag)} student")
-	print("Testing...")
-	os.chdir('student')
-	if tag[-1] == 'j':
-		os.system(f"cp ../Testing/{tag}.java Tests.java")
-		stu.assignments[tag].set_score(run_java())
-	elif tag[-1] == 'p':
-		os.system(f"cp ../Testing/{tag}.py Tests.py")
-		stu.assignments[tag].set_score(run_python())
-	os.chdir('..')
-	run(['rm','-rf','student'])
+	if os.path.isdir('student'):
+		print("Testing...")
+		os.chdir('student')
+		if tag[-1] == 'j':
+			os.system(f"cp ../Testing/{tag}.java Tests.java")
+			stu.assignments[tag].set_score(run_java())
+		elif tag[-1] == 'p':
+			os.system(f"cp ../Testing/{tag}.py Tests.py")
+			stu.assignments[tag].set_score(run_python())
+		os.chdir('..')
+		run(['rm','-rf','student'])
+	else:
+		print(f"{stu.name} hasn't startd the assignment")
 
