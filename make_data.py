@@ -378,12 +378,12 @@ def grade_student():
 	if assign.score < 5 and assign.late:
 		print(f'Grading {stu.name} -- late')
 		grade(stu,tag)
-		print(f'{stu.name: {tag} - {stu.assignments[tag].score/10')
+		print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
 	elif assign.score < 10 and not a.late:
 		print(f'Grading {stu.name} -- on time')
 		grade(stu, tag)
-		print(f'{stu.name: {tag} - {stu.assignments[tag].score/10')
-	elif (assign.sore == 10 and not assign.late) or (assign.score == 5 and a.late):
+		print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
+	elif (assign.score == 10 and not assign.late) or (assign.score == 5 and a.late):
 		print(f"{stu.name} already has completed assignment")
 	else:
 		print(f"something strange happened in SimoGrader.grade_student()")
@@ -397,4 +397,49 @@ def grade_student():
 	d['students'] = students
 	d.close()
 	print("Data saved")
+
+def report():
+	# ask for (python, java, all)
+	course = None
+	while course not in ('0','1030','1400'):
+		print("Select a course to report on:")
+		print("0 - All courses")
+		print("1030 - Python")
+		print("1400 - Java")
+		course = input("What's your selection?\n")
+	if course == '1030' or course == '1400':
+		write(course)
+	if course == '0':
+		write('1030')
+		write('1400')
+	print("Report complete")
+
+def write(course):
+	with shelve.open('data.dat') as d:
+		students = d['students']
+		python = d['python']
+		java = d['java']
+	header = ['Period','Last Name','First Name']
+	if course == '1030':
+		for tag in python:
+			header.append(tag)
+		tags = python
+	elif course == '1400':
+		for tag in java:
+			header.append(tag)
+		tags = java
+	stuff = [header]
+	for stu in students:
+		if stu.course == course:
+			last, first = stu.name.split(',')
+			row = [stu.period,last,first]
+			for a in tags:
+				s = str(stu.assignments[a].score)
+				if stu.assignments[a].late:
+					s += "L"
+				row.append(s)
+			stuff.append(row)
+	with open(f'{course} {datetime.date.today()}.csv','w',newline='') as f:
+		w = csv.writer(f, delimiter=',', quotechar='|')
+		w.writerows(stuff)
 

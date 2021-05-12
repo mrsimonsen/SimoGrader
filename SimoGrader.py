@@ -1,8 +1,6 @@
 import shelve
 from make_data import *
 
-
-
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
 	c = 14
@@ -39,17 +37,7 @@ def main():
 				elif a == '2':
 					grade_student()
 				elif a == '3':
-					pass
-					# ask for (python, java, all)
-					#create a CSV file w/ header
-						#header.append(period, student)
-						#for assign in ask:
-							#header.append(assign.code)
-					#for each student
-						#list.append(stu.period, stu.name)
-						#for each assignment in stu.assign
-							#list.append(stu.assign.score)
-						#append data to CSV
+					report()
 				else:
 					print("That's not a valid menu option.")
 		elif c == '2':
