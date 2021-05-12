@@ -370,3 +370,31 @@ def grade_assignment():
 	d['students'] = students
 	d.close()
 	print("finished")
+
+def grade_student():
+	stu = select_student()
+	tag = validate_assign()
+	assign = stu.assignments[tag]
+	if assign.score < 5 and assign.late:
+		print(f'Grading {stu.name} -- late')
+		grade(stu,tag)
+		print(f'{stu.name: {tag} - {stu.assignments[tag].score/10')
+	elif assign.score < 10 and not a.late:
+		print(f'Grading {stu.name} -- on time')
+		grade(stu, tag)
+		print(f'{stu.name: {tag} - {stu.assignments[tag].score/10')
+	elif (assign.sore == 10 and not assign.late) or (assign.score == 5 and a.late):
+		print(f"{stu.name} already has completed assignment")
+	else:
+		print(f"something strange happened in SimoGrader.grade_student()")
+	print("Grading complete -- saving...")
+	d = shelve.open('data.dat')
+	students = d['students']
+	for i in range(len(students)):
+		if students[i].name == stu.name:
+			students[i] = stu
+			break
+	d['students'] = students
+	d.close()
+	print("Data saved")
+
