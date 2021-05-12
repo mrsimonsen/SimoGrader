@@ -1,6 +1,8 @@
 import shelve
 from make_data import *
 
+
+
 def main():
 	print("Welcome to the Simonsen AutoGrater Data Utility")
 	c = 14
@@ -35,14 +37,7 @@ def main():
 				elif a == '1':
 					grade_assignment()
 				elif a == '2':
-					pass
-					#validate a student
-					#validate an assignment for that student
-					#grade that student's assignment
-						#clone url
-						#replace test with mine
-						#run test
-						#update student assignment score
+					grade_student()
 				elif a == '3':
 					pass
 					# ask for (python, java, all)
