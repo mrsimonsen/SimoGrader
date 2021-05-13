@@ -6,18 +6,21 @@ def grading_menu():
 	while a != '0':
 		print("Grading Menu")
 		print("0 - Return to Main Menu")
-		print("1 - Grade an Assignment")
-		print("2 - Grade a single Student's Assignment")
-		print("3 - Generate Report")
+		print("1 - Grade Multiple Assignments")
+		print("2 - Grade an Assignment")
+		print("3 - Grade a single Student's Assignment")
+		print("4 - Generate Report")
 		a = input("What's your selection?\n")
 
 		if a=='0':
 			print("Returning to Main Menu")
 		elif a == '1':
-			grade_assignment()
+			grade_multiple()
 		elif a == '2':
-			grade_student()
+			grade_assignment()
 		elif a == '3':
+			grade_student()
+		elif a == '4':
 			report()
 		else:
 			print("That's not a valid menu option.")
