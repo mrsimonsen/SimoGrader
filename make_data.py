@@ -114,7 +114,7 @@ def validate_assign():
 	with shelve.open('data.dat') as d:
 		assign += d['java']
 		assign += d['python']
-		assign += 'done'
+		assign.append('done')
 	a = ''
 	while a not in assign:
 		a = input("Enter an assignment tag:\n").lower()
@@ -327,7 +327,8 @@ def mod_assign():
 			stu.assignments[tag].score = change_float("Enter a new score:", stu.assignments[tag].score)
 		elif choice == 2:
 			tag = validate_assign()
-			if ask_yn(f"Set {tag} to late?") == 'y':
+			l = not stu.assignments[tag].late
+			if ask_yn(f"Set {tag} to {l}?") == 'y':
 				stu.assignments[tag].set_late()
 		elif choice == 0:
 			d = shelve.open('data.dat')
@@ -452,6 +453,7 @@ def grade_multiple():
 		r = validate_assign()
 		if r != 'done':
 			tags.append(r)
+			print(tags)
 	for tag in tags:
 		grade_assignment(tag)
 	if 'p' in tags:
