@@ -22,7 +22,7 @@ class Assignment():
 			self._score = new
 
 	def set_score(self, result):
-		if "/" in result:
+		if result:
 			points, total = result.split("/")
 			score = round(int(points)/int(total)*10,2)
 		else:#something went wrong, no score
@@ -31,7 +31,7 @@ class Assignment():
 
 	def set_late(self):
 		#set late and adjust score
-		self.late = True
+		self.late = not self.late
 		if self.score > 5:
 			self.score = 5.0
 		

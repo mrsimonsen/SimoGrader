@@ -83,7 +83,7 @@ def main():
 		if c == '0':
 			print("Goodbye")
 		elif c == '1':
-			grading_men()
+			grading_menu()
 		elif c == '2':
 			class_menu()
 		elif c == '3':
