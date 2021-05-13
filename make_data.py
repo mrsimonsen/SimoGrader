@@ -439,7 +439,7 @@ def write(course):
 					s += "L"
 				row.append(s)
 			stuff.append(row)
-	with open(f'{course} {datetime.date.today()}.csv','w',newline='') as f:
+	with open(f'{course}.csv','w',newline='') as f:
 		w = csv.writer(f, delimiter=',', quotechar='|')
 		w.writerows(stuff)
 
