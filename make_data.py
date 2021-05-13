@@ -114,9 +114,10 @@ def validate_assign():
 	with shelve.open('data.dat') as d:
 		assign += d['java']
 		assign += d['python']
+		assign += 'done'
 	a = ''
 	while a not in assign:
-		a = input("Enter an assignment tag:\n")
+		a = input("Enter an assignment tag:\n").lower()
 	return a
 
 def set_periods():
@@ -339,8 +340,9 @@ def mod_assign():
 			d.close()
 			print('Data saved')
 
-def grade_assignment():
-	tag = validate_assign()
+def grade_assignment(tag = None):
+	if not tag:
+		tag = validate_assign()
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
@@ -398,18 +400,17 @@ def grade_student():
 	d.close()
 	print("Data saved")
 
-def report():
+def report(course = None):
 	# ask for (python, java, all)
-	course = None
-	while course not in ('0','1030','1400'):
+	while course not in ('all','1030','1400'):
 		print("Select a course to report on:")
-		print("0 - All courses")
+		print("all - All courses")
 		print("1030 - Python")
 		print("1400 - Java")
-		course = input("What's your selection?\n")
+		course = input("What's your selection?\n").lower()
 	if course == '1030' or course == '1400':
 		write(course)
-	if course == '0':
+	if course == 'all':
 		write('1030')
 		write('1400')
 	print("Report complete")
@@ -442,4 +443,20 @@ def write(course):
 	with open(f'{course}.csv','w',newline='') as f:
 		w = csv.writer(f, delimiter=',', quotechar='|')
 		w.writerows(stuff)
+
+def grade_multiple():
+	tags = []
+	r = ''
+	while r != 'done':
+		print("Enter assignment tags - type 'done' when finished.")
+		r = validate_assign()
+		if r != 'done':
+			tags.append(r)
+	for tag in tags:
+		grade_assignment(tag)
+	if 'p' in tags:
+		report('1030')
+	if 'j' in tags:
+		report('1400')
+	print(f"Grading and Reporting done for {tags}")
 
