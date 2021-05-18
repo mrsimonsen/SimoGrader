@@ -1,31 +1,31 @@
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class Test00 {
-  static HelloWorld student = new HelloWorld();
-  private static ByteArrayOutputStream TOut;
-  private static ByteArrayInputStream TIn;
-  private static final PrintStream SOut = System.out;
-  private static final InputStream SIn = System.in;
-  public static String[] args;
+	static HelloWorld student = new HelloWorld();
+	private static ByteArrayOutputStream TOut;
+	private static ByteArrayInputStream TIn;
+	private static final PrintStream SOut = System.out;
+	private static final InputStream SIn = System.in;
+	private static int testCount = 0;
+	
+	public static void main(String[] args){
+		ArrayList<String> failed = new ArrayList<String>();
+		failed.add(test1() ? null:"test1");
+		System.out.printf("Passed %d out of %d tests.",testCount - failed.size(), testCount);
+	}
+	
+	public static boolean test1(){
+		testCount++;
+		String correct = "Hello World!\n";
+		String result = getOutput("");
+		return result.equals(correct);
+	}
 
-  public static void main(String[] args){
-    System.out.println(tests());
-  }
-
-  public static String tests(){
-    int total = 0;
-    int score = 0;
-    setOutput();
-    //test1
-    total++;
-    student.main(args);
-    //need to add '/r' for windows when grading, stupid windows
-    String correct = "Hello World!\n";
-    String result = getOutput();
-    if (result.equals(correct)){
-      score++;
-    }
-    //no hidden tests for assignment 00
+//no hidden tests for assignment 00
     //testing complete
     restoreSystem();
     String rep = ""+ score +"/"+total;
@@ -41,8 +41,13 @@ public class Test00 {
   TIn = new ByteArrayInputStream(data.getBytes());
   System.setIn(TIn);
   }
-  private static String getOutput(){
-    return TOut.toString();
+  private static String getOutput(String input){
+  	setOutput();
+	setInput(input);
+	student.main(null);
+	String result = TOut.toString();
+	restoreSystem();
+    return result;
   }
   public static void restoreSystem(){
     System.setOut(SOut);
@@ -50,14 +55,16 @@ public class Test00 {
   }
   public static void toFile(String correct, String result){
 	try{
-		File c = new File("correct.txt");
-		File r = new File("result.txt");
-		PrintWriter wc = new PrintWriter(c);
-		wc.print(correct);
-		wc.close();
-		PrintWriter wr = new PrintWriter(r);
-		wr.print(result);
-		wr.close();
+		File f;
+		PrintWriter p;
+		String[] a = {"correct","result"};
+		String[] args = {correct,result};
+		for (int i = 0; i<2;i++){
+			f = new File(a[i]+".txt");
+			p = new PrintWriter(f);
+			p.print(args[i]);
+			p.close();
+		}
 	}
 	catch (FileNotFoundException e){
 		System.out.println("Couldn't create files.");
