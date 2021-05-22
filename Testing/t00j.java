@@ -22,9 +22,11 @@ public class t00j {
 			failed.add("test1");
 		}
 		System.out.printf("Passed %d out of %d tests.\n",passed, testCount);
-		System.out.println("Failed:");
-		for (String i: failed){
-			System.out.printf("\t* %s\n",i);
+		if( failed.size() > 0){
+			System.out.println("Failed:");
+			for (String i: failed){
+				System.out.printf("\t* %s\n",i);
+			}
 		}
 	}
 	
