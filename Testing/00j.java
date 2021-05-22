@@ -7,43 +7,45 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
-public class t00j {
+// 00j
+public class Tests {
 	static HelloWorld student = new HelloWorld();
 	private static ByteArrayOutputStream TOut;
 	private static ByteArrayInputStream TIn;
 	private static final PrintStream SOut = System.out;
 	private static final InputStream SIn = System.in;
-	private static int testCount = 0;
+	private static int total = 0;
 	private static int passed = 0;
+	private static ArrayList<String> failed = new ArrayList<String>();
 	
 	public static void main(String[] args){
-		ArrayList<String> failed = new ArrayList<String>();
-		if (! test1()){
-			failed.add("test1");
-		}
-		System.out.printf("Passed %d out of %d tests.\n",passed, testCount);
-		if( failed.size() > 0){
-			System.out.println("Failed:");
-			for (String i: failed){
-				System.out.printf("\t* %s\n",i);
+		simple();
+		if (!args[0].equals("simple"){
+			System.out.printf("Passed %d out of %d tests.\n",passed, total);
+			if( failed.size() > 0){
+				System.out.println("Failed:");
+				for (String i: failed){
+					System.out.printf("\t* %s\n",i);
+				}
 			}
 		}
 	}
 	
-	public String runner(){
+	public static void simple(){
 		test1();
-		return ""+passed+"/"+testCount;
+		System.out.printf("%d/%d\n",passed,total);
 	}
 
-	public static boolean test1(){
-		testCount++;
+	public static void test1(){
+		total++;
 		String correct = "Hello World!\n";
 		String result = getOutput("");
 		if (result.equals(correct)){
 			passed++;
-			return true;
 		}
-		return false;
+		else{
+			failed.add("test1");
+		}
 	}
 
 	//no hidden tests for assignment 00
