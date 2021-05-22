@@ -230,47 +230,55 @@ def drop():
 		w.writerow(row)
 	a.close()
 
-def run_python():
+def run_python(simple):
 	try:
-		p = run("python3 Tests.py",shell=True,capture_output=True,text=True)
+		p = run(f"python3 Tests.py {'simple' if simple else ''}",shell=True,capture_output=True,text=True)
 		if p.stderr:
 			print("Tests didn't run")
 			score = None
 		else:
-			score = p.stdout.strip()
+			out = p.stdout.strip().split("\n")
+			if len(out) > 1:
+				for i in range(1,len(out)):
+					print(out[i])
+			score = out[0]
 	except KeyboardInterrupt:
 		print("Student test terminated")
 		score = None
 	return score
 
-def run_java():
+def run_java(simple):
 	try:
-		p = run(f'javac Tests.java;java Tests',shell=True,capture_output=True)
+		p = run(f"javac Tests.java;java Tests {'simple' if simple else ''}",shell=True,capture_output=True,text=True)
 		if p.stderr:
 			print("Tests didn't compile")
 			score = None
 		else:
-			score = p.stdout
+			out = p.stdout.strip().split('\n')
+			if len(out) > 1:
+				for i in range(1,len(out)):
+					print(out[i])
+			score = out[0]
 	except KeyboardInterrupt:
 		print("Student test terminated")
 		score = None
 	return score
 
-def grade(stu,tag):
-	os.system(f"gh repo clone {stu.clone(tag)} student")
+def grade(stu,tag, simple = True):
+	os.system(f"gh repo clone {stu.clone(tag)} student -- -q")
 	if os.path.isdir('student'):
 		print("Testing...")
 		os.chdir('student')
 		if tag[-1] == 'j':
 			os.system(f"cp ../Testing/{tag}.java Tests.java")
-			stu.assignments[tag].set_score(run_java())
+			stu.assignments[tag].set_score(run_java(simple))
 		elif tag[-1] == 'p':
 			os.system(f"cp ../Testing/{tag}.py Tests.py")
-			stu.assignments[tag].set_score(run_python())
+			stu.assignments[tag].set_score(run_python(simple))
 		os.chdir('..')
 		run(['rm','-rf','student'])
 	else:
-		print(f"{stu.name} hasn't startd the assignment")
+		print(f"{stu.name} hasn't started the assignment")
 
 def mod_student():
 	stu = select_student()
@@ -367,7 +375,7 @@ def grade_assignment(tag = None):
 			elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
 				print(f"{stu.name} already has completed assignment")
 			else:
-				print("something strange happened in SimoGrader.grade_assignment()")
+				print("something strange happened in grade_assignment()")
 	print("Grading complete -- saving...")
 	d = shelve.open('data.dat')
 	d['students'] = students
@@ -377,29 +385,32 @@ def grade_assignment(tag = None):
 def grade_student():
 	stu = select_student()
 	tag = validate_assign()
-	assign = stu.assignments[tag]
-	if assign.score < 5 and assign.late:
-		print(f'Grading {stu.name} -- late')
-		grade(stu,tag)
-		print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-	elif assign.score < 10 and not a.late:
-		print(f'Grading {stu.name} -- on time')
-		grade(stu, tag)
-		print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-	elif (assign.score == 10 and not assign.late) or (assign.score == 5 and a.late):
-		print(f"{stu.name} already has completed assignment")
-	else:
-		print(f"something strange happened in SimoGrader.grade_student()")
-	print("Grading complete -- saving...")
-	d = shelve.open('data.dat')
-	students = d['students']
-	for i in range(len(students)):
-		if students[i].name == stu.name:
-			students[i] = stu
-			break
-	d['students'] = students
-	d.close()
-	print("Data saved")
+	try:
+		assign = stu.assignments[tag]
+		if assign.score < 5 and assign.late:
+			print(f'Grading {stu.name} -- late')
+			grade(stu,tag, False)
+			print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
+		elif assign.score < 10 and not assign.late:
+			print(f'Grading {stu.name} -- on time')
+			grade(stu, tag, False)
+			print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
+		elif (assign.score == 10 and not assign.late) or (assign.score == 5 and assign.late):
+			print(f"{stu.name} already has completed assignment")
+		else:
+			print(f"something strange happened in grade_student()")
+		print("Grading complete -- saving...")
+		d = shelve.open('data.dat')
+		students = d['students']
+		for i in range(len(students)):
+			if students[i].name == stu.name:
+				students[i] = stu
+				break
+		d['students'] = students
+		d.close()
+		print("Data saved")
+	except KeyError as e:
+		print("That student doesn't have that assignment")
 
 def report(course = None):
 	# ask for (python, java, all)

@@ -1,41 +1,66 @@
 from subprocess import run
 from os import getcwd
-file = "hello_world.py"
+import sys
 
-# setup methods
-def catchOutput(inputs=None, seed=''):
-	cwd = getcwd()
-	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
-	return p.stdout
+#00p
+file = "hello_world.py"
+passed = 0
+total = 0
+failed = []
 
 def main():
-	total = 0
-	score = 0
+	global score, total
+	simple()
+	if sys.argv[1]!='simple':
+		print(f"Passed {passed} out of {total} tests.")
+		if len(failed) > 0:
+			print("Failed:")
+			for i in failed:
+				print(f"\t* {i}")
+
+def simple():
+	global score, total
+	test1()
+	test2()
+	test3()
+	print(f"{passed}/{total}")
+
+def test1():
+	global total, passed
 	total += 1
-	#def test_1():
 	correct = "Hello World!\n"
 	result = catchOutput()[:len(correct)]
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append("test1")
 
+def test2():
+	global total, passed
 	total += 1
-	#def test_2():
-	correct = "Hello World!\nNUAMES\n"
+	correct = "Hello World\nNUAMES\n"
 	result = catchOutput()[:len(correct)]
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append("test2")
 
+def test3():
+	global total, passed
 	total += 1
-	#def test_3():
 	correct = "Hello World!\nNUAMES\nCS 1030\n"
 	result = catchOutput()
 	if result == correct:
-		score += 1
-		
-	#hidden tests
-	#no hidden tests for this assignment
+		passed += 1
+	else:
+		failed.append("test3")
 
-	return f"{score}/{total}"
+# no hidden tests for assignment 00
+
+# setup methods
+def catchOutput(inputs=None, seed=''):
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, shell=True, input=inputs)
+	return p.stdout
 
 if __name__ == "__main__":
-	print(main())
+	main()
