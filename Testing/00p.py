@@ -11,7 +11,11 @@ failed = []
 def main():
 	global score, total
 	simple()
-	if sys.argv[1]!='simple':
+	try:
+		out = sys.argv[1]!='simple'
+	except:
+		out = True
+	if out:
 		print(f"Passed {passed} out of {total} tests.")
 		if len(failed) > 0:
 			print("Failed:")
@@ -38,7 +42,7 @@ def test1():
 def test2():
 	global total, passed
 	total += 1
-	correct = "Hello World\nNUAMES\n"
+	correct = "Hello World!\nNUAMES\n"
 	result = catchOutput()[:len(correct)]
 	if result == correct:
 		passed += 1
