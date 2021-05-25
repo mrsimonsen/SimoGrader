@@ -185,23 +185,25 @@ def select_student():
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
-	search = input("Enter a part of a student name:\n")
-	results = []
-	for i in students:
-		if search in i.name.lower():
-			results.append(i)
-	if len(results):
-		print("0 - Quit")
-		for i in range(len(results)):
-			print(f"{i+1} - {results[i].name}")
-		n = validate_num("Which student?")-1
-		if n >= 0:
-			return results[n]
+	search = None
+	while search != '0':
+		search = input("Enter a part of a student name or '0' to exit:\n")
+		results = []
+		for i in students:
+			if search.lower() in i.name.lower():
+				results.append(i)
+		if len(results):
+			print("0 - Quit")
+			for i in range(len(results)):
+				print(f"{i+1} - {results[i].name}")
+			n = validate_num("Which student?")-1
+			if n >= 0:
+				return results[n]
+			else:
+				return None
 		else:
-			return None
-	else:
-		print(f"No students matched \"{search}\"")
-		return None
+			if search != '0':
+				print(f"No students matched \"{search}\"")
 
 
 def drop():
@@ -384,33 +386,34 @@ def grade_assignment(tag = None):
 
 def grade_student():
 	stu = select_student()
-	tag = validate_assign()
-	try:
-		assign = stu.assignments[tag]
-		if assign.score < 5 and assign.late:
-			print(f'Grading {stu.name} -- late')
-			grade(stu,tag, False)
-			print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-		elif assign.score < 10 and not assign.late:
-			print(f'Grading {stu.name} -- on time')
-			grade(stu, tag, False)
-			print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-		elif (assign.score == 10 and not assign.late) or (assign.score == 5 and assign.late):
-			print(f"{stu.name} already has completed assignment")
-		else:
-			print(f"something strange happened in grade_student()")
-		print("Grading complete -- saving...")
-		d = shelve.open('data.dat')
-		students = d['students']
-		for i in range(len(students)):
-			if students[i].name == stu.name:
-				students[i] = stu
-				break
-		d['students'] = students
-		d.close()
-		print("Data saved")
-	except KeyError as e:
-		print("That student doesn't have that assignment")
+	if stu:
+		tag = validate_assign()
+		try:
+			assign = stu.assignments[tag]
+			if assign.score < 5 and assign.late:
+				print(f'Grading {stu.name} -- late')
+				grade(stu,tag, False)
+				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
+			elif assign.score < 10 and not assign.late:
+				print(f'Grading {stu.name} -- on time')
+				grade(stu, tag, False)
+				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
+			elif (assign.score == 10 and not assign.late) or (assign.score == 5 and assign.late):
+				print(f"{stu.name} already has completed assignment")
+			else:
+				print(f"something strange happened in grade_student()")
+			print("Grading complete -- saving...")
+			d = shelve.open('data.dat')
+			students = d['students']
+			for i in range(len(students)):
+				if students[i].name == stu.name:
+					students[i] = stu
+					break
+			d['students'] = students
+			d.close()
+			print("Data saved")
+		except KeyError as e:
+			print("That student doesn't have that assignment")
 
 def report(course = None):
 	# ask for (python, java, all)
