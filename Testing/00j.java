@@ -20,7 +20,14 @@ public class Tests {
 	
 	public static void main(String[] args){
 		simple();
-		if (!args[0].equals("simple"){
+		boolean verbose;
+		try{
+			verbose = !args[0].equals("simple");
+		}
+		catch (ArrayIndexOutOfBoundsException e){
+			verbose = true;
+		}
+		if (verbose){
 			System.out.printf("Passed %d out of %d tests.\n",passed, total);
 			if( failed.size() > 0){
 				System.out.println("Failed:");

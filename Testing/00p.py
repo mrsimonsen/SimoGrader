@@ -12,10 +12,10 @@ def main():
 	global score, total
 	simple()
 	try:
-		out = sys.argv[1]!='simple'
+		verbose = sys.argv[1]!='simple'
 	except:
-		out = True
-	if out:
+		verbose = True
+	if verbose:
 		print(f"Passed {passed} out of {total} tests.")
 		if len(failed) > 0:
 			print("Failed:")
