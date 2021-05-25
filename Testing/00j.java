@@ -29,7 +29,7 @@ public class Tests {
 		}
 		if (verbose){
 			System.out.printf("Passed %d out of %d tests.\n",passed, total);
-			if( failed.size() > 0){
+			if (failed.size() > 0){
 				System.out.println("Failed:");
 				for (String i: failed){
 					System.out.printf("\t* %s\n",i);
