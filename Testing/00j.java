@@ -37,7 +37,7 @@ public class Tests {
 			}
 		}
 	}
-	
+
 	public static void simple(){
 		test1();
 		System.out.printf("%d/%d\n",passed,total);
