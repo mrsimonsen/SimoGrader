@@ -17,7 +17,7 @@ public class Tests {
 	private static int total = 0;
 	private static int passed = 0;
 	private static ArrayList<String> failed = new ArrayList<String>();
-	
+
 	public static void main(String[] args){
 		simple();
 		boolean verbose;
