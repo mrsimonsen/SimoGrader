@@ -40,81 +40,81 @@ public class Tests {
 	
 	public static void simple(){
 		test1();
+		test2();
+		test3();
+		test4();
+		hidden1();
 		System.out.printf("%d/%d\n",passed,total);
 	}
 
-  public static String tests(){
-    int total = 0;
-    int score = 0;
-    setOutput();
-    //test1
-    total++;
-    setInput("IDK how that happened. TTYL.");
-    student.main(args);
-    String correct = "Enter text:\nYou entered: IDK how that happened. TTYL.\n";
-    String result = getOutput().substring(0,correct.length());
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-    //test2
-    setOutput();
-    total++;
-    setInput("IDK how that happened. TTYL.");
-    student.main(args);
-    correct = "Enter text:\nYou entered: IDK how that happened. TTYL.\n";
-    correct += "\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"TTYL\" with \"talk to you later\".\n";
-    correct += "\nExpanded: I don't know how that happened. talk to you later.\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-    //test3
-    setOutput();
-    total++;
-    setInput("I'll fix it. JK, you know IDK how.");
-    student.main(args);
-    correct = "Enter text:\nYou entered: I'll fix it. JK, you know IDK how.\n";
-    correct += "\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\n";
-    correct += "\nExpanded: I'll fix it. just kidding, you know I don't know how.\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-    //test4
-    setOutput();
-    total++;
-    setInput("Your bff, my BFF, and her BFF are all there.");
-    student.main(args);
-    correct = "Enter text:\nYou entered: Your bff, my BFF, and her BFF are all there.\n";
-    correct += "\nReplaced \"BFF\" with \"best friend forever\".\n";
-    correct += "\nExpanded: Your bff, my best friend forever, and her best friend forever are all there.\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
+	public static void test1(){
+		total++;
+		String correct = "Enter text:\nYou entered: IDK how that happened. TTYL.\n";
+		String result = getOutput("IDK how that happened. TTYL.");
+		result = result.substring(0,correct.length());
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test1");
+		}
+	}
 
-    //hidden tests
-    setOutput();
-    total++;
-    setInput("JK, IDK if TMI BFF. TTYL");
-    student.main(args);
-    correct = "Enter text:\nYou entered: JK, IDK if TMI BFF. TTYL\n";
-    correct += "\nReplaced \"BFF\" with \"best friend forever\".\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\nReplaced \"TMI\" with \"too much information\".\nReplaced \"TTYL\" with \"talk to you later\".\n";
-	correct += "\nExpanded: just kidding, I don't know if too much information best friend forever. talk to you later\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
+	public static void test2(){
+		total++;
+		String correct = "Enter text:\nYou entered: IDK how that happened. TTYL.\n";
+		correct += "\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"TTYL\" with \"talk to you later\".\n";
+		correct += "\nExpanded: I don't know how that happened. talk to you later.\n";
+		String result = getOutput("IDK how that happened. TTYL.");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test2");
+		}
+	}
 
-    //testing complete
-    String rep = ""+ score +"/"+total;
-    return rep;
-  }
+	public static void test3(){
+		total++;
+		String correct = "Enter text:\nYou entered: I'll fix it. JK, you know IDK how.\n";
+		correct += "\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\n";
+		correct += "\nExpanded: I'll fix it. just kidding, you know I don't know how.\n";
+		String result = getOutput("I'll fix it. JK, you know IDK how.");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test3");
+		}
+	}
+
+	public static void test4(){
+		total++;
+		String correct = "Enter text:\nYou entered: Your bff, my BFF, and her BFF are all there.\n";
+		correct += "\nReplaced \"BFF\" with \"best friend forever\".\n";
+		correct += "\nExpanded: Your bff, my best friend forever, and her best friend forever are all there.\n";
+		String result = getOutput("Your bff, my BFF, and her BFF are all there.");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test4");
+		}
+	}
+
+	public static void hidden1(){
+		total++;
+		String correct = "Enter text:\nYou entered: JK, IDK if TMI BFF. TTYL\n";
+		correct = correct += "\nReplaced \"BFF\" with \"best friend forever\".\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\nReplaced \"TMI\" with \"too much information\".\nReplaced \"    TTYL\" with \"talk to you later\".\n";
+		correct += "\nExpanded: just kidding, I don't know if too much information best friend forever. talk to you later\n";
+		String result = getOutput("JK, IDK if TMI BFF. TTYL");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("hidden1");
+		}
+	}
 
 	//Set up methods
 	 public static void setOutput(){
