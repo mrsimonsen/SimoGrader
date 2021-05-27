@@ -1,93 +1,161 @@
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Test14 {
-  static AuthoringAssistant student = new AuthoringAssistant();
-  static private ByteArrayOutputStream TOut;
-  static private ByteArrayInputStream TIn;
-  static private final PrintStream SOut = System.out;
-  static private final InputStream SIn = System.in;
-  static String[] args = {};
+// 14j
+public class Tests {
+	static AuthoringAssistant student = new AuthoringAssistant();
+	private static ByteArrayOutputStream TOut;
+	private static ByteArrayInputStream TIn;
+	private static final PrintStream SOut = System.out;
+	private static final InputStream SIn = System.in;
+	private static int total = 0;
+	private static int passed = 0;
+	private static ArrayList<String> failed = new ArrayList<String>();
 
-  public static void main(String[] args){
-    System.out.println(tests());
-  }
-
-  public static String tests(){
-    int total = 0;
-    int score = 0;
-    setOutput();
-    //test1
-    total++;
-    setInput("Testing that enterd text is repeated.\nq\n");
-    student.main(args);
-    String correct = "Enter a sample text:\n\nYou entered: Testing that enterd text is repeated.\n";
-    String result = getOutput().substring(0,correct.length());
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-    //test2a
-    setOutput();
-    total++;
-    setInput("Testing that menu is called and can quit.\nq\n");
-    student.main(args);
-    correct = "";
-    correct += "Enter a sample text:\n\nYou entered: Testing that menu is called and can quit.\n";
-    correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-	//test2b
-	total++;
-	Scanner s = new Scanner("1\nq\n");
-	setOutput();
-	char res = student.printMenu(s);
-	restoreSystem();
-	char cor = 'q';
-	if (res == cor){
-		score++;
+	public static void main(String[] args){
+		simple();
+		boolean verbose;
+		try{
+			verbose = !args[0].equals("simple");
+		}
+		catch (ArrayIndexOutOfBoundsException e){
+			verbose = true;
+		}
+		if (verbose){
+			System.out.printf("Passed %d out of %d tests.\n",passed, total);
+			if (failed.size() > 0){
+				System.out.println("Failed:");
+				for (String i: failed){
+					System.out.printf("\t* %s\n",i);
+				}
+			}
+		}
 	}
-	 
-    //test3
-    total++;
-    int r = student.getNumOfNonWSCharacters("This is a   test.");
-    if (r==12){
-      score++;
-    }
-    //test4
-    total++;
-    r = student.getNumOfWords("This is a   test.");
-    if (r==4){
-      score++;
-    }
-    //test5
-    total++;
-    r = student.findText("some water", "I want some water. I had some water earlier, but now he has some water.");
-    if (r==3){
-      score++;
-    }
-    //test6
-    total++;
-    result = student.replaceExclamation("May the Force be with  you!");
-    if (result.equals("May the Force be with  you.")){
-      score++;
-    }
-    //test7
-    total++;
-    result = student.shortenSpace("             There are  too  many    spaces     here.      Why?");
-    if (result.equals("There are too many spaces here. Why?")){
-      score++;
-    }
-	
-	//test 8
-	total++;
-	setOutput();
-	  setInput("We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\nc\nw\nf\nmore\nr\ns\nq\n");
-		correct = "Enter a sample text:\n\nYou entered: We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\n";
-   		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+
+	public static void simple(){
+		test1();
+		test2a();
+		test2b();
+		test3();
+		test4();
+		test5();
+		test6();
+		test7();
+		test8();
+		hidden1();
+		hidden2();
+		System.out.printf("%d/%d\n",passed,total);
+	}
+
+	public static void test1(){
+		total++;
+		String correct = "Enter a sample text:\n\nYou entered: Testing that enterd text is repeated.\n";
+		String result = getOutput("Testing that enterd text is repeated.\nq\n")
+		result = result.substring(0,correct.length());
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test1");
+		}
+	}
+
+	public static void test2a(){
+		total++;
+		String correct = "Enter a sample text:\n\nYou entered: Testing that menu is called and can quit.\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		result = getOutput("Testing that menu is called and can quit.\nq\n");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test2a");
+		}
+	}
+
+	public static void test2b(){
+		total++;
+		char correct = 'q';
+		char result = student.printMenu(new Scanner("1\nq\n"));
+		if (result == correct){
+			passed++;
+		}
+		else{
+			failed.add("test2b");
+		}
+	}
+
+	public static void test3(){
+		total++;
+		int correct = 12;
+		int result = student.getNumOfNonWSCharacters("This is a   test.");
+		if (result == correct){
+			passed++;
+		}
+		else{
+			failed.add("test3");
+		}
+	}
+
+	public static void test4(){
+		total++;
+		int correct = 4;
+		int result = student.getNumOfWords("This is a   test.");
+		if (result == correct){
+			passed++;
+		}
+		else{
+			failed.add("test4");
+		}
+	}
+
+	public static void test5(){
+		total++;
+		int correct = 3;
+		int result = student.findText("some water", "I want some water. I had some water earlier, but now he has some water.");
+		if (result == correct){
+			passed++;
+		}
+		else{
+			failed.add("test5");
+		}
+	}
+
+	public static void test6(){
+		total++;
+		String correct = "May the Force be with  you.";
+		string result = student.replaceExclamation("May the Force be with  you!");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test6");
+		}
+	}
+
+	public static void test7(){
+		total++;
+		String correct = "There are too many spaces here. Why?";
+		String result = student.shortenSpace("             There are  too  many    spaces     here.      Why?");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test7");
+		}
+	}
+
+	public static test8(){
+		total++;
+		String correct = "Enter a sample text:\n\nYou entered: We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
 		correct += "Number of non-whitespace characters: 181\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
 		correct += "Number of words: 35\n";
@@ -98,83 +166,89 @@ public class Test14 {
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
 		correct += "Edited text: We'll continue our quest in space. There will be more shuttle flights and more shuttle crews and, yes, more volunteers, more civilians, more teachers in space. Nothing ends here; our hopes and our journeys continue.\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-		student.main(args);
-		result = getOutput();
-	  if (result.equals(correct)){
-      score++;
-    }
+		String result = getOutput("We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\nc\nw\nf\nmore\nr\ns\nq\n");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test8");
+		}
+	}
 
-    //hidden tests
-    setOutput();
-    total++;
-		setInput("I have a test! I am not prepared!\nr\nw\nc\nq\n");
-    student.main(args);
-    correct = "Enter a sample text:\n\nYou entered: I have a test! I am not prepared!\n";
-    correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-    correct += "Edited text: I have a test. I am not prepared.\n";
-    correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+	public static void hidden1(){
+		total++;
+		String correct = "Enter a sample text:\n\nYou entered: I have a test! I am not prepared!\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Edited text: I have a test. I am not prepared.\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
 		correct += "Number of words: 8\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
 		correct += "Number of non-whitespace characters: 26\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
+		String result = getOutput("I have a test! I am not prepared!\nr\nw\nc\nq\n");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("hidden1");
+		}
+	}
 
-    setOutput();
-    total++;
-    setInput("I want some water. I had some water earlier, but now he has some water   .\nf\nsome water\ns\nq\n");
-    student.main(args);
-    correct = "";
-    correct = "Enter a sample text:\n\nYou entered: I want some water. I had some water earlier, but now he has some water   .\n";
-    correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-    correct += "Enter a word or phrase to be found:\n\"some water\" instances: 3\n";
-    correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+	public static void hidden2(){
+		total++;
+		String correct = "";
+		correct = "Enter a sample text:\n\nYou entered: I want some water. I had some water earlier, but now he has some water   .\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
+		correct += "Enter a word or phrase to be found:\n\"some water\" instances: 3\n";
+		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
 		correct += "Edited text: I want some water. I had some water earlier, but now he has some water .\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-    result = getOutput();
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-
-    //testing complete
-    String rep = ""+ score +"/"+total;
-    return rep;
-  }
-
-  //Set up methods
-  static public void setOutput(){
-    TOut = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(TOut));
-  }
-  private static void setInput(String data){
-  TIn = new ByteArrayInputStream(data.getBytes());
-  System.setIn(TIn);
-  }
-  static private String getOutput(){
-    return TOut.toString();
-  }
-  static public void restoreSystem(){
-    System.setOut(SOut);
-    System.setIn(SIn);
-  }
-  public static void toFile(String correct, String result){
-	try{
-		File c = new File("correct.txt");
-		File r = new File("result.txt");
-		PrintWriter wc = new PrintWriter(c);
-		wc.print(correct);
-		wc.close();
-		PrintWriter wr = new PrintWriter(r);
-		wr.print(result);
-		wr.close();
+		String result = getOutput("I want some water. I had some water earlier, but now he has some water   .\nf\nsome water\ns\nq\n");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("hidden2");
+		}
 	}
-	catch (FileNotFoundException e){
-		System.out.println("Couldn't create files.");
-		System.out.println(e);
+
+	//Set up methods
+	 public static void setOutput(){
+	 	TOut = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(TOut));
 	}
-  }
+	private static void setInput(String data){
+		TIn = new ByteArrayInputStream(data.getBytes());
+		System.setIn(TIn);
+	}
+	private static String getOutput(String input){
+		setOutput();
+		setInput(input);
+		student.main(null);
+		String result = TOut.toString();
+		restoreSystem();
+		return result;
+	}
+	public static void restoreSystem(){
+		System.setOut(SOut);
+		System.setIn(SIn);
+	}
+	public static void toFile(String correct, String result){
+		try{
+			File f;
+			PrintWriter p;
+			String[] a = {"correct","result"};
+			String[] args = {correct,result};
+			for (int i = 0; i<2;i++){
+				f = new File(a[i]+".txt");
+				p = new PrintWriter(f);
+				p.print(args[i]);
+				p.close();
+			}
+		}
+		catch (FileNotFoundException e){
+			System.out.println("Couldn't create files.");
+			System.out.println(e);
+		}
+	}
 }
