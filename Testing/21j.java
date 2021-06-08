@@ -252,56 +252,70 @@ public class Tests {
 			score++;
 		}
 
-		//test13
-      total++;
-    //testing 3 of the possible full houses
-    int[][] dice13 = {{2,2,3,3,3},{4,4,4,6,6},{1,4,1,4,1}};
-    correct = "Full House";
-    String[] c13 = new String[dice13.length];
-    for (int i = 0; i<dice13.length; i++){
-      c13[i] = correct;
-    }
-    String[] r13 = new String[dice13.length];
-    for (int i = 0; i < dice13.length; i++){
-        r13[i] = student.printScore(dice13[i]);
-      }
-      if (Arrays.equals(c13,r13)){
-        score++;
-      }
-      //test14
-      total++;
-    //testing 2 of the possible 3 o' kinds
-    int[][] dice14 = {{4,4,4,1,2},{1,3,5,3,3}};
-    correct = "Three of a Kind";
-    String[] c14 = new String[dice14.length];
-    for (int i = 0; i<dice14.length; i++){
-      c14[i] = correct;
-    }
-    String[] r14 = new String[dice14.length];
-    for (int i = 0; i < dice14.length; i++){
-        r14[i] = student.printScore(dice14[i]);
-      }
-      if (Arrays.equals(c14,r14)){
-        score++;
-      }
-      //test15
-      total++;
-    //testing 2 of the possible no score
-    int[][] dice15 = {{1,1,4,5,3},{6,5,3,5,6}};
-    correct = "You did not score anything noteworthy.";
-    String[] c15 = new String[dice15.length];
-    for (int i = 0; i<dice15.length; i++){
-      c15[i] = correct;
-    }
-    String[] r15 = new String[dice15.length];
-    for (int i = 0; i < dice15.length; i++){
-        r15[i] = student.printScore(dice15[i]);
-      }
-      if (Arrays.equals(c15,r15)){
-        score++;
-      }
+	public static void test13(){
+		total++;
+		String correct = "Full House";
+		//testing 3 of the possible full houses
+		int[][] dice = {{2,2,3,3,3},{4,4,4,6,6},{1,4,1,4,1}};
+		String[] correctArray = new String[3];
+		for (int i = 0; i < 3; i++){
+			correctArray[i] = correct;
+		}
+		String[] resultArray = new String[3];
+		for (int i = 0; i < 3; i++){
+			resultArray[i] = student.printScore(dice[i]);
+		}
+		if (Arrays.equals(correctArray,resultArray)){
+			score++;
+		}
+		else{	
+			failed.add("test13");
+		}
+	}
 
-      //no hidden tests
+	public static void test14(){
+		total++;
+		String correct = "Three of a Kind";
+		//testing 2 of the possible 3 o' kinds
+		int[][] dice = {{4,4,4,1,2},{1,3,5,3,3}};
+		String[] correctArray = new String[2];
+		for (int i = 0; i < 2; i++){
+			correctArary[i] = correct;
+		}
+		String[] resultArray = new String[2];
+		for (int i = 0; i < 2; i++){
+			resultArray[i] = student.printScore(dice[i]);
+		}
+		if (Arrays.equals(correctArray,resultArray)){
+			score++;
+		}
+		else{
+			failed.add("test14");
+		}
+	}
+
+	public static void test15(){
+		total++;
+		String correct = "You did not score anything noteworthy.";
+		//testing 2 of the possible no score
+		int[][] dice = {{1,1,4,5,3},{6,5,3,5,6}};
+		String[] correctArray = new String[2];
+		for (int i = 0; i < 2; i++){
+			correctArray[i] = correct;
+		}
+		String[] resultArray = new String[2];
+		for (int i = 0; i < 2; i++){
+			resultArray[i] = student.printScore(dice[i]);
+		}
+		if (Arrays.equals(correctArray,resultArray)){
+			score++;
+		}
+		else{
+			failed.add("test15");
+		}
+	}
+	//no hidden tests
+
 	//Set up methods
 	 public static void setOutput(){
 	 	TOut = new ByteArrayOutputStream();
