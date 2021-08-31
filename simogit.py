@@ -54,7 +54,7 @@ def main():
 	#clone those starting with prefix
 	for r in repos:
 		if pre in r.name:
-			run(["git", "clone", r.ssh_url, r.name[len(pre)+1:]])
+			run(["git", "clone", r.html_url+".git", r.name[len(pre)+1:]])
 			#sleep(2)
 	chdir('..')
 	print("\nAll repos cloned")
