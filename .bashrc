@@ -116,8 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias all='cd AutoGrader;python3 all.py'
+alias grade='cd ~/GitHub/AutoGrader;python3 SimoGrader.py'
 alias rmc="find . -type f -name '*.class' -delete"
 #https://www.cyberciti.biz/open-source/cbonsai-linux-bonsai-tree-generator-for-cli-lovers-for-fun/
 alias bonsai="~/.local/bin/cbonsai -S -t 0.1 -L 50"
-
+#https://www.cyberciti.biz/tips/displays-animations-when-accidentally-you-type-sl-instead-of-ls.html
+#sl will trigger a steam locomotive to cross the screen
