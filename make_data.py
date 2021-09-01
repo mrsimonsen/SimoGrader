@@ -63,6 +63,7 @@ def reset_data():
 	d['python'] = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
 	#list of 1400 assignment prefixes
 	d['java'] = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
+	d['web'] = ('web')
 	#list of course periods
 	periods = []
 	for i in range(8):
@@ -114,6 +115,7 @@ def validate_assign():
 	with shelve.open('data.dat') as d:
 		assign += d['java']
 		assign += d['python']
+		assign += d['web']
 		assign.append('done')
 	a = ''
 	while a not in assign:
@@ -134,6 +136,10 @@ def set_periods():
 		for i in range(n):
 			x = validate_num(f"Enter class period for 1400 section number {i+1}:")
 			periods[x-1] = '1400'
+		n = validate_num("How many Web Dev sections this semester?")
+		for i in range(n):
+			x = validate_num(f"Enter class period for web section number {i+1}:")
+			periods[x-1] = 'Web Dev'
 		print(f"Periods: {periods}")
 		r = ask_yn("Is this correct?")
 	d['periods'] = periods
@@ -145,12 +151,16 @@ def display_classes():
 		periods = f['periods']
 		p = []
 		j = []
+		w = []
 		for i in range(len(periods)):
 			if periods[i] == '1030':
 				p.append(i+1)
 			elif periods[i] == '1400':
 				j.append(i+1)
+			elif periods[i] == 'Web Dev':
+				w.append(i+1)
 		print(f"{len(p)} Python classes, {len(j)} Java classes")
+		print(f"\tWeb Dev periods: {w}")
 		print(f"\tPython periods: {p}")
 		print(f"\tJava periods: {j}")
 
@@ -180,7 +190,7 @@ def display_student():
 	if stu:
 		print(f"{stu.name} Assignments")
 		print(stu.print_assignments())
-	
+
 def select_student():
 	d = shelve.open('data.dat')
 	students = d['students']
@@ -361,10 +371,14 @@ def grade_assignment(tag = None):
 		grading = '1400'
 	elif tag[-1] == 'p':
 		grading = '1030'
+	elif tag == 'web':
+		grading = "Web Dev"
 	else:
 		grading = None
 	for stu in students:
 		if stu.course == grading:
+			if grading == "Web Dev":
+				break
 			a = stu.assignments[tag]
 			if a.score < 5 and a.late:
 				print(f"Grading {stu.name} - late")
@@ -417,15 +431,17 @@ def grade_student():
 
 def report(course = None):
 	# ask for (python, java, all)
-	while course not in ('all','1030','1400'):
+	while course not in ('all','1030','1400','web'):
 		print("Select a course to report on:")
 		print("all - All courses")
 		print("1030 - Python")
 		print("1400 - Java")
+		print("web - Web Dev")
 		course = input("What's your selection?\n").lower()
-	if course == '1030' or course == '1400':
+	if course in ('1030','1400','web'):
 		write(course)
 	if course == 'all':
+		write('web')
 		write('1030')
 		write('1400')
 	print("Report complete")
@@ -435,6 +451,7 @@ def write(course):
 		students = d['students']
 		python = d['python']
 		java = d['java']
+		web = d['web']
 	header = ['Period','Last Name','First Name']
 	if course == '1030':
 		for tag in python:
@@ -444,6 +461,10 @@ def write(course):
 		for tag in java:
 			header.append(tag)
 		tags = java
+	elif course == 'Web Dev':
+		for tag in web:
+			header.append(tag)
+		tags = web
 	stuff = [header]
 	for stu in students:
 		if stu.course == course:
@@ -474,5 +495,6 @@ def grade_multiple():
 		report('1030')
 	if 'j' in tags:
 		report('1400')
+	if 'w' in tags:
+		report('Web Dev')
 	print(f"Grading and Reporting done for {tags}")
-
