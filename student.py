@@ -8,7 +8,7 @@ class Student():
 		self.github = github
 		self.assignments = {}
 		self.add_assignments()
-	
+
 	def __str__(self):
 		rep = f"{self.name}: {self.github}\n"
 		d = shelve.open('data.dat')
@@ -24,7 +24,7 @@ class Student():
 		d.close()
 		return p[self.period - 1]
 
-	
+
 	def add_assignments(self):
 		d = shelve.open('data.dat')
 		course = d['periods'][self.period-1]
@@ -33,6 +33,8 @@ class Student():
 			tags = d['python']
 		elif course == '1400':
 			tags = d['java']
+		elif course == 'Web Dev':
+			tags = d['web']
 		else:
 			print(f"Error - {self.period} not set as a programming class")
 			print(f"Check entry for {self.name}")
@@ -44,7 +46,7 @@ class Student():
 
 	def clone(self, tag):
 		return f"nuames-cs/{tag}-{self.github}"
-	
+
 	def print_assignments(self):
 		rep = "|Tag|Score|Late?|\t|Tag|Score|Late?|\n"
 		rep +="________________\t________________\n"
