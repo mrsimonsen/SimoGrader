@@ -174,7 +174,7 @@ def set_students():
 		for row in raw:
 			if row[0] == "Timestamp":
 				continue #skip the header
-			students.append(Student(f"{row[2]}, {row[1]}", int(row[3]), row[4]))
+			students.append(Student(f"{row[2].trim()}, {row[1].trim()}", int(row[3]), row[4].trim()))
 		f.close()
 		d = shelve.open('data.dat')
 		d['students'] = students
@@ -313,7 +313,7 @@ def mod_student():
 			stu.github = change("Enter a new github username:",stu.github)
 		elif choice == 3:
 			print(f"Changing {stu.name} period:")
-			stu.period = change("Enter a new period for username:",stu.period)
+			stu.period = change(f"Enter a new period for {stu.name}:",stu.period, True)
 		elif choice == 4:
 			print(f"Drop {stu.name}")
 			if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
