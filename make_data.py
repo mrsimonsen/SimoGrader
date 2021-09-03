@@ -174,7 +174,7 @@ def set_students():
 		for row in raw:
 			if row[0] == "Timestamp":
 				continue #skip the header
-			students.append(Student(f"{row[2].trim()}, {row[1].trim()}", int(row[3]), row[4].trim()))
+			students.append(Student(f"{row[2].strip()}, {row[1].strip()}", int(row[3]), row[4].strip()))
 		f.close()
 		d = shelve.open('data.dat')
 		d['students'] = students
