@@ -9,7 +9,8 @@ def grading_menu():
 		print("1 - Grade Multiple Assignments")
 		print("2 - Grade an Assignment")
 		print("3 - Grade a single Student's Assignment")
-		print("4 - Generate Report")
+		print("4 - Set assignment to late")
+		print("5 - Generate Report")
 		a = input("What's your selection?\n")
 
 		if a=='0':
@@ -21,6 +22,8 @@ def grading_menu():
 		elif a == '3':
 			grade_student()
 		elif a == '4':
+			mark_late()
+		elif a == '5':
 			report()
 		else:
 			print("That's not a valid menu option.")
@@ -79,7 +82,7 @@ def main():
 		print("4 - Reset Database")
 		print("5 - Delete Old Repos")
 		c = input("What's your selection?\n")
-		
+
 		if c == '0':
 			print("Goodbye")
 		elif c == '1':
@@ -97,4 +100,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
