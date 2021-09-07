@@ -1,7 +1,14 @@
 from subprocess import run
 from os import getcwd
-file = "character_creator.py"
+import sys
+
 import character_creator
+
+#12p
+file = "character_creator.py"
+passed = 0
+total = 0
+failed = []
 MENU = '''
 \t\t\t ____
 \t\t\t|Menu|
@@ -10,18 +17,42 @@ MENU = '''
 \t\t2 - Add to Attribute
 \t\t3 - Remove from Attribute\n'''
 
-# setup methods
-def catchOutput(inputs=None, seed=''):
-	cwd = getcwd()
-	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
-	return p.stdout
 
 def main():
-	total = 0
-	score = 0
+	global score, total
+	simple()
+	try:
+		verbose = sys.argv[1]!='simple'
+	except:
+		verbose = True
+	if verbose:
+		print(f"Passed {passed} out of {total} tests.")
+		if len(failed) > 0:
+			print("Failed:")
+			for i in failed:
+				print(f"\t* {i}")
+
+def simple():
+	global score, total
+	test1()
+	test2()
+	test3()
+	test4()
+	test5()
+	test6()
+	test7()
+	test8()
+	test9()
+	test10()
+	test11()
+	test12()
+	test13()
+	hidden1()
+	print(f"{passed}/{total}")
+
+def test1():
+	global total, passed
 	total += 1
-	
-	#test_1(self):
 	inputs = "a\n0\n"
 	correct = MENU
 	correct += "What's your choice?\n"
@@ -31,10 +62,13 @@ def main():
 	correct += "Goodbye.\n"
 	result = catchOutput(inputs)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test1')
 
+def test2():
+	global total, passed
 	total += 1
-	#def test_2(self):A
 	inputs = "1\n0\n"
 	correct = MENU
 	correct += "What's your choice?\n"
@@ -53,10 +87,13 @@ ______________________________\n'''
 	correct += "Goodbye.\n"
 	result = catchOutput(inputs, '0')
 	if result == correct:
-		score += 1
-	
+		passed += 1
+	else:
+		failed.append('test2')
+
+def test3():
+	global total, passed
 	total += 1
-	#test 2B
 	test_dict = {
 		'Strength':10,
 		'Dexterity':10,
@@ -77,34 +114,49 @@ ______________________________
 ______________________________'''
 	result = character_creator.table(test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test4')
 
+def test5():
+	global total, passed
 	total+= 1
-		#def test_3(self):A
 	test_dict = {'Something': 0,
 				 'Pool': 10}
-
 	correct = "5 added to Something"
 	result = character_creator.add('Something', 5, test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test5')
 
+def test6():
+	global total, passed
 	total += 1
-	#with self.subTest():B
+	test_dict = {'Something': 0,
+				 'Pool': 10}
 	correct = "6 is more points than you have left in your pool"
 	result = character_creator.add('Something', 6, test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test6')
 
+def test7():
+	global total, passed
 	total += 1
-	#with self.subTest():C
+	test_dict = {'Something': 0,
+				 'Pool': 10}
 	correct = "'this' is not a valid attribute"
 	result = character_creator.add('this', 1, test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test7')
 
+def test8():
+	global total, passed
 	total += 1
-	#def test_4(self):
 	inputs = "2\nIntelligence\n10\n1\n0\n"
 	correct = MENU
 	correct += "What's your choice?\n"
@@ -128,34 +180,49 @@ ______________________________\n'''
 	correct += "Goodbye.\n"
 	result = catchOutput(inputs)
 	if result == correct:
-		score += 1
-		
-	#def test_5(self):
+		passed += 1
+	else:
+		failed.append('test8')
+
+def test9():
+	global total, passed
 	test_dict = {'Something': 10,
 				 'Pool': 0}
 	total += 1
-	#with self.subTest():A
 	correct = "5 removed from Something"
 	result = character_creator.remove('Something', 5, test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test9')
 
+def test10():
+	global total, passed
 	total += 1
-	#with self.subTest():B
+	test_dict = {'Something': 10,
+				 'Pool': 0}
 	correct = "6 is more points than you have left in Something"
 	result = character_creator.remove('Something', 6, test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test10')
 
+def test11():
+	global total, passed
 	total += 1
-	#with self.subTest():C
+	test_dict = {'Something': 10,
+				 'Pool': 0}
 	correct = "'this' is not a valid attribute"
 	result = character_creator.remove('this', 1, test_dict)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test11')
 
+def test12():
+	global total, passed
 	total += 1
-	#def test_6(self):
 	inputs = "2\nWisdom\n15\n3\nWisdom\n5\n1\n0\n"
 	correct = MENU
 	correct += "What's your choice?\n"
@@ -184,10 +251,13 @@ ______________________________\n'''
 	correct += "Goodbye.\n"
 	result = catchOutput(inputs)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test12')
 
+def test13():
+	global total, passed
 	total += 1
-	#def test_7(self):
 	inputs = "2\ncharisma\n1\n3\nstrength\n1\n0\n"
 	correct = MENU
 	correct += "What's your choice?\n"
@@ -204,9 +274,12 @@ ______________________________\n'''
 	correct += "Goodbye.\n"
 	result = catchOutput(inputs)
 	if result == correct:
-		score += 1
-	
-	#hidden tests
+		passed += 1
+	else:
+		failed.append('test13')
+
+def hidden1():
+	global total, passed
 	total += 4
 	inputs = "2\nstrength\n15\n2\ndexterity\n14\n2\nconstitution\n13\n2\nwisdom\n12\n2\nintelligence\n10\n2\ncharisma\n8\n1\n3\nstrength\n14\n3\ndexterity\n13\n3\nconstitution\n12\n3\nwisdom\n11\n3\nintelligence\n9\n3\ncharisma\n7\n1\n0\n"
 	correct = '''
@@ -389,9 +462,14 @@ Goodbye.
 '''
 	result = catchOutput(inputs)
 	if result == correct:
-		score += 4
-	
-	return f"{score}/{total}"
+		passed += 4
+	else:
+		failed.append('hidden1')
+
+# setup methods
+def catchOutput(inputs=None, seed=''):
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, shell=True, input=inputs)
+	return p.stdout
 
 if __name__ == "__main__":
-	print(main())
+	main()

@@ -1,49 +1,88 @@
 from subprocess import run
 from os import getcwd
-file = "pig_latin.py"
+import sys
+
 import pig_latin
 
-# setup methods
-def catchOutput(inputs=None, seed=''):
-	cwd = getcwd()
-	p = run(f"python3 {file} {seed}", capture_output=True, text=True, cwd=cwd, shell=True, input=inputs)
-	return p.stdout
+#15p
+file = "pig_latin.py"
+passed = 0
+total = 0
+failed = []
 
 def main():
-	total = 0
-	score = 0
-	
+	global score, total
+	simple()
+	try:
+		verbose = sys.argv[1]!='simple'
+	except:
+		verbose = True
+	if verbose:
+		print(f"Passed {passed} out of {total} tests.")
+		if len(failed) > 0:
+			print("Failed:")
+			for i in failed:
+				print(f"\t* {i}")
+
+def simple():
+	global score, total
+	test1()
+	test2()
+	test3()
+	test4()
+	test5()
+	test6()
+	test7()
+	test8()
+	test9()
+	test10()
+	test11()
+	hidden1()
+	print(f"{passed}/{total}")
+
+def test1():
+	global total, passed
 	total += 1
-	#def test_1(self):
 	correct = "aeiou"
 	result = pig_latin.VOWELS
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test1')
 
+def test2():
+	global total, passed
 	total += 1
-	#def test_2(self):
 	correct = 'appleway'
 	result = pig_latin.way_end('apple')
 	if result == correct:
-		score += 1
-	
+		passed += 1
+	else:
+		failed.append('test2')
+
+def test3():
+	global total, passed
 	total += 1
-	#def test_3(self):
 	correct = 'appyhay'
 	result = pig_latin.ay_end('happy', 1)
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test3')
 
+def test4():
+	global total, passed
 	total += 1
-	#def test_4(self):
 	correct = ["appyhay 5 applesway\n"]
 	result = pig_latin.translate(["Happy 5 appLes"])
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test4')
 
+def test5():
+	global total, passed
 	total += 1
-	#def test_5_6(self):
-	#A
 	inputs = "nothing.txt"
 	out = "Welcome to the Pig Latin Translator!\n"
 	out += "What is the name of the file:\n"
@@ -51,54 +90,73 @@ def main():
 	correct = (out, ['1error'])
 	result = (catchOutput(inputs), pig_latin.read('nothing.txt'))
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test5')
 
+def test6():
+	global total, passed
 	total += 1
-	#B
 	pig_latin.write(["Some message!\nwith 2 lines!\n"])
 	result = pig_latin.read('pig.txt')
 	correct = ["Some message!\n", "with 2 lines!\n"]
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test6')
 
+def test7():
+	global total, passed
 	total += 1
-	#def test_7(self):
-	#A7
 	correct = "appyhay!"
 	result = pig_latin.ay_end("happy!", 1)
 	if result == correct:
-		score += 1
-	
-	#B8
+		passed += 1
+	else:
+		failed.append('test7')
+
+def test8():
+	global total, passed
 	total += 1
 	correct = "eggway,"
 	result = pig_latin.way_end("egg,")
 	if result == correct:
-		score += 1
-	
-	#C9
+		passed += 1
+	else:
+		failed.append('test8')
+
+def test9():
+	global total, passed
 	total += 1
 	correct = '.,!?'
 	result = pig_latin.END
 	if result == correct:
-		score += 1
-	
+		passed += 1
+	else:
+		failed.append('test9')
+
+def test10():
+	global total, passed
 	total += 1
-	#def test_8(self):
-	#A10
 	correct = ["oolschay?\n","oolcay\n"]
 	result = pig_latin.translate(["school?","cool"])
 	if result == correct:
-		score += 1
+		passed += 1
+	else:
+		failed.append('test10')
 
-	#B11
+def test11():
+	global total, passed
 	total += 1
 	correct = ["enigmaway.\n"]
 	result = pig_latin.translate(["enigma."])
 	if result == correct:
-		score += 1
-		
-	#hidden tests
+		passed += 1
+	else:
+		failed.append('test11')
+
+def hidden1():
+	global total, passed
 	total += 3
 	with open("test.txt", 'w') as f:
 		f.write('''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla felis at magna blandit elementum? Vestibulum eu vehicula mauris.
@@ -113,9 +171,14 @@ edsay egetway apiensay ortortay. oinpray egetway iverravay oremlay, odalessay el
 	with open('pig.txt','r') as f:
 		result = f.read()
 	if result == correct:
-		score += 3
-	
-	return f"{score}/{total}"
+		passed += 3
+	else:
+		failed.append('hidden1')
+
+# setup methods
+def catchOutput(inputs=None, seed=''):
+	p = run(f"python3 {file} {seed}", capture_output=True, text=True, shell=True, input=inputs)
+	return p.stdout
 
 if __name__ == "__main__":
-	print(main())
+	main()
