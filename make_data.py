@@ -7,6 +7,37 @@ from dotenv import load_dotenv
 from alive_progress import alive_bar
 from sys import exit
 
+def mark_late():
+	#set assignment
+	tag = validate_assign()
+	#determine class Periods
+	d = shelve.open('data.dat')
+	periods = d['periods']
+	p = d['python']
+	j = d['java']
+	w = d['web']
+	if tag in p:
+		cls = '1030'
+	elif tag in j:
+		cls = '1400'
+	elif tag in w:
+		cls = 'Web Dev'
+	#load students
+	students = d['students']
+	#if student assignment grade is 0 and not already late
+	counter = 0
+	for stu in students:
+		if periods[stu.period-1] == cls :
+			a = stu.assignments[tag]
+			if a.score == 0.0 and not a.late:
+				counter += 1
+				stu.assignments[tag].late = True
+	d['students'] = students
+	d.close()
+	#display counter
+	print(f"{counter} students set to late for {tag}")
+
+
 def get_date():
 	ok = False
 	while not ok:
