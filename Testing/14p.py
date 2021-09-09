@@ -76,6 +76,7 @@ def test2():
 def test3():
 	global total, passed
 	total += 1
+	r = tv_remote.Remote()
 	x = None
 	try:
 		x = r.volume
@@ -89,6 +90,7 @@ def test3():
 def test4():
 	global total, passed
 	total += 1
+	r = tv_remote.Remote()
 	for i in range(6):
 		r.volume_up()
 	result = r.__str__()
@@ -127,7 +129,7 @@ def test6():
 def test7():
 	global total, passed
 	total += 1
-	r = r = tv_remote.Remote()
+	r = tv_remote.Remote()
 	for i in range(10):
 		r.channel_down()
 	result = r.__str__()
@@ -259,6 +261,10 @@ Select an option:
 Goodbye.
 '''
 	result = catchOutput(inputs)
+	with open('r.txt','w') as f:
+		f.write(result)
+	with open('c.txt','w') as f:
+		f.write(correct)
 	if result == correct:
 		passed += 2
 	else:

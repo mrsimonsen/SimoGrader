@@ -2,11 +2,13 @@ from subprocess import run
 from os import getcwd
 import sys
 
+import guess_AI
 #11p
 file = "guess_AI.py"
 passed = 0
 total = 0
 failed = []
+INTRO = "I am a special mind-reading machine and will guess the number you're thinking of between 1 and 100 in 6 tries or less.\nAfter each guess, tell me if I'm 'high', 'low', or 'correct'.\n"
 
 def main():
 	global score, total
@@ -96,7 +98,7 @@ def test6():
 		failed.append('test6')
 
 def test7():
-	global
+	global total, passed
 	total += 1
 	#with self.subTest():C
 	if guess_AI.high_low(1,100,50,'correct',5,True) == (1,100,5,False):
@@ -134,7 +136,7 @@ Goodbye.
 	result = catchOutput(inputs, '32')
 	if result == correct:
 		passed += 2
-		
+
 # setup methods
 def catchOutput(inputs=None, seed=''):
 	p = run(f"python3 {file} {seed}", capture_output=True, text=True, shell=True, input=inputs)
