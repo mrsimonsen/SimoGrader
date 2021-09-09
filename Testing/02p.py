@@ -70,7 +70,7 @@ def test4():
 	total += 1
 	correct = "You crack open your cookie and your fortune falls out:\n"
 	correct += "You will read this and say \"Geez! I could come up with better fortunes than that!\"\n"
-		result = catchOutput(seed = "0")
+	result = catchOutput(seed = "0")
 	if result == correct:
 		passed += 1
 	else:
