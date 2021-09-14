@@ -247,8 +247,7 @@ def select_student():
 				print(f"No students matched \"{search}\"")
 
 
-def drop():
-	stu = select_student()
+def drop(stu):
 	d = shelve.open('data.dat')
 	students = d['students']
 	for i in range(len(students)):
