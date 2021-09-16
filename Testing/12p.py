@@ -46,7 +46,6 @@ def simple():
 	test10()
 	test11()
 	test12()
-	test13()
 	hidden1()
 	print(f"{passed}/{total}")
 
@@ -116,15 +115,27 @@ ______________________________'''
 	if result == correct:
 		passed += 1
 	else:
-		failed.append('test4')
+		failed.append('test3')
 
-def test5():
+def test4():
 	global total, passed
 	total+= 1
 	test_dict = {'Something': 0,
 				 'Pool': 10}
 	correct = "5 added to Something"
 	result = character_creator.add('Something', 5, test_dict)
+	if result == correct:
+		passed += 1
+	else:
+		failed.append('test4')
+
+def test5():
+	global total, passed
+	total += 1
+	test_dict = {'Something': 5,
+				 'Pool': 5}
+	correct = "6 is more points than you have left in your pool"
+	result = character_creator.add('Something', 6, test_dict)
 	if result == correct:
 		passed += 1
 	else:
@@ -135,26 +146,14 @@ def test6():
 	total += 1
 	test_dict = {'Something': 0,
 				 'Pool': 10}
-	correct = "6 is more points than you have left in your pool"
-	result = character_creator.add('Something', 6, test_dict)
+	correct = "'this' is not a valid attribute"
+	result = character_creator.add('this', 1, test_dict)
 	if result == correct:
 		passed += 1
 	else:
 		failed.append('test6')
 
 def test7():
-	global total, passed
-	total += 1
-	test_dict = {'Something': 0,
-				 'Pool': 10}
-	correct = "'this' is not a valid attribute"
-	result = character_creator.add('this', 1, test_dict)
-	if result == correct:
-		passed += 1
-	else:
-		failed.append('test7')
-
-def test8():
 	global total, passed
 	total += 1
 	inputs = "2\nIntelligence\n10\n1\n0\n"
@@ -182,15 +181,27 @@ ______________________________\n'''
 	if result == correct:
 		passed += 1
 	else:
-		failed.append('test8')
+		failed.append('test7')
 
-def test9():
+def test8():
 	global total, passed
 	test_dict = {'Something': 10,
 				 'Pool': 0}
 	total += 1
 	correct = "5 removed from Something"
 	result = character_creator.remove('Something', 5, test_dict)
+	if result == correct:
+		passed += 1
+	else:
+		failed.append('test8')
+
+def test9():
+	global total, passed
+	total += 1
+	test_dict = {'Something': 5,
+				 'Pool': 5}
+	correct = "6 is more points than you have left in Something"
+	result = character_creator.remove('Something', 6, test_dict)
 	if result == correct:
 		passed += 1
 	else:
@@ -201,26 +212,14 @@ def test10():
 	total += 1
 	test_dict = {'Something': 10,
 				 'Pool': 0}
-	correct = "6 is more points than you have left in Something"
-	result = character_creator.remove('Something', 6, test_dict)
+	correct = "'this' is not a valid attribute"
+	result = character_creator.remove('this', 1, test_dict)
 	if result == correct:
 		passed += 1
 	else:
 		failed.append('test10')
 
 def test11():
-	global total, passed
-	total += 1
-	test_dict = {'Something': 10,
-				 'Pool': 0}
-	correct = "'this' is not a valid attribute"
-	result = character_creator.remove('this', 1, test_dict)
-	if result == correct:
-		passed += 1
-	else:
-		failed.append('test11')
-
-def test12():
 	global total, passed
 	total += 1
 	inputs = "2\nWisdom\n15\n3\nWisdom\n5\n1\n0\n"
@@ -253,9 +252,9 @@ ______________________________\n'''
 	if result == correct:
 		passed += 1
 	else:
-		failed.append('test12')
+		failed.append('test11')
 
-def test13():
+def test12():
 	global total, passed
 	total += 1
 	inputs = "2\ncharisma\n1\n3\nstrength\n1\n0\n"
@@ -276,7 +275,7 @@ def test13():
 	if result == correct:
 		passed += 1
 	else:
-		failed.append('test13')
+		failed.append('test12')
 
 def hidden1():
 	global total, passed
