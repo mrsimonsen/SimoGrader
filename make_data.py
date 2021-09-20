@@ -409,7 +409,8 @@ def grade_assignment(tag = None):
 	for stu in students:
 		if stu.course == grading:
 			if grading == "Web Dev":
-				os.system(f"gh repo clone nuames-cs/web-dev-{stu.github} web -- -q")
+				print(f"Cloning {stu.github}")
+				os.system(f"gh repo clone nuames-cs/web-dev-{stu.github} web/{stu.github} -- -q")
 				continue
 			a = stu.assignments[tag]
 			if a.score < 5 and a.late:
