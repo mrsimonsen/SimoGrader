@@ -146,9 +146,10 @@ def validate_assign():
 	with shelve.open('data.dat') as d:
 		assign += d['java']
 		assign += d['python']
-		assign += d['web']
+		assign += ['web']
 		assign.append('done')
 	a = ''
+	print(assign)
 	while a not in assign:
 		a = input("Enter an assignment tag:\n").lower()
 	return a
@@ -408,7 +409,8 @@ def grade_assignment(tag = None):
 	for stu in students:
 		if stu.course == grading:
 			if grading == "Web Dev":
-				break
+				os.system(f"gh repo clone nuames-cs/web-dev-{stu.github} web -- -q")
+				continue
 			a = stu.assignments[tag]
 			if a.score < 5 and a.late:
 				print(f"Grading {stu.name} - late")
