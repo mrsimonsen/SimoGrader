@@ -248,30 +248,34 @@ def select_student():
 				print(f"No students matched \"{search}\"")
 
 
-def drop(stu):
+def drop():
 	d = shelve.open('data.dat')
 	students = d['students']
-	for i in range(len(students)):
-		if students[i].name == stu.name:
-			students.pop(i)
-			break
-	d['students'] = students
 	d.close()
-	f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
-	raw = csv.reader(f, delimiter= ',', quotechar = '"')
-	new = []
-	for row in raw:
-		name = f"{row[2]}, {row[1]}"
-		if name != stu.name:
-			new.append(row)
-		else:
-			print(f"{stu.name} dropped")
-	f.close()
-	a = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'w',newline='')
-	w = csv.writer(a, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
-	for row in new:
-		w.writerow(row)
-	a.close()
+	stu = select_student()
+	if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
+		for i in range(len(students)):
+			if students[i].name == stu.name:
+				students.pop(i)
+				break
+		d = shelve.open('data.dat')
+		d['students'] = students
+		d.close()
+		f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
+		raw = csv.reader(f, delimiter= ',', quotechar = '"')
+		new = []
+		for row in raw:
+			name = f"{row[2]}, {row[1]}"
+			if name != stu.name:
+				new.append(row)
+			else:
+				print(f"{stu.name} dropped")
+		f.close()
+		a = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'w',newline='')
+		w = csv.writer(a, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
+		for row in new:
+			w.writerow(row)
+		a.close()
 
 def run_python(simple):
 	try:
@@ -332,10 +336,8 @@ def mod_student():
 		print("1 - Change name")
 		print("2 - Change github username")
 		print("3 - Change class period")
-		print("4 - Drop student")
-		print("5 - Add a student")
 		choice = -1
-		while choice not in range(6):
+		while choice not in range(4):
 			choice = validate_num("What would you like to change?")
 		if choice == 1:
 			print(f"Changing {stu.name} name:")
@@ -346,15 +348,6 @@ def mod_student():
 		elif choice == 3:
 			print(f"Changing {stu.name} period:")
 			stu.period = change(f"Enter a new period for {stu.name}:",stu.period, True)
-		elif choice == 4:
-			print(f"Drop {stu.name}")
-			if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
-				drop(stu)
-				choice = 0
-		elif choice == 5:
-				students.append(create())
-				students.sort(key=fsort)
-				choice = 0
 		elif choice == 0:
 			d = shelve.open('data.dat')
 			students = d['students']
@@ -373,8 +366,10 @@ def fsort(obj):
 def create():
 	print("Adding a student to the roster.")
 	correct = 'n'
-	with shelve.open('data.dat') as d:
-		periods = d['periods']
+	d =  shelve.open('data.dat')
+	periods = d['periods']
+	students = d['students']
+	d.close()
 	while correct == 'n':
 		fname = input("What is the student's first name?\n").title()
 		lname = input("What is the student's last name?\n").title()
@@ -387,10 +382,14 @@ def create():
 		correct = ask_yn("Is this information correct?")
 	#make the student
 	new = Student(f"{lname}, {fname}", period, git)
-	print("student created")
+	print("...student created")
 	new.add_assignments()
-	print("assignments created")
-	return new
+	print("...assignments created")
+	students.append(new)
+	students.sort(key=fsort)
+	d = shelve.open('data.dat')
+	d['students'] = students
+	print("Student created and added to database. Data Saved.")
 
 def mod_assign():
 	stu = select_student()
