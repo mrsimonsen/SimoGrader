@@ -35,6 +35,8 @@ def class_menu():
 		print("0 - Return to Main Menu")
 		print("1 - View Classes")
 		print("2 - Set Classes")
+		print("3 - Drop Student")
+		print("4 - Add Student")
 		a = input("What's your selection?\n")
 
 		if a == '0':
@@ -43,6 +45,10 @@ def class_menu():
 			display_classes()
 		elif a == '2':
 			set_periods()
+		elif a == '3':
+			drop()
+		elif a == '4':
+			create()
 		else:
 			print("That's not a valid menu option.")
 
