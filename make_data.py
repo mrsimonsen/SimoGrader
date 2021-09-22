@@ -234,7 +234,7 @@ def select_student():
 		for i in students:
 			if search.lower() in i.name.lower():
 				results.append(i)
-		if len(results):
+		if len(results)>1:
 			print("0 - Quit")
 			for i in range(len(results)):
 				print(f"{i+1} - {results[i].name}")
@@ -243,6 +243,8 @@ def select_student():
 				return results[n]
 			else:
 				return None
+		elif len(results)==1:
+			return results[0]
 		else:
 			if search != '0':
 				print(f"No students matched \"{search}\"")
