@@ -333,8 +333,9 @@ def mod_student():
 		print("2 - Change github username")
 		print("3 - Change class period")
 		print("4 - Drop student")
+		print("5 - Add a student")
 		choice = -1
-		while choice not in (0,1,2,3,4):
+		while choice not in range(6):
 			choice = validate_num("What would you like to change?")
 		if choice == 1:
 			print(f"Changing {stu.name} name:")
@@ -350,6 +351,10 @@ def mod_student():
 			if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
 				drop(stu)
 				choice = 0
+		elif choice == 5:
+				students.append(create())
+				students.sort(key=fsort)
+				choice = 0
 		elif choice == 0:
 			d = shelve.open('data.dat')
 			students = d['students']
@@ -360,6 +365,32 @@ def mod_student():
 			d['students'] = students
 			d.close()
 			print('Data saved')
+
+#function to use as a sorting key in choice 5 of mod_student
+def fsort(obj):
+	return obj.name
+
+def create():
+	print("Adding a student to the roster.")
+	correct = 'n'
+	with shelve.open('data.dat') as d:
+		periods = d['periods']
+	while correct == 'n':
+		fname = input("What is the student's first name?\n").title()
+		lname = input("What is the student's last name?\n").title()
+		period = int(input("What class period is the student in?\n"))
+		course = periods[period-1]
+		git = input("What is the student's GitHub username?\n")
+		print(f"Student: {lname}, {fname}")
+		print(f"Period: {period} - {course}")
+		print(f"GitHub username: {git}")
+		correct = ask_yn("Is this information correct?")
+	#make the student
+	new = Student(f"{lname}, {fname}", period, git)
+	print("student created")
+	new.add_assignments()
+	print("assignments created")
+	return new
 
 def mod_assign():
 	stu = select_student()
