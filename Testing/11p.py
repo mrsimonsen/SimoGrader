@@ -136,6 +136,8 @@ Goodbye.
 	result = catchOutput(inputs, '32')
 	if result == correct:
 		passed += 2
+	else:
+		failed.append('hidden1')
 
 # setup methods
 def catchOutput(inputs=None, seed=''):
