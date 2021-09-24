@@ -15,8 +15,7 @@ Made for Ubuntu for Windows
 * sudo apt install python3-pip default-jdk
 * pip3 install pygithub python-dotenv alive-progress
 * [install GitHub CLI](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
-	* use ssh
-* Setup a new [SSH key](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh) and link to account 
+	* use https
 ##TOC
 
 ## Notes
