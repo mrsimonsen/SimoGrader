@@ -313,7 +313,7 @@ def run_java(simple):
 		score = None
 	return score
 
-def grade(stu,tag, simple = True):
+def grade(stu, tag, simple = True):
 	os.system(f"gh repo clone {stu.clone(tag)} student -- -q")
 	if os.path.isdir('student'):
 		print("Testing...")
@@ -462,6 +462,37 @@ def grade_assignment(tag = None):
 	d['students'] = students
 	d.close()
 	print("finished")
+
+def grade_all():
+	stu = select_student()
+	d = shelve.open('data.dat')
+	students = d['students']
+	periods = d['periods']
+	if periods[stu.period-1] == '1030':
+		tags = d['python']
+		d.close()
+	elif periods[stu.period-1] == '1400':
+		tags = d['java']
+		d.close()
+	else:
+		print('not a grade-able period')
+		d.close()
+		return
+	for tag in tags:
+		print(f"Grading {tag}")
+		grade(stu, tag)
+	d = shelve.open('data.dat')
+	students = d['students']
+	for i in range(len(students)):
+		if students[i].name == stu.name:
+			students[i] = stu
+			break
+	d['students'] = students
+	d.close()
+	print("Data saved")
+	print(f"{stu.name} Assignments")
+	print(stu.print_assignments())
+
 
 def grade_student():
 	stu = select_student()
