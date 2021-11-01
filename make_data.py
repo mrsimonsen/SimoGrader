@@ -255,6 +255,7 @@ def drop():
 	students = d['students']
 	d.close()
 	stu = select_student()
+	print(f"Dropping {stu.name.upper()}, {stu.period}")
 	if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
 		for i in range(len(students)):
 			if students[i].name == stu.name:
@@ -278,6 +279,8 @@ def drop():
 		for row in new:
 			w.writerow(row)
 		a.close()
+	else:
+		print("Drop Aborted")
 
 def run_python(simple):
 	try:
