@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Random;
-import java.util.Arrays;
 
-// 21j
+// 16j
 public class Tests {
-	static Yahtzee student = new Yahtzee();
+	static ShoppingCartManager student = new ShoppingCartManager();
 	private static ByteArrayOutputStream TOut;
 	private static ByteArrayInputStream TIn;
 	private static final PrintStream SOut = System.out;
@@ -60,13 +57,14 @@ public class Tests {
 		System.out.printf("%d/%d\n",passed,total);
 	}
 
+
 	public static void test1(){
 		total++;
-		int correct = 4;
-		String input = "30 4";
-		int result = student.holding(new Scanner(input));
-		if (result == correct){
-			score++;
+		ItemToPurchase item = new ItemToPurchase("Bottled Water", "Deer Park, 12 oz.", 1, 10);
+		if(item.getName()=="Bottled Water"&&
+		item.getDescription()=="Deer Park, 12 oz."&&
+		item.getPrice()==1&&item.getQuantity()==10){
+			passed++;
 		}
 		else{
 			failed.add("test1");
@@ -75,11 +73,12 @@ public class Tests {
 
 	public static void test2(){
 		total++;
-		int correct = 0;
-		String input = "0";
-		int result = student.holding(new Scanner(input));
-		if (result == correct){
-			score++;
+		String correct = "Volt color, Weightlifting shoes";
+		ItemtoPurchase item = new ItemToPurchase();
+		item.setDescription(correct);
+		String result = item.getDescription();
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test2");
@@ -88,12 +87,10 @@ public class Tests {
 
 	public static void test3(){
 		total++;
-		int[] correct = {1,2,3,4,5};
-		String input = " 14 1 ";
-		int[] start = {1,2,3,4,5};
-		int[] result = student.rerollDice(start,new Scanner(input),new Random(0),4);
-		if (Arrays.equals(result, correct)){
-			score++;
+		ShoppingCart cart = new ShoppingCart();
+		if(cart.getCustomerName()=="none"&&
+		cart.getDate().equals("January 1, 2016")){
+			passed++;
 		}
 		else{
 			failed.add("test3");
@@ -102,12 +99,10 @@ public class Tests {
 
 	public static void test4(){
 		total++;
-		int[] correct = {6,2,1,4,6};
-		String input = " 14 1 3 5 ";
-		int[] start = {1,2,3,4,5};
-		int[] result = student.rerollDice(start,new Scanner(input),new Random(25),2);
-		if (Arrays.equals(result, correct)){
-			score++;
+		ShoppingCart cart = new ShoppingCart("John Doe", "February 1, 2016");
+		if(cart.getCustomerName()=="John Doe"&&
+		cart.getDate().equals("February 1, 2016")){
+			passed++;
 		}
 		else{
 			failed.add("test4");
@@ -116,12 +111,15 @@ public class Tests {
 
 	public static void test5(){
 		total++;
-		String correct = "1 2 3 4 5";
-		String correctSpace = "1 2 3 4 5 ";
-		int[] dice  = {1,2,3,4,5};
-		String result = student.printDice(dice);
-		if (result.equals(correct)||result.equals(correctSpace)){
-			score++;
+		int correct = 6;
+		ShoppingCart cart = new ShoppingCart();
+		ItemToPurchase item = new ItemToPurchase("none", "none", 1, 1);
+		for(int i=0; i<6;i++){
+			cart.addItem(item);
+		}
+		int result = cart.getNumItemsInCart();
+		if (result == correct){
+			passed++;
 		}
 		else{
 			failed.add("test5");
@@ -130,12 +128,15 @@ public class Tests {
 
 	public static void test6(){
 		total++;
-		String correct = "5 4 3 2 1";
-		String correctSpace = "5 4 3 2 1 ";
-		int[] dice = {5,4,3,2,1};
-		String result = student.printDice(dice);
-		if (result.equals(correct)||result.equals(correctSpace)){
-			score++;
+		int correct = 9;
+		ShoppingCart cart = new ShoppingCart();
+		ItemToPurchase item1 = new ItemToPurchase("none", "none", 2, 4);
+		ItemToPurchase item2 = new ItemToPurchase("none", "none", 1, 1);
+		cart.addItem(item1);
+		cart.addItem(item2);
+		int result = cart.getCostOfCart();
+		if (result == correct){
+			passed++;
 		}
 		else{
 			failed.add("test6");
@@ -144,24 +145,25 @@ public class Tests {
 
 	public static void test7(){
 		total++;
-		int[] correct = {2,0,1,0,1,1};
-		int[] dice = {1,1,3,5,6};
-		int[] result = student.kinds(dice);
-		if (Arrays.equals(result, correct)){
-			score++;
+		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\nq\n")
+		result = result.substring(0,correct.length());
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test7");
 		}
 	}
 
-	public static void test8(){
+	public static void test8{
 		total++;
-		int[] correct = {0,1,1,2,0,1};
-		int[] dice = {2,3,4,4,6};
-		int[] result = student.kinds(dice);
-		if (Arrays.equals(result, correct)){
-			score++;
+		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\nChoose an option:\nChoose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\nf\ns\nq\n");
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test8");
@@ -170,19 +172,15 @@ public class Tests {
 
 	public static void test9(){
 		total++;
-		String correct = "Yahtzee";
-		//6 possible Yahtzees
-		int[][] dice = {{4,4,4,4,4},{6,6,6,6,6},{5,5,5,5,5},{3,3,3,3,3},{2,2,2,2,2},{1,1,1,1,1}};
-		String[] correctArray = new String[6];
-		for (int i = 0; i<6; i++){
-			correctArray[i] = correct;
-		}
-		String[] resultArray = new String[6];
-		for (int i = 0; i < 6; i++){
-			resultArray[i] = student.printScore(dice[i]);
-		}
-		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 0\n\nSHOPPING CART IS EMPTY\n\nTotal: $0\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\no\nq\n");
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test9");
@@ -191,19 +189,18 @@ public class Tests {
 
 	public static void test10(){
 		total++;
-		String correct = "Large Straight";
-		//2 possible Large Straights
-		int[][] dice = {{4,5,6,3,2},{5,2,4,1,3}};
-		String[] correctArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			correctArray[i] = correct;
-		}
-		String[] resultArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			resultArray[i] = student.printScore(dice[i]);
-		}
-		if (Arrays.equals(correctArray, resultArray)){
-			score++;
+		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 2\n\nNike Romaleos 2 @ $189 = $378\n\nTotal: $378\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\no\nq\n");
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test10");
@@ -212,23 +209,19 @@ public class Tests {
 
 	public static void test11(){
 		total++;
-		String correct = "Small Straight";
-		//14 possible Small Straights
-		int[][] dice = {
-		{1,2,3,4,6},{1,2,3,4,1},{1,2,3,4,2},{1,2,3,4,3},{1,2,3,4,4},
-		{2,3,4,5,2},{2,3,4,5,3},{2,3,4,5,4},{2,3,4,5,5},
-		{3,4,5,6,6},{3,4,5,6,1},{3,4,5,6,3},{3,4,5,6,4},{3,4,5,6,5}
-		};
-		String[] correct Array = new String[14];
-		for (int i = 0; i < 14; i++){
-			correctArray[i] = correct;
-		}
-		String[] resultArray = new String[14];
-		for (int i = 0; i < 14; i++){
-			resultArray[i] = student.printScore(dice[i]);
-		}
-		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+		setInput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\nd\nSpectre DVD\nq\n");
+		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "REMOVE ITEM FROM CART\nEnter name of item to remove:\nItem not found in cart. Nothing removed.\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\nd\nSpectre DVD\nq\n");
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test11");
@@ -237,57 +230,57 @@ public class Tests {
 
 	public static void test12(){
 		total++;
-		String correct = "Four of a Kind";
-		//testing 2 of the possible 4 o' Kinds
-		int[][] dice = {{4,4,3,4,4},{3,3,3,5,3}};
-		String[] correctArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			correctArray[i] = correct;
+		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "REMOVE ITEM FROM CART\nEnter name of item to remove:\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 3\n\nNike Romaleos 2 @ $189 = $378\nPowerbeats 2 Headphones 1 @ $128 = $128\n\nTotal: $506\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nd\nChocola    te Chips\no\nq\n");
+		if (result.equals(correct)){
+			passed++;
 		}
-		String[] resultArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			resultArray[i] = student.printScore(dice[i]);
+		else{
+			failed.add("test12");
 		}
-		if (Arrays.equals(correctArray,resultArray)){
-			score++;
-		}
+	}
 
 	public static void test13(){
 		total++;
-		String correct = "Full House";
-		//testing 3 of the possible full houses
-		int[][] dice = {{2,2,3,3,3},{4,4,4,6,6},{1,4,1,4,1}};
-		String[] correctArray = new String[3];
-		for (int i = 0; i < 3; i++){
-			correctArray[i] = correct;
+		String correct = "CHANGE ITEM QUANTITY\nEnter the item name:\nEnter the new quantity:\nItem not found in cart. Nothing modified.\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nThe    rmos Stainless Steel King\n5\nq\n");
+		result = result.substring(result.length()-correct.length(),result.length());
+		if (result.equals(correct)){
+			passed++;
 		}
-		String[] resultArray = new String[3];
-		for (int i = 0; i < 3; i++){
-			resultArray[i] = student.printScore(dice[i]);
-		}
-		if (Arrays.equals(correctArray,resultArray)){
-			score++;
-		}
-		else{	
+		else{
 			failed.add("test13");
 		}
 	}
 
 	public static void test14(){
 		total++;
-		String correct = "Three of a Kind";
-		//testing 2 of the possible 3 o' kinds
-		int[][] dice = {{4,4,4,1,2},{1,3,5,3,3}};
-		String[] correctArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			correctArary[i] = correct;
-		}
-		String[] resultArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			resultArray[i] = student.printScore(dice[i]);
-		}
-		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+		String correct = "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 9\n\nNike Romaleos 3 @ $189 = $567\nChocolate Chips 5 @ $3 = $15\nPowerbeats 2 Headphones 1 @ $128 = $128\n\nTotal: $710\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nNike Ro    maleos\n3\no\nq\n");
+		result = result.substring(result.length()-correct.length(),result.length());
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test14");
@@ -296,25 +289,20 @@ public class Tests {
 
 	public static void test15(){
 		total++;
-		String correct = "You did not score anything noteworthy.";
-		//testing 2 of the possible no score
-		int[][] dice = {{1,1,4,5,3},{6,5,3,5,6}};
-		String[] correctArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			correctArray[i] = correct;
-		}
-		String[] resultArray = new String[2];
-		for (int i = 0; i < 2; i++){
-			resultArray[i] = student.printScore(dice[i]);
-		}
-		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+		String correct = "OUTPUT ITEMS' DESCRIPTIONS\nJohn Doe's Shopping Cart - February 1, 2016\n\nItem Descriptions\nNike Romaleos: Volt color, Weightlifting shoes\nChocolate Chips: Semi-sweet\nPowerbeats 2 Headphones: Bluetooth headphones\n\n";
+		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
+		correct += "Choose an option:\n";
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\ni\nq\n    ");
+		result = result.substring(result.length()-correct.length(),result.length());
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test15");
 		}
 	}
-	//no hidden tests
+
+	//no hidden tests for 16
 
 	//Set up methods
 	 public static void setOutput(){

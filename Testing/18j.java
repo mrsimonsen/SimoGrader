@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
-// 18j
+// 17j
 public class Tests {
-	static ParseStrings student = new ParseStrings();
+	static BinConverter student = new BinConverter();
 	private static ByteArrayOutputStream TOut;
 	private static ByteArrayInputStream TIn;
 	private static final PrintStream SOut = System.out;
@@ -49,9 +49,8 @@ public class Tests {
 
 	public static void test1(){
 		total++;
-		String correct = "Enter input string:\n";
-		String result = getOutput("John, Simonsen\nq\n")
-		result = result.substring(0,correct.length());
+		String correct = "1110";
+		String result = student.convert(14);
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -62,9 +61,8 @@ public class Tests {
 
 	public static void test2(){
 		total++;
-		String correct = "Enter input string:\nError: No comma in string.\n\nEnter input string:\nError: No comma in string.\n\nEnter input string:\nError: No comma in string.\n\nEnter input string:\n";
-		String result = getOutput("John Simonsen\nJohnSimonsen\nJohn  Simonsen\nq\n")
-		result = result.substring(0,correct.length());
+		String correct = "1111 1111";
+		String result = student.convert(255);
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -75,8 +73,8 @@ public class Tests {
 
 	public static void test3(){
 		total++;
-		String correct = "Enter input string:\nFirst word: John\nSecond word: Simonsen\n";
-		String result = getOutput("John, Simonsen\nq\n").substring(0,correct.length());
+		String correct = "0110 1101";
+		String result = student.convert(109);
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -87,11 +85,8 @@ public class Tests {
 
 	public static void test4(){
 		total++;
-		String correct = "Enter input string:\nFirst word: John\nSecond word: Simonsen\n\n";
-		correct += "Enter input string:\nFirst word: Luke\nSecond word: Skywalker\n\n";
-		correct += "Enter input string:\nFirst word: Layton\nSecond word: UT\n\n";
-		correct += "Enter input string:\n";
-		String result = getOutput("John, Simonsen\nLuke , Skywalker\nLayton,UT\nq\n");
+		String correct = "1011 1011 1000";
+		String result = student.convert(3000);
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -102,11 +97,8 @@ public class Tests {
 
 	public static void hidden1(){
 		total++;
-		String correct = "Enter input string:\nFirst word: Leia\nSecond word: Organa\n\n";
-		correct += "Enter input string:\nFirst word: Darth\nSecond word: Vader\n\n";
-		correct += "Enter input string:\nFirst word: Death\nSecond word: Star\n\n";
-		correct += "Enter input string:\n";
-		String result = getOutput("Leia , Organa\nDarth,Vader\nDeath, Star\nq\n");
+		String correct = "1101 0101";
+		String result = student.convert(213);
 		if (result.equals(correct)){
 			passed++;
 		}

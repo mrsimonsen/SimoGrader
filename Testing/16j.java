@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
-// 16j
+// 18j
 public class Tests {
-	static ShoppingCartManager student = new ShoppingCartManager();
+	static ParseStrings student = new ParseStrings();
 	private static ByteArrayOutputStream TOut;
 	private static ByteArrayInputStream TIn;
 	private static final PrintStream SOut = System.out;
@@ -43,27 +43,16 @@ public class Tests {
 		test2();
 		test3();
 		test4();
-		test5();
-		test6();
-		test7();
-		test8();
-		test9();
-		test10();
-		test11();
-		test12();
-		test13();
-		test14();
-		test15();
+		hidden1();
 		System.out.printf("%d/%d\n",passed,total);
 	}
 
-
 	public static void test1(){
 		total++;
-		ItemToPurchase item = new ItemToPurchase("Bottled Water", "Deer Park, 12 oz.", 1, 10);
-		if(item.getName()=="Bottled Water"&&
-		item.getDescription()=="Deer Park, 12 oz."&&
-		item.getPrice()==1&&item.getQuantity()==10){
+		String correct = "Enter input string:\n";
+		String result = getOutput("John, Simonsen\nq\n")
+		result = result.substring(0,correct.length());
+		if (result.equals(correct)){
 			passed++;
 		}
 		else{
@@ -73,10 +62,9 @@ public class Tests {
 
 	public static void test2(){
 		total++;
-		String correct = "Volt color, Weightlifting shoes";
-		ItemtoPurchase item = new ItemToPurchase();
-		item.setDescription(correct);
-		String result = item.getDescription();
+		String correct = "Enter input string:\nError: No comma in string.\n\nEnter input string:\nError: No comma in string.\n\nEnter input string:\nError: No comma in string.\n\nEnter input string:\n";
+		String result = getOutput("John Simonsen\nJohnSimonsen\nJohn  Simonsen\nq\n")
+		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -87,9 +75,9 @@ public class Tests {
 
 	public static void test3(){
 		total++;
-		ShoppingCart cart = new ShoppingCart();
-		if(cart.getCustomerName()=="none"&&
-		cart.getDate().equals("January 1, 2016")){
+		String correct = "Enter input string:\nFirst word: John\nSecond word: Simonsen\n";
+		String result = getOutput("John, Simonsen\nq\n").substring(0,correct.length());
+		if (result.equals(correct)){
 			passed++;
 		}
 		else{
@@ -99,9 +87,12 @@ public class Tests {
 
 	public static void test4(){
 		total++;
-		ShoppingCart cart = new ShoppingCart("John Doe", "February 1, 2016");
-		if(cart.getCustomerName()=="John Doe"&&
-		cart.getDate().equals("February 1, 2016")){
+		String correct = "Enter input string:\nFirst word: John\nSecond word: Simonsen\n\n";
+		correct += "Enter input string:\nFirst word: Luke\nSecond word: Skywalker\n\n";
+		correct += "Enter input string:\nFirst word: Layton\nSecond word: UT\n\n";
+		correct += "Enter input string:\n";
+		String result = getOutput("John, Simonsen\nLuke , Skywalker\nLayton,UT\nq\n");
+		if (result.equals(correct)){
 			passed++;
 		}
 		else{
@@ -109,200 +100,20 @@ public class Tests {
 		}
 	}
 
-	public static void test5(){
+	public static void hidden1(){
 		total++;
-		int correct = 6;
-		ShoppingCart cart = new ShoppingCart();
-		ItemToPurchase item = new ItemToPurchase("none", "none", 1, 1);
-		for(int i=0; i<6;i++){
-			cart.addItem(item);
-		}
-		int result = cart.getNumItemsInCart();
-		if (result == correct){
-			passed++;
-		}
-		else{
-			failed.add("test5");
-		}
-	}
-
-	public static void test6(){
-		total++;
-		int correct = 9;
-		ShoppingCart cart = new ShoppingCart();
-		ItemToPurchase item1 = new ItemToPurchase("none", "none", 2, 4);
-		ItemToPurchase item2 = new ItemToPurchase("none", "none", 1, 1);
-		cart.addItem(item1);
-		cart.addItem(item2);
-		int result = cart.getCostOfCart();
-		if (result == correct){
-			passed++;
-		}
-		else{
-			failed.add("test6");
-		}
-	}
-
-	public static void test7(){
-		total++;
-		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\nq\n")
-		result = result.substring(0,correct.length());
+		String correct = "Enter input string:\nFirst word: Leia\nSecond word: Organa\n\n";
+		correct += "Enter input string:\nFirst word: Darth\nSecond word: Vader\n\n";
+		correct += "Enter input string:\nFirst word: Death\nSecond word: Star\n\n";
+		correct += "Enter input string:\n";
+		String result = getOutput("Leia , Organa\nDarth,Vader\nDeath, Star\nq\n");
 		if (result.equals(correct)){
 			passed++;
 		}
 		else{
-			failed.add("test7");
+			failed.add("hidden1");
 		}
 	}
-
-	public static void test8{
-		total++;
-		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\nChoose an option:\nChoose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\nf\ns\nq\n");
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test8");
-		}
-	}
-
-	public static void test9(){
-		total++;
-		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 0\n\nSHOPPING CART IS EMPTY\n\nTotal: $0\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\no\nq\n");
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test9");
-		}
-	}
-
-	public static void test10(){
-		total++;
-		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 2\n\nNike Romaleos 2 @ $189 = $378\n\nTotal: $378\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\no\nq\n");
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test10");
-		}
-	}
-
-	public static void test11(){
-		total++;
-		setInput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\nd\nSpectre DVD\nq\n");
-		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "REMOVE ITEM FROM CART\nEnter name of item to remove:\nItem not found in cart. Nothing removed.\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\nd\nSpectre DVD\nq\n");
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test11");
-		}
-	}
-
-	public static void test12(){
-		total++;
-		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "ADD ITEM TO CART\nEnter the item name:\nEnter the item description:\nEnter the item price:\nEnter the item quantity:\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "REMOVE ITEM FROM CART\nEnter name of item to remove:\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 3\n\nNike Romaleos 2 @ $189 = $378\nPowerbeats 2 Headphones 1 @ $128 = $128\n\nTotal: $506\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nd\nChocola    te Chips\no\nq\n");
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test12");
-		}
-	}
-
-	public static void test13(){
-		total++;
-		String correct = "CHANGE ITEM QUANTITY\nEnter the item name:\nEnter the new quantity:\nItem not found in cart. Nothing modified.\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nThe    rmos Stainless Steel King\n5\nq\n");
-		result = result.substring(result.length()-correct.length(),result.length());
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test13");
-		}
-	}
-
-	public static void test14(){
-		total++;
-		String correct = "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 9\n\nNike Romaleos 3 @ $189 = $567\nChocolate Chips 5 @ $3 = $15\nPowerbeats 2 Headphones 1 @ $128 = $128\n\nTotal: $710\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nNike Ro    maleos\n3\no\nq\n");
-		result = result.substring(result.length()-correct.length(),result.length());
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test14");
-		}
-	}
-
-	public static void test15(){
-		total++;
-		String correct = "OUTPUT ITEMS' DESCRIPTIONS\nJohn Doe's Shopping Cart - February 1, 2016\n\nItem Descriptions\nNike Romaleos: Volt color, Weightlifting shoes\nChocolate Chips: Semi-sweet\nPowerbeats 2 Headphones: Bluetooth headphones\n\n";
-		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
-		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\ni\nq\n    ");
-		result = result.substring(result.length()-correct.length(),result.length());
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("test15");
-		}
-	}
-
-	//no hidden tests for 16
 
 	//Set up methods
 	 public static void setOutput(){
