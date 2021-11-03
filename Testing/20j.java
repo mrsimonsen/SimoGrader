@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Scanner;
 
-// 20j
+// 15j
 public class Tests {
-	static CaesarCipher student = new CaesarCipher();
+	static ShoppingCartPrinter student = new ShoppingCartPrinter();
 	private static ByteArrayOutputStream TOut;
 	private static ByteArrayInputStream TIn;
 	private static final PrintStream SOut = System.out;
@@ -45,15 +43,19 @@ public class Tests {
 		test2();
 		test3();
 		test4();
+		test5();
+		hidden1();
 		System.out.printf("%d/%d\n",passed,total);
 	}
 
 	public static void test1(){
 		total++;
-		int[] result = Support.letterDistr("Holy letters Batman, this is a string.");
-		int[] correct = {3,1,0,0,2,0,1,2,3,0,0,2,1,2,1,0,0,2,4,5,0,0,0,0,1,0};
-		if (Arrays.equals(result,correct)){
-			score++;
+		String correct = "Chocolate Chips";
+		ItemToPurchase item = new ItemToPurchase();
+		item.setName("Chocolate Chips");
+		String result = item.getName();
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test1");
@@ -62,10 +64,12 @@ public class Tests {
 
 	public static void test2(){
 		total++;
-		String result = Support.encrypt("This is my message.", 14);
-		String correct = "Hvwg wg am asggous.";
-		if (result.equals(correct)){
-			score++;
+		int correct = 3;
+		item = new ItemToPurchase();
+		item.setPrice(3);
+		int result = item.getPrice();
+		if (result == correct){
+			passed++;
 		}
 		else{
 			failed.add("test2");
@@ -74,10 +78,12 @@ public class Tests {
 
 	public static void test3(){
 		total++;
-		String result = Support.decrypt("Hvwg wg am asggous.", 14);
-		String correct = "This is my message.";
-		if (result.equals(correct)){
-			score++;
+		int correct = 4;
+		item = new ItemToPurchase();
+		item.setQuantity(4);
+		int result = item.getQuantity();
+		if (result == correct){
+			passed++;
 		}
 		else{
 			failed.add("test3");
@@ -86,43 +92,49 @@ public class Tests {
 
 	public static void test4(){
 		total++;
-		Scanner sinput = null;
-		String fname = "secret.txt";
-		String rout = "result";
-		String cout = "correct";
-		try{
-			sinput = ReadWrite.open_file(fname,sinput);
-			Scanner cinput = new Scanner(new File(fname));
-			rout = sinput.nextLine();
-			cout = cinput.nextLine();
-			sinput.close();
-			cinput.close();
-		}
-		catch (FileNotFoundException e){
-			System.out.println(e);
-		}
-		if (rout.equals(cout)){
-			score++;
+		String correct = "Item 1\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n";
+		correct += "\nItem 2\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n";
+		String result = getOutput("Chocolate Chips\n3\n1\nBottled Water\n1\n10\n");
+		result = result.substring(0,correct.length());
+		if (result.equals(correct)){
+			passed++;
 		}
 		else{
 			failed.add("test4");
 		}
 	}
-/*
-    //hidden test
-    total++;
-    setOutput();
-    String[] args = {};
-    student.main(args);
-    setInput("4\ntest.txt\n2n\n5\ny\ntext.txt\nn\n0\n");//this sequence does not work.
-    correct = "a:   2|**\nb:   1|*\nc:   0|\nd:   2|**\ne:   5|*****\nf:   2|**\ng:   1|*\nh:   1|*\ni:   2|**\nj:   0|\nk:   0|\nl:   2|**\nm:   0|\nn:   0|\no:   6|******\np:   0|\nq:   0|\nr:   3|***\ns:   1|*\nt:   2|**\nu:   2|**\nv:   0|\nw:   1|*\nx:   0|\ny:   2|**\nz:   0|\nWould you like to see the menu again?: \nWhat is your choice?: \nThank you for using the utility and goodbye~\n";
-    result = getOutput();
-    result = result.substring(result.length()-correct.length(),result.length());
-    restoreSystem();
-    if (result.equals(correct)){
-      score++;
-    }
-*/
+
+	public static void test5(){
+		total++;
+		String correct = "Item 1\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n";
+		correct += "\nItem 2\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n";
+		correct += "\nTOTAL COST\nChocolate Chips 1 @ $3 = $3\n";
+		correct += "Bottled Water 10 @ $1 = $10\n";
+		correct += "\nTotal: $13\n";
+		String result = getOutput("Chocolate Chips\n3\n1\nBottled Water\n1\n10\n");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("test5");
+		}
+	}
+
+	public static void hidden1(){
+		total++;
+		String correct = "Item 1\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n";
+		correct += "\nItem 2\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n";
+		correct += "\nTOTAL COST\nImperal Logo Sticker 2 @ $20 = $40\n";
+		correct += "R2-D2 Bust 3 @ $31 = $93\n";
+		correct += "\nTotal: $133\n";
+		String result = getOutput("Imperal Logo Sticker\n20\n2\nR2-D2 Bust\n31\n3\n");
+		if (result.equals(correct)){
+			passed++;
+		}
+		else{
+			failed.add("hidden1");
+		}
+	}
 
 	//Set up methods
 	 public static void setOutput(){
