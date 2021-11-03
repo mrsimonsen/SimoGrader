@@ -22,10 +22,10 @@ class Assignment():
 			self._score = new
 
 	def set_score(self, result):
-		if result:
+		try:
 			points, total = result.split("/")
 			score = round(int(points)/int(total)*10,2)
-		else:#something went wrong, no score
+		except:#something went wrong, no score
 			score = 0
 		self.score = score
 
@@ -34,4 +34,3 @@ class Assignment():
 		self.late = not self.late
 		if self.score > 5:
 			self.score = 5.0
-		
