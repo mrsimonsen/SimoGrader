@@ -261,10 +261,6 @@ Select an option:
 Goodbye.
 '''
 	result = catchOutput(inputs)
-	with open('r.txt','w') as f:
-		f.write(result)
-	with open('c.txt','w') as f:
-		f.write(correct)
 	if result == correct:
 		passed += 2
 	else:
