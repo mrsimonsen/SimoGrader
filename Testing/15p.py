@@ -129,10 +129,13 @@ def test9():
 	global total, passed
 	total += 1
 	correct = '.,!?'
-	result = pig_latin.END
-	if result == correct:
-		passed += 1
-	else:
+	try:
+		result = pig_latin.END
+		if result == correct:
+			passed += 1
+		else:
+			failed.append('test9')
+	except:
 		failed.append('test9')
 
 def test10():
