@@ -87,8 +87,12 @@ def test5():
 	out = "Welcome to the Pig Latin Translator!\n"
 	out += "What is the name of the file:\n"
 	out += "Message stored in 'pig.txt'\n"
-	correct = (out, ['1error'])
-	result = (catchOutput(inputs), pig_latin.read('nothing.txt'))
+	correct = [out, ['1error']]
+	result = [catchOutput(inputs)]
+	try:
+		result.append(pig_latin.read('nothing.txt'))
+	except IOError:
+		result.append("IOError not caught")
 	if result == correct:
 		passed += 1
 	else:
@@ -97,8 +101,11 @@ def test5():
 def test6():
 	global total, passed
 	total += 1
-	pig_latin.write(["Some message!\nwith 2 lines!\n"])
-	result = pig_latin.read('pig.txt')
+	try:
+		pig_latin.write(["Some message!\nwith 2 lines!\n"])
+		result = pig_latin.read('pig.txt')
+	except:
+		result = "Read/Write don't work"
 	correct = ["Some message!\n", "with 2 lines!\n"]
 	if result == correct:
 		passed += 1
@@ -171,8 +178,11 @@ aliquamway edsay ignissimday odioway. edsay 2commodo inway equenay utway uctusla
 edsay egetway apiensay ortortay. oinpray egetway iverravay oremlay, odalessay elementumway equenay.
 '''
 	pig_latin.write(pig_latin.translate(pig_latin.read('test.txt')))
-	with open('pig.txt','r') as f:
-		result = f.read()
+	try:
+		with open('pig.txt','r') as f:
+			result = f.read()
+	except:
+		result = ''
 	if result == correct:
 		passed += 3
 	else:
