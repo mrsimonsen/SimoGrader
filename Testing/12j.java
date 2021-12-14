@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.util.Random;
+import java.util.Arrays;
 
 // 12j
 public class Tests {
@@ -45,16 +47,14 @@ public class Tests {
 		test4();
 		test5();
 		test6();
-		hidden1();
-		hidden2();
 		System.out.printf("%d/%d\n",passed,total);
 	}
 
 	public static void test1(){
 		total++;
-		boolean correct = true;
-		boolean result = student.cont(1);
-		if (result == correct){
+		int[] correct = {0,1,0,0,1,1,1,3,1,1,2};
+		int[] result = student.dice(11,new Random(0));
+		if (Arrays.equals(result,correct){
 			passed++;
 		}
 		else{
@@ -64,9 +64,9 @@ public class Tests {
 
 	public static void test2(){
 		total++;
-		boolean correct = false;
-		boolean result = student.cont(0);
-		if (result == correct){
+		int[] correct = {2,4,6,1,4,7,8,6,5,5,2};
+		int[] result = student.dice(50,new Random(14));
+		if (Arrays.equals(result,correct){
 			passed++;
 		}
 		else{
@@ -76,9 +76,14 @@ public class Tests {
 
 	public static void test3(){
 		total++;
-		boolean correct = true;
-		boolean result = student.cont(10);
-		if (result == correct){
+		String correct = "Dice roll histogram:\n\n";
+		String star = "****(4)\n";
+		for(int i=2; i<13; i++){
+			correct += i+":\t"+star;
+		}
+		int[] input = {4,4,4,4,4,4,4,4,4,4,4};
+		String result = student.histogram(input);
+		if (result.equals(correct)){
 			passed++;
 		}
 		else{
@@ -86,23 +91,14 @@ public class Tests {
 		}
 	}
 
-	public static void test4(){
+public static void test4(){
 		total++;
-		String star = "*\n";
 		String correct = "Dice roll histogram:\n\n";
-		correct += "2:  "+star;
-		correct += "3:  "+star;
-		correct += "4:  "+star;
-		correct += "5:  "+star;
-		correct += "6:  "+star;
-		correct += "7:  "+star;
-		correct += "8:  "+star;
-		correct += "9:  "+star;
-		correct += "10: "+star;
-		correct += "11: "+star;
-		correct += "12: "+star;
-		int[] total = {1,1,1,1,1,1,1,1,1,1,1};
-		String result = student.histogram(total);
+		correct += "2:\t**(2)\n"+"3:\t***(3)\n"+"4:\t*****(5)\n"+"5:\t***(3)\n";
+		correct += "6:\t***(3)\n"+"7:\t***(3)\n"+"8:\t*****(5)\n"+"9:\t********(8)\n";
+		correct += "10:\t****(4)\n"+"11:\t*(1)\n"+"12:\t***(3)\n";
+		int[] input = {2,3,5,3,3,3,5,8,4,1,3};
+		String result = student.histogram(input);
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -111,23 +107,14 @@ public class Tests {
 		}
 	}
 
-	public static test5(){
+	public static void test5(){
 		total++;
-		String star = "****\n";
-		String correct = "Dice roll histogram:\n\n";
-		correct += "2:  "+star;
-		correct += "3:  "+star;
-		correct += "4:  "+star;
-		correct += "5:  "+star;
-		correct += "6:  "+star;
-		correct += "7:  "+star;
-		correct += "8:  "+star;
-		correct += "9:  "+star;
-		correct += "10: "+star;
-		correct += "11: "+star;
-		correct += "12: "+star;
-		int[] total = {4,4,4,4,4,4,4,4,4,4,4};
-		String result = student.histogram(total);
+		String correct = "Enter number of rolls:\nDice roll histogram:\n\n";
+		correct += "2:\t**(2)\n3:\t****(4)\n4:\t******(6)\n5:\t*(1)\n6:\t****(4)\n";
+		correct += "7:\t*******(7)\n8:\t********(8)\n9:\t******(6)\n10:\t*****(5)\n";
+		correct += "11:\t*****(5)\n12:\t**(2)\n\n";
+		String input = "50";
+		String result = getOutput(input, 14);
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -136,76 +123,17 @@ public class Tests {
 		}
 	}
 
-public static void test6(){
+	public static void test6(){
 		total++;
-		String correct = "Dice roll histogram:\n\n";
-		correct += "2:  **\n";
-		correct += "3:  ***\n";
-		correct += "4:  *****\n";
-		correct += "5:  ***\n";
-		correct += "6:  ***\n";
-		correct += "7:  ***\n";
-		correct += "8:  *****\n";
-		correct += "9:  ********\n";
-		correct += "10: ****\n";
-		correct += "11: *\n";
-		correct += "12: ***\n";
-		int[] total = {2,3,5,3,3,3,5,8,4,1,3};
-		String result = student.histogram(total);
+		String correct = "Enter number of rolls:\n";
+		correct += "Invalid rolls. Try again.\n";
+		String input = "0";
+		String result = getOutput(input);
 		if (result.equals(correct)){
 			passed++;
 		}
 		else{
 			failed.add("test6");
-		}
-	}
-
-	public static void hidden1(){
-		total++;
-		String correct = "Dice roll histogram:\n\n";
-		correct += "2:  *\n";
-		correct += "3:  **\n";
-		correct += "4:  ***\n";
-		correct += "5:  ****\n";
-		correct += "6:  *****\n";
-		correct += "7:  ******\n";
-		correct += "8:  *******\n";
-		correct += "9:  ********\n";
-		correct += "10: *********\n";
-		correct += "11: **********\n";
-		correct += "12: ***********\n";
-		int[] total = {1,2,3,4,5,6,7,8,9,10,11};
-		String result = student.histogram(total);
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("hidden1");
-		}
-	}
-
-	public static void hidden2(){
-		total++;
-		int[] total6 = {11,10,9,8,7,6,5,4,3,2,1};
-		String correct = "Dice roll histogram:\n\n";
-		correct += "2:  ***********\n";
-		correct += "3:  **********\n";
-		correct += "4:  *********\n";
-		correct += "5:  ********\n";
-		correct += "6:  *******\n";
-		correct += "7:  ******\n";
-		correct += "8:  *****\n";
-		correct += "9:  ****\n";
-		correct += "10: ***\n";
-		correct += "11: **\n";
-		correct += "12: *\n";
-		int[] total = {11,10,9,8,7,6,5,4,3,2,1};
-		String result = student.histogram(total);
-		if (result.equals(correct)){
-			passed++;
-		}
-		else{
-			failed.add("hidden2");
 		}
 	}
 
@@ -222,7 +150,8 @@ public static void test6(){
 	private static String getOutput(String input){
 		setOutput();
 		setInput(input);
-		student.main(null);
+		String[] args = {};
+		student.main(args);
 		String result = TOut.toString();
 		restoreSystem();
 		return result;
