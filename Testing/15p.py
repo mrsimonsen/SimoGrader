@@ -44,7 +44,10 @@ def test1():
 	global total, passed
 	total += 1
 	correct = "aeiou"
-	result = pig_latin.VOWELS
+	try:
+		result = pig_latin.VOWELS
+	except:
+		result = ''
 	if result == correct:
 		passed += 1
 	else:
@@ -54,7 +57,10 @@ def test2():
 	global total, passed
 	total += 1
 	correct = 'appleway'
-	result = pig_latin.way_end('apple')
+	try:
+		result = pig_latin.way_end('apple')
+	except:
+		result = ''
 	if result == correct:
 		passed += 1
 	else:
@@ -64,7 +70,10 @@ def test3():
 	global total, passed
 	total += 1
 	correct = 'appyhay'
-	result = pig_latin.ay_end('happy', 1)
+	try:
+		result = pig_latin.ay_end('happy', 1)
+	except:
+		result = ''
 	if result == correct:
 		passed += 1
 	else:
@@ -74,7 +83,10 @@ def test4():
 	global total, passed
 	total += 1
 	correct = ["appyhay 5 applesway\n"]
-	result = pig_latin.translate(["Happy 5 appLes"])
+	try:
+		result = pig_latin.translate(["Happy 5 appLes"])
+	except:
+		result = ''
 	if result == correct:
 		passed += 1
 	else:
@@ -88,7 +100,10 @@ def test5():
 	out += "What is the name of the file:\n"
 	out += "Message stored in 'pig.txt'\n"
 	correct = [out, ['1error']]
-	result = [catchOutput(inputs)]
+	try:
+		result = [catchOutput(inputs)]
+	except:
+		result = ['no output']
 	try:
 		result.append(pig_latin.read('nothing.txt'))
 	except IOError:
@@ -116,7 +131,10 @@ def test7():
 	global total, passed
 	total += 1
 	correct = "appyhay!"
-	result = pig_latin.ay_end("happy!", 1)
+	try:
+		result = pig_latin.ay_end("happy!", 1)
+	except:
+		result = ''
 	if result == correct:
 		passed += 1
 	else:
@@ -126,14 +144,17 @@ def test8():
 	global total, passed
 	total += 1
 	correct = "eggway,"
-	result = pig_latin.way_end("egg,")
+	try:
+		result = pig_latin.way_end("egg,")
+	except:
+		result = ''
 	if result == correct:
 		passed += 1
 	else:
 		failed.append('test8')
-
 def test9():
 	global total, passed
+
 	total += 1
 	correct = '.,!?'
 	try:
@@ -149,7 +170,10 @@ def test10():
 	global total, passed
 	total += 1
 	correct = ["oolschay?\n","oolcay\n"]
-	result = pig_latin.translate(["school?","cool"])
+	try:
+		result = pig_latin.translate(["school?","cool"])
+	except:
+		result = []
 	if result == correct:
 		passed += 1
 	else:
@@ -159,7 +183,10 @@ def test11():
 	global total, passed
 	total += 1
 	correct = ["enigmaway.\n"]
-	result = pig_latin.translate(["enigma."])
+	try:
+		result = pig_latin.translate(["enigma."])
+	except:
+		result = []
 	if result == correct:
 		passed += 1
 	else:
@@ -177,8 +204,8 @@ Sed eget sapien tortor. Proin eget viverra lorem, sodales elementum neque.
 aliquamway edsay ignissimday odioway. edsay 2commodo inway equenay utway uctuslay. aurismay acinialay etway ibhnay atway ultricesway. utway euismodway uruspay ellustay, atway interdumway isusray aliquetway edsay. aliquamway onnay iamday 6orci! aliquamway iaculisway ustojay ecnay exway incidunttay uctuslay. 4aliquam ibhnay ustojay, emportay euway acinialay away, oncusrhay edsay estway.
 edsay egetway apiensay ortortay. oinpray egetway iverravay oremlay, odalessay elementumway equenay.
 '''
-	pig_latin.write(pig_latin.translate(pig_latin.read('test.txt')))
 	try:
+		pig_latin.write(pig_latin.translate(pig_latin.read('test.txt')))
 		with open('pig.txt','r') as f:
 			result = f.read()
 	except:
