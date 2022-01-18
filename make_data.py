@@ -65,17 +65,18 @@ def clean():
 	g = Github(token)
 	print(f"Loaded credentials for {g.get_user().name}")
 	#makedir for clone - set name to current date time
-	repos = g.get_user().get_repos()
-	print("Gathering all repos older than what date?")
-	date = get_date()
 	print("Gathering Repos...")
+	repos = g.get_user().get_repos()
+	print("Gathering all repos older than what date? (all web repos ignored)")
+	date = get_date()
 	old = []
 	total = len(list(repos))
 	print("Starting Search..")
 	with alive_bar(total, bar='classic', spinner='classic') as bar:
 		for r in repos:
 			if r.organization == "NUAMES-CS" and not_template(r.name) and r.updated_at < date:
-				old.append(r)
+				if r.name[:3] != 'web':
+					old.append(r)
 			bar()
 	for i in old:
 		print(i)
