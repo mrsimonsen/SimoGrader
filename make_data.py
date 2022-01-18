@@ -4,6 +4,7 @@ from assignment import Assignment
 from subprocess import run
 from github import Github
 from dotenv import load_dotenv
+from os import environ as env
 from alive_progress import alive_bar
 from sys import exit
 
@@ -43,7 +44,7 @@ def get_date():
 	while not ok:
 		year = validate_num("Year:(####)")
 		month = validate_num("Month:(##)")
-		day = validate("Day:(##)")
+		day = validate_num("Day:(##)")
 		try:
 			d = datetime.datetime(year, month, day)
 			ok = True
@@ -51,13 +52,9 @@ def get_date():
 			print(e)
 	return d
 
-def not_template(name):
-	if name[-3:] != ".py" and name[-5:] != ".java":
-		return True
-	return False
-
 def clean():
 	#get user credentials from .env
+	print("Logging into GitHub...")
 	load_dotenv()
 	if (token := env.get('TOKEN')) == None:
 		exit("Edit .env file to have your personal access token.")
@@ -65,21 +62,20 @@ def clean():
 	g = Github(token)
 	print(f"Loaded credentials for {g.get_user().name}")
 	#makedir for clone - set name to current date time
-	print("Gathering Repos...")
 	repos = g.get_user().get_repos()
-	print("Gathering all repos older than what date? (all web repos ignored)")
-	date = get_date()
+	print("Gathering Repos...")
 	old = []
 	total = len(list(repos))
-	print("Starting Search..")
+	d = shelve.open('data.dat')
+	course = d['java'] + d['python']
+	d.close()
+	print("Starting Search...")
 	with alive_bar(total, bar='classic', spinner='classic') as bar:
 		for r in repos:
-			if r.organization == "NUAMES-CS" and not_template(r.name) and r.updated_at < date:
-				if r.name[:3] != 'web':
-					old.append(r)
+			if r.name[:3] in course:
+				print(f"{r.name} added")
+				old.append(r)
 			bar()
-	for i in old:
-		print(i)
 	print(f"{len(old)} repos collected")
 	if a := (input("Delete?\n").lower() in ('yes','y')):
 		for i in old:
@@ -107,7 +103,7 @@ def reset_data():
 
 def validate_num(question):
 	ok = False
-	while not ok:
+	if r.name[:3] in course:
 		try:
 			number = int(input(f"{question}\n"))
 			ok = True
