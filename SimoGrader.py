@@ -37,9 +37,9 @@ def class_menu():
 		print("Class Menu")
 		print("0 - Return to Main Menu")
 		print("1 - View Classes")
-		print("2 - Set Classes")
-		print("3 - Drop Student")
-		print("4 - Add Student")
+		print("2 - Drop Student")
+		print("3 - Add Student")
+		print("4 - Import Students")
 		a = input("What's your selection?\n")
 
 		if a == '0':
@@ -47,11 +47,13 @@ def class_menu():
 		elif a == '1':
 			display_classes()
 		elif a == '2':
-			set_periods()
-		elif a == '3':
 			drop()
-		elif a == '4':
+		elif a == '3':
 			create()
+		elif a == '4':
+			if ask_yn("\n-------------------------------\nThis will delete current student data, are you sure?") == 'y':
+				set_periods()
+				set_students()
 		else:
 			print("That's not a valid menu option.")
 
@@ -63,7 +65,6 @@ def student_menu():
 		print("1 - View a Student")
 		print("2 - Modify a Student")
 		print("3 - Modify a Student's Assignment")
-		print("4 - Import Students")
 		a = input ("What's your selection?\n")
 
 		if a == '0':
@@ -74,9 +75,6 @@ def student_menu():
 			mod_student()
 		elif a == '3':
 			mod_assign()
-		elif a == '4':
-			if ask_yn("\n-------------------------------\nThis will delete current student data, are you sure?") == 'y':
-				set_students()
 		else:
 			print("That's not a valid menu option.")
 

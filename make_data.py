@@ -16,13 +16,10 @@ def mark_late():
 	periods = d['periods']
 	p = d['python']
 	j = d['java']
-	w = d['web']
 	if tag in p:
 		cls = '1030'
 	elif tag in j:
 		cls = '1400'
-	elif tag in w:
-		cls = 'Web Dev'
 	#load students
 	students = d['students']
 	#if student assignment grade is 0 and not already late
@@ -91,7 +88,6 @@ def reset_data():
 	d['python'] = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
 	#list of 1400 assignment prefixes
 	d['java'] = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
-	d['web'] = ('web')
 	#list of course periods
 	periods = []
 	for i in range(8):
@@ -103,12 +99,11 @@ def reset_data():
 
 def validate_num(question):
 	ok = False
-	if r.name[:3] in course:
-		try:
-			number = int(input(f"{question}\n"))
-			ok = True
-		except ValueError:
-			print("That wasn't a number")
+	try:
+		number = int(input(f"{question}\n"))
+		ok = True
+	except ValueError:
+		print("That wasn't a number")
 	return number
 
 def ask_yn(question):
@@ -143,7 +138,6 @@ def validate_assign():
 	with shelve.open('data.dat') as d:
 		assign += d['java']
 		assign += d['python']
-		assign += ['web']
 		assign.append('done')
 	a = ''
 	print(assign)
@@ -165,10 +159,6 @@ def set_periods():
 		for i in range(n):
 			x = validate_num(f"Enter class period for 1400 section number {i+1}:")
 			periods[x-1] = '1400'
-		n = validate_num("How many Web Dev sections this semester?")
-		for i in range(n):
-			x = validate_num(f"Enter class period for web section number {i+1}:")
-			periods[x-1] = 'Web Dev'
 		print(f"Periods: {periods}")
 		r = ask_yn("Is this correct?")
 	d['periods'] = periods
@@ -186,10 +176,7 @@ def display_classes():
 				p.append(i+1)
 			elif periods[i] == '1400':
 				j.append(i+1)
-			elif periods[i] == 'Web Dev':
-				w.append(i+1)
 		print(f"{len(p)} Python classes, {len(j)} Java classes")
-		print(f"\tWeb Dev periods: {w}")
 		print(f"\tPython periods: {p}")
 		print(f"\tJava periods: {j}")
 
@@ -438,16 +425,10 @@ def grade_assignment(tag = None):
 		grading = '1400'
 	elif tag[-1] == 'p':
 		grading = '1030'
-	elif tag == 'web':
-		grading = "Web Dev"
 	else:
 		grading = None
 	for stu in students:
 		if stu.course == grading:
-			if grading == "Web Dev":
-				print(f"Cloning {stu.github}")
-				os.system(f"gh repo clone nuames-cs/web-dev-{stu.github} web/{stu.github} -- -q")
-				continue
 			a = stu.assignments[tag]
 			if a.score < 5 and a.late:
 				print(f"Grading {stu.name} - late")
@@ -531,17 +512,15 @@ def grade_student():
 
 def report(course = None):
 	# ask for (python, java, all)
-	while course not in ('all','1030','1400','web'):
+	while course not in ('all','1030','1400'):
 		print("Select a course to report on:")
 		print("all - All courses")
 		print("1030 - Python")
 		print("1400 - Java")
-		print("web - Web Dev")
 		course = input("What's your selection?\n").lower()
-	if course in ('1030','1400','web'):
+	if course in ('1030','1400'):
 		write(course)
 	if course == 'all':
-		write('web')
 		write('1030')
 		write('1400')
 	print("Report complete")
@@ -551,7 +530,6 @@ def write(course):
 		students = d['students']
 		python = d['python']
 		java = d['java']
-		web = d['web']
 	header = ['Period','Last Name','First Name']
 	if course == '1030':
 		for tag in python:
@@ -561,10 +539,6 @@ def write(course):
 		for tag in java:
 			header.append(tag)
 		tags = java
-	elif course == 'Web Dev':
-		for tag in web:
-			header.append(tag)
-		tags = web
 	stuff = [header]
 	for stu in students:
 		if stu.course == course:
@@ -595,6 +569,4 @@ def grade_multiple():
 		report('1030')
 	if 'j' in tags:
 		report('1400')
-	if 'w' in tags:
-		report('Web Dev')
 	print(f"Grading and Reporting done for {tags}")
