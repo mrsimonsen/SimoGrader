@@ -4,8 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.io.File;
-import java.PrintWriter;
+import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 // 02j
 public class Tests {
@@ -25,7 +26,7 @@ public class Tests {
 		try{
 			verbose = !args[0].equals("simple");
 		}
-		catch (ArrayIndexOutOfBoundsError e){
+		catch (ArrayIndexOutOfBoundsException e){
 			verbose = true;
 		}
 		if (verbose){

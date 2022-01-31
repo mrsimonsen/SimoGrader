@@ -490,7 +490,7 @@ def grade_student():
 				grade(stu,tag, False)
 				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
 			elif assign.score < 10 and not assign.late:
-				print(f'Grading {stu.name} -- on time')
+				print(f'Grading {stu.name} -- on time: {stu.github}')
 				grade(stu, tag, False)
 				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
 			elif (assign.score == 10 and not assign.late) or (assign.score == 5 and assign.late):
