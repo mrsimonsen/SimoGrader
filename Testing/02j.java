@@ -89,7 +89,7 @@ public class Tests {
 	public static void hidden1(){
 		total++;
 		String correct = "Enter wall height (feet):\nEnter wall width (feet):\nWall area: 350.0 square feet\nPaint needed: 1.0 gallons\nCans needed: 1 can(s)\n";
-		String result = getOutput("35 10");
+		String result = getOutput("70 5");
 		if (result.equals(correct)){
 			passed++;
 		}
