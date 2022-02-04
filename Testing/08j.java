@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 
 // 08j
 public class Tests {
@@ -40,7 +41,9 @@ public class Tests {
 
 	public static void simple(){
 		test1();
+		testArray1();
 		test2();
+		testArray2();
 		test3();
 		test4();
 		test5();
@@ -63,6 +66,20 @@ public class Tests {
 		}
 	}
 
+	static public void testArray1(){
+		total++;
+		double[] correct = {236,89.5,142.0,166.3,93};
+		String input = "236.0 89.5 142.0 166.3 93.0";
+		getOutput(input);
+		double[] result = student.userWeights;
+		if (Arrays.equals(result, correct)){
+			passed++;
+		}
+		else{
+			failed.add("testArray1");
+		}
+	}
+
 	public static void test2(){
 		total++;
 		String correct = "Enter weight 1:\nEnter weight 2:\nEnter weight 3:\nEnter weight 4:\nEnter weight 5:\n";
@@ -74,6 +91,20 @@ public class Tests {
 		}
 		else{
 			failed.add("test2");
+		}
+	}
+
+	static public void testArray2(){
+		total++;
+		double[] correct = {123.4,56,98,174,215.8};
+		String input = "123.4 56.0 98.0 174.0 215.8";
+		getOutput(input);
+		double[] result = student.userWeights;
+		if (Arrays.equals(result, correct)){
+			passed++;
+		}
+		else{
+			failed.add("testArray2");
 		}
 	}
 
