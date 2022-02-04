@@ -37,7 +37,7 @@ public class Tests {
 			}
 		}
 	}
-	
+
 	public static void simple(){
 		test1();
 		test2();
@@ -76,7 +76,7 @@ public class Tests {
 	public static void test3(){
 		total++;
 		String correct = "Input an abbreviation:\nUnknown\n";
-		String result = GetOutput("XYZ");
+		String result = getOutput("XYZ");
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -102,7 +102,7 @@ public class Tests {
 		String correct = "Input an abbreviation:\nUnknown\n";
 		String result = getOutput("IMH");
 		if (result.equals(correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test5");
