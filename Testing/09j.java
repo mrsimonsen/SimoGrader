@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.io.Arrays;
 
 // 09j
 public class Tests {
@@ -40,13 +41,16 @@ public class Tests {
 
 	public static void simple(){
 		test1();
+		testArray1();
 		test2();
 		test3();
 		test4();
 		test5();
+		testArray4();
 		test6();
 		test7();
 		test8();
+		testArray6();
 		test9();
 		hidden1();
 		hidden2();
@@ -68,6 +72,47 @@ public class Tests {
 		}
 	}
 
+	static public void testArray1(){
+		total++;
+		int[][] correct = {{84,7},{23,4},{4,5},{30,2},{66,9}};
+		String input = "84 7 23 4 4 5 30 2 66 9 q";
+		getOutput(input);
+		int[][] result = student.players;
+		if (Arrays.deepEquals(result, correct)){
+			passed++;
+		}
+		else{
+			failed.add("testArray1");
+		}
+	}
+
+	static public void testArray4(){
+		total++;
+		int[][] correct = {{84,7},{23,4},{4,6},{30,2},{66,9}};
+		String input = "84 7 23 4 4 5 30 2 66 9 q";
+		getOutput(input);
+		int[][] result = student.players;
+		if (Arrays.deepEquals(result, correct)){
+			passed++;
+		}
+		else{
+			failed.add("testArray4");
+		}
+	}
+
+	static public void testArray6(){
+		total++;
+		int[][] correct = {{84,7},{23,4},{4,5},{30,2},{15,6}};
+		String input = "84 7 23 4 4 5 30 2 66 9 q";
+		getOutput(input);
+		int[][] result = student.players;
+		if (Arrays.deepEquals(result, correct)){
+			passed++;
+		}
+		else{
+			failed.add("testArray6");
+		}
+	}
 	public static void test2(){
 		total++;
 		String correct = "Enter player 1's jersey number:\nEnter player 1's rating:\n\nEnter player 2's jersey number:\nEnter player 2's rating:\n\nEnter player 3's jersey number:\nEnter player 3's rating:\n\nEnter player 4's jersey number:\nEnter player 4's rating:\n\nEnter player 5's jersey number:\nEnter player 5's rating:\n\n";
