@@ -37,7 +37,7 @@ public class Tests {
 			}
 		}
 	}
-	
+
 	public static void simple(){
 		test1();
 		test2();
@@ -105,7 +105,7 @@ public class Tests {
 	public static void hidden1(){
 		total++;
 		String correct = "Enter text:\nYou entered: JK, IDK if TMI BFF. TTYL\n";
-		correct = correct += "\nReplaced \"BFF\" with \"best friend forever\".\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\nReplaced \"TMI\" with \"too much information\".\nReplaced \"    TTYL\" with \"talk to you later\".\n";
+		correct = correct += "\nReplaced \"BFF\" with \"best friend forever\".\nReplaced \"IDK\" with \"I don't know\".\nReplaced \"JK\" with \"just kidding\".\nReplaced \"TMI\" with \"too much information\".\nReplaced \"TTYL\" with \"talk to you later\".\n";
 		correct += "\nExpanded: just kidding, I don't know if too much information best friend forever. talk to you later\n";
 		String result = getOutput("JK, IDK if TMI BFF. TTYL");
 		if (result.equals(correct)){
