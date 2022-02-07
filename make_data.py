@@ -323,6 +323,8 @@ def grade(stu, tag, simple = True):
 def mod_student():
 	stu = select_student()
 	choice = -1
+	new = Student(stu.name, stu.period, stu.github)
+	new.assignments = stu.assignments
 	while choice != 0 and stu:
 		print(stu)
 		print("0 - Save/Back to Main Menu")
@@ -334,19 +336,19 @@ def mod_student():
 			choice = validate_num("What would you like to change?")
 		if choice == 1:
 			print(f"Changing {stu.name} name:")
-			stu.name = change("Enter a new name:",stu.name)
+			new.name = change("Enter a new name:",stu.name)
 		elif choice == 2:
 			print(f"Changing {stu.name} username:")
-			stu.github = change("Enter a new github username:",stu.github)
+			new.github = change("Enter a new github username:",stu.github)
 		elif choice == 3:
 			print(f"Changing {stu.name} period:")
-			stu.period = change(f"Enter a new period for {stu.name}:",stu.period, True)
+			new.period = change(f"Enter a new period for {stu.name}:",stu.period, True)
 		elif choice == 0:
 			d = shelve.open('data.dat')
 			students = d['students']
 			for i in range(len(students)):
 				if students[i].name == stu.name:
-					students[i] = stu
+					students[i] = new
 					break
 			d['students'] = students
 			d.close()
