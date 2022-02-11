@@ -55,7 +55,7 @@ public class Tests {
 		String result = getOutput("5 2 4");
 		result.substring(0,correct.length());
 		if (result.equals(correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test1");

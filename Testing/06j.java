@@ -57,6 +57,7 @@ public class Tests {
 		else{
 			failed.add("test1");
 		}
+	}
 
 	public static void test2(){
 		total++;
@@ -95,6 +96,7 @@ public class Tests {
 		else{
 			failed.add("hidden1");
 		}
+	}
 
 	//Set up methods
 	 public static void setOutput(){
