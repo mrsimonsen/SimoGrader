@@ -53,7 +53,7 @@ public class Tests {
 		String correct = "Enter arrow base height:\nEnter arrow base width:\nEnter arrow head width:\n";
 		correct += "\n**\n**\n**\n**\n**\n";
 		String result = getOutput("5 2 4");
-		result.substring(0,correct.length());
+		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
 		}
