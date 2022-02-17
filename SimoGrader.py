@@ -1,4 +1,5 @@
 import shelve
+from sys import exit
 from make_data import *
 
 def grading_menu():
@@ -28,6 +29,8 @@ def grading_menu():
 			mark_late()
 		elif a == '6':
 			report()
+		elif a == 'exit':
+			exit()
 		else:
 			print("That's not a valid menu option.")
 
@@ -54,6 +57,8 @@ def class_menu():
 			if ask_yn("\n-------------------------------\nThis will delete current student data, are you sure?") == 'y':
 				set_periods()
 				set_students()
+		elif a == 'exit':
+			exit()
 		else:
 			print("That's not a valid menu option.")
 
@@ -75,6 +80,8 @@ def student_menu():
 			mod_student()
 		elif a == '3':
 			mod_assign()
+		elif a == 'exit':
+			exit()
 		else:
 			print("That's not a valid menu option.")
 
@@ -103,6 +110,8 @@ def main():
 			reset_data()
 		elif c == '5':
 			clean()
+		elif c == 'exit':
+			exit()
 		else:
 			print("That's not a valid menu option.")
 
