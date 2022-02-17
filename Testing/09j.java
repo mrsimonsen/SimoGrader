@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
-import java.io.Arrays;
+import java.util.Arrays;
 
 // 09j
 public class Tests {
@@ -46,11 +46,11 @@ public class Tests {
 		test3();
 		test4();
 		test5();
-		testArray4();
+		testArray5();
 		test6();
 		test7();
 		test8();
-		testArray6();
+		testArray8();
 		test9();
 		hidden1();
 		hidden2();
@@ -86,10 +86,10 @@ public class Tests {
 		}
 	}
 
-	static public void testArray4(){
+	static public void testArray5(){
 		total++;
 		int[][] correct = {{84,7},{23,4},{4,6},{30,2},{66,9}};
-		String input = "84 7 23 4 4 5 30 2 66 9 q";
+		String input = "84 7 23 4 4 5 30 2 66 9 u 4 6 q";
 		getOutput(input);
 		int[][] result = student.players;
 		if (Arrays.deepEquals(result, correct)){
@@ -100,10 +100,10 @@ public class Tests {
 		}
 	}
 
-	static public void testArray6(){
+	static public void testArray8(){
 		total++;
 		int[][] correct = {{84,7},{23,4},{4,5},{30,2},{15,6}};
-		String input = "84 7 23 4 4 5 30 2 66 9 q";
+		String input = "84 7 23 4 4 5 30 2 66 9 r 66 15 6 q";
 		getOutput(input);
 		int[][] result = student.players;
 		if (Arrays.deepEquals(result, correct)){
@@ -127,11 +127,12 @@ public class Tests {
 		}
 	}
 
-	public static voicd test3(){
+	public static void test3(){
 		total++;
 		String correct = "Enter player 1's jersey number:\nEnter player 1's rating:\n\nEnter player 2's jersey number:\nEnter player 2's rating:\n\nEnter player 3's jersey number:\nEnter player 3's rating:\n\nEnter player 4's jersey number:\nEnter player 4's rating:\n\nEnter player 5's jersey number:\nEnter player 5's rating:\n";
 		correct += "\nROSTER\nPlayer 1 -- Jersey number: 84, Rating: 7\nPlayer 2 -- Jersey number: 23, Rating: 4\nPlayer 3 -- Jersey number: 4, Rating: 5\nPlayer 4 -- Jersey number: 30, Rating: 2\nPlayer 5 -- Jersey number: 66, Rating: 9\n";
 		String result = getOutput("84 7 23 4 4 5 30 2 66 9 q");
+		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
 		}
