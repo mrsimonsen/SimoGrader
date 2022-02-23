@@ -54,7 +54,7 @@ public class Tests {
 		total++;
 		int[] correct = {0,1,0,0,1,1,1,3,1,1,2};
 		int[] result = student.dice(11,new Random(0));
-		if (Arrays.equals(result,correct){
+		if (Arrays.equals(result,correct)){
 			passed++;
 		}
 		else{
@@ -66,7 +66,7 @@ public class Tests {
 		total++;
 		int[] correct = {2,4,6,1,4,7,8,6,5,5,2};
 		int[] result = student.dice(50,new Random(14));
-		if (Arrays.equals(result,correct){
+		if (Arrays.equals(result,correct)){
 			passed++;
 		}
 		else{
@@ -114,7 +114,7 @@ public static void test4(){
 		correct += "7:\t*******(7)\n8:\t********(8)\n9:\t******(6)\n10:\t*****(5)\n";
 		correct += "11:\t*****(5)\n12:\t**(2)\n\n";
 		String input = "50";
-		String result = getOutput(input, 14);
+		String result = getOutput(input, "14");
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -151,6 +151,15 @@ public static void test4(){
 		setOutput();
 		setInput(input);
 		String[] args = {};
+		student.main(args);
+		String result = TOut.toString();
+		restoreSystem();
+		return result;
+	}
+	private static String getOutput(String input, String seed){
+		setOutput();
+		setInput(input);
+		String[] args = {seed};
 		student.main(args);
 		String result = TOut.toString();
 		restoreSystem();
