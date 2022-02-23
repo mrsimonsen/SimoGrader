@@ -55,7 +55,7 @@ public class Tests {
 	public static void test1(){
 		total++;
 		String correct = "Enter a title for the data:\nYou entered: Number of Novels Authored\n";
-		String result = getOutput("Number of Novels Authored\nblank\nblank\n-1\n")
+		String result = getOutput("Number of Novels Authored\nblank\nblank\n-1\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -70,7 +70,7 @@ public class Tests {
 		String correct = "Enter a title for the data:\nYou entered: Number of Novels Authored\n\n";
 		correct += "Enter the column 1 header:\nYou entered: Author name\n\n";
 		correct += "Enter the column 2 header:\nYou entered: Number of novels\n\n";
-		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\n-1\n")
+		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\n-1\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -86,7 +86,7 @@ public class Tests {
 		correct += "Enter the column 1 header:\nYou entered: Author name\n\n";
 		correct += "Enter the column 2 header:\nYou entered: Number of novels\n\n";
 		correct += "Enter a data point (-1 to stop input):\nData string: Jane Austen\nData integer: 6\n";
-		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nJane Austen,6\n-1\n")
+		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nJane Austen,6\n-1\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -104,8 +104,8 @@ public class Tests {
 		correct += "Enter a data point (-1 to stop input):\nError: No comma in string.\n\n";
 		correct += "Enter a data point (-1 to stop input):\nError: No comma in string.\n\n";
 		correct += "Enter a data point (-1 to stop input):\nData string: Ernest Hemingway\nData integer: 9\n";
-		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nErnest Hemingway 9\nErnest Hemingway9\nErnest Hemingway,9\n-1\n")
-		result = .substring(0,correct.length());
+		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nErnest Hemingway 9\nErnest Hemingway9\nErnest Hemingway,9\n-1\n");
+		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -122,7 +122,7 @@ public class Tests {
 		correct += "Enter a data point (-1 to stop input):\nError: Too many commas in input.\n\n";
 		correct += "Enter a data point (-1 to stop input):\nError: Too many commas in input.\n\n";
 		correct += "Enter a data point (-1 to stop input):\nData string: F. Scott Fitzgerald\nData integer: 8\n";
-		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nF, Scott Fitzgerald, 8\nF. Scott, Fitzgerald, 8\nF. Scott Fitzgerald, 8\n-1\n")
+		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nF, Scott Fitzgerald, 8\nF. Scott, Fitzgerald, 8\nF. Scott Fitzgerald, 8\n-1\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -141,7 +141,7 @@ public class Tests {
 		correct += "Enter a data point (-1 to stop input):\nError: Comma not followed by an integer.\n\n";
 		correct += "Enter a data point (-1 to stop input):\nError: Comma not followed by an integer.\n\n";
 		correct += "Enter a data point (-1 to stop input):\nData string: Agatha Christie\nData integer: 73\n";
-		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nAgatha Christie,seventythree\nAgatha Christie,seventythree\nAgatha Christie,seventythree\nAgatha Christie,73\n-1\n")
+		String result = getOutput("Number of Novels Authored\nAuthor name\nNumber of novels\nAgatha Christie,seventythree\nAgatha Christie,seventythree\nAgatha Christie,seventythree\nAgatha Christie,73\n-1\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -280,14 +280,14 @@ public class Tests {
 		correct += "       John Simonsen ***************************\n";
 		correct += "     Teresa Simonsen ****************************\n";
 		correct += "      Emily Simonsen \n";
-		result = getOutput("Ages of Simonsens\nName\nAge\nJohn Simonsen, 27\nTeresa Simonsen, 28\nEmily Simonsen, 0\n-1\n");
+		String result = getOutput("Ages of Simonsens\nName\nAge\nJohn Simonsen, 27\nTeresa Simonsen, 28\nEmily Simonsen, 0\n-1\n");
 		if (result.equals(correct)){
 			passed++;
 		}
 		else{
 			failed.add("hidden2");
 		}
-	} 
+	}
 
 	//Set up methods
 	 public static void setOutput(){
