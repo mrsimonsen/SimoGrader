@@ -67,7 +67,7 @@ public class Tests {
 		}
 	}
 
-	public static hidden1(){
+	public static void hidden1(){
 		total++;
 		int result = student.flipper(250,0);
 		if (result==122||result==128){

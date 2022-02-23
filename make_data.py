@@ -481,7 +481,7 @@ def grade_all():
 	d['students'] = students
 	d.close()
 	print("Data saved")
-	print(f"{stu.name} Assignments")
+	print(f"{stu.name} Assignments: {stu.github}")
 	print(stu.print_assignments())
 
 
