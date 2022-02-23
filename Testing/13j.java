@@ -65,7 +65,7 @@ public class Tests {
 
 	public static void test2(){
 		total++;
-		int correct = 46;
+		int correct = 36;
 		int result = student.getNumOfCharacters("The only thing we have to fear is fear itself.");
 		if (result == correct){
 			passed++;
@@ -77,7 +77,7 @@ public class Tests {
 
 	public static void test3(){
 		total++;
-		int correct = 44;
+		int correct = 35;
 		int result = student.getNumOfCharacters("The rain in Spain stays mainly in the plain.");
 		if (result == correct){
 			passed++;
@@ -90,7 +90,7 @@ public class Tests {
 	public static void test4(){
 		total++;
 		String correct = "Enter a sentence or phrase:\n\nYou entered: The only thing we have to fear is fear itself.\n";
-		correct += "\nNumber of characters: 46\n";
+		correct += "\nNumber of characters: 36\n";
 		String result = getOutput("The only thing we have to fear is fear itself.\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
@@ -104,7 +104,7 @@ public class Tests {
 	public static void test5(){
 		total++;
 		String correct = "Enter a sentence or phrase:\n\nYou entered: The only thing we have to fear is fear itself.\n";
-		correct += "\nNumber of characters: 46\n";
+		correct += "\nNumber of characters: 36\n";
 		correct += "String with no whitespace: Theonlythingwehavetofearisfearitself.\n";
 		String result = getOutput("The only thing we have to fear is fear itself.\n");
 		if (result.equals(correct)){
@@ -118,7 +118,7 @@ public class Tests {
 	public static void test6(){
 		total++;
 		String correct = "Enter a sentence or phrase:\n\nYou entered: The rain in Spain stays mainly in the plain.\n";
-		correct += "\nNumber of characters: 44\n";
+		correct += "\nNumber of characters: 35\n";
 		correct += "String with no whitespace: TheraininSpainstaysmainlyintheplain.\n";
 		String result = getOutput("The rain in Spain stays mainly in the plain.\n");
 		if (result.equals(correct)){
@@ -132,7 +132,7 @@ public class Tests {
 	public static void hidden1(){
 		total++;
 		String correct = "Enter a sentence or phrase:\n\nYou entered: May the Force be with you!\n";
-		correct += "\nNumber of characters: 26\n";
+		correct += "\nNumber of characters: 20\n";
 		correct += "String with no whitespace: MaytheForcebewithyou!\n";
 		String result = getOutput("May the Force be with you!\n");
 		if (result.equals(correct)){
