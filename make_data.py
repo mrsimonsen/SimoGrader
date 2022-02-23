@@ -98,12 +98,12 @@ def reset_data():
 	print("Data has been reset")
 
 def validate_num(question):
-	ok = False
-	try:
-		number = int(input(f"{question}\n"))
-		ok = True
-	except ValueError:
-		print("That wasn't a number")
+	number = None
+	while not number:
+		try:
+			number = int(input(f"{question}\n"))
+		except ValueError:
+			print("That wasn't a number")
 	return number
 
 def ask_yn(question):
