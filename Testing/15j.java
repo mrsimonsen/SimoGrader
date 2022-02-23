@@ -64,9 +64,11 @@ public class Tests {
 		total++;
 		int correct = 4;
 		String input = "30 4";
+		setOutput();
 		int result = student.holding(new Scanner(input));
+		restoreSystem();
 		if (result == correct){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test1");
@@ -77,9 +79,11 @@ public class Tests {
 		total++;
 		int correct = 0;
 		String input = "0";
+		setOutput();
 		int result = student.holding(new Scanner(input));
+		restoreSystem();
 		if (result == correct){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test2");
@@ -91,9 +95,11 @@ public class Tests {
 		int[] correct = {1,2,3,4,5};
 		String input = " 14 1 ";
 		int[] start = {1,2,3,4,5};
+		setOutput();
 		int[] result = student.rerollDice(start,new Scanner(input),new Random(0),4);
+		restoreSystem();
 		if (Arrays.equals(result, correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test3");
@@ -105,9 +111,11 @@ public class Tests {
 		int[] correct = {6,2,1,4,6};
 		String input = " 14 1 3 5 ";
 		int[] start = {1,2,3,4,5};
+		setOutput();
 		int[] result = student.rerollDice(start,new Scanner(input),new Random(25),2);
+		restoreSystem();
 		if (Arrays.equals(result, correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test4");
@@ -121,7 +129,7 @@ public class Tests {
 		int[] dice  = {1,2,3,4,5};
 		String result = student.printDice(dice);
 		if (result.equals(correct)||result.equals(correctSpace)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test5");
@@ -135,7 +143,7 @@ public class Tests {
 		int[] dice = {5,4,3,2,1};
 		String result = student.printDice(dice);
 		if (result.equals(correct)||result.equals(correctSpace)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test6");
@@ -148,7 +156,7 @@ public class Tests {
 		int[] dice = {1,1,3,5,6};
 		int[] result = student.kinds(dice);
 		if (Arrays.equals(result, correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test7");
@@ -161,7 +169,7 @@ public class Tests {
 		int[] dice = {2,3,4,4,6};
 		int[] result = student.kinds(dice);
 		if (Arrays.equals(result, correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test8");
@@ -182,7 +190,7 @@ public class Tests {
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test9");
@@ -203,7 +211,7 @@ public class Tests {
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray, resultArray)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test10");
@@ -219,7 +227,7 @@ public class Tests {
 		{2,3,4,5,2},{2,3,4,5,3},{2,3,4,5,4},{2,3,4,5,5},
 		{3,4,5,6,6},{3,4,5,6,1},{3,4,5,6,3},{3,4,5,6,4},{3,4,5,6,5}
 		};
-		String[] correct Array = new String[14];
+		String[] correctArray = new String[14];
 		for (int i = 0; i < 14; i++){
 			correctArray[i] = correct;
 		}
@@ -228,7 +236,7 @@ public class Tests {
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test11");
@@ -249,8 +257,9 @@ public class Tests {
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+			passed++;
 		}
+	}
 
 	public static void test13(){
 		total++;
@@ -266,9 +275,9 @@ public class Tests {
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+			passed++;
 		}
-		else{	
+		else{
 			failed.add("test13");
 		}
 	}
@@ -280,14 +289,14 @@ public class Tests {
 		int[][] dice = {{4,4,4,1,2},{1,3,5,3,3}};
 		String[] correctArray = new String[2];
 		for (int i = 0; i < 2; i++){
-			correctArary[i] = correct;
+			correctArray[i] = correct;
 		}
 		String[] resultArray = new String[2];
 		for (int i = 0; i < 2; i++){
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test14");
@@ -308,7 +317,7 @@ public class Tests {
 			resultArray[i] = student.printScore(dice[i]);
 		}
 		if (Arrays.equals(correctArray,resultArray)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test15");
