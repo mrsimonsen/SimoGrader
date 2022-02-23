@@ -53,7 +53,7 @@ public class Tests {
 		int[] result = Support.letterDistr("Holy letters Batman, this is a string.");
 		int[] correct = {3,1,0,0,2,0,1,2,3,0,0,2,1,2,1,0,0,2,4,5,0,0,0,0,1,0};
 		if (Arrays.equals(result,correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test1");
@@ -65,7 +65,7 @@ public class Tests {
 		String result = Support.encrypt("This is my message.", 14);
 		String correct = "Hvwg wg am asggous.";
 		if (result.equals(correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test2");
@@ -77,7 +77,7 @@ public class Tests {
 		String result = Support.decrypt("Hvwg wg am asggous.", 14);
 		String correct = "This is my message.";
 		if (result.equals(correct)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test3");
@@ -91,7 +91,7 @@ public class Tests {
 		String rout = "result";
 		String cout = "correct";
 		try{
-			sinput = ReadWrite.open_file(fname,sinput);
+			sinput = ReadWrite.openFile(fname,sinput);
 			Scanner cinput = new Scanner(new File(fname));
 			rout = sinput.nextLine();
 			cout = cinput.nextLine();
@@ -102,7 +102,7 @@ public class Tests {
 			System.out.println(e);
 		}
 		if (rout.equals(cout)){
-			score++;
+			passed++;
 		}
 		else{
 			failed.add("test4");
@@ -120,7 +120,7 @@ public class Tests {
     result = result.substring(result.length()-correct.length(),result.length());
     restoreSystem();
     if (result.equals(correct)){
-      score++;
+      passed++;
     }
 */
 
