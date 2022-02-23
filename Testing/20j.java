@@ -65,7 +65,7 @@ public class Tests {
 	public static void test2(){
 		total++;
 		int correct = 3;
-		item = new ItemToPurchase();
+		ItemToPurchase item = new ItemToPurchase();
 		item.setPrice(3);
 		int result = item.getPrice();
 		if (result == correct){
@@ -79,7 +79,7 @@ public class Tests {
 	public static void test3(){
 		total++;
 		int correct = 4;
-		item = new ItemToPurchase();
+		ItemToPurchase item = new ItemToPurchase();
 		item.setQuantity(4);
 		int result = item.getQuantity();
 		if (result == correct){

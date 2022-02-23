@@ -74,7 +74,7 @@ public class Tests {
 	public static void test2(){
 		total++;
 		String correct = "Volt color, Weightlifting shoes";
-		ItemtoPurchase item = new ItemToPurchase();
+		ItemToPurchase item = new ItemToPurchase();
 		item.setDescription(correct);
 		String result = item.getDescription();
 		if (result.equals(correct)){
@@ -146,7 +146,7 @@ public class Tests {
 	public static void test7(){
 		total++;
 		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\nq\n")
+		String result = getOutput("John Doe\nFebruary 1, 2016\nq\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -156,7 +156,7 @@ public class Tests {
 		}
 	}
 
-	public static void test8{
+	public static void test8(){
 		total++;
 		String correct = "Enter Customer's Name:\nEnter Today's Date:\n\nCustomer Name: John Doe\nToday's Date: February 1, 2016\n\n";
 		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
