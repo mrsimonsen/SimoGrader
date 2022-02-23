@@ -57,7 +57,7 @@ public class Tests {
 	public static void test1(){
 		total++;
 		String correct = "Enter a sample text:\n\nYou entered: Testing that enterd text is repeated.\n";
-		String result = getOutput("Testing that enterd text is repeated.\nq\n")
+		String result = getOutput("Testing that enterd text is repeated.\nq\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -71,7 +71,7 @@ public class Tests {
 		total++;
 		String correct = "Enter a sample text:\n\nYou entered: Testing that menu is called and can quit.\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
-		result = getOutput("Testing that menu is called and can quit.\nq\n");
+		String result = getOutput("Testing that menu is called and can quit.\nq\n");
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -83,7 +83,9 @@ public class Tests {
 	public static void test2b(){
 		total++;
 		char correct = 'q';
+		setOutput();
 		char result = student.printMenu(new Scanner("1\nq\n"));
+		restoreSystem();
 		if (result == correct){
 			passed++;
 		}
@@ -131,7 +133,7 @@ public class Tests {
 	public static void test6(){
 		total++;
 		String correct = "May the Force be with  you.";
-		string result = student.replaceExclamation("May the Force be with  you!");
+		String result = student.replaceExclamation("May the Force be with  you!");
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -152,7 +154,7 @@ public class Tests {
 		}
 	}
 
-	public static test8(){
+	public static void test8(){
 		total++;
 		String correct = "Enter a sample text:\n\nYou entered: We'll continue our quest in space.  There will be more shuttle flights and more shuttle crews and,  yes,  more volunteers, more civilians,  more teachers in space.  Nothing ends here;  our hopes and our journeys continue!\n";
 		correct += "\nMENU\nc - Number of non-whitespace characters\nw - Number of words\nf - Find text\nr - Replace all !\'s\ns - Shorten spaces\nq - Quit\n\nChoose an option:\n";
