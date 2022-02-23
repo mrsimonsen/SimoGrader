@@ -207,13 +207,12 @@ def display_student():
 		print(f"{stu.name} Assignments")
 		print(stu.print_assignments())
 
-def select_student():
+def select_student(text=None):
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
-	search = None
+	search = text
 	while search != '0':
-		search = input("Enter a part of a student name or '0' to exit:\n")
 		results = []
 		for i in students:
 			if search.lower() in i.name.lower():
@@ -232,6 +231,7 @@ def select_student():
 		else:
 			if search != '0':
 				print(f"No students matched \"{search}\"")
+				search = input("Enter a part of a student name or '0' to exit:\n")
 
 
 def drop():
@@ -481,8 +481,8 @@ def grade_all():
 	print(stu.print_assignments())
 
 
-def grade_student():
-	stu = select_student()
+def grade_student(text):
+	stu = select_student(text)
 	if stu:
 		tag = validate_assign()
 		try:
@@ -510,7 +510,8 @@ def grade_student():
 			d.close()
 			print("Data saved")
 		except KeyError as e:
-			print("That student doesn't have that assignment")
+			if tag != "done":
+				print("That student doesn't have that assignment")
 
 def report(course = None):
 	# ask for (python, java, all)

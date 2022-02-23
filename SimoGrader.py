@@ -21,8 +21,6 @@ def grading_menu():
 			grade_multiple()
 		elif a == '2':
 			grade_assignment()
-		elif a == '3':
-			grade_student()
 		elif a == '4':
 			grade_all()
 		elif a == '5':
@@ -31,6 +29,8 @@ def grading_menu():
 			report()
 		elif a == 'exit':
 			exit()
+		elif a == '3' or not a.isdigit():
+			grade_student(a)
 		else:
 			print("That's not a valid menu option.")
 
