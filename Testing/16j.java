@@ -50,7 +50,7 @@ public class Tests {
 	public static void test1(){
 		total++;
 		String correct = "Enter input string:\n";
-		String result = getOutput("John, Simonsen\nq\n")
+		String result = getOutput("John, Simonsen\nq\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
@@ -63,7 +63,7 @@ public class Tests {
 	public static void test2(){
 		total++;
 		String correct = "Enter input string:\nError: No comma in string.\n\nEnter input string:\nError: No comma in string.\n\nEnter input string:\nError: No comma in string.\n\nEnter input string:\n";
-		String result = getOutput("John Simonsen\nJohnSimonsen\nJohn  Simonsen\nq\n")
+		String result = getOutput("John Simonsen\nJohnSimonsen\nJohn  Simonsen\nq\n");
 		result = result.substring(0,correct.length());
 		if (result.equals(correct)){
 			passed++;
