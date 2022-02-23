@@ -99,7 +99,7 @@ def reset_data():
 
 def validate_num(question):
 	number = None
-	while not number:
+	while type(number) != type(0):
 		try:
 			number = int(input(f"{question}\n"))
 		except ValueError:
@@ -208,10 +208,11 @@ def display_student():
 		print(stu.print_assignments())
 
 def select_student(text=None):
+	if not text:
+		search = input("Enter a part of a student name or '0' to exit:\n")
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
-	search = text
 	while search != '0':
 		results = []
 		for i in students:
@@ -232,6 +233,7 @@ def select_student(text=None):
 			if search != '0':
 				print(f"No students matched \"{search}\"")
 				search = input("Enter a part of a student name or '0' to exit:\n")
+
 
 
 def drop():
@@ -452,6 +454,8 @@ def grade_assignment(tag = None):
 
 def grade_all():
 	stu = select_student()
+	if not stu:
+		return
 	d = shelve.open('data.dat')
 	students = d['students']
 	periods = d['periods']
