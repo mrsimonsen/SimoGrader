@@ -210,6 +210,8 @@ def display_student():
 def select_student(text=None):
 	if not text:
 		search = input("Enter a part of a student name or '0' to exit:\n")
+	else:
+		search = text
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()

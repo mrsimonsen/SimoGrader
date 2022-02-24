@@ -248,7 +248,7 @@ public class Tests {
 		correct += "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 3\n\nNike Romaleos 2 @ $189 = $378\nPowerbeats 2 Headphones 1 @ $128 = $128\n\nTotal: $506\n\n";
 		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
 		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nd\nChocola    te Chips\no\nq\n");
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nd\nChocolate Chips\no\nq\n");
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -262,7 +262,7 @@ public class Tests {
 		String correct = "CHANGE ITEM QUANTITY\nEnter the item name:\nEnter the new quantity:\nItem not found in cart. Nothing modified.\n\n";
 		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
 		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nThe    rmos Stainless Steel King\n5\nq\n");
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nThermos Stainless Steel King\n5\nq\n");
 		result = result.substring(result.length()-correct.length(),result.length());
 		if (result.equals(correct)){
 			passed++;
@@ -277,7 +277,7 @@ public class Tests {
 		String correct = "OUTPUT SHOPPING CART\nJohn Doe's Shopping Cart - February 1, 2016\nNumber of Items: 9\n\nNike Romaleos 3 @ $189 = $567\nChocolate Chips 5 @ $3 = $15\nPowerbeats 2 Headphones 1 @ $128 = $128\n\nTotal: $710\n\n";
 		correct += "MENU\na - Add item to cart\nd - Remove item from cart\nc - Change item quantity\ni - Output items' descriptions\no - Output shopping cart\nq - Quit\n\n";
 		correct += "Choose an option:\n";
-		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nNike Ro    maleos\n3\no\nq\n");
+		String result = getOutput("John Doe\nFebruary 1, 2016\na\nNike Romaleos\nVolt color, Weightlifting shoes\n189\n2\na\nChocolate Chips\nSemi-sweet\n3\n5\na\nPowerbeats 2 Headphones\nBluetooth headphones\n128\n1\nc\nNike Romaleos\n3\no\nq\n");
 		result = result.substring(result.length()-correct.length(),result.length());
 		if (result.equals(correct)){
 			passed++;
