@@ -50,7 +50,9 @@ public class Tests {
 	public static void test1(){
 		total++;
 		String correct = "1110";
+		setOutput();
 		String result = student.convert(14);
+		restoreSystem();
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -62,7 +64,9 @@ public class Tests {
 	public static void test2(){
 		total++;
 		String correct = "1111 1111";
+		setOutput();
 		String result = student.convert(255);
+		restoreSystem();
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -74,7 +78,9 @@ public class Tests {
 	public static void test3(){
 		total++;
 		String correct = "0110 1101";
+		setOutput();
 		String result = student.convert(109);
+		restoreSystem();
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -86,7 +92,9 @@ public class Tests {
 	public static void test4(){
 		total++;
 		String correct = "1011 1011 1000";
+		setOutput();
 		String result = student.convert(3000);
+		restoreSystem();
 		if (result.equals(correct)){
 			passed++;
 		}
@@ -98,7 +106,9 @@ public class Tests {
 	public static void hidden1(){
 		total++;
 		String correct = "1101 0101";
+		setOutput();
 		String result = student.convert(213);
+		restoreSystem();
 		if (result.equals(correct)){
 			passed++;
 		}
