@@ -30,3 +30,30 @@ class Tests(unittest.TestCase):
 		student.main()
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
+
+def main(verbose=False):
+	suite = unittest.defaultTestLoader
+	runner = unittest.TextTestRunner(stream=StringIO(), descriptions=False)
+	result = runner.run(suite.loadTestsFromTestCase(Tests))
+	total = result.testsRun
+	if result.wasSuccessful():
+		score = 10
+		passed = total
+	else:
+		passed = total - len(result.failures) - len(result.errors)
+		score = round(passed/total*10,2)
+	print(f"Passed: {passed}/{total}")
+	print(f"Score: {score}")
+	if verbose:
+		failed = []
+		for i in result.failures:
+			failed.append(f"Fail: {i[0].id()[15:]}")
+		for i in result.errors:
+			failed.append(f"Error: {i[0].id()[15:]}")
+		print("Failed:")
+		for i in failed:
+			print(f"	{i}")
+	return score
+
+if __name__ == '__main__':
+	main(True)
