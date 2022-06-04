@@ -264,7 +264,7 @@ def grade(stu, tag, simple = True):
 		print("Testing...")
 		os.chdir('student')
 		os.system(f"cp ../Testing/{tag}tests.py Tests.py")
-		stu.assignments[tag] = run_python(simple)
+		stu.assignments[tag].score = run_python(simple)
 		os.chdir('..')
 		run(['rm','-rf','student'])
 	else:
