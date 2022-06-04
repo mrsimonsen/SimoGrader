@@ -46,7 +46,7 @@ class Tests(unittest.TestCase):
 		except AttributeError:
 			self.fail("Message: Produce missing attributes.")
 
-def main(verbose=False):
+def main(verbose):
 	suite = unittest.defaultTestLoader
 	runner = unittest.TextTestRunner(stream=StringIO(), descriptions=False)
 	result = runner.run(suite.loadTestsFromTestCase(Tests))
@@ -71,4 +71,10 @@ def main(verbose=False):
 	return score
 
 if __name__ == '__main__':
-	main(True)
+	try:
+		verbose = sys.argv[1] != 'simple'
+	except IndexError:
+		verbose = False
+	score = main(verbose)
+	with open('score.txt','w') as f:
+		f.write(str(score))

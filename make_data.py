@@ -244,18 +244,17 @@ def drop():
 
 def run_python(simple):
 	try:
-		p = run(f"python3 Tests.py {'simple' if simple else ''}",shell=True,capture_output=True,text=True)
-		if p.stderr:
-			print("Tests didn't run")
-			score = None
-		else:
-			out = p.stdout.strip().split("\n")
-			if len(out) > 1:
-				for i in range(1,len(out)):
-					print(out[i])
-			score = out[0]
+		p = run(f"python3 Tests.py {'simple' if simple else ''}")
+		with open('score.txt','r') as f:
+			score = int(f.read())
 	except KeyboardInterrupt:
 		print("Student test terminated")
+		score = None
+	except ValueError:
+		print("non-numeric data in score.txt")
+		score = None
+	except FileNotFoundError:
+		print("couldn't find score.txt file")
 		score = None
 	return score
 
@@ -264,7 +263,7 @@ def grade(stu, tag, simple = True):
 	if os.path.isdir('student'):
 		print("Testing...")
 		os.chdir('student')
-		os.system(f"cp ../Testing/{tag}.py Tests.py")
+		os.system(f"cp ../Testing/{tag}tests.py Tests.py")
 		stu.assignments[tag] = run_python(simple)
 		os.chdir('..')
 		run(['rm','-rf','student'])
