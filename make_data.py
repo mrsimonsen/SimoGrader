@@ -1,7 +1,5 @@
 import shelve, csv, os, datetime
 from subprocess import run
-from github import Github
-from dotenv import load_dotenv
 from os import environ as env
 from sys import exit
 
@@ -64,23 +62,13 @@ def get_date():
 	return d
 
 def clean():
-	#get user credentials from .env
-	print("Logging into GitHub...")
-	load_dotenv()
-	if (token := env.get('TOKEN')) == None:
-		exit("Edit .env file to have your personal access token.")
-	#make github object
-	g = Github(token)
-	print(f"Loaded credentials for {g.get_user().name}")
-	#makedir for clone - set name to current date time
-	repos = g.get_user().get_repos()
 	print("Gathering Repos...")
+	os.system("gh repo list nuames-cs --json name > temp.json")
 	old = []
-	total = len(list(repos))
 	d = shelve.open('data.dat')
 	tags = d['assignments']
 	d.close()
-	print("Starting Search...")
+	print("Filtering Results...")
 	for r in repos:
 		if r.name[:3] in tags:
 			print(f"{r.name} added")
@@ -244,9 +232,10 @@ def drop():
 
 def run_python(simple):
 	try:
-		p = run(f"python3 Tests.py {'simple' if simple else ''}")
+		os.system(f"python3 Tests.py {'simple' if simple else ''}")
 		with open('score.txt','r') as f:
 			score = int(f.read())
+		os.system("rm score.txt")
 	except KeyboardInterrupt:
 		print("Student test terminated")
 		score = None
@@ -371,27 +360,15 @@ def grade_assignment(tag = None):
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
-	if tag[-1] == 'j':
-		grading = '1400'
-	elif tag[-1] == 'p':
-		grading = '1030'
-	else:
-		grading = None
 	for stu in students:
-		if stu.course == grading:
-			a = stu.assignments[tag]
-			if a.score < 5 and a.late:
-				print(f"Grading {stu.name} - late")
-				grade(stu,tag)
-				print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
-			elif a.score < 10 and not a.late:
-				print(f"Cloning {stu.name} - on time")
-				grade(stu,tag)
-				print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
-			elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
-				print(f"{stu.name} already has completed assignment")
-			else:
-				print("something strange happened in grade_assignment()")
+		a = stu.assignments[tag]
+		print(f"Cloning {stu.name}")
+		grade(stu,tag)
+		print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
+		elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
+			print(f"{stu.name} already has completed assignment")
+		else:
+			print("something strange happened in grade_assignment()")
 	print("Grading complete -- saving...")
 	d = shelve.open('data.dat')
 	d['students'] = students
