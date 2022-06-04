@@ -11,8 +11,7 @@ def grading_menu():
 		print("2 - Grade an Assignment")
 		print("3 - Grade a single Student's Assignment")
 		print("4 - Grade all of single Student's Assignments")
-		print("5 - Set assignment to late")
-		print("6 - Generate Report")
+		print("5 - Generate Report")
 		a = input("What's your selection?\n")
 
 		if a=='0':
@@ -24,8 +23,6 @@ def grading_menu():
 		elif a == '4':
 			grade_all()
 		elif a == '5':
-			mark_late()
-		elif a == '6':
 			report()
 		elif a == 'exit':
 			exit()

@@ -1,40 +1,54 @@
 import shelve, csv, os, datetime
-from student import Student
-from assignment import Assignment
 from subprocess import run
 from github import Github
 from dotenv import load_dotenv
 from os import environ as env
-from alive_progress import alive_bar
 from sys import exit
 
-def mark_late():
-	#set assignment
-	tag = validate_assign()
-	#determine class Periods
-	d = shelve.open('data.dat')
-	periods = d['periods']
-	p = d['python']
-	j = d['java']
-	if tag in p:
-		cls = '1030'
-	elif tag in j:
-		cls = '1400'
-	#load students
-	students = d['students']
-	#if student assignment grade is 0 and not already late
-	counter = 0
-	for stu in students:
-		if periods[stu.period-1] == cls :
-			a = stu.assignments[tag]
-			if a.score == 0.0 and not a.late:
-				counter += 1
-				stu.assignments[tag].late = True
-	d['students'] = students
-	d.close()
-	#display counter
-	print(f"{counter} students set to late for {tag}")
+class Student():
+	def __init__(self, name = "Student, Sample", period = 0, github = 'username'):
+		self.name = name
+		self.period = period
+		self.github = github
+		self.assignments = {}
+		self.add_assignments()
 
+	def __str__(self):
+		rep = f"{self.name}: {self.github}\n"
+		rep += f"{self.period}\n"
+		return rep
+
+	def add_assignments(self):
+		with shelve.open('data.dat') as d:
+			tags = d['assignments']
+		for t in tags:
+			self.assignments[t]=Assignment(t)
+
+	def clone(self, tag):
+		return f"nuames-cs/{tag}-{self.github}"
+
+	def print_assignments(self):
+		rep = f"/tAssignments"
+		rep += "|Tag|Score|\t|Tag|Score|\n"
+		rep +="___________\t___________\n"
+		keys = list(self.assignments.keys())
+		for i in range(0,len(self.assignments),2):
+			a1 = self.assignments[keys[i]]
+			a2 = self.assignments[keys[i+1]]
+			rep += f"|{a1.tag}|{a1.score:>5}|\t|{a2.tag}|{a2.score:>5}|\n"
+		a = self.assignments[-1]
+		rep += f"|{a.tag}|{a.score>5}|"
+		return rep
+
+class Assignment():
+	def __init__(self, tag):
+		self.tag = tag
+		self.score = 0.0
+
+	def __str__(self):
+		rep = f"Assignment {self.tag}\n"
+		rep += f"Score: {self.score}/10\n"
+		return rep
 
 def get_date():
 	ok = False
@@ -64,42 +78,34 @@ def clean():
 	old = []
 	total = len(list(repos))
 	d = shelve.open('data.dat')
-	course = d['java'] + d['python']
+	tags = d['assignments']
 	d.close()
 	print("Starting Search...")
-	with alive_bar(total, bar='classic', spinner='classic') as bar:
-		for r in repos:
-			if r.name[:3] in course:
-				print(f"{r.name} added")
-				old.append(r)
-			bar()
+	for r in repos:
+		if r.name[:3] in tags:
+			print(f"{r.name} added")
+			old.append(r)
 	print(f"{len(old)} repos collected")
-	if a := (input("Delete?\n").lower() in ('yes','y')):
+	if input("Delete?\n").lower() in ('yes','y'):
 		for i in old:
 			print(f"deleting {i.name}")
 			i.delete()
-	if not a:
-		print("Nothing Deleted.")
 	print("Done.")
 
 def reset_data():
 	d = shelve.open('data.dat')
-	#list of 1030 assignment prefixes
-	d['python'] = ('00p','01p','02p','03p','04p','05p','06p','07p','08p','09p','10p','11p','12p','13p','14p','15p')
-	#list of 1400 assignment prefixes
-	d['java'] = ('00j','01j','02j','03j','04j','05j','06j','07j','08j','09j','10j','11j','12j','13j','14j','15j','16j','17j','18j','19j','20j','21j')
-	#list of course periods
-	periods = []
-	for i in range(8):
-		periods.append('empty')
-	d['periods'] = periods
+	d['assignment'] = []
+	for i in range(26):
+		d['assignment'].append(f"{i:02}p")
+	for i in range(1,12):
+		d['assignments'].append(f"P{i:02}")
 	d['students'] = []
 	d.close()
 	print("Data has been reset")
 
 def validate_num(question):
 	number = None
-	while type(number) != type(0):
+	while not number:
 		try:
 			number = int(input(f"{question}\n"))
 		except ValueError:
@@ -136,49 +142,13 @@ def change(q1, thing, num = False):
 def validate_assign():
 	assign = []
 	with shelve.open('data.dat') as d:
-		assign += d['java']
-		assign += d['python']
+		assign += d['assignments']
 		assign.append('done')
 	a = ''
 	print(assign)
 	while a not in assign:
 		a = input("Enter an assignment tag:\n").lower()
 	return a
-
-def set_periods():
-	r = 'n'
-	d = shelve.open('data.dat')
-	periods = d['periods']
-	#while not correct
-	while r == 'n':
-		n = validate_num("How many 1030 sections this semester?")
-		for i in range(n):
-			x = validate_num(f"Enter class period for 1030 section number {i+1}:")
-			periods[x-1] = '1030'
-		n = validate_num("How many 1400 sections this semester?")
-		for i in range(n):
-			x = validate_num(f"Enter class period for 1400 section number {i+1}:")
-			periods[x-1] = '1400'
-		print(f"Periods: {periods}")
-		r = ask_yn("Is this correct?")
-	d['periods'] = periods
-	d.close()
-	print("Course periods have been saved")
-
-def display_classes():
-	with shelve.open('data.dat') as f:
-		periods = f['periods']
-		p = []
-		j = []
-		w = []
-		for i in range(len(periods)):
-			if periods[i] == '1030':
-				p.append(i+1)
-			elif periods[i] == '1400':
-				j.append(i+1)
-		print(f"{len(p)} Python classes, {len(j)} Java classes")
-		print(f"\tPython periods: {p}")
-		print(f"\tJava periods: {j}")
 
 def set_students():
 	students = []
@@ -204,7 +174,7 @@ def set_students():
 def display_student():
 	stu = select_student()
 	if stu:
-		print(f"{stu.name} Assignments")
+		print(f"{stu.name} Assignments - P{stu.period}")
 		print(stu.print_assignments())
 
 def select_student(text=None):
@@ -235,8 +205,6 @@ def select_student(text=None):
 			if search != '0':
 				print(f"No students matched \"{search}\"")
 				search = input("Enter a part of a student name or '0' to exit:\n")
-
-
 
 def drop():
 	d = shelve.open('data.dat')
@@ -291,34 +259,13 @@ def run_python(simple):
 		score = None
 	return score
 
-def run_java(simple):
-	try:
-		p = run(f"javac Tests.java;java Tests {'simple' if simple else ''}",shell=True,capture_output=True,text=True)
-		if p.stderr:
-			print("Tests didn't compile")
-			score = None
-		else:
-			out = p.stdout.strip().split('\n')
-			if len(out) > 1:
-				for i in range(1,len(out)):
-					print(out[i])
-			score = out[0]
-	except KeyboardInterrupt:
-		print("Student test terminated")
-		score = None
-	return score
-
 def grade(stu, tag, simple = True):
 	os.system(f"gh repo clone {stu.clone(tag)} student -- -q")
 	if os.path.isdir('student'):
 		print("Testing...")
 		os.chdir('student')
-		if tag[-1] == 'j':
-			os.system(f"cp ../Testing/{tag}.java Tests.java")
-			stu.assignments[tag].set_score(run_java(simple))
-		elif tag[-1] == 'p':
-			os.system(f"cp ../Testing/{tag}.py Tests.py")
-			stu.assignments[tag].set_score(run_python(simple))
+		os.system(f"cp ../Testing/{tag}.py Tests.py")
+		stu.assignments[tag] = run_python(simple)
 		os.chdir('..')
 		run(['rm','-rf','student'])
 	else:
@@ -366,17 +313,15 @@ def create():
 	print("Adding a student to the roster.")
 	correct = 'n'
 	d =  shelve.open('data.dat')
-	periods = d['periods']
 	students = d['students']
 	d.close()
 	while correct == 'n':
 		fname = input("What is the student's first name?\n").title()
 		lname = input("What is the student's last name?\n").title()
 		period = int(input("What class period is the student in?\n"))
-		course = periods[period-1]
 		git = input("What is the student's GitHub username?\n")
 		print(f"Student: {lname}, {fname}")
-		print(f"Period: {period} - {course}")
+		print(f"Period: {period}")
 		print(f"GitHub username: {git}")
 		correct = ask_yn("Is this information correct?")
 	#make the student
@@ -458,31 +403,19 @@ def grade_all():
 	stu = select_student()
 	if not stu:
 		return
-	d = shelve.open('data.dat')
-	students = d['students']
-	periods = d['periods']
-	if periods[stu.period-1] == '1030':
-		tags = d['python']
-		d.close()
-	elif periods[stu.period-1] == '1400':
-		tags = d['java']
-		d.close()
-	else:
-		print('not a grade-able period')
-		d.close()
-		return
+	with shelve.open('data.dat') as d:
+		students = d['students']
+		tags = d['assignments']
 	for tag in tags:
 		print(f"Grading {tag}")
 		grade(stu, tag)
-	d = shelve.open('data.dat')
-	students = d['students']
 	for i in range(len(students)):
 		if students[i].name == stu.name:
 			students[i] = stu
 			break
-	d['students'] = students
-	d.close()
-	print("Data saved")
+	with shelve.open('data.dat') as d:
+		d['students'] = students
+		print("Data saved")
 	print(f"{stu.name} Assignments: {stu.github}")
 	print(stu.print_assignments())
 
@@ -519,35 +452,13 @@ def grade_student(text):
 			if tag != "done":
 				print("That student doesn't have that assignment")
 
-def report(course = None):
-	# ask for (python, java, all)
-	while course not in ('all','1030','1400'):
-		print("Select a course to report on:")
-		print("all - All courses")
-		print("1030 - Python")
-		print("1400 - Java")
-		course = input("What's your selection?\n").lower()
-	if course in ('1030','1400'):
-		write(course)
-	if course == 'all':
-		write('1030')
-		write('1400')
-	print("Report complete")
-
-def write(course):
+def report():
 	with shelve.open('data.dat') as d:
 		students = d['students']
-		python = d['python']
-		java = d['java']
+		tags = d['assignments']
 	header = ['Period','Last Name','First Name']
-	if course == '1030':
-		for tag in python:
-			header.append(tag)
-		tags = python
-	elif course == '1400':
-		for tag in java:
-			header.append(tag)
-		tags = java
+	for tag in tags:
+		header.append(tag)
 	stuff = [header]
 	for stu in students:
 		if stu.course == course:
@@ -555,13 +466,12 @@ def write(course):
 			row = [stu.period,last,first]
 			for a in tags:
 				s = str(stu.assignments[a].score)
-				if stu.assignments[a].late:
-					s += "L"
 				row.append(s)
 			stuff.append(row)
 	with open(f'{course}.csv','w',newline='') as f:
 		w = csv.writer(f, delimiter=',', quotechar='|')
 		w.writerows(stuff)
+	print("Report complete")
 
 def grade_multiple():
 	tags = []
@@ -574,8 +484,4 @@ def grade_multiple():
 			print(tags)
 	for tag in tags:
 		grade_assignment(tag)
-	if 'p' in tags:
-		report('1030')
-	if 'j' in tags:
-		report('1400')
 	print(f"Grading and Reporting done for {tags}")
