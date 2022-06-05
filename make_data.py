@@ -70,7 +70,7 @@ def clean():
 	d.close()
 	print("Filtering Results...")
 	for r in repos:
-		if r.name[:3] in tags:
+		if r.name[:3] in tags and [-3:] != '.py':
 			print(f"{r.name} added")
 			old.append(r)
 	print(f"{len(old)} repos collected")
