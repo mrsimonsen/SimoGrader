@@ -1,4 +1,4 @@
-import shelve, csv, os, datetime
+import shelve, csv, os, datetime, json
 from subprocess import run
 from os import environ as env
 from sys import exit
@@ -63,32 +63,39 @@ def get_date():
 
 def clean():
 	print("Gathering Repos...")
-	os.system("gh repo list nuames-cs --json name > temp.json")
+	os.system("gh repo list nuames-cs --json name -L 4444 > temp.json")
 	old = []
 	d = shelve.open('data.dat')
 	tags = d['assignments']
 	d.close()
+	with open("temp.json") as file:
+		repos = json.load(file)
+	os.system("rm temp.json")
 	print("Filtering Results...")
 	for r in repos:
-		if r.name[:3] in tags and [-3:] != '.py':
-			print(f"{r.name} added")
-			old.append(r)
-	print(f"{len(old)} repos collected")
+		if r["name"][:3] in tags and r["name"][-3:] != '.py':
+			old.append(r['name'])
+			print(f"{r['name']} added")
+	total = len(old)
+	print(f"{total} repos collected")
 	if input("Delete?\n").lower() in ('yes','y'):
+		c = 0
+		print("checking authentication")
+		os.system("gh auth refresh -h github.com -s delete_repo")
 		for i in old:
-			print(f"deleting {i.name}")
-			i.delete()
+			print(f"deleting nuames-cs/{i} ({c}/{total})")
+			os.system(f"gh repo delete nuames-cs/{i} --confirm")
 	print("Done.")
 
 def reset_data():
-	d = shelve.open('data.dat')
-	d['assignment'] = []
+	assignments = []
 	for i in range(26):
-		d['assignment'].append(f"{i:02}p")
+		assignments.append(f"{i:02}p")
 	for i in range(1,12):
-		d['assignments'].append(f"P{i:02}")
-	d['students'] = []
-	d.close()
+		assignments.append(f"P{i:02}")
+	with shelve.open('data.dat','n') as d:
+		d['assignments'] = assignments
+		d['students'] = []
 	print("Data has been reset")
 
 def validate_num(question):
@@ -170,6 +177,8 @@ def select_student(text=None):
 		search = input("Enter a part of a student name or '0' to exit:\n")
 	else:
 		search = text
+	if search == '0':
+		return None
 	d = shelve.open('data.dat')
 	students = d['students']
 	d.close()
@@ -199,6 +208,8 @@ def drop():
 	students = d['students']
 	d.close()
 	stu = select_student()
+	if not stu:
+		return
 	print(f"Dropping {stu.name.upper()}, {stu.period}")
 	if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
 		for i in range(len(students)):
@@ -261,6 +272,8 @@ def grade(stu, tag, simple = True):
 
 def mod_student():
 	stu = select_student()
+	if not stu:
+		return
 	choice = -1
 	new = Student(stu.name, stu.period, stu.github)
 	new.assignments = stu.assignments
@@ -325,6 +338,8 @@ def create():
 
 def mod_assign():
 	stu = select_student()
+	if not stu:
+		return
 	choice = None
 	while choice != 0 and stu:
 		print(stu)
@@ -362,17 +377,15 @@ def grade_assignment(tag = None):
 	d.close()
 	for stu in students:
 		a = stu.assignments[tag]
-		print(f"Cloning {stu.name}")
-		grade(stu,tag)
-		print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
-		elif (a.score == 10 and not a.late) or (a.score == 5 and a.late):
+		if a.score == 10:
 			print(f"{stu.name} already has completed assignment")
 		else:
-			print("something strange happened in grade_assignment()")
+			print(f"Cloning {stu.name}")
+			grade(stu,tag)
+			print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
 	print("Grading complete -- saving...")
-	d = shelve.open('data.dat')
-	d['students'] = students
-	d.close()
+	with shelve.open('data.dat') as d:
+		d['students'] = students
 	print("finished")
 
 def grade_all():

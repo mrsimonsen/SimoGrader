@@ -36,21 +36,18 @@ def class_menu():
 	while a != '0':
 		print("Class Menu")
 		print("0 - Return to Main Menu")
-		print("1 - View Classes")
-		print("2 - Drop Student")
-		print("3 - Add Student")
-		print("4 - Import Students")
+		print("1 - Drop Student")
+		print("2 - Add Student")
+		print("3 - Import Students")
 		a = input("What's your selection?\n")
 
 		if a == '0':
 			print("Returning to Main Menu")
 		elif a == '1':
-			display_classes()
-		elif a == '2':
 			drop()
-		elif a == '3':
+		elif a == '2':
 			create()
-		elif a == '4':
+		elif a == '3':
 			if ask_yn("\n-------------------------------\nThis will delete current student data, are you sure?") == 'y':
 				set_periods()
 				set_students()
