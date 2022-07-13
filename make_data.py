@@ -88,7 +88,7 @@ def clean():
 	print("Done.")
 
 def reset_data():
-	assignments = []
+	assignments = ["st-"]
 	for i in range(26):
 		assignments.append(f"{i:02}p")
 	for i in range(1,12):
