@@ -1,6 +1,4 @@
 import shelve, csv, os, datetime, json
-from subprocess import run
-from os import environ as env
 from sys import exit
 
 class Student():
@@ -147,24 +145,18 @@ def validate_assign():
 
 def set_students():
 	students = []
-	try:
-		f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
+	if os.path.exists('students.dat'):
 		print("Loading students...")
-		#format: time, first, last, period, github
-		raw = csv.reader(f, delimiter= ',', quotechar = '"')
-		for row in raw:
-			if row[0] == "Timestamp":
-				continue #skip the header
-			students.append(Student(f"{row[2].strip()}, {row[1].strip()}", int(row[3]), row[4].strip()))
-		f.close()
-		d = shelve.open('data.dat')
-		d['students'] = students
-		d.close()
+		with shelve.open('students.dat') as d:
+			for e in d:
+				parts = d[e]__str__().split(,)
+				students.append(Student(parts[0], parts[1], int(parts[3][-1]), parts[2]))
+		with shelve.open('data.dat') as d:
+			d['students'] = students
 		print(f"{len(students)} loaded")
-	except FileNotFoundError as e:
-		print(e)
-		print("Exiting program -- goodbye.")
-		exit()
+		os.system("rm students.dat")
+	else:
+		print("Couldn't find \"students.dat\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
 
 def display_student():
 	stu = select_student()
@@ -266,7 +258,7 @@ def grade(stu, tag, simple = True):
 		os.system(f"cp ../Testing/{tag}tests.py Tests.py")
 		stu.assignments[tag].score = run_python(simple)
 		os.chdir('..')
-		run(['rm','-rf','student'])
+		os.system('rm -rf student')
 	else:
 		print(f"{stu.name} hasn't started the assignment")
 
