@@ -257,10 +257,25 @@ def grade(stu, tag, simple = True):
 		os.chdir('student')
 		os.system(f"cp ../Testing/{tag}tests.py Tests.py")
 		stu.assignments[tag].score = run_python(simple)
+		extract_algorithm(stu, tag)
 		os.chdir('..')
 		os.system('rm -rf student')
 	else:
 		print(f"{stu.name} hasn't started the assignment")
+
+def extract_algorithm(stu, tag):
+	if tag[0] == 'P':
+		name = f'../Algorithms-{tag}'
+		if not os.path.isdir(name):
+			os.system(f'mkdir {name}')
+		with open('student.py','r') as f:
+			text = f.readlines()
+		algo = []
+		for line in text:
+			if line.strip()[0]=='#':
+				algo.append(line)
+		with open(f'{name}/{stu.name}-Algo.txt','w') as f:
+			f.writelines(algo)
 
 def mod_student():
 	stu = select_student()
