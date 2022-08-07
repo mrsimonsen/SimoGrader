@@ -211,25 +211,7 @@ def drop():
 		d = shelve.open('data.dat')
 		d['students'] = students
 		d.close()
-		f = None
-		try:
-			f = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'r',newline='')
-		except:
-			print("response csv not found")
-		if f:
-			raw = csv.reader(f, delimiter= ',', quotechar = '"')
-			new = []
-			for row in raw:
-				name = f"{row[2]}, {row[1]}"
-				if name != stu.name:
-					new.append(row)
-			f.close()
-			a = open("What's in a Username_ (Responses) - Copy of Form Responses 1.csv",'w',newline='')
-			w = csv.writer(a, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
-			for row in new:
-				w.writerow(row)
-			a.close()
-		print(f"{stu.name} dropped")
+			print(f"{stu.name} dropped")
 	else:
 		print("Drop Aborted")
 
