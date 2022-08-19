@@ -149,8 +149,7 @@ def set_students():
 		print("Loading students...")
 		with shelve.open('students.dat') as d:
 			for e in d:
-				parts = d[e]__str__().split(,)
-				students.append(Student(parts[0], parts[1], int(parts[3][-1]), parts[2]))
+				students.append(Student(e.name,e.period,e.github)
 		with shelve.open('data.dat') as d:
 			d['students'] = students
 		print(f"{len(students)} loaded")
