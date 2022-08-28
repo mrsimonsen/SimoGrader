@@ -149,7 +149,7 @@ def set_students():
 		print("Loading students...")
 		with shelve.open('students.dat') as d:
 			for e in d:
-				students.append(Student(e.name,e.period,e.github)
+				students.append(Student(e.name,e.period,e.github))
 		with shelve.open('data.dat') as d:
 			d['students'] = students
 		print(f"{len(students)} loaded")
@@ -210,7 +210,7 @@ def drop():
 		d = shelve.open('data.dat')
 		d['students'] = students
 		d.close()
-			print(f"{stu.name} dropped")
+		print(f"{stu.name} dropped")
 	else:
 		print("Drop Aborted")
 

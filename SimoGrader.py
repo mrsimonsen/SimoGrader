@@ -1,5 +1,3 @@
-import shelve
-from sys import exit
 from make_data import *
 
 def grading_menu():
