@@ -12,6 +12,8 @@ TODOs
 - [ ] docs folder for all Instruction .md files
 - [ ] GUI using TKinter?
 - [ ] shelve to sqlite3 -> allowing custom queries and reports
+- [ ] Drag and Drop interface for adding tests? At least a button to open the testing folder location to add test files manually.
+- [ ] update .gitignore to not preserve student database.
 
 Instructions to make
 - [ ] setting up GitHub Classroom
@@ -27,3 +29,4 @@ Instructions to make
 - [ ] getting student data setup
 	- public RSA assignment ([fireship video](https://www.youtube.com/watch?v=UFc-RPbq8kg) on automate and validate PRs) - practice git while getting student data
 	- CSV import (like from a goolge form)
+	- manual student entry through GUI
