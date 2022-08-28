@@ -1,4 +1,4 @@
-# Simonsen Auto-grader
+# Simonsen Auto-Grader
 
 I originally created this terminal program to collect student assignments hosted on GitHub then test/grade them and store the results in a database to enter into my school's SIS, but all privately to protect student information and keep my assignments and tests private.
 
