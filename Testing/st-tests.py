@@ -65,7 +65,6 @@ class Tests(unittest.TestCase):
 
 def main(verbose):
 	suite = unittest.defaultTestLoader
-	suite = unittest.defaultTestLoader
 	runner = unittest.TextTestRunner(stream=StringIO(), descriptions=False)
 	result = runner.run(suite.loadTestsFromTestCase(Tests))
 	total = result.testsRun
