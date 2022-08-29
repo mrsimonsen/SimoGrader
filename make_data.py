@@ -36,16 +36,6 @@ class Student():
 		rep += f"|{a.tag}|{a.score>5}|"
 		return rep
 
-class Assignment():
-	def __init__(self, tag):
-		self.tag = tag
-		self.score = 0.0
-
-	def __str__(self):
-		rep = f"Assignment {self.tag}\n"
-		rep += f"Score: {self.score}/10\n"
-		return rep
-
 def get_date():
 	ok = False
 	while not ok:
