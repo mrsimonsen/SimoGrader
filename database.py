@@ -90,17 +90,17 @@ def change_grade(github, tag, score):
 	id = read(c, f"SELECT id FROM scores WHERE github = '{github}' and tag = '{tag}';")
 	if id:
 		id = id[0][0]
-		query = f"UPDATE scores SET score = {score} WHERE id = {id};"
+		query = f"UPDATE scores SET earned = {score} WHERE id = {id};"
 	else:
-		query = f"INSERT INTO scores (github, tag, score) VALUES ('{github}','{tag}',{score});"
+		query = f"INSERT INTO scores (github, tag, earned) VALUES ('{github}','{tag}',{score});"
 	execute(c, query)
 
 if __name__ == "__main__":
 	c = connect("data.sqlite3")
 	#execute(c,"INSERT INTO students(github, first_weber, last, weber, period) VALUES ('ssmith2','Sue','Smith','ssmith',2);")
-	#add_grade("ssmith2", "00p",10)
-	#add_grade("ssmith2", "st-",20)
-	#add_grade("ssmith2", "P03",10)
+	change_grade("ssmith2", "00p",10)
+	change_grade("ssmith2", "st-",20)
+	change_grade("ssmith2", "P03",10)
 	#print(read(c,"SELECT * FROM scores INNER JOIN students ON scores.github = students.github WHERE period = 2;"))
 	#r = read(c, "SELECT scores.tag, score, assignments.points FROM scores INNER JOIN assignments ON scores.tag = assignments.tag WHERE scores.github = 'bsmith2';")
 	#print(r)
