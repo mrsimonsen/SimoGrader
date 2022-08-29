@@ -7,11 +7,11 @@ I'm now making a public repo to show off my work with example data so that other
 TODOs
 - [ ] Choose or make a public license before moving to public reo
 - [ ] Purge student data before making public repo
-- [ ] modify database to no longer include assignment list, instead scan Testing folder for assignment prefixes.
-- [ ] Create Example Assignments folder (copy templates without AKs)
+- [x] modify database to no longer include assignment list, instead scan Testing folder for assignment prefixes.
+- [x] Create Example Assignments folder (copy templates without AKs)
 - [ ] docs folder for all Instruction .md files
 - [ ] GUI using TKinter?
-- [ ] shelve to sqlite3 -> allowing custom queries and reports
+- [x] shelve to sqlite3 -> allowing custom queries and reports
 - [ ] Drag and Drop interface for adding tests? At least a button to open the testing folder location to add test files manually.
 - [ ] update .gitignore to not preserve student database.
 
