@@ -23,4 +23,19 @@ def report(github):
 		rep += f"\n{tag} | {earned}/{total}"
 	return rep
 
-print(report('ssmith2'))
+def remove_student(github):
+	c = database.connect()
+	delete_scores =	f"DELETE FROM scores WHERE github = '{github}';"
+	database.execute(c,delete_scores)
+	delete_student = f"DELETE FROM students WHERE github = '{github}';"
+	database.execute(c,delete_student)
+
+def change_grade(github, tag, score):
+	c = database.connect()
+	id = database.read(c, f"SELECT id FROM scores WHERE github = '{github}' and tag = '{tag}';")
+	if id:
+		id = id[0][0]
+		query = f"UPDATE scores SET earned = {score} WHERE id = {id};"
+	else:
+		query = f"INSERT INTO scores (github, tag, earned) VALUES ('{github}','{tag}',{score});"
+	database.execute(c, query)

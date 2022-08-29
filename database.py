@@ -78,13 +78,6 @@ def create_assignments(connection):
 		VALUES ('{tag}', {points});'''
 		execute(connection, enter_assignment)
 
-def remove_student(github):
-	c = connect()
-	delete_scores =	f"DELETE FROM scores WHERE github = '{github}';"
-	execute(c,delete_scores)
-	delete_student = f"DELETE FROM students WHERE github = '{github}';"
-	execute(c,delete_student)
-
 def change_grade(github, tag, score):
 	c = connect()
 	id = read(c, f"SELECT id FROM scores WHERE github = '{github}' and tag = '{tag}';")
@@ -98,13 +91,12 @@ def change_grade(github, tag, score):
 if __name__ == "__main__":
 	c = connect("data.sqlite3")
 	#execute(c,"INSERT INTO students(github, first_weber, last, weber, period) VALUES ('ssmith2','Sue','Smith','ssmith',2);")
-	change_grade("ssmith2", "00p",10)
-	change_grade("ssmith2", "st-",20)
-	change_grade("ssmith2", "P03",10)
+	#change_grade("ssmith2", "00p",10)
+	#change_grade("ssmith2", "st-",20)
+	#change_grade("ssmith2", "P03",10)
 	#print(read(c,"SELECT * FROM scores INNER JOIN students ON scores.github = students.github WHERE period = 2;"))
 	#r = read(c, "SELECT scores.tag, score, assignments.points FROM scores INNER JOIN assignments ON scores.tag = assignments.tag WHERE scores.github = 'bsmith2';")
 	#print(r)
 	#change_grade('bsmith2','00p',10)
 	#change_grade('bsmith2','11p',22)
-	#remove_student('bsmith2')
 	
