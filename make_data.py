@@ -1,25 +1,6 @@
 import shelve, csv, os, datetime, json
 from sys import exit
-
 class Student():
-	def __init__(self, name = "Student, Sample", period = 0, github = 'username'):
-		self.name = name
-		self.period = period
-		self.github = github
-		self.assignments = {}
-		self.add_assignments()
-
-	def __str__(self):
-		rep = f"{self.name}: {self.github}\n"
-		rep += f"{self.period}\n"
-		return rep
-
-	def add_assignments(self):
-		with shelve.open('data.dat') as d:
-			tags = d['assignments']
-		for t in tags:
-			self.assignments[t]=Assignment(t)
-
 	def clone(self, tag):
 		return f"nuames-cs/{tag}-{self.github}"
 

@@ -42,7 +42,6 @@ def create(connection):
 		first_weber TEXT NOT NULL,
 		first_nuames TEXT,
 		last TEXT NOT NULL,
-		weber TEXT NOT NULL,
 		period INTEGER NOT NULL
 	);'''
 	execute(connection, create_students_table)
@@ -65,38 +64,24 @@ def create(connection):
 	create_assignments(connection)
 
 def create_assignments(connection):
-	testing = listdir("Testing")
-	for file in testing:
-		tag = file[:3]
-		try:
-			int(tag[0])
-			points = 10
-		except ValueError:
-			points = 20
-		enter_assignment=f'''
-		INSERT INTO assignments (tag, total)
-		VALUES ('{tag}', {points});'''
-		execute(connection, enter_assignment)
-
-def change_grade(github, tag, score):
-	c = connect()
-	id = read(c, f"SELECT id FROM scores WHERE github = '{github}' and tag = '{tag}';")
-	if id:
-		id = id[0][0]
-		query = f"UPDATE scores SET earned = {score} WHERE id = {id};"
-	else:
-		query = f"INSERT INTO scores (github, tag, earned) VALUES ('{github}','{tag}',{score});"
-	execute(c, query)
+	testing = None
+	try:
+		testing = listdir("Testing")
+	except FileNotFoundError as e:
+		print(f"Error while trying to load assignments:\n{e}")
+	if testing:
+		for file in testing:
+			tag = file[:3]
+			try:
+				int(tag[0])
+				points = 10
+			except ValueError:
+				points = 20
+			enter_assignment=f'''
+			INSERT INTO assignments (tag, total)
+			VALUES ('{tag}', {points});'''
+			execute(connection, enter_assignment)
 
 if __name__ == "__main__":
 	c = connect("data.sqlite3")
-	#execute(c,"INSERT INTO students(github, first_weber, last, weber, period) VALUES ('ssmith2','Sue','Smith','ssmith',2);")
-	#change_grade("ssmith2", "00p",10)
-	#change_grade("ssmith2", "st-",20)
-	#change_grade("ssmith2", "P03",10)
-	#print(read(c,"SELECT * FROM scores INNER JOIN students ON scores.github = students.github WHERE period = 2;"))
-	#r = read(c, "SELECT scores.tag, score, assignments.points FROM scores INNER JOIN assignments ON scores.tag = assignments.tag WHERE scores.github = 'bsmith2';")
-	#print(r)
-	#change_grade('bsmith2','00p',10)
-	#change_grade('bsmith2','11p',22)
 	

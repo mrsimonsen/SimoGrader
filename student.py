@@ -4,7 +4,11 @@ def report(github):
 	c = database.connect()
 	
 	student_query = f"SELECT period, last, first_weber, first_nuames FROM students WHERE github = '{github}';"
-	period, last, first_weber, first_nuames = database.read(c, student_query)[0]
+	result = database.read(c, student_query)
+	if result:
+		period, last, first_weber, first_nuames = result[0]
+	else:
+		return f"{github}: not found in database"
 	
 	line1 = f"{github} - Period: {period}\n"
 	line2 = f"{last}, {first_weber}" + (f" ({first_nuames})\n" if first_nuames else '\n')
@@ -23,6 +27,18 @@ def report(github):
 		rep += f"\n{tag} | {earned}/{total}"
 	return rep
 
+def change_student(github, first_weber=None, first_nuames=None, last=None, period=None):
+	c = database.connect()
+	found = database.read(c, f"SELECT * FROM students WHERE github = '{github}'")
+	if found:
+		old = found[0]
+		if first_weber and first_weber != old[1]:
+			query = f"UPDATE students SET first_weber = '{first_weber}' WHERE github = '{github}';"
+		if 
+	else:
+		query = f"INSERT INTO students VALUES ('{github}', '{first_weber}', '{first_nuames}', '{last}', {period});"
+	databse.execute(c, query)
+
 def remove_student(github):
 	c = database.connect()
 	delete_scores =	f"DELETE FROM scores WHERE github = '{github}';"
@@ -39,3 +55,8 @@ def change_grade(github, tag, score):
 	else:
 		query = f"INSERT INTO scores (github, tag, earned) VALUES ('{github}','{tag}',{score});"
 	database.execute(c, query)
+
+
+if __name__ == '__main__':
+	#change_grade('ssmith2', '12p',0)
+	#print(report('ssmith2'))
