@@ -83,5 +83,5 @@ def create_assignments(connection):
 			execute(connection, enter_assignment)
 
 if __name__ == "__main__":
-	c = connect("data.sqlite3")
+	print(read(connect(), "select tag from assignments;"))
 	

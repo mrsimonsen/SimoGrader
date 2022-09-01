@@ -1,34 +1,5 @@
-import shelve, csv, os, datetime, json
+import shelve, os, datetime, json
 from sys import exit
-class Student():
-	def clone(self, tag):
-		return f"nuames-cs/{tag}-{self.github}"
-
-	def print_assignments(self):
-		rep = f"/tAssignments"
-		rep += "|Tag|Score|\t|Tag|Score|\n"
-		rep +="___________\t___________\n"
-		keys = list(self.assignments.keys())
-		for i in range(0,len(self.assignments),2):
-			a1 = self.assignments[keys[i]]
-			a2 = self.assignments[keys[i+1]]
-			rep += f"|{a1.tag}|{a1.score:>5}|\t|{a2.tag}|{a2.score:>5}|\n"
-		a = self.assignments[-1]
-		rep += f"|{a.tag}|{a.score>5}|"
-		return rep
-
-def get_date():
-	ok = False
-	while not ok:
-		year = validate_num("Year:(####)")
-		month = validate_num("Month:(##)")
-		day = validate_num("Day:(##)")
-		try:
-			d = datetime.datetime(year, month, day)
-			ok = True
-		except ValueError as e:
-			print(e)
-	return d
 
 def clean():
 	print("Gathering Repos...")
@@ -67,53 +38,6 @@ def reset_data():
 		d['students'] = []
 	print("Data has been reset")
 
-def validate_num(question):
-	number = None
-	while not number:
-		try:
-			number = int(input(f"{question}\n"))
-		except ValueError:
-			print("That wasn't a number")
-	return number
-
-def ask_yn(question):
-	r = ''
-	while r not in ('y','n'):
-		r = input(f"{question} (Y/n)\n").lower()
-	return r
-
-def change_float(q1, thing):
-	complete = 'n'
-	while complete == 'n':
-		new = input(f"{q1}\n")
-		try:
-			new = float(new)
-			complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
-		except ValueError:
-			print("That wasn't a number")
-	return new
-
-def change(q1, thing, num = False):
-	complete = 'n'
-	while complete == 'n':
-		if num:
-			new = validate_num(q1)
-		else:
-			new = input(f"{q1}\n")
-		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
-	return new
-
-def validate_assign():
-	assign = []
-	with shelve.open('data.dat') as d:
-		assign += d['assignments']
-		assign.append('done')
-	a = ''
-	print(assign)
-	while a not in assign:
-		a = input("Enter an assignment tag:\n").lower()
-	return a
-
 def set_students():
 	students = []
 	if os.path.exists('students.dat'):
@@ -127,43 +51,6 @@ def set_students():
 		os.system("rm students.dat")
 	else:
 		print("Couldn't find \"students.dat\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
-
-def display_student():
-	stu = select_student()
-	if stu:
-		print(f"{stu.name} Assignments - P{stu.period}")
-		print(stu.print_assignments())
-
-def select_student(text=None):
-	if not text:
-		search = input("Enter a part of a student name or '0' to exit:\n")
-	else:
-		search = text
-	if search == '0':
-		return None
-	d = shelve.open('data.dat')
-	students = d['students']
-	d.close()
-	while search != '0':
-		results = []
-		for i in students:
-			if search.lower() in i.name.lower():
-				results.append(i)
-		if len(results)>1:
-			print("0 - Quit")
-			for i in range(len(results)):
-				print(f"{i+1} - {results[i].name}")
-			n = validate_num("Which student?")-1
-			if n >= 0:
-				return results[n]
-			else:
-				return None
-		elif len(results)==1:
-			return results[0]
-		else:
-			if search != '0':
-				print(f"No students matched \"{search}\"")
-				search = input("Enter a part of a student name or '0' to exit:\n")
 
 def drop():
 	d = shelve.open('data.dat')
@@ -203,7 +90,7 @@ def run_python(simple):
 	return score
 
 def grade(stu, tag, simple = True):
-	os.system(f"gh repo clone {stu.clone(tag)} student -- -q")
+	os.system(f"gh repo clone nuames-cs/{tag}{github} student -- -q")
 	if os.path.isdir('student'):
 		print("Testing...")
 		os.chdir('student')
@@ -399,27 +286,6 @@ def grade_student(text):
 		except KeyError as e:
 			if tag != "done":
 				print("That student doesn't have that assignment")
-
-def report():
-	with shelve.open('data.dat') as d:
-		students = d['students']
-		tags = d['assignments']
-	header = ['Period','Last Name','First Name']
-	for tag in tags:
-		header.append(tag)
-	stuff = [header]
-	for stu in students:
-		if stu.course == course:
-			last, first = stu.name.split(',')
-			row = [stu.period,last,first]
-			for a in tags:
-				s = str(stu.assignments[a].score)
-				row.append(s)
-			stuff.append(row)
-	with open(f'{course}.csv','w',newline='') as f:
-		w = csv.writer(f, delimiter=',', quotechar='|')
-		w.writerows(stuff)
-	print("Report complete")
 
 def grade_multiple():
 	tags = []

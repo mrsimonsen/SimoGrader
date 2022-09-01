@@ -1,10 +1,8 @@
 import database
 
 def report(github):
-	c = database.connect()
-	
 	student_query = f"SELECT period, last, first_weber, first_nuames FROM students WHERE github = '{github}';"
-	result = database.read(c, student_query)
+	result = database.read(database.connect(), student_query)
 	if result:
 		period, last, first_weber, first_nuames = result[0]
 	else:
@@ -21,15 +19,14 @@ def report(github):
 	INNER JOIN assignments ON assignments.tag = scores.tag
 	WHERE scores.github = "{github}"
 	ORDER BY scores.tag;'''
-	result = database.read(c, assignment_query)
+	result = database.read(database.connect(), assignment_query)
 
 	for tag, earned, total in result:
 		rep += f"\n{tag} | {earned}/{total}"
 	return rep
 
 def change_student(github, first_weber=None, first_nuames=None, last=None, period=None):
-	c = database.connect()
-	found = database.read(c, f"SELECT * FROM students WHERE github = '{github}'")
+	found = database.read(database.connect(), f"SELECT * FROM students WHERE github = '{github}'")
 	if found:
 		old = found[0]
 		if first_weber and first_weber != old[1]:
@@ -37,25 +34,22 @@ def change_student(github, first_weber=None, first_nuames=None, last=None, perio
 		if 
 	else:
 		query = f"INSERT INTO students VALUES ('{github}', '{first_weber}', '{first_nuames}', '{last}', {period});"
-	databse.execute(c, query)
+	database.execute(databse.connect(), query)
 
 def remove_student(github):
-	c = database.connect()
 	delete_scores =	f"DELETE FROM scores WHERE github = '{github}';"
-	database.execute(c,delete_scores)
+	database.execute(database.connect(),delete_scores)
 	delete_student = f"DELETE FROM students WHERE github = '{github}';"
-	database.execute(c,delete_student)
+	database.execute(database.connect(),delete_student)
 
 def change_grade(github, tag, score):
-	c = database.connect()
-	id = database.read(c, f"SELECT id FROM scores WHERE github = '{github}' and tag = '{tag}';")
+	id = database.read(database.connect(), f"SELECT id FROM scores WHERE github = '{github}' and tag = '{tag}';")
 	if id:
 		id = id[0][0]
 		query = f"UPDATE scores SET earned = {score} WHERE id = {id};"
 	else:
 		query = f"INSERT INTO scores (github, tag, earned) VALUES ('{github}','{tag}',{score});"
-	database.execute(c, query)
-
+	database.execute(database.connect(), query)
 
 if __name__ == '__main__':
 	#change_grade('ssmith2', '12p',0)
