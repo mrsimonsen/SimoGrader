@@ -5,7 +5,8 @@ from os import listdir
 DATABASE_NAME = 'data.sqlite3'
 
 def connect(db=DATABASE_NAME):
-	'''established a connection to the given database, creates a database using create() if it didn't already exist'''
+	'''Established a connection to the given database, defaults to DATABASE_NAME.
+	If the database didn't already exists it is created with the create() schema.'''
 	connection = None
 	reset = not exists(db)
 	try:
@@ -35,7 +36,20 @@ def read(connection, query):
 		print(f"Read Error:\n{e}\n{query}")
 
 def create(connection):
-	'''creates the database for the auto-grader schema'''
+	'''Creates the tables using the default schema for auto-grader.
+	Also fills the assignments table by pulling the tags from the test files in the 'Testing' director
+	students: github(text, PK), first_weber(text), first_nuames(text), last(text), period(int)
+		github - Student's GitHub username
+		first_weber - Student's first name on record with Weber State University
+		first_nuames - Student's first name on record with NUAMES
+		(university and high school name on record may be different)
+		last - Student's last name on record
+		period - What high school class period the student is in
+	assignments: tag(text, PK), total(int)
+		tag - The prefix tag for the assignment as made in GitHub Classroom
+		total - The total points the assignment is worth
+	scores: id(int, PK, auto), github(text, FK), tag(text, FK), earned(int)
+		id - Autoincrement id '''
 	create_students_table='''
 	CREATE TABLE IF NOT EXISTS students (
 		github TEXT PRIMARY KEY,
@@ -53,12 +67,10 @@ def create(connection):
 	execute(connection, create_assignments_table)
 	create_scores_table='''
 	CREATE TABLE IF NOT EXISTS scores (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		github TEXT NOT NULL,
-		tag TEXT NOT NULL,
+		tag TEXT NOT NULL REFERENCES assignments(tag),
+		github TEXT NOT NULL REFERENCES students(github),
 		earned INTEGER,
-		FOREIGN KEY (github) REFERENCES students (github)
-		FOREIGN KEY (tag) REFERENCES assignments (tag)
+		PRIMARY KEY (tag, github);
 	);'''
 	execute(connection, create_scores_table)
 	create_assignments(connection)

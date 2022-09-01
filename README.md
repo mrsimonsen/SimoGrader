@@ -19,6 +19,10 @@ Utah strands and standards for programming 1 & 2 have changed, and now want to c
 - [ ] update .gitignore to not preserve student database.
 
 ### Instructions to make
+- [ ] Each module should have detailed docstring for help()
+	- [ ] database
+	- [ ] student
+	- [ ] tools
 - [ ] setting up GitHub Classroom
 	- assignment prefix for testing files
 	- .github folder for automatic testing through github actions
