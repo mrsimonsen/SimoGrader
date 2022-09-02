@@ -1,0 +1,1 @@
+This folder contains files for testing that my programs are working like they should - software development testing, not testing student programs.
