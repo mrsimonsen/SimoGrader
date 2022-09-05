@@ -1,5 +1,5 @@
 # Instructions
-Objective: Learn how to use the optional paramaters of the range function.
+Objective: Learn how to use the optional parameters of the range function.
 
 ## Steps
 1. Prompt the user for 3 integers; a starting number, ending number, and step (count-by) number.
