@@ -2,7 +2,7 @@
 Project 10: extends assignment 21 with a structure like 22.
 
 ## Steps
-1. You've been given the main() function for this assignment in the student.py file. Don't edit the main() function. You will need to modify the top of the studnet.py file to import your ShoppingCart file after its created.
+1. You've been given the main() function for this assignment in the student.py file. Don't edit the main() function. You will need to modify the top of the student.py file to import your ShoppingCart file after its created.
 	____
 	### Items.py
 1. Create a file called Items.py, it will have 2 class definitions in it: a generic item in class Generic, and produce item based on the generic item in class Produce.
