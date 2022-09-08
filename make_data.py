@@ -24,16 +24,18 @@ class Student():
 		return f"nuames-cs/{tag}-{self.github}"
 
 	def print_assignments(self):
-		rep = f"/tAssignments"
-		rep += "|Tag|Score|\t|Tag|Score|\n"
-		rep +="___________\t___________\n"
+		rep = f"\tAssignments\n"
+		rep += "|Tag|Score|\t|Tag|Score|\t|Tag|Score|\t|Tag|Score|\n"
+		rep +="___________\t___________\t___________\t___________\n"
 		keys = list(self.assignments.keys())
-		for i in range(0,len(self.assignments),2):
-			a1 = self.assignments[keys[i]]
-			a2 = self.assignments[keys[i+1]]
-			rep += f"|{a1.tag}|{a1.score:>5}|\t|{a2.tag}|{a2.score:>5}|\n"
-		a = self.assignments[-1]
-		rep += f"|{a.tag}|{a.score>5}|"
+		for i in range(0,len(self.assignments),4):
+			for j in range(4):
+				try:
+					a = self.assignments[keys[i+j]]
+					rep += f"|{a.tag}|{a.score:>5}|\t"
+				except IndexError:
+					pass
+			rep+='\n'
 		return rep
 
 class Assignment():
@@ -145,17 +147,23 @@ def validate_assign():
 
 def set_students():
 	students = []
-	if os.path.exists('students.dat'):
+	if os.path.exists('students.txt'):
 		print("Loading students...")
-		with shelve.open('students.dat') as d:
-			for e in d:
-				students.append(Student(e.name,e.period,e.github))
+		with open('students.txt') as f:
+			for line in f:
+				if "last,first_weber,first_nuames,period,weber,github" in line:
+					continue
+				last,legal,nuames,period,weber,github = line.split(',')
+				print(last,legal,nuames,period,weber,github)
+				name = f"{last}, {legal} ({nuames})"
+				print(name)
+				students.append(Student(name,period,github))
 		with shelve.open('data.dat') as d:
 			d['students'] = students
 		print(f"{len(students)} loaded")
-		os.system("rm students.dat")
+		#os.system("rm students.txt")
 	else:
-		print("Couldn't find \"students.dat\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
+		print("Couldn't find \"students.txt\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
 
 def display_student():
 	stu = select_student()
@@ -433,20 +441,18 @@ def report():
 	with shelve.open('data.dat') as d:
 		students = d['students']
 		tags = d['assignments']
-	header = ['Period','Last Name','First Name']
+	header = ['Period','Name',]
 	for tag in tags:
 		header.append(tag)
 	stuff = [header]
 	for stu in students:
-		if stu.course == course:
-			last, first = stu.name.split(',')
-			row = [stu.period,last,first]
-			for a in tags:
-				s = str(stu.assignments[a].score)
-				row.append(s)
-			stuff.append(row)
-	with open(f'{course}.csv','w',newline='') as f:
-		w = csv.writer(f, delimiter=',', quotechar='|')
+		row = [stu.period,stu.name]
+		for a in tags:
+			s = str(stu.assignments[a].score)
+			row.append(s)
+		stuff.append(row)
+	with open(f'report.csv','w',newline='') as f:
+		w = csv.writer(f, delimiter=',')
 		w.writerows(stuff)
 	print("Report complete")
 
