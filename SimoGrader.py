@@ -46,8 +46,7 @@ def class_menu():
 		elif a == '2':
 			create()
 		elif a == '3':
-			if ask_yn("\n-------------------------------\nThis will delete current student data, are you sure?") == 'y':
-				set_students()
+			set_students()
 		elif a == 'exit':
 			exit()
 		else:

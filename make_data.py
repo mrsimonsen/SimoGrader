@@ -149,18 +149,25 @@ def set_students():
 	students = []
 	if os.path.exists('students.txt'):
 		print("Loading students...")
-		with open('students.txt') as f:
+		with open('students.txt','r') as f:
 			for line in f:
 				if "last,first_weber,first_nuames,period,weber,github" in line:
 					continue
 				last,legal,nuames,period,weber,github = line.split(',')
-				print(last,legal,nuames,period,weber,github)
 				name = f"{last}, {legal} ({nuames})"
-				print(name)
-				students.append(Student(name,period,github))
+				students.append(Student(name,period,github.strip()))
 		with shelve.open('data.dat') as d:
-			d['students'] = students
-		print(f"{len(students)} loaded")
+			new = []
+			for stu in students:
+				found = False
+				for s in d['students']:
+					if s.github == stu.github:
+						found = True
+						break
+				if not found:
+					new.append(stu)
+			d['students'] += new
+			print(f"{len(new)} new students loaded")
 		#os.system("rm students.txt")
 	else:
 		print("Couldn't find \"students.txt\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
@@ -226,12 +233,12 @@ def run_python(simple):
 	try:
 		os.system(f"python3 Tests.py {'simple' if simple else ''}")
 		with open('score.txt','r') as f:
-			score = int(f.read())
+			score = float(f.read())
 		os.system("rm score.txt")
 	except KeyboardInterrupt:
 		print("Student test terminated")
 		score = None
-	except ValueError:
+	except ValueError as e:
 		print("non-numeric data in score.txt")
 		score = None
 	except FileNotFoundError:
@@ -411,15 +418,11 @@ def grade_student(text):
 		tag = validate_assign()
 		try:
 			assign = stu.assignments[tag]
-			if assign.score < 5 and assign.late:
-				print(f'Grading {stu.name} -- late')
-				grade(stu,tag, False)
-				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-			elif assign.score < 10 and not assign.late:
+			if assign.score < 10:
 				print(f'Grading {stu.name} -- on time: {stu.github}')
-				grade(stu, tag, False)
+				grade(stu, tag)
 				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-			elif (assign.score == 10 and not assign.late) or (assign.score == 5 and assign.late):
+			elif assign.score == 10:
 				print(f"{stu.name} already has completed assignment")
 			else:
 				print(f"something strange happened in grade_student()")
