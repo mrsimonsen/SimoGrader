@@ -237,13 +237,13 @@ def run_python(simple):
 		os.system("rm score.txt")
 	except KeyboardInterrupt:
 		print("Student test terminated")
-		score = None
+		score = 0
 	except ValueError as e:
 		print("non-numeric data in score.txt")
-		score = None
+		score = 0
 	except FileNotFoundError:
 		print("couldn't find score.txt file")
-		score = None
+		score = 0
 	return score
 
 def grade(stu, tag, simple = True):
@@ -400,7 +400,7 @@ def grade_all():
 		tags = d['assignments']
 	for tag in tags:
 		print(f"Grading {tag}")
-		grade(stu, tag)
+		grade(stu, tag, False)
 	for i in range(len(students)):
 		if students[i].name == stu.name:
 			students[i] = stu
