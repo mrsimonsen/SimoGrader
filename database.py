@@ -4,20 +4,9 @@ from os import listdir
 
 DATABASE_NAME = 'data.sqlite3'
 
-def connect(db=DATABASE_NAME):
-	'''Established a connection to the given database, defaults to DATABASE_NAME.
-	If the database didn't already exists it is created with the create() schema.'''
-	connection = None
-	reset = not exists(db)
-	try:
-		connection = sqlite3.connect(db)
-		if reset:
-			create(connection)
-	except sqlite3.Error as e:
-		print(f"Connection Error:\n{e}")
-	return connection
-
-def execute(connection, query):
+def execute(query):
+	'''connect to the default DATABASE_NAME and try to execute the provided query'''
+	connection = sqlite3.connect(DATABASE_NAME)
 	cursor = connection.cursor()
 	try:
 		cursor.execute(query)
@@ -25,7 +14,9 @@ def execute(connection, query):
 	except sqlite3.Error as e:
 		print(f"Execute Error:\n{e}\n{query}")
 
-def read(connection, query):
+def read(query):
+	'''connect to the default DATABASE_NAME and try to execute the provided query and return the results'''
+	connection = sqlite3.connect(DATABASE_NAME)
 	cursor = connection.cursor()
 	result = None
 	try:
@@ -35,9 +26,9 @@ def read(connection, query):
 	except sqlite3.Error as e:
 		print(f"Read Error:\n{e}\n{query}")
 
-def create(connection):
+def create():
 	'''Creates the tables using the default schema for auto-grader.
-	Also fills the assignments table by pulling the tags from the test files in the 'Testing' director
+	Also fills the assignments table by pulling the tags from the test files in the 'Testing' directory
 	students: github(text, PK), first_weber(text), first_nuames(text), last(text), period(int)
 		github - Student's GitHub username
 		first_weber - Student's first name on record with Weber State University
@@ -48,8 +39,11 @@ def create(connection):
 	assignments: tag(text, PK), total(int)
 		tag - The prefix tag for the assignment as made in GitHub Classroom
 		total - The total points the assignment is worth
-	scores: id(int, PK, auto), github(text, FK), tag(text, FK), earned(int)
-		id - Autoincrement id '''
+	scores: github(text, FK), tag(text, FK), earned(int), PK(tag,github)
+		github - Foreign key to student's GitHub username
+		tag - Foreign key to the assignment's prefix tag
+		earned - How many points did the students earn for that assignment
+	'''
 	create_students_table='''
 	CREATE TABLE IF NOT EXISTS students (
 		github TEXT PRIMARY KEY,
@@ -58,24 +52,21 @@ def create(connection):
 		last TEXT NOT NULL,
 		period INTEGER NOT NULL
 	);'''
-	execute(connection, create_students_table)
+	execute(create_students_table)
 	create_assignments_table='''
 	CREATE TABLE IF NOT EXISTS assignments (
 		tag TEXT PRIMARY KEY,
 		total INTEGER NOT NULL
 		);'''
-	execute(connection, create_assignments_table)
+	execute(create_assignments_table)
 	create_scores_table='''
 	CREATE TABLE IF NOT EXISTS scores (
 		tag TEXT NOT NULL REFERENCES assignments(tag),
 		github TEXT NOT NULL REFERENCES students(github),
 		earned INTEGER,
-		PRIMARY KEY (tag, github);
+		PRIMARY KEY (tag, github)
 	);'''
-	execute(connection, create_scores_table)
-	create_assignments(connection)
-
-def create_assignments(connection):
+	execute(create_scores_table)
 	testing = None
 	try:
 		testing = listdir("Testing")
@@ -85,15 +76,18 @@ def create_assignments(connection):
 		for file in testing:
 			tag = file[:3]
 			try:
+				#regular assignment start with a number
 				int(tag[0])
 				points = 10
 			except ValueError:
+				#projects start with a letter and are worth more
 				points = 20
 			enter_assignment=f'''
 			INSERT INTO assignments (tag, total)
 			VALUES ('{tag}', {points});'''
-			execute(connection, enter_assignment)
+			execute(enter_assignment)
 
 if __name__ == "__main__":
-	print(read(connect(), "select tag from assignments;"))
+	create()
+	print(read("select tag from assignments;"))
 	
