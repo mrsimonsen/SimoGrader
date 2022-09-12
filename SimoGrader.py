@@ -1,111 +1,111 @@
-from make_data import *
+import sqlite3
+from os.path import exists
+from os import listdir
 
-def grading_menu():
-	a = ''
-	while a != '0':
-		print("Grading Menu")
-		print("0 - Return to Main Menu")
-		print("1 - Grade Multiple Assignments")
-		print("2 - Grade an Assignment")
-		print("3 - Grade a single Student's Assignment")
-		print("4 - Grade all of single Student's Assignments")
-		print("5 - Generate Report")
-		a = input("What's your selection?\n")
+DATABASE_NAME = 'data.sqlite3'
 
-		if a=='0':
-			print("Returning to Main Menu")
-		elif a == '1':
-			grade_multiple()
-		elif a == '2':
-			grade_assignment()
-		elif a == '4':
-			grade_all()
-		elif a == '5':
-			report()
-		elif a == 'exit':
-			exit()
-		elif a == '3' or not a.isdigit():
-			grade_student(a)
-		else:
-			print("That's not a valid menu option.")
+def execute(query):
+	'''connect to the default DATABASE_NAME and try to execute the provided query'''
+	connection = sqlite3.connect(DATABASE_NAME)
+	cursor = connection.cursor()
+	try:
+		cursor.execute(query)
+		connection.commit()
+	except sqlite3.Error as e:
+		print(f"Execute Error:\n{e}\n{query}")
 
-def class_menu():
-	a = ''
-	while a != '0':
-		print("Class Menu")
-		print("0 - Return to Main Menu")
-		print("1 - Drop Student")
-		print("2 - Add Student")
-		print("3 - Import Students")
-		a = input("What's your selection?\n")
+def read(query):
+	'''connect to the default DATABASE_NAME and try to execute the provided query and return the results'''
+	connection = sqlite3.connect(DATABASE_NAME)
+	cursor = connection.cursor()
+	result = None
+	try:
+		cursor.execute(query)
+		result = cursor.fetchall()
+		return result
+	except sqlite3.Error as e:
+		print(f"Read Error:\n{e}\n{query}")
 
-		if a == '0':
-			print("Returning to Main Menu")
-		elif a == '1':
-			drop()
-		elif a == '2':
-			create()
-		elif a == '3':
-			if ask_yn("\n-------------------------------\nThis will delete current student data, are you sure?") == 'y':
-				set_periods()
-				set_students()
-		elif a == 'exit':
-			exit()
-		else:
-			print("That's not a valid menu option.")
+def create():
+	'''Creates the tables using the default schema for auto-grader.
+	Also fills the assignments table by pulling the tags from the test files in the 'Testing' directory
+	students: github(text, PK), name (text), period(int)
+		github - Student's GitHub username
+		name - Student's "last, first (actual)" name
+		(university and high school name on record may be different)
+		period - What high school class period the student is in
+	assignments: tag(text, PK), total(int)
+		tag - The prefix tag for the assignment as made in GitHub Classroom
+		total - The total points the assignment is worth
+	scores: github(text, FK), tag(text, FK), earned(int), PK(tag,github)
+		github - Foreign key to student's GitHub username
+		tag - Foreign key to the assignment's prefix tag
+		earned - How many points did the students earn for that assignment
+	'''
+	create_students_table='''
+	CREATE TABLE IF NOT EXISTS students (
+		github TEXT PRIMARY KEY,
+		name TEXT NOT NULL,
+		period INTEGER NOT NULL
+	);'''
+	execute(create_students_table)
+	create_assignments_table='''
+	CREATE TABLE IF NOT EXISTS assignments (
+		tag TEXT PRIMARY KEY,
+		total INTEGER NOT NULL
+		);'''
+	execute(create_assignments_table)
+	create_scores_table='''
+	CREATE TABLE IF NOT EXISTS scores (
+		tag TEXT NOT NULL REFERENCES assignments(tag),
+		github TEXT NOT NULL REFERENCES students(github),
+		earned INTEGER,
+		PRIMARY KEY (tag, github)
+	);'''
+	execute(create_scores_table)
+	testing = None
+	try:
+		testing = listdir("Testing")
+	except FileNotFoundError as e:
+		print(f"Error while trying to load assignments:\n{e}")
+	if testing:
+		for file in testing:
+			tag = file[:3]
+			try:
+				#regular assignment start with a number
+				int(tag[0])
+				points = 10
+			except ValueError:
+				#projects start with a letter and are worth more
+				points = 20
+			enter_assignment=f'''
+			INSERT INTO assignments (tag, total)
+			VALUES ('{tag}', {points});'''
+			execute(enter_assignment)
 
-def student_menu():
-	a = ''
-	while a != '0':
-		print("Student Menu")
-		print("0 - Return to Main Menu")
-		print("1 - View a Student")
-		print("2 - Modify a Student")
-		print("3 - Modify a Student's Assignment")
-		a = input ("What's your selection?\n")
+def report(github):
+	'''return a string report of a given student's assignments'''
+	student_query = f"SELECT period, name FROM students WHERE github = '{github}';"
+	result = read(student_query)
 
-		if a == '0':
-			print("Returning to Main Menu")
-		elif a == '1':
-			display_student()
-		elif a == '2':
-			mod_student()
-		elif a == '3':
-			mod_assign()
-		elif a == 'exit':
-			exit()
-		else:
-			print("That's not a valid menu option.")
+	if result:
+		period, name = result[0]
+	else:
+		return f"{github}: not found in database"
+	
+	line1 = f"{github} - Period: {period}\n"
+	line2 = f"{name}\n"
+	separator = '-'*len(line1) if len(line1) > len(line2) else '-'*len(line2)
+	rep = line1+line2+separator
 
-def main():
-	print("Welcome to the Simonsen AutoGrater Data Utility")
-	c = 14
-	while c != '0':
-		print("Main Menu")
-		print("0 - Quit")
-		print("1 - Grading Menu")
-		print("2 - Class Menu")
-		print("3 - Student Menu")
-		print("4 - Reset Database")
-		print("5 - Delete Old Repos")
-		c = input("What's your selection?\n")
+	assignment_query = f'''
+	SELECT scores.tag, earned, assignments.total
+	FROM scores
+	INNER JOIN assignments ON assignments.tag = scores.tag
+	WHERE scores.github = "{github}"
+	ORDER BY scores.tag;'''
+	result = read(assignment_query)
 
-		if c == '0':
-			print("Goodbye")
-		elif c == '1':
-			grading_menu()
-		elif c == '2':
-			class_menu()
-		elif c == '3':
-			student_menu()
-		elif c == '4':
-			reset_data()
-		elif c == '5':
-			clean()
-		elif c == 'exit':
-			exit()
-		else:
-			print("That's not a valid menu option.")
-
-if __name__ == "__main__":
-	main()
+	for tag, earned, total in result:
+		rep += f"\n{tag} | {earned}/{total}"
+	return rep

@@ -1,29 +1,4 @@
-import database
 
-def report(github):
-	student_query = f"SELECT period, last, first_weber, first_nuames FROM students WHERE github = '{github}';"
-	result = database.read(database.connect(), student_query)
-	if result:
-		period, last, first_weber, first_nuames = result[0]
-	else:
-		return f"{github}: not found in database"
-	
-	line1 = f"{github} - Period: {period}\n"
-	line2 = f"{last}, {first_weber}" + (f" ({first_nuames})\n" if first_nuames else '\n')
-	separator = '-'*len(line1) if len(line1) > len(line2) else '-'*len(line2)
-	rep = line1+line2+separator
-
-	assignment_query = f'''
-	SELECT scores.tag, earned, assignments.total
-	FROM scores
-	INNER JOIN assignments ON assignments.tag = scores.tag
-	WHERE scores.github = "{github}"
-	ORDER BY scores.tag;'''
-	result = database.read(database.connect(), assignment_query)
-
-	for tag, earned, total in result:
-		rep += f"\n{tag} | {earned}/{total}"
-	return rep
 
 def change_student(github, first_weber=None, first_nuames=None, last=None, period=None):
 	found = database.read(database.connect(), f"SELECT * FROM students WHERE github = '{github}'")

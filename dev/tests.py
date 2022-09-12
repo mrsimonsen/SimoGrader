@@ -1,16 +1,14 @@
 from unittest.mock import patch
 from io import StringIO
-import unittest, sys, os
-#import modules from outside the folder
+import unittest, sys, os, sqlite3
+#import SimoGrader from outside the folder
 sys.path.insert(0,f'{os.getcwd()}/../.')
-import database
-import sqlite3
+import SimoGrader
 
-class Tests(unittest.TestCase):
+class Database(unittest.TestCase):
 	def tearDown(self):
 		'''clean up after each test'''
-		os.system('rm -f data.sqlite3')
-		os.system('rm -rf Testing')
+		os.system('rm data.sqlite3')
 
 	def test01_write_read(self):
 		'''tests the execute() and read() database functions'''
@@ -18,9 +16,9 @@ class Tests(unittest.TestCase):
 		query = "CREATE TABLE test (id INTEGER PRIMARY KEY AUTOINCREMENT, value TEXT);"
 		query2 = "INSERT INTO test(value) VALUES ('some data'),('more data'),('another');"
 		query3 = "SELECT * FROM test;"
-		database.execute(query)
-		database.execute(query2)
-		result = database.read(query3)
+		SimoGrader.execute(query)
+		SimoGrader.execute(query2)
+		result = SimoGrader.read(query3)
 		self.assertEqual(result, correct)
 
 	def test02_schema_creation(self):
@@ -31,10 +29,22 @@ class Tests(unittest.TestCase):
 		for i in range(2):
 			os.system(f'touch Testing/{i:02}p.py')
 			os.system(f'touch Testing/P{i:02}.py')
-		database.create()
+		SimoGrader.create()
+		os.system('rm -rf Testing')
 		query = "SELECT tag FROM assignments;"
-		result = database.read(query)
+		result = SimoGrader.read(query)
 		self.assertEqual(result, correct)
+
+class Student(unittest.TestCase):
+	@classmethod
+	def setUpClass(cls):
+		SimoGrader.create()
+	@classmethod
+	def tearDownClass(cls):
+		os.system('rm data.sqlite3')
+
+	
+
 
 if __name__ == "__main__":
 	unittest.main(failfast=True)
