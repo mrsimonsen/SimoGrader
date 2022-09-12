@@ -109,3 +109,18 @@ def report(github):
 	for tag, earned, total in result:
 		rep += f"\n{tag} | {earned}/{total}"
 	return rep
+#convert format to match this - up to 4 assignments per line 
+'''def print_assignments(self):
+		rep = f"\tAssignments\n"
+		rep += "|Tag|Score|\t|Tag|Score|\t|Tag|Score|\t|Tag|Score|\n"
+		rep +="___________\t___________\t___________\t___________\n"
+		keys = list(self.assignments.keys())
+		for i in range(0,len(self.assignments),4):
+			for j in range(4):
+				try:
+					a = self.assignments[keys[i+j]]
+					rep += f"|{a.tag}|{a.score:>5}|\t"
+				except IndexError:
+					pass
+			rep+='\n'
+		return rep'''
