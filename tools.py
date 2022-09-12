@@ -81,7 +81,7 @@ def select_student():
 				print(f"No students matched \"{search}\"")
 				search = input("Enter a part of a student name (or '0' to exit):\n")
 
-def report():
+def csv_report():
 	c = database.connect()
 	tags = database.read(c, 
 	"SELECT tag FROM assignments;")
