@@ -1,5 +1,65 @@
-import shelve, os, datetime, json
+import shelve, csv, os, datetime, json
 from sys import exit
+
+class Student():
+	def __init__(self, name = "Student, Sample", period = 0, github = 'username'):
+		self.name = name
+		self.period = period
+		self.github = github
+		self.assignments = {}
+		self.add_assignments()
+
+	def __str__(self):
+		rep = f"{self.name}: {self.github}\n"
+		rep += f"{self.period}\n"
+		return rep
+
+	def add_assignments(self):
+		with shelve.open('data.dat') as d:
+			tags = d['assignments']
+		for t in tags:
+			self.assignments[t]=Assignment(t)
+
+	def clone(self, tag):
+		return f"nuames-cs/{tag}-{self.github}"
+
+	def print_assignments(self):
+		rep = f"\tAssignments\n"
+		rep += "|Tag|Score|\t|Tag|Score|\t|Tag|Score|\t|Tag|Score|\n"
+		rep +="___________\t___________\t___________\t___________\n"
+		keys = list(self.assignments.keys())
+		for i in range(0,len(self.assignments),4):
+			for j in range(4):
+				try:
+					a = self.assignments[keys[i+j]]
+					rep += f"|{a.tag}|{a.score:>5}|\t"
+				except IndexError:
+					pass
+			rep+='\n'
+		return rep
+
+class Assignment():
+	def __init__(self, tag):
+		self.tag = tag
+		self.score = 0.0
+
+	def __str__(self):
+		rep = f"Assignment {self.tag}\n"
+		rep += f"Score: {self.score}/10\n"
+		return rep
+
+def get_date():
+	ok = False
+	while not ok:
+		year = validate_num("Year:(####)")
+		month = validate_num("Month:(##)")
+		day = validate_num("Day:(##)")
+		try:
+			d = datetime.datetime(year, month, day)
+			ok = True
+		except ValueError as e:
+			print(e)
+	return d
 
 def clean():
 	print("Gathering Repos...")
@@ -38,19 +98,116 @@ def reset_data():
 		d['students'] = []
 	print("Data has been reset")
 
+def validate_num(question):
+	number = None
+	while not number:
+		try:
+			number = int(input(f"{question}\n"))
+		except ValueError:
+			print("That wasn't a number")
+	return number
+
+def ask_yn(question):
+	r = ''
+	while r not in ('y','n'):
+		r = input(f"{question} (Y/n)\n").lower()
+	return r
+
+def change_float(q1, thing):
+	complete = 'n'
+	while complete == 'n':
+		new = input(f"{q1}\n")
+		try:
+			new = float(new)
+			complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
+		except ValueError:
+			print("That wasn't a number")
+	return new
+
+def change(q1, thing, num = False):
+	complete = 'n'
+	while complete == 'n':
+		if num:
+			new = validate_num(q1)
+		else:
+			new = input(f"{q1}\n")
+		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
+	return new
+
+def validate_assign():
+	assign = []
+	with shelve.open('data.dat') as d:
+		assign += d['assignments']
+		assign.append('done')
+	a = ''
+	print(assign)
+	while a not in assign:
+		a = input("Enter an assignment tag:\n").lower()
+	return a
+
 def set_students():
 	students = []
-	if os.path.exists('students.dat'):
+	if os.path.exists('students.txt'):
 		print("Loading students...")
-		with shelve.open('students.dat') as d:
-			for e in d:
-				students.append(Student(e.name,e.period,e.github))
+		with open('students.txt','r') as f:
+			for line in f:
+				if "last,first_weber,first_nuames,period,weber,github" in line:
+					continue
+				last,legal,nuames,period,weber,github = line.split(',')
+				name = f"{last}, {legal} ({nuames})"
+				students.append(Student(name,period,github.strip()))
 		with shelve.open('data.dat') as d:
-			d['students'] = students
-		print(f"{len(students)} loaded")
-		os.system("rm students.dat")
+			new = []
+			for stu in students:
+				found = False
+				for s in d['students']:
+					if s.github == stu.github:
+						found = True
+						break
+				if not found:
+					new.append(stu)
+			d['students'] += new
+			print(f"{len(new)} new students loaded")
+		#os.system("rm students.txt")
 	else:
-		print("Couldn't find \"students.dat\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
+		print("Couldn't find \"students.txt\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
+
+def display_student():
+	stu = select_student()
+	if stu:
+		print(f"{stu.name} Assignments - P{stu.period}")
+		print(stu.print_assignments())
+
+def select_student(text=None):
+	if not text:
+		search = input("Enter a part of a student name or '0' to exit:\n")
+	else:
+		search = text
+	if search == '0':
+		return None
+	d = shelve.open('data.dat')
+	students = d['students']
+	d.close()
+	while search != '0':
+		results = []
+		for i in students:
+			if search.lower() in i.name.lower():
+				results.append(i)
+		if len(results)>1:
+			print("0 - Quit")
+			for i in range(len(results)):
+				print(f"{i+1} - {results[i].name}")
+			n = validate_num("Which student?")-1
+			if n >= 0:
+				return results[n]
+			else:
+				return None
+		elif len(results)==1:
+			return results[0]
+		else:
+			if search != '0':
+				print(f"No students matched \"{search}\"")
+				search = input("Enter a part of a student name or '0' to exit:\n")
 
 def drop():
 	d = shelve.open('data.dat')
@@ -76,21 +233,21 @@ def run_python(simple):
 	try:
 		os.system(f"python3 Tests.py {'simple' if simple else ''}")
 		with open('score.txt','r') as f:
-			score = int(f.read())
+			score = float(f.read())
 		os.system("rm score.txt")
 	except KeyboardInterrupt:
 		print("Student test terminated")
-		score = None
-	except ValueError:
+		score = 0
+	except ValueError as e:
 		print("non-numeric data in score.txt")
-		score = None
+		score = 0
 	except FileNotFoundError:
 		print("couldn't find score.txt file")
-		score = None
+		score = 0
 	return score
 
 def grade(stu, tag, simple = True):
-	os.system(f"gh repo clone nuames-cs/{tag}{github} student -- -q")
+	os.system(f"gh repo clone {stu.clone(tag)} student -- -q")
 	if os.path.isdir('student'):
 		print("Testing...")
 		os.chdir('student')
@@ -243,7 +400,7 @@ def grade_all():
 		tags = d['assignments']
 	for tag in tags:
 		print(f"Grading {tag}")
-		grade(stu, tag)
+		grade(stu, tag, False)
 	for i in range(len(students)):
 		if students[i].name == stu.name:
 			students[i] = stu
@@ -261,15 +418,11 @@ def grade_student(text):
 		tag = validate_assign()
 		try:
 			assign = stu.assignments[tag]
-			if assign.score < 5 and assign.late:
-				print(f'Grading {stu.name} -- late')
-				grade(stu,tag, False)
-				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-			elif assign.score < 10 and not assign.late:
+			if assign.score < 10:
 				print(f'Grading {stu.name} -- on time: {stu.github}')
-				grade(stu, tag, False)
+				grade(stu, tag)
 				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-			elif (assign.score == 10 and not assign.late) or (assign.score == 5 and assign.late):
+			elif assign.score == 10:
 				print(f"{stu.name} already has completed assignment")
 			else:
 				print(f"something strange happened in grade_student()")
@@ -286,6 +439,25 @@ def grade_student(text):
 		except KeyError as e:
 			if tag != "done":
 				print("That student doesn't have that assignment")
+
+def report():
+	with shelve.open('data.dat') as d:
+		students = d['students']
+		tags = d['assignments']
+	header = ['Period','Name',]
+	for tag in tags:
+		header.append(tag)
+	stuff = [header]
+	for stu in students:
+		row = [stu.period,stu.name]
+		for a in tags:
+			s = str(stu.assignments[a].score)
+			row.append(s)
+		stuff.append(row)
+	with open(f'report.csv','w',newline='') as f:
+		w = csv.writer(f, delimiter=',')
+		w.writerows(stuff)
+	print("Report complete")
 
 def grade_multiple():
 	tags = []
