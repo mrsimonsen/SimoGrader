@@ -86,6 +86,8 @@ def create():
 			INSERT INTO assignments (tag, total)
 			VALUES ('{tag}', {points});'''
 			execute(enter_assignment)
+	#also create game design management
+	execute("INSERT INTO assignments (tag, total) VALUES ('godot',50);")
 
 
 #Student Methods

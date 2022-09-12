@@ -1,4 +1,4 @@
-import datetime, database, csv
+import datetime, csv
 
 def get_date():
 	ok = False
@@ -50,7 +50,7 @@ def change(q1, thing, num = False):
 	return new
 
 def validate_assign():
-	raw = database.read(database.connect(), "SELECT tag FROM assignments;")
+	raw = read("SELECT tag FROM assignments;")
 	assigns = []
 	for i in raw:
 		assigns.append(i[0])
@@ -63,8 +63,7 @@ def validate_assign():
 def select_student():
 	search = input("Enter a part of a student name (or '0' to exit):\n")
 	while search != '0':
-		results = database.read(database.connect(),
-		f"SELECT last, first_weber, first_nuames, github FROM students WHERE last LIKE %{search}% OR first_weber LIKE %{search}% OR first_nuames LIKE %{search}%;")
+		results = read(f"SELECT name, github FROM students WHERE name LIKE %{search}%;")
 		if len(results)>1:
 			print("0 - Quit")
 			for i in range(len(results)):
@@ -82,19 +81,16 @@ def select_student():
 				search = input("Enter a part of a student name (or '0' to exit):\n")
 
 def csv_report():
-	c = database.connect()
-	tags = database.read(c, 
-	"SELECT tag FROM assignments;")
-	students = database.read(c,
-	f"SELECT * FROM students;")
-	header = ['Period','Last Name','Weber First', 'NUAMES First']
+	tags = read("SELECT tag FROM assignments;")
+	students = read(f"SELECT * FROM students;")
+	header = ['Period','Name']
 	for t in tags:
 		header.append(t[0])
 	stuff = [header]
-	for github, first_weber, first_nuames, last, period in students:
-		row = [period, last, first_weber, first_nuames]
+	for github, name, period in students:
+		row = [period, name]
 		for a in tags:
-			s = database.read(c, f"SELECT earned FROM scores WHERE github = '{github}' AND tag = '{a[0]}';")
+			s = read(f"SELECT earned FROM scores WHERE github = '{github}' AND tag = '{a[0]}';")
 			if s:
 				row.append(s[0][0])
 			else:
@@ -104,4 +100,3 @@ def csv_report():
 		w = csv.writer(f, delimiter=',', quotechar='|')
 		w.writerows(stuff)
 	print("Report complete")
-report()
