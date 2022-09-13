@@ -19,10 +19,7 @@ Utah strands and standards for programming 1 & 2 have changed, and now want to c
 - [ ] update .gitignore to not preserve student database.
 
 ### Instructions to make
-- [ ] Each module should have detailed docstring for help()
-	- [ ] database
-	- [ ] student
-	- [ ] tools
+- [ ] Each function should have detailed docstring for help()
 - [ ] setting up GitHub Classroom
 	- assignment prefix for testing files
 	- .github folder for automatic testing through github actions
@@ -34,6 +31,6 @@ Utah strands and standards for programming 1 & 2 have changed, and now want to c
 	- [ ] testing dependencies try/catch
 	- [ ] test file ordering and fast-fail
 - [ ] getting student data setup
-	- public RSA assignment ([fireship video](https://www.youtube.com/watch?v=UFc-RPbq8kg) on automate and validate PRs) - practice git while getting student data
+	- <del>public RSA assignment ([fireship video](https://www.youtube.com/watch?v=UFc-RPbq8kg) on automate and validate PRs) - practice git while getting student data</del> Way too much work (validating and merging pull requests, too difficult for students too early)
 	- CSV import (like from a goolge form)
 	- manual student entry through GUI

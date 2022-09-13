@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from io import StringIO
 import unittest, sys, os, sqlite3
-#import SimoGrader from outside the folder
+#import from outside the folder
 sys.path.insert(0,f'{os.getcwd()}/../.')
 import SimoGrader
 
@@ -113,6 +113,8 @@ ______________	______________	______________	______________
 '''
 		result = SimoGrader.student_report('skyguy')
 		self.assertEqual(result, correct)
+
+
 
 
 if __name__ == "__main__":
