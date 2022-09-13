@@ -1,53 +1,6 @@
 import shelve, csv, os, datetime, json
 from sys import exit
 
-class Student():
-	def __init__(self, name = "Student, Sample", period = 0, github = 'username'):
-		self.name = name
-		self.period = period
-		self.github = github
-		self.assignments = {}
-		self.add_assignments()
-
-	def __str__(self):
-		rep = f"{self.name}: {self.github}\n"
-		rep += f"{self.period}\n"
-		return rep
-
-	def add_assignments(self):
-		with shelve.open('data.dat') as d:
-			tags = d['assignments']
-		for t in tags:
-			self.assignments[t]=Assignment(t)
-
-	def clone(self, tag):
-		return f"nuames-cs/{tag}-{self.github}"
-
-	def print_assignments(self):
-		rep = f"\tAssignments\n"
-		rep += "|Tag|Score|\t|Tag|Score|\t|Tag|Score|\t|Tag|Score|\n"
-		rep +="___________\t___________\t___________\t___________\n"
-		keys = list(self.assignments.keys())
-		for i in range(0,len(self.assignments),4):
-			for j in range(4):
-				try:
-					a = self.assignments[keys[i+j]]
-					rep += f"|{a.tag}|{a.score:>5}|\t"
-				except IndexError:
-					pass
-			rep+='\n'
-		return rep
-
-class Assignment():
-	def __init__(self, tag):
-		self.tag = tag
-		self.score = 0.0
-
-	def __str__(self):
-		rep = f"Assignment {self.tag}\n"
-		rep += f"Score: {self.score}/10\n"
-		return rep
-
 def get_date():
 	ok = False
 	while not ok:
@@ -86,17 +39,6 @@ def clean():
 			print(f"deleting nuames-cs/{i} ({c}/{total})")
 			os.system(f"gh repo delete nuames-cs/{i} --confirm")
 	print("Done.")
-
-def reset_data():
-	assignments = ["st-"]
-	for i in range(26):
-		assignments.append(f"{i:02}p")
-	for i in range(1,12):
-		assignments.append(f"P{i:02}")
-	with shelve.open('data.dat','n') as d:
-		d['assignments'] = assignments
-		d['students'] = []
-	print("Data has been reset")
 
 def validate_num(question):
 	number = None
@@ -172,12 +114,6 @@ def set_students():
 	else:
 		print("Couldn't find \"students.txt\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
 
-def display_student():
-	stu = select_student()
-	if stu:
-		print(f"{stu.name} Assignments - P{stu.period}")
-		print(stu.print_assignments())
-
 def select_student(text=None):
 	if not text:
 		search = input("Enter a part of a student name or '0' to exit:\n")
@@ -209,168 +145,9 @@ def select_student(text=None):
 				print(f"No students matched \"{search}\"")
 				search = input("Enter a part of a student name or '0' to exit:\n")
 
-def drop():
-	d = shelve.open('data.dat')
-	students = d['students']
-	d.close()
-	stu = select_student()
-	if not stu:
-		return
-	print(f"Dropping {stu.name.upper()}, {stu.period}")
-	if ask_yn("Are you sure? This CANNOT be undone.") == 'y':
-		for i in range(len(students)):
-			if students[i].name == stu.name:
-				students.pop(i)
-				break
-		d = shelve.open('data.dat')
-		d['students'] = students
-		d.close()
-		print(f"{stu.name} dropped")
-	else:
-		print("Drop Aborted")
-
-def run_python(simple):
-	try:
-		os.system(f"python3 Tests.py {'simple' if simple else ''}")
-		with open('score.txt','r') as f:
-			score = float(f.read())
-		os.system("rm score.txt")
-	except KeyboardInterrupt:
-		print("Student test terminated")
-		score = 0
-	except ValueError as e:
-		print("non-numeric data in score.txt")
-		score = 0
-	except FileNotFoundError:
-		print("couldn't find score.txt file")
-		score = 0
-	return score
-
-def grade(stu, tag, simple = True):
-	os.system(f"gh repo clone {stu.clone(tag)} student -- -q")
-	if os.path.isdir('student'):
-		print("Testing...")
-		os.chdir('student')
-		os.system(f"cp ../Testing/{tag}tests.py Tests.py")
-		stu.assignments[tag].score = run_python(simple)
-		extract_algorithm(stu, tag)
-		os.chdir('..')
-		os.system('rm -rf student')
-	else:
-		print(f"{stu.name} hasn't started the assignment")
-
-def extract_algorithm(stu, tag):
-	if tag[0] == 'P':
-		name = f'../Algorithms-{tag}'
-		if not os.path.isdir(name):
-			os.system(f'mkdir {name}')
-		with open('student.py','r') as f:
-			text = f.readlines()
-		algo = []
-		for line in text:
-			if line.strip()[0]=='#':
-				algo.append(line)
-		with open(f'{name}/{stu.name}-Algo.txt','w') as f:
-			f.writelines(algo)
-
-def mod_student():
-	stu = select_student()
-	if not stu:
-		return
-	choice = -1
-	new = Student(stu.name, stu.period, stu.github)
-	new.assignments = stu.assignments
-	while choice != 0 and stu:
-		print(stu)
-		print("0 - Save/Back to Main Menu")
-		print("1 - Change name")
-		print("2 - Change github username")
-		print("3 - Change class period")
-		choice = -1
-		while choice not in range(4):
-			choice = validate_num("What would you like to change?")
-		if choice == 1:
-			print(f"Changing {stu.name} name:")
-			new.name = change("Enter a new name:",stu.name)
-		elif choice == 2:
-			print(f"Changing {stu.name} username:")
-			new.github = change("Enter a new github username:",stu.github)
-		elif choice == 3:
-			print(f"Changing {stu.name} period:")
-			new.period = change(f"Enter a new period for {stu.name}:",stu.period, True)
-		elif choice == 0:
-			d = shelve.open('data.dat')
-			students = d['students']
-			for i in range(len(students)):
-				if students[i].name == stu.name:
-					students[i] = new
-					break
-			d['students'] = students
-			d.close()
-			print('Data saved')
-
 #function to use as a sorting key in choice 5 of mod_student
 def fsort(obj):
 	return obj.name
-
-def create():
-	print("Adding a student to the roster.")
-	correct = 'n'
-	d =  shelve.open('data.dat')
-	students = d['students']
-	d.close()
-	while correct == 'n':
-		fname = input("What is the student's first name?\n").title()
-		lname = input("What is the student's last name?\n").title()
-		period = int(input("What class period is the student in?\n"))
-		git = input("What is the student's GitHub username?\n")
-		print(f"Student: {lname}, {fname}")
-		print(f"Period: {period}")
-		print(f"GitHub username: {git}")
-		correct = ask_yn("Is this information correct?")
-	#make the student
-	new = Student(f"{lname}, {fname}", period, git)
-	print("...student created")
-	new.add_assignments()
-	print("...assignments created")
-	students.append(new)
-	students.sort(key=fsort)
-	d = shelve.open('data.dat')
-	d['students'] = students
-	print("Student created and added to database. Data Saved.")
-
-def mod_assign():
-	stu = select_student()
-	if not stu:
-		return
-	choice = None
-	while choice != 0 and stu:
-		print(stu)
-		print(stu.print_assignments())
-		print("0 - Save/Back to Main Menu")
-		print("1 - Change a score")
-		print("2 - Set as late")
-		choice = -1
-		while choice not in (0,1,2):
-			choice = validate_num("What would you like to do?")
-		if choice == 1:
-			tag = validate_assign()
-			stu.assignments[tag].score = change_float("Enter a new score:", stu.assignments[tag].score)
-		elif choice == 2:
-			tag = validate_assign()
-			l = not stu.assignments[tag].late
-			if ask_yn(f"Set {tag} to {l}?") == 'y':
-				stu.assignments[tag].set_late()
-		elif choice == 0:
-			d = shelve.open('data.dat')
-			students = d['students']
-			for i in range(len(students)):
-				if students[i].name == stu.name:
-					students[i] = stu
-					break
-			d['students'] = students
-			d.close()
-			print('Data saved')
 
 def grade_assignment(tag = None):
 	if not tag:
