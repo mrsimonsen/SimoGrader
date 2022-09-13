@@ -1,4 +1,5 @@
 from database import execute, read
+import os
 
 def change_student(github, name=None, period=None):
 	'''Create or change a student's details'''
@@ -71,3 +72,7 @@ def student_report(github):
 			rep = rep[:-1]+'\n'
 	
 	return rep
+
+def clone(github, tag):
+	'''Clone the given student's assignment'''
+	os.system(f"gh repo clone nuames-cs/{tag}-{github}")
