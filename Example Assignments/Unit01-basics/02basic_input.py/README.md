@@ -10,11 +10,11 @@ Objective: Learn how to get input and cast data types.
 
 The output of the program should look like the following:
 ```
-Enter string:
+Enter a string:
 Howdy
-Enter integer:
+Enter an integer:
 14
-Enter float:
+Enter a float:
 3.77
 
 Howdy 14 3.77
