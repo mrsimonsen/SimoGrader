@@ -63,10 +63,10 @@ def main(simple):
 		report += "Failed:\n"
 		for i in failed:
 			report += f"\t{i}\n"
-		print(report)
-	return score
+	return score, report
 
 if __name__ == '__main__':
-	score = main(sys.argv[1]=='True')
+	score, report = main(sys.argv[1]=='True')
 	with open('score.txt','w') as f:
 		f.write(str(score))
+		f.write('\n'+report)
