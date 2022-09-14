@@ -46,7 +46,7 @@ def main(simple):
 		report += "Failed:\n"
 		for i in failed:
 			report += f"\t{i}\n"
-			print(report)
+		print(report)
 	return score
 
 if __name__ == '__main__':
