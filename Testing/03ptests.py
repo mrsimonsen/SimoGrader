@@ -53,15 +53,14 @@ def main(simple):
 	else:
 		passed = total - len(result.failures) - len(result.errors)
 		score = round(passed/total*10,2)
-	print(f"Passed: {passed}/{total}")
-	print(f"Score: {score}")
+	report = f"Passed: {passed}/{total}\nScore: {score}\n"
 	if not simple:
 		failed = []
 		for i in result.failures:
 			failed.append(f"Fail: {i[0].id()[15:]}")
 		for i in result.errors:
 			failed.append(f"Error: {i[0].id()[15:]}")
-		print("Failed:")
+		report += "Failed:\n"
 		for i in failed:
 			print(f"	{i}")
 	return score
