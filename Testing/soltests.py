@@ -88,7 +88,6 @@ def main(simple):
 	return score
 
 if __name__ == '__main__':
-	simple = bool(sys.argv[1])
-	score = main(simple)
+	score = main(sys.argv[1]=='True')
 	with open('score.txt','w') as f:
 		f.write(str(score))
