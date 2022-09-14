@@ -115,6 +115,69 @@ ______________	______________	______________	______________
 		self.assertEqual(result, correct)
 
 
+class Grading(unittest.TestCase):
+	@classmethod
+	def setUpClass(cls):
+		#copy tests
+		os.mkdir('Testing')
+		os.system('cp ../Testing/00ptests.py Testing/00ptests.py')
+		os.system('cp ../Testing/P01tests.py Testing/P01tests.py')
+		#create students
+		SimoGrader.create()
+		SimoGrader.change_student('skyguy', 'Vader, Darth', 6)
+		SimoGrader.change_student('rebel','Organa, Leia', 1)
+		#create testing student files
+		with open("00p-rebel.py",'w') as f:
+			f.write("def main():\n\tprint('Hello World!\\nNUAMES\\n\\tCS')\n")
+		with open("00p-skyguy.py",'w') as f:
+			f.write("def main():\n\tprint('Hello World!')\n")
+		with open("P01-skyguy.py",'w') as f:
+			lines = [
+				"def main():\n",
+				"\tSQFT_PER_GAL = 350.0\n",
+				'\theight = float(input("Enter wall height (feet):\\n"))\n',
+				'\twidth = float(input("Enter wall width (feet):\\n"))\n',
+				'\tarea = height * width\n',
+				'\tprint(f\"Wall area: {area} square feet\")\n'
+			]
+			f.writelines(lines)
+		with open("P01-rebel.py",'w') as f:
+			lines = [
+				"def main():\n",
+				"\tSQFT_PER_GAL = 350.0\n",
+				"\t#prompt for wall height",
+				'\theight = float(input("Enter wall height (feet):\\n"))\n',
+				"\t#prompt for wall width",
+				'\twidth = float(input("Enter wall width (feet):\\n"))\n',
+				"\t#calculate wall area",
+				'\tarea = height * width\n',
+				"\t#display wall area",
+				'\tprint(f\"Wall area: {area} square feet\")\n'
+			]
+			f.writelines(lines)
+	
+	@classmethod
+	def tearDownClass(cls):
+		#delete testing data
+		os.system('rm data.sqlite3')
+		os.system('rm -r Testing')
+
+	#@patch('sys.stdin', StringIO('5.0\n'))
+	@patch('sys.stdout',new_callable = StringIO)
+	def test01_grade(self, stdout):
+		'''test grading regular assignments - full score & simple'''
+		correct = [('rebel',10)]
+		#students.clone() will fail since these students don't really exist
+		#so we're going to mack it's creation
+		os.system('mkdir student')
+		os.system('mv 00p-rebel.py student/student.py')
+		#grade the student
+		SimoGrader.grade('rebel','00p')
+		result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "rebel";')
+		self.assertEqual(result, correct)
+
+	
+
 
 
 if __name__ == "__main__":
