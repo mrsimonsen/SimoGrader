@@ -174,8 +174,7 @@ def main(simple):
 	return score
 
 if __name__ == '__main__':
-	try:
-		simple = bool(sys.argv[1])
+			simple = bool(sys.argv[1])
 	score = main(simple)
 	with open('score.txt','w') as f:
 		f.write(str(score))
