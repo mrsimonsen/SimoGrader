@@ -231,7 +231,8 @@ def main(simple):
 			failed.append(f"Error: {i[0].id()[15:]}")
 		report += "Failed:\n"
 		for i in failed:
-			print(f"	{i}")
+			report += f"\t{i}\n"
+		print(report)
 	return score
 
 if __name__ == '__main__':
