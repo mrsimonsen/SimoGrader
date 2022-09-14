@@ -23,7 +23,7 @@ def grade(github,tag,simple=True):
 	os.system('rm out.txt')
 	#if the student folder doesn't exist, then it didn't clone
 	if not os.path.exists('student'):
-		print(f"Student hasn't started the assignment")
+		return f"Student hasn't started the assignment"
 	else:
 		score = 0
 		#enter the repo
@@ -39,14 +39,17 @@ def grade(github,tag,simple=True):
 			os.system(f"python3 Tests.py {simple}")
 			#get the score from the file the test made
 			with open('score.txt','r') as f:
-				score += float(f.read())
+				lines = f.readlines()
+			score += float(lines[0].strip())
+			report = ''.join(lines[1:])
 			os.system("rm score.txt")
 		except KeyboardInterrupt:
-			print("Student test terminated")
+			return "Student test terminated"
 		except ValueError as e:
-			print("non-numeric data in score.txt")
+			return "non-numeric data in score.txt"
 		except FileNotFoundError:
-			print("couldn't find score.txt file\nstudent file probably crashed")
+			return "Couldn't find score.txt file - student.py probably crashed"
 		os.chdir('..')
 		os.system('rm -rf student')
 		change_grade(github,tag,score)
+	return report

@@ -145,13 +145,13 @@ class Grading(unittest.TestCase):
 			lines = [
 				"def main():\n",
 				"\tSQFT_PER_GAL = 350.0\n",
-				"\t#prompt for wall height",
+				"\t#prompt for wall height\n",
 				'\theight = float(input("Enter wall height (feet):\\n"))\n',
-				"\t#prompt for wall width",
+				"\t#prompt for wall width\n",
 				'\twidth = float(input("Enter wall width (feet):\\n"))\n',
-				"\t#calculate wall area",
+				"\t#calculate wall area\n",
 				'\tarea = height * width\n',
-				"\t#display wall area",
+				"\t#display wall area\n",
 				'\tprint(f\"Wall area: {area} square feet\")\n'
 			]
 			f.writelines(lines)
@@ -163,21 +163,88 @@ class Grading(unittest.TestCase):
 		os.system('rm -r Testing')
 
 	#@patch('sys.stdin', StringIO('5.0\n'))
-	@patch('sys.stdout',new_callable = StringIO)
-	def test01_grade(self, stdout):
-		'''test grading regular assignments - full score & simple'''
-		correct = [('rebel',10)]
+	#@patch('sys.stdout',new_callable = StringIO)
+	def test01_grade_simple(self):
+		'''test grading regular assignment - full score & simple'''
 		#students.clone() will fail since these students don't really exist
 		#so we're going to mack it's creation
 		os.system('mkdir student')
 		os.system('mv 00p-rebel.py student/student.py')
 		#grade the student
-		SimoGrader.grade('rebel','00p')
-		result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "rebel";')
-		self.assertEqual(result, correct)
+		report = SimoGrader.grade('rebel','00p')
+		with self.subTest("check database"):
+			correct = [('rebel',10)]
+			result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "rebel";')
+			self.assertEqual(result, correct)
+		with self.subTest("check report"):
+			correct = 'Passed: 3/3\nScore: 10\n'
+			self.assertEqual(report,correct)
 
-	
+	def test02_grade_verbose(self):
+		'''test grading regular assignment - partial points & verbose'''
+		#students.clone() will fail since these students don't really exist
+		#so we're going to mack it's creation
+		os.system('mkdir student')
+		os.system('mv 00p-skyguy.py student/student.py')
+		#grade the student
+		report = SimoGrader.grade('skyguy','00p',False)
+		with self.subTest("check database"):
+			correct = [('skyguy',3.33)]
+			result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "skyguy";')
+			self.assertEqual(result, correct)
+		with self.subTest("check report"):
+			correct = 'Passed: 1/3\nScore: 3.33\nFailed:\n\tFail: test02_part_2\n\tFail: test03_part_3\n'
+			self.assertEqual(report, correct)
 
+	@patch('sys.stdout', new_callable = StringIO)
+	@patch('sys.stdin', StringIO('10\n'))
+	def test03_grade_algo_simple(self, stdout):
+		'''test grading project - half score code & full score algo'''
+		#students.clone() will fail since these students don't really exist
+		#so we're going to mack it's creation
+		os.system('mkdir student')
+		os.system('mv P01-rebel.py student/student.py')
+		#grade the student
+		report = SimoGrader.grade('rebel','P01')
+		with self.subTest('check algorithm'):
+			correct = '''\t#prompt for wall height
+	#prompt for wall width
+	#calculate wall area
+	#display wall area
+
+Enter a score for the algorithm:
+'''
+			algo = stdout.getvalue()
+			self.assertEqual(algo, correct)
+		with self.subTest("check database"):
+			correct = [('rebel',15)]
+			result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "rebel" AND tag == "P01";')
+			self.assertEqual(result, correct)
+		with self.subTest("check report"):
+			correct = 'Passed: 2/4\nScore: 5.0\n'
+			self.assertEqual(report,correct)
+
+	@patch('sys.stdout', new_callable = StringIO)
+	@patch('sys.stdin', StringIO('0.00\n'))
+	def test04_grade_algo_verbose(self, stdout):
+		'''test grading project - half score code & no score algo, verbose'''
+		#students.clone() will fail since these students don't really exist
+		#so we're going to mack it's creation
+		os.system('mkdir student')
+		os.system('mv P01-skyguy.py student/student.py')
+		#grade the student
+		report = SimoGrader.grade('skyguy','P01',False)
+		with self.subTest('check algorithm'):
+			correct = '\nEnter a score for the algorithm:\n'
+			algo = stdout.getvalue()
+			self.assertEqual(algo, correct)
+		with self.subTest("check database"):
+			correct = [('skyguy',5)]
+			result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "skyguy" AND tag == "P01";')
+			self.assertEqual(result, correct)
+		with self.subTest("check report"):
+			correct = 'Passed: 2/4\nScore: 5.0\nFailed:\n\tFail: test03_part_3\n\tFail: test04_part_4\n'
+			self.assertEqual(report,correct)
 
 
 if __name__ == "__main__":
