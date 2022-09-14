@@ -385,7 +385,7 @@ def grade_assignment(tag = None):
 		else:
 			print(f"Cloning {stu.name}")
 			grade(stu,tag)
-			print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
+			print(f"p{stu.period} {stu.name}: {tag} - {stu.assignments[tag].score}/10")
 	print("Grading complete -- saving...")
 	with shelve.open('data.dat') as d:
 		d['students'] = students
@@ -421,7 +421,7 @@ def grade_student(text):
 			if assign.score < 10:
 				print(f'Grading {stu.name} -- on time: {stu.github}')
 				grade(stu, tag)
-				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
+				print(f'p{stu.period} {stu.name}: {tag} - {stu.assignments[tag].score}/10')
 			elif assign.score == 10:
 				print(f"{stu.name} already has completed assignment")
 			else:
