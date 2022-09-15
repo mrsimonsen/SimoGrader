@@ -13,7 +13,7 @@ Enter a number:
 1
 Enter a second number:
 8
-Doing math for 1 and 16.
+Doing math for 1 and 8.
 
 Addition = 9
 Subtraction = -7
