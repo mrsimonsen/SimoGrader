@@ -302,5 +302,12 @@ Enter a score for the algorithm:
 
 
 if __name__ == "__main__":
-	unittest.main(failfast=True)
+	Loader = unittest.TestLoader()
+	Loader.loadTestsFromTestCase(Database)
+	Loader.loadTestsFromTestCase(Student)
+	Loader.loadTestsFromTestCase(Grading)
+	Runner = unittest.TestResult()
+	Runner.
+
+	unittest.main(failfast=True,testLoader=Loader,testRunner=Runner)
 
