@@ -1,5 +1,6 @@
 import os
 from student import change_grade
+from database import read
 
 GITHUB_ORGANIZATION_NAME = "NUAMES-CS"
 
@@ -17,6 +18,10 @@ def extract_algorithm():
 	return score
 
 def grade(github,tag,simple=True):
+	#check if student already complete assignment
+	earned = read(f'SELECT earned FROM scores WHERE github == "{github}" AND tag = "{tag}";')
+	if (10,) in earned:
+		return "student already complete assignment"
 	#clone student repo
 	os.system(f"gh repo clone {GITHUB_ORGANIZATION_NAME}/{tag}-{github} student -- -q 2> out.txt")
 	#pipe any errors into a file so that I don't see them
@@ -53,3 +58,12 @@ def grade(github,tag,simple=True):
 		os.system('rm -rf student')
 		change_grade(github,tag,score)
 	return report
+
+def grade_assignment(tag):
+	'''grades all student's given assignment'''
+	students = read(f'SELECT github FROM students;')
+	for s in students:
+		github = s[0]
+		grade(github,tag)
+
+

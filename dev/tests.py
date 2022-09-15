@@ -126,6 +126,7 @@ class Grading(unittest.TestCase):
 		SimoGrader.create()
 		SimoGrader.change_student('skyguy', 'Vader, Darth', 6)
 		SimoGrader.change_student('rebel','Organa, Leia', 1)
+		SimoGrader.change_student('zesa','Binks, JarJar',4)
 		#create testing student files
 		with open("00p-rebel.py",'w') as f:
 			f.write("def main():\n\tprint('Hello World!\\nNUAMES\\n\\tCS')\n")
@@ -162,14 +163,12 @@ class Grading(unittest.TestCase):
 		os.system('rm data.sqlite3')
 		os.system('rm -r Testing')
 
-	#@patch('sys.stdin', StringIO('5.0\n'))
-	#@patch('sys.stdout',new_callable = StringIO)
 	def test01_grade_simple(self):
 		'''test grading regular assignment - full score & simple'''
 		#students.clone() will fail since these students don't really exist
-		#so we're going to mack it's creation
+		#so we're going to mock it's creation
 		os.system('mkdir student')
-		os.system('mv 00p-rebel.py student/student.py')
+		os.system('cp 00p-rebel.py student/student.py')
 		#grade the student
 		report = SimoGrader.grade('rebel','00p')
 		with self.subTest("check database"):
@@ -183,7 +182,7 @@ class Grading(unittest.TestCase):
 	def test02_grade_verbose(self):
 		'''test grading regular assignment - partial points & verbose'''
 		#students.clone() will fail since these students don't really exist
-		#so we're going to mack it's creation
+		#so we're going to mock it's creation
 		os.system('mkdir student')
 		os.system('mv 00p-skyguy.py student/student.py')
 		#grade the student
@@ -201,7 +200,7 @@ class Grading(unittest.TestCase):
 	def test03_grade_algo_simple(self, stdout):
 		'''test grading project - half score code & full score algo'''
 		#students.clone() will fail since these students don't really exist
-		#so we're going to mack it's creation
+		#so we're going to mock it's creation
 		os.system('mkdir student')
 		os.system('mv P01-rebel.py student/student.py')
 		#grade the student
@@ -229,7 +228,7 @@ Enter a score for the algorithm:
 	def test04_grade_algo_verbose(self, stdout):
 		'''test grading project - half score code & no score algo, verbose'''
 		#students.clone() will fail since these students don't really exist
-		#so we're going to mack it's creation
+		#so we're going to mock it's creation
 		os.system('mkdir student')
 		os.system('mv P01-skyguy.py student/student.py')
 		#grade the student
@@ -245,6 +244,22 @@ Enter a score for the algorithm:
 		with self.subTest("check report"):
 			correct = 'Passed: 2/4\nScore: 5.0\nFailed:\n\tFail: test03_part_3\n\tFail: test04_part_4\n'
 			self.assertEqual(report,correct)
+
+	def test05_grade_assignment(self):
+		'''test grade_assignment'''
+		#students.clone() will fail since these students don't really exist
+		#so we're going to mock it's creation
+		os.system('mkdir student')
+		#Leia should be skipped because she already complete the assignment with full points
+		#We're going to replace Vader's assignment with Leia's for testing
+		os.system('mv 00p-rebel.py student/student.py')
+		SimoGrader.grade_assignment('00p')
+		correct = [
+			('rebel',10),
+			('skyguy',10),
+		]
+		result = SimoGrader.read('SELECT github, earned FROM scores WHERE tag = "00p";')
+		self.assertEqual(result, correct)
 
 
 if __name__ == "__main__":
