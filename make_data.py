@@ -87,33 +87,6 @@ def validate_assign():
 		a = input("Enter an assignment tag:\n").lower()
 	return a
 
-def set_students():
-	students = []
-	if os.path.exists('students.txt'):
-		print("Loading students...")
-		with open('students.txt','r') as f:
-			for line in f:
-				if "last,first_weber,first_nuames,period,weber,github" in line:
-					continue
-				last,legal,nuames,period,weber,github = line.split(',')
-				name = f"{last}, {legal} ({nuames})"
-				students.append(Student(name,period,github.strip()))
-		with shelve.open('data.dat') as d:
-			new = []
-			for stu in students:
-				found = False
-				for s in d['students']:
-					if s.github == stu.github:
-						found = True
-						break
-				if not found:
-					new.append(stu)
-			d['students'] += new
-			print(f"{len(new)} new students loaded")
-		#os.system("rm students.txt")
-	else:
-		print("Couldn't find \"students.txt\" file. Did you import it from NUAMES-CS/RSA-Encryption?")
-
 def select_student(text=None):
 	if not text:
 		search = input("Enter a part of a student name or '0' to exit:\n")
@@ -149,25 +122,6 @@ def select_student(text=None):
 def fsort(obj):
 	return obj.name
 
-def grade_assignment(tag = None):
-	if not tag:
-		tag = validate_assign()
-	d = shelve.open('data.dat')
-	students = d['students']
-	d.close()
-	for stu in students:
-		a = stu.assignments[tag]
-		if a.score == 10:
-			print(f"{stu.name} already has completed assignment")
-		else:
-			print(f"Cloning {stu.name}")
-			grade(stu,tag)
-			print(f"{stu.name}: {tag} - {stu.assignments[tag].score}/10")
-	print("Grading complete -- saving...")
-	with shelve.open('data.dat') as d:
-		d['students'] = students
-	print("finished")
-
 def grade_all():
 	stu = select_student()
 	if not stu:
@@ -189,34 +143,6 @@ def grade_all():
 	print(stu.print_assignments())
 
 
-def grade_student(text):
-	stu = select_student(text)
-	if stu:
-		tag = validate_assign()
-		try:
-			assign = stu.assignments[tag]
-			if assign.score < 10:
-				print(f'Grading {stu.name} -- on time: {stu.github}')
-				grade(stu, tag)
-				print(f'{stu.name}: {tag} - {stu.assignments[tag].score}/10')
-			elif assign.score == 10:
-				print(f"{stu.name} already has completed assignment")
-			else:
-				print(f"something strange happened in grade_student()")
-			print("Grading complete -- saving...")
-			d = shelve.open('data.dat')
-			students = d['students']
-			for i in range(len(students)):
-				if students[i].name == stu.name:
-					students[i] = stu
-					break
-			d['students'] = students
-			d.close()
-			print("Data saved")
-		except KeyError as e:
-			if tag != "done":
-				print("That student doesn't have that assignment")
-
 def report():
 	with shelve.open('data.dat') as d:
 		students = d['students']
@@ -231,7 +157,7 @@ def report():
 			s = str(stu.assignments[a].score)
 			row.append(s)
 		stuff.append(row)
-	with open(f'report.csv','w',newline='') as f:
+	with open('report.csv','w',newline='') as f:
 		w = csv.writer(f, delimiter=',')
 		w.writerows(stuff)
 	print("Report complete")

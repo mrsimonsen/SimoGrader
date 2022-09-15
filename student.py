@@ -1,3 +1,6 @@
+from csv import DictReader
+from os.path import exists
+
 from database import execute, read
 
 def change_student(github, name=None, period=None):
@@ -71,3 +74,49 @@ def student_report(github):
 			rep = rep[:-1]+'\n'
 	
 	return rep
+
+def import_students():
+	'''imports all student's from CSV into database
+	Expected CSV Header: GitHub, Last, Legal, First, Period'''
+	#get the name of the csv file from the user
+	found = False
+	while not found or file != 'exit':
+		file = input("Enter the name of the student CSV file or 'exit':\n")
+
+		#check that the user enter the file extension
+		if file != 'exit':
+			if '.csv' not in file:
+				file += '.csv'
+		
+		#try to locate the file
+		if file == 'exit':
+			return
+		elif exists(file):
+			found = True
+			print('File located')
+		else:
+			print('Could not locate file, try again.')
+	
+	#load the data from the file
+	students = []
+	with open(file,newline='') as f:
+		#read the csv as a dictionary, header is the keys
+		reader = DictReader(reader(f))
+		for r in reader:
+			try:
+				students.append((r['GitHub'],f"{r['Last']}, {r['Legal']} ({r['First']})",int(r['Period'])))
+			except KeyError:
+				print("CSV files doesn't have the expected header row:\nGitHub, Last, Legal, First, Period")
+				return
+	print(f"{len(students)} student entries found")
+	print("--Adding students to database, skipping those who already exist--")
+	count = 0
+	for github, name, period in students:
+		if read(f'SELECT github FROM students WHERE github = "{github}"'):
+			print(f"{name} already exists, skipping")
+		else:
+			change_student(github, name, period)
+			print('new student added')
+			count += 1
+	print(f"Complete: {count} new students added")
+
