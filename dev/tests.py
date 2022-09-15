@@ -12,7 +12,7 @@ def mock_tests():
 	for i in DUMMY_TESTS:
 		os.system(f'touch Testing/{i}.py')
 
-class Database(unittest.TestCase):
+class Case_1_Database(unittest.TestCase):
 	def tearDown(self):
 		'''clean up after each test'''
 		os.system('rm data.sqlite3')
@@ -38,7 +38,7 @@ class Database(unittest.TestCase):
 		result = SimoGrader.read(query)
 		self.assertEqual(result, correct)
 
-class Student(unittest.TestCase):
+class Case_2_Student(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		mock_tests()
@@ -154,7 +154,7 @@ ______________	______________	______________	______________
 		self.assertEqual(result, correct)
 
 
-class Grading(unittest.TestCase):
+class Case_3_Grading(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		#copy tests
@@ -301,13 +301,6 @@ Enter a score for the algorithm:
 		self.assertEqual(result, correct)
 
 
-if __name__ == "__main__":
-	Loader = unittest.TestLoader()
-	Loader.loadTestsFromTestCase(Database)
-	Loader.loadTestsFromTestCase(Student)
-	Loader.loadTestsFromTestCase(Grading)
-	Runner = unittest.TestResult()
-	Runner.
-
-	unittest.main(failfast=True,testLoader=Loader,testRunner=Runner)
+if __name__ == '__main__':
+	unittest.main(failfast=True,verbosity=2)
 
