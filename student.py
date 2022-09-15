@@ -80,7 +80,7 @@ def import_students():
 	Expected CSV Header: GitHub, Last, Legal, First, Period'''
 	#get the name of the csv file from the user
 	found = False
-	while not found or file != 'exit':
+	while not found:
 		file = input("Enter the name of the student CSV file or 'exit':\n")
 
 		#check that the user enter the file extension
@@ -101,12 +101,12 @@ def import_students():
 	students = []
 	with open(file,newline='') as f:
 		#read the csv as a dictionary, header is the keys
-		reader = DictReader(reader(f))
+		reader = DictReader(f)
 		for r in reader:
 			try:
 				students.append((r['GitHub'],f"{r['Last']}, {r['Legal']} ({r['First']})",int(r['Period'])))
 			except KeyError:
-				print("CSV files doesn't have the expected header row:\nGitHub, Last, Legal, First, Period")
+				print("CSV file doesn't have the expected header row:\nGitHub, Last, Legal, First, Period")
 				return
 	print(f"{len(students)} student entries found")
 	print("--Adding students to database, skipping those who already exist--")

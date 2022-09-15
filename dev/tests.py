@@ -1,6 +1,6 @@
 from unittest.mock import patch
 from io import StringIO
-import unittest, sys, os, sqlite3
+import unittest, sys, os, sqlite3, csv
 #import from outside the folder
 sys.path.insert(0,f'{os.getcwd()}/../.')
 import SimoGrader
@@ -43,30 +43,68 @@ class Student(unittest.TestCase):
 	def setUpClass(cls):
 		mock_tests()
 		SimoGrader.create()
+		with open('test_students.csv','w',newline='') as f:
+			w = csv.writer(f,delimiter=',')
+			w.writerow(('GitHub','Last','Legal','First','Period'))
+			w.writerow(('skyguy','Vader','Anakin','Darth',66))
+			w.writerow(('rebel','Organa','Leia','Princess',1))
+			w.writerow(('itsa_mesa','Binks','JarJar','',1))
 	@classmethod
 	def tearDownClass(cls):
-		os.system('rm data.sqlite3')
+		os.system('rm data.sqlite3 test_students.csv')
 		os.system('rm -r Testing')
 	
 	def test01_change_student(self):
+		'''tests adding a student to the database'''
+		SimoGrader.change_student('itsa_mesa','Binks, JarJar ()',1)
+		query = 'SELECT * FROM students;'
+		correct = [('itsa_mesa','Binks, JarJar ()',1)]
+		result = SimoGrader.read(query)
+		self.assertEqual(result, correct)
+
+	inputs = 'abc\ntest_students\n'
+	@patch('sys.stdin', StringIO(inputs))
+	@patch('sys.stdout', new_callable=StringIO)
+	def test02_import_students(self,stdout):
 		'''create a new student'''
-		correct = [('skyguy', 'Vader, Darth', 66),('rebel','Organa, Leia', 1),('itsa_mesa','Binks, JarJar',1)]
-		SimoGrader.change_student('skyguy','Vader, Darth',66)
-		SimoGrader.change_student('rebel','Organa, Leia',1)
-		SimoGrader.change_student('itsa_mesa','Binks, JarJar',1)
-		query = 'SELECT * FROM students;'
-		result = SimoGrader.read(query)
-		self.assertEqual(result, correct)
+		SimoGrader.import_students()
+		with self.subTest('check output'):
+			correct = '''Enter the name of the student CSV file or 'exit':
+Could not locate file, try again.
+Enter the name of the student CSV file or 'exit':
+File located
+3 student entries found
+--Adding students to database, skipping those who already exist--
+new student added
+new student added
+Binks, JarJar () already exists, skipping
+Complete: 2 new students added
+'''
+			result = stdout.getvalue()
+			self.assertEqual(result, correct)
+		with self.subTest('check database'):
+			correct = [
+				('itsa_mesa','Binks, JarJar ()',1),
+				('skyguy', 'Vader, Anakin (Darth)', 66),
+				('rebel','Organa, Leia (Princess)', 1),
+			]
+			query = 'SELECT * FROM students;'
+			result = SimoGrader.read(query)
+			self.assertEqual(result, correct)
 
-	def test02_change_student(self):
+	def test03_change_student(self):
 		'''update existing student'''
-		correct = [('skyguy', 'Vader, Darth', 66),('rebel','Skywalker, Leia', 2817),('itsa_mesa','Binks, JarJar',1)]
-		SimoGrader.change_student('rebel','Skywalker, Leia',2817)
+		correct = [
+				('itsa_mesa','Binks, JarJar ()',1),
+				('skyguy', 'Vader, Anakin (Darth)', 66),
+				('rebel','Skywalker, Leia ()', 2817),
+			]
+		SimoGrader.change_student('rebel','Skywalker, Leia ()',2817)
 		query = 'SELECT * FROM students;'
 		result = SimoGrader.read(query)
 		self.assertEqual(result, correct)
 
-	def test03_change_grade(self):
+	def test04_change_grade(self):
 		'''create new grades'''
 		correct = [(1, '00p', 'rebel', 10),(2, '00p', 'skyguy', 7),(3, '00p', 'itsa_mesa', 2),(4, '01p', 'rebel', 10),(5, '01p', 'skyguy', 7),
 		(6, '01p', 'itsa_mesa', 2),(7, 'P01', 'rebel', 10),(8, 'P01', 'skyguy', 7),(9, 'P01', 'itsa_mesa', 2),(10, 'st-', 'rebel', 10),
@@ -79,7 +117,7 @@ class Student(unittest.TestCase):
 		result = SimoGrader.read(query)
 		self.assertEqual(result, correct)
 
-	def test04_change_grade(self):
+	def test05_change_grade(self):
 		'''update existing grade'''
 		correct = [(1, '00p', 'rebel', 10),(2, '00p', 'skyguy', 7),(3, '00p', 'itsa_mesa', 0),(4, '01p', 'rebel', 10),(5, '01p', 'skyguy', 7),
 		(6, '01p', 'itsa_mesa', 2),(7, 'P01', 'rebel', 10),(8, 'P01', 'skyguy', 7),(9, 'P01', 'itsa_mesa', 2),(10, 'st-', 'rebel', 10),
@@ -90,23 +128,24 @@ class Student(unittest.TestCase):
 		result = SimoGrader.read(query)
 		self.assertEqual(result, correct)
 
-	def test05_remove_student(self):
+	def test06_remove_student(self):
 		'''delete a student'''
-		correct = [('rebel', 'Skywalker, Leia', '00p', 10, 10),('skyguy', 'Vader, Darth', '00p', 7, 10),('rebel', 'Skywalker, Leia', '01p', 10, 10),
-		('skyguy', 'Vader, Darth', '01p', 7, 10),('rebel', 'Skywalker, Leia', 'P01', 10, 20),('skyguy', 'Vader, Darth', 'P01', 7, 20),
-		('rebel', 'Skywalker, Leia', 'st-', 10, 20),('skyguy', 'Vader, Darth', 'st-', 10, 20)]
+		correct = [
+			('rebel', 'Skywalker, Leia ()'),
+			('skyguy', 'Vader, Anakin (Darth)')
+			]
 		SimoGrader.remove_student('itsa_mesa')
-		query = '''SELECT scores.github, students.name, scores.tag, earned, assignments.total FROM scores
+		query = '''SELECT scores.github, students.name FROM scores
 		INNER JOIN students ON students.github = scores.github
-		INNER JOIN assignments ON assignments.tag = scores.tag;'''
+		GROUP BY scores.github;'''
 		result = SimoGrader.read(query)
 		self.assertEqual(result, correct)
 
-	def test06_student_report(self):
+	def test07_student_report(self):
 		'''generate a student report'''
 		correct = '''skyguy - Period: 66
-Vader, Darth
---------------------
+Vader, Anakin (Darth)
+----------------------
 |Tag|Obtained|	|Tag|Obtained|	|Tag|Obtained|	|Tag|Obtained|	
 ______________	______________	______________	______________	
 |00p|07.00/10|	|01p|07.00/10|	|P01|07.00/20|	|st-|10.00/20|

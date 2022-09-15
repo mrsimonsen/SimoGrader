@@ -29,7 +29,7 @@ def grade(github,tag,simple=True):
 	#pipe any errors into a file so that I don't see them
 	system('rm out.txt')
 	#if the student folder doesn't exist, then it didn't clone
-	if not path.exists('student'):
+	if not exists('student'):
 		return f"Student hasn't started the assignment"
 	else:
 		score = 0
