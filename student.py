@@ -1,6 +1,8 @@
 from csv import DictReader
 from os.path import exists
 
+from database import read, execute
+
 def change_student(github, name=None, period=None):
 	'''Create or change a student's details'''
 	found = read(f"SELECT * FROM students WHERE github = '{github}'")

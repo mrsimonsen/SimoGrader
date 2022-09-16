@@ -201,6 +201,7 @@ class Case_3_Grading(unittest.TestCase):
 		#delete testing data
 		os.system('rm data.sqlite3')
 		os.system('rm -r Testing')
+		os.system('rm -r P01-Algos')
 
 	def test01_grade_simple(self):
 		'''test grading regular assignment - full score & simple'''
@@ -237,13 +238,13 @@ class Case_3_Grading(unittest.TestCase):
 	@patch('sys.stdout', new_callable = StringIO)
 	@patch('sys.stdin', StringIO('10\n'))
 	def test03_grade_algo_simple(self, stdout):
-		'''test grading project - half score code & full score algo'''
+		'''test grading project - half score code & full score algo w/ grading in terminal'''
 		#students.clone() will fail since these students don't really exist
 		#so we're going to mock it's creation
 		os.system('mkdir student')
-		os.system('mv P01-rebel.py student/student.py')
+		os.system('cp P01-rebel.py student/student.py')
 		#grade the student
-		report = SimoGrader.grade('rebel','P01')
+		report = SimoGrader.grade('rebel','P01',now=True)
 		with self.subTest('check algorithm'):
 			correct = '''\t#prompt for wall height
 	#prompt for wall width
@@ -261,17 +262,44 @@ Enter a score for the algorithm:
 		with self.subTest("check report"):
 			correct = 'Passed: 2/4\nScore: 5.0\n'
 			self.assertEqual(report,correct)
+	
+	@patch('sys.stdout', new_callable = StringIO)
+	@patch('sys.stdin', StringIO('n\n'))
+	def test04_grade_algo_later(self, stdout):
+		'''test grading project - half score code & stored algo'''
+		#students.clone() will fail since these students don't really exist
+		#so we're going to mock it's creation
+		os.system('mkdir student')
+		os.system('mv P01-rebel.py student/student.py')
+		#grade the student
+		report = SimoGrader.grade('rebel','P01',now=False)
+		with self.subTest('check algorithm'):
+			correct = '''\t#prompt for wall height
+	#prompt for wall width
+	#calculate wall area
+	#display wall area
+'''
+			with open('P01-Algos/rebel.txt','r') as f:
+				algo = f.read()
+			self.assertEqual(algo, correct)
+		with self.subTest("check database"):
+			correct = [('rebel',5)]
+			result = SimoGrader.read('SELECT github, earned FROM scores WHERE github == "rebel" AND tag == "P01";')
+			self.assertEqual(result, correct)
+		with self.subTest("check report"):
+			correct = 'Passed: 2/4\nScore: 5.0\n'
+			self.assertEqual(report,correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
 	@patch('sys.stdin', StringIO('0.00\n'))
-	def test04_grade_algo_verbose(self, stdout):
+	def test05_grade_algo_verbose(self, stdout):
 		'''test grading project - half score code & no score algo, verbose'''
 		#students.clone() will fail since these students don't really exist
 		#so we're going to mock it's creation
 		os.system('mkdir student')
 		os.system('mv P01-skyguy.py student/student.py')
 		#grade the student
-		report = SimoGrader.grade('skyguy','P01',False)
+		report = SimoGrader.grade('skyguy','P01',False,True)
 		with self.subTest('check algorithm'):
 			correct = '\nEnter a score for the algorithm:\n'
 			algo = stdout.getvalue()
@@ -284,7 +312,7 @@ Enter a score for the algorithm:
 			correct = 'Passed: 2/4\nScore: 5.0\nFailed:\n\tFail: test03_part_3\n\tFail: test04_part_4\n'
 			self.assertEqual(report,correct)
 
-	def test05_grade_assignment(self):
+	def test06_grade_assignment(self):
 		'''test grade_assignment'''
 		#students.clone() will fail since these students don't really exist
 		#so we're going to mock it's creation
@@ -302,7 +330,7 @@ Enter a score for the algorithm:
 	
 	@patch('sys.stdout', new_callable = StringIO)
 	@patch('sys.stdin', StringIO('a\nn\nb\ny\n00p\n'))
-	def test06_select_tag(self, stdout):
+	def test07_select_tag(self, stdout):
 		'''test select_tag'''
 		tag = SimoGrader.select_tag()
 		with self.subTest('check output'):
@@ -321,7 +349,7 @@ Enter an assignment tag or 'exit' to quit:
 
 	@patch('sys.stdout', new_callable = StringIO)
 	@patch('sys.stdin', StringIO('0\na\n1\n'))
-	def test06_select_student(self, stdout):
+	def test08_select_student(self, stdout):
 		'''test select_student'''
 		github = SimoGrader.select_student()
 		with self.subTest('check output'):

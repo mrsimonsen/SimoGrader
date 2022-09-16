@@ -1,6 +1,9 @@
 from os import chdir, system, mkdir
 from os.path import exists
 
+from database import read
+from student import change_grade
+
 GITHUB_ORGANIZATION_NAME = "NUAMES-CS"
 
 def extract_algorithm(github,tag,now):
