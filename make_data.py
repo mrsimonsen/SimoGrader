@@ -1,19 +1,3 @@
-import shelve, csv, os, datetime, json
-from sys import exit
-
-def get_date():
-	ok = False
-	while not ok:
-		year = validate_num("Year:(####)")
-		month = validate_num("Month:(##)")
-		day = validate_num("Day:(##)")
-		try:
-			d = datetime.datetime(year, month, day)
-			ok = True
-		except ValueError as e:
-			print(e)
-	return d
-
 def clean():
 	print("Gathering Repos...")
 	os.system("gh repo list nuames-cs --json name -L 4444 > temp.json")
@@ -40,52 +24,6 @@ def clean():
 			os.system(f"gh repo delete nuames-cs/{i} --confirm")
 	print("Done.")
 
-def validate_num(question):
-	number = None
-	while not number:
-		try:
-			number = int(input(f"{question}\n"))
-		except ValueError:
-			print("That wasn't a number")
-	return number
-
-def ask_yn(question):
-	r = ''
-	while r not in ('y','n'):
-		r = input(f"{question} (Y/n)\n").lower()
-	return r
-
-def change_float(q1, thing):
-	complete = 'n'
-	while complete == 'n':
-		new = input(f"{q1}\n")
-		try:
-			new = float(new)
-			complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
-		except ValueError:
-			print("That wasn't a number")
-	return new
-
-def change(q1, thing, num = False):
-	complete = 'n'
-	while complete == 'n':
-		if num:
-			new = validate_num(q1)
-		else:
-			new = input(f"{q1}\n")
-		complete = ask_yn(f"Change \"{thing}\" to \"{new}\"?")
-	return new
-
-def validate_assign():
-	assign = []
-	with shelve.open('data.dat') as d:
-		assign += d['assignments']
-		assign.append('done')
-	a = ''
-	print(assign)
-	while a not in assign:
-		a = input("Enter an assignment tag:\n").lower()
-	return a
 
 def select_student(text=None):
 	if not text:

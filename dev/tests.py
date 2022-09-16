@@ -163,9 +163,9 @@ class Case_3_Grading(unittest.TestCase):
 		os.system('cp ../Testing/P01tests.py Testing/P01tests.py')
 		#create students
 		SimoGrader.create()
-		SimoGrader.change_student('skyguy', 'Vader, Darth', 6)
-		SimoGrader.change_student('rebel','Organa, Leia', 1)
-		SimoGrader.change_student('zesa','Binks, JarJar',4)
+		SimoGrader.change_student('skyguy', 'Vader, Darth ()', 6)
+		SimoGrader.change_student('rebel','Organa, Leia ()', 1)
+		SimoGrader.change_student('zesa','Binks, JarJar ()',4)
 		#create testing student files
 		with open("00p-rebel.py",'w') as f:
 			f.write("def main():\n\tprint('Hello World!\\nNUAMES\\n\\tCS')\n")
@@ -299,6 +299,47 @@ Enter a score for the algorithm:
 		]
 		result = SimoGrader.read('SELECT github, earned FROM scores WHERE tag = "00p";')
 		self.assertEqual(result, correct)
+	
+	@patch('sys.stdout', new_callable = StringIO)
+	@patch('sys.stdin', StringIO('a\nn\nb\ny\n00p\n'))
+	def test06_select_tag(self, stdout):
+		'''test select_tag'''
+		tag = SimoGrader.select_tag()
+		with self.subTest('check output'):
+			correct = '''Enter an assignment tag or 'exit' to quit:
+Would you like to see the assignment tags?(Y/n)
+Enter an assignment tag or 'exit' to quit:
+Would you like to see the assignment tags?(Y/n)
+['00p', 'P01']
+Enter an assignment tag or 'exit' to quit:
+'''
+			result = stdout.getvalue()
+			self.assertEqual(result, correct)
+		with self.subTest('check return'):
+			correct = '00p'
+			self.assertEqual(tag, correct)
+
+	@patch('sys.stdout', new_callable = StringIO)
+	@patch('sys.stdin', StringIO('0\na\n1\n'))
+	def test06_select_student(self, stdout):
+		'''test select_student'''
+		github = SimoGrader.select_student()
+		with self.subTest('check output'):
+			correct = '''Enter part of a student's name or github or 'exit' to quit:
+No results found. Try again.
+Enter part of a student's name or github or 'exit' to quit:
+--Results--
+1 - skyguy: Vader, Darth ()
+2 - rebel: Organa, Leia ()
+3 - zesa: Binks, JarJar ()
+Which student?
+'''
+			result = stdout.getvalue()
+			self.assertEqual(result, correct)
+		with self.subTest('check return'):
+			correct = 'skyguy'
+			self.assertEqual(github, correct)
+
 
 
 if __name__ == '__main__':

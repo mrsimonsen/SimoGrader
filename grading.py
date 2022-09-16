@@ -73,7 +73,9 @@ def grade_assignment(tag):
 
 def select_tag():
 	'''prompts and validates an assignment tag'''
-	ALL = read('SELECT tag FROM assignments;')
+	ALL = []
+	for i in  read('SELECT tag FROM assignments;'):
+		ALL.append(i[0])
 	tag = ''
 	#allow the used to exit without crashing
 	while tag not in ALL and tag != 'exit':
@@ -83,3 +85,33 @@ def select_tag():
 				print(ALL)
 		tag = input("Enter an assignment tag or 'exit' to quit:\n")
 	return tag
+
+def select_student():
+	'''prompts and validates a student from the database'''
+	search = ''
+	github = ''
+	while not github:
+		search = input("Enter part of a student's name or github or 'exit' to quit:\n")
+		results = read(f"SELECT github, name FROM students WHERE github LIKE '%{search}%' OR name LIKE '%{search}%';")
+		if len(results) > 1:
+			print('--Results--')
+			count = 1
+			for git,name in results:
+				print(f"{count} - {git}: {name}")
+				count += 1
+			c = input("Which student?\n")
+			try:
+				c = int(c)-1
+				github = results[c][0]
+			except ValueError:
+				if c != 'exit':
+					print("That wasn't a number.")
+				else:
+					github = c
+			except IndexError:
+				print("That wasn't a valid option.")
+		elif len(results) == 1:
+			github = results[0][1]
+		else:
+			print("No results found. Try again.")
+	return github

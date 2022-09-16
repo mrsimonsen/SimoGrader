@@ -49,8 +49,7 @@ def main():
 				"'0' - Return to Main Menu",
 				"'1' - Grade an assignment",
 				"'2' - Grade multiple assignments",
-				"'3' - Grade a student's assignment",
-				"'4' - Grade all of a student's assignments"
+				"'3' - Grade a student's assignment"
 			]
 			while g != '0':
 				g = display_menu('Grading Menu', options)
@@ -66,16 +65,11 @@ def main():
 						grade_assignments(tag)
 				elif g == '3':
 					#grade single student assignment
-
-					#select student
-					#select tag
-					#grade w/ verbose output
-				elif g == '4':
-					#grade all student's assignments
-
-					#select student
-					#grade all tags
-					#display student report
+					github = select_student()
+					if github != 'exit':
+						tag = select_tag()
+						if tag != 'exit':
+							print(grade(github, tag, False))
 				else:
 					print(f"Invalid selection: '{g}'")
 
