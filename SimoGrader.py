@@ -56,27 +56,63 @@ def main():
 				if g == '0':
 					print('Returning...')
 				elif g == '1':
-					grade_assignment(select_tag())
+					tag = select_tag()
+					if tag != 'exit':
+						#if it is a project, would you like to grade the algo now or later?
+						now = tag[0].isalpha() and input("Would you like to grade the algorithms now?(Y/n)\n").lower() in ('yes','y')
+						grade_assignment(select_tag(),now)
 				elif g == '2':
 					tags = []
 					while 'exit' not in tags:
 						tags.append(select_tag())
 					for tag in tags:
+						#algos will be stored for later with multiple assignment grading
 						grade_assignments(tag)
 				elif g == '3':
-					#grade single student assignment
 					github = select_student()
 					if github != 'exit':
 						tag = select_tag()
 						if tag != 'exit':
-							print(grade(github, tag, False))
+							#show extended report and grade algo now
+							print(grade(github, tag, False, True))
 				else:
 					print(f"Invalid selection: '{g}'")
 
 		elif c == '2':
-			print('class')
+			g = ''
+			options = [
+				"'0' - Return to Main Menu",
+				"'1' - Import Students",
+				"'2' - Drop a Student",
+				"'3' - Reset Database",
+				"'4' - Delete old student repos",
+			]
+			while g != '0':
+				g = display_menu('Class Menu', options)
+				if g == '0':
+					print('Returning...')
+				elif g == '1':
+					import_students()
+				elif g == '2':
+					remove_student(select_student())
+				elif g == '3':
+					if input("---WARNING---\nAll existing data will be lost!\nContinue?(Y/n)?\n").lower() in ('yes','y'):
+						system(f"rm {DATABASE_NAME}")
+						create()
+						print(f"{DATABASE_NAME} reset to default schema.")
+						print("Students will need to be imported.")
+				elif g == '4':
+					print("---WARNING---\nAll student GitHub repos will be deleted!\nDatabase will also be deleted!")
+					if input('Continue?(Y/n)?\n').lower() in ('yes','y'):
+						clean()
+						system(f"rm {DATABASE_NAME}")
+						print("Cleaning Complete")
+						c = '0' #program should exit, no point in running anymore
+				else:
+					print(f"Invalid selection: '{g}'")
 		elif c == '3':
 			print('student')
+			#clone a student repo (really useful for quick checking for more detailed feedback)
 		else:
 			print(f"Invalid selection: '{c}'")
 

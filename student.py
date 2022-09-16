@@ -1,8 +1,6 @@
 from csv import DictReader
 from os.path import exists
 
-from database import execute, read
-
 def change_student(github, name=None, period=None):
 	'''Create or change a student's details'''
 	found = read(f"SELECT * FROM students WHERE github = '{github}'")
@@ -20,6 +18,8 @@ def change_student(github, name=None, period=None):
 
 def remove_student(github):
 	'''Remove a student from the database'''
+	if github == 'exit':
+		return
 	delete_scores =	f"DELETE FROM scores WHERE github = '{github}';"
 	execute(delete_scores)
 	delete_student = f"DELETE FROM students WHERE github = '{github}';"
@@ -119,4 +119,3 @@ def import_students():
 			print('new student added')
 			count += 1
 	print(f"Complete: {count} new students added")
-

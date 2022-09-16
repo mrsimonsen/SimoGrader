@@ -1,12 +1,9 @@
-from os import chdir, system
+from os import chdir, system, mkdir
 from os.path import exists
-
-from student import change_grade
-from database import read
 
 GITHUB_ORGANIZATION_NAME = "NUAMES-CS"
 
-def extract_algorithm():
+def extract_algorithm(github,tag,now):
 	'''extract the comments of the student file as an algorithm text file'''
 	with open('student.py','r') as f:
 		text = f.readlines()
@@ -14,12 +11,20 @@ def extract_algorithm():
 	for line in text:
 		if '#' in line:
 			algo.append(line)
-	#display the algorithm
-	print(''.join(algo))
-	score = float(input("Enter a score for the algorithm:\n"))
+	if now:
+		#display the algorithm
+		print(''.join(algo))
+		score = float(input("Enter a score for the algorithm:\n"))
+	else:
+		#save for later
+		if not exists(f'../{tag}-Algos'):
+			mkdir(f'../{tag}-Algos')
+		with open(f'../{tag}-Algos/{github}.txt', 'w') as f:
+			f.writelines(algo)
+		score = 0
 	return score
 
-def grade(github,tag,simple=True):
+def grade(github,tag,simple=True,now=False):
 	#check if student already complete assignment
 	earned = read(f'SELECT earned FROM scores WHERE github == "{github}" AND tag = "{tag}";')
 	if (10,) in earned:
@@ -38,7 +43,7 @@ def grade(github,tag,simple=True):
 		#check if the tag is a project
 		if tag[0].isalpha():
 			#grade the algorithm
-			score += extract_algorithm()
+			score += extract_algorithm(github,tag,now)
 		#run my copy of the tests
 		system(f"cp ../Testing/{tag}tests.py Tests.py")
 		try:
@@ -61,7 +66,7 @@ def grade(github,tag,simple=True):
 		change_grade(github,tag,score)
 	return report
 
-def grade_assignment(tag):
+def grade_assignment(tag,now=False):
 	'''grades all student's given assignment'''
 	if tag == 'exit':
 		#don't try to grade that
@@ -69,49 +74,24 @@ def grade_assignment(tag):
 	students = read('SELECT github FROM students;')
 	for s in students:
 		github = s[0]
-		grade(github,tag)
+		grade(github,tag,True,now)
 
-def select_tag():
-	'''prompts and validates an assignment tag'''
-	ALL = []
-	for i in  read('SELECT tag FROM assignments;'):
-		ALL.append(i[0])
-	tag = ''
-	#allow the used to exit without crashing
-	while tag not in ALL and tag != 'exit':
-		#ask to display tags if no valid tag is given
-		if tag != '' and tag != 'exit':
-			if input('Would you like to see the assignment tags?(Y/n)\n').lower() in ('yes','y'):
-				print(ALL)
-		tag = input("Enter an assignment tag or 'exit' to quit:\n")
-	return tag
+def clean():
+	'''delete student repos from GitHub, cleaning up the ORG for next year.
+	This is NOT reversible.
 
-def select_student():
-	'''prompts and validates a student from the database'''
-	search = ''
-	github = ''
-	while not github:
-		search = input("Enter part of a student's name or github or 'exit' to quit:\n")
-		results = read(f"SELECT github, name FROM students WHERE github LIKE '%{search}%' OR name LIKE '%{search}%';")
-		if len(results) > 1:
-			print('--Results--')
-			count = 1
-			for git,name in results:
-				print(f"{count} - {git}: {name}")
-				count += 1
-			c = input("Which student?\n")
-			try:
-				c = int(c)-1
-				github = results[c][0]
-			except ValueError:
-				if c != 'exit':
-					print("That wasn't a number.")
-				else:
-					github = c
-			except IndexError:
-				print("That wasn't a valid option.")
-		elif len(results) == 1:
-			github = results[0][1]
-		else:
-			print("No results found. Try again.")
-	return github
+	If students want to keep their work, they will need to have a local copy.
+	Students don't have admin access to their repos and forking is disabled
+	by default from GitHub Classroom. This is to minimize visibility of 
+	completed assignments for future students, reducing cheating.
+	That copy can be added to their personal GitHub accounts if they want.
+
+	This used to speed up the grader since it scanned the ORG for repos, but
+	I changed assignment templates and the code so that this is no longer the
+	case. I just like the ORG clean.'''
+
+	#get a list of assignment tags
+	ALL = 'f'
+	#list all repos that have prefix '{tag}-'
+	#for each repo
+		#delete it

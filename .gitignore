@@ -2,3 +2,4 @@ __pycache__
 .pytest_cache
 *.csv
 data.sqlite3
+*-Algos/
