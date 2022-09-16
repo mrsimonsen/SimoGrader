@@ -63,9 +63,23 @@ def grade(github,tag,simple=True):
 
 def grade_assignment(tag):
 	'''grades all student's given assignment'''
-	students = read(f'SELECT github FROM students;')
+	if tag == 'exit':
+		#don't try to grade that
+		return
+	students = read('SELECT github FROM students;')
 	for s in students:
 		github = s[0]
 		grade(github,tag)
 
-
+def select_tag():
+	'''prompts and validates an assignment tag'''
+	ALL = read('SELECT tag FROM assignments;')
+	tag = ''
+	#allow the used to exit without crashing
+	while tag not in ALL and tag != 'exit':
+		#ask to display tags if no valid tag is given
+		if tag != '' and tag != 'exit':
+			if input('Would you like to see the assignment tags?(Y/n)\n').lower() in ('yes','y'):
+				print(ALL)
+		tag = input("Enter an assignment tag or 'exit' to quit:\n")
+	return tag
