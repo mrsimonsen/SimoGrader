@@ -99,9 +99,8 @@ def select_tag():
 		tag = input("Enter an assignment tag or 'exit' to quit:\n")
 	return tag
 
-def select_student():
+def select_student(search=''):
 	'''prompts and validates a student from the database'''
-	search = ''
 	github = ''
 	while not github:
 		search = input("Enter part of a student's name or github or 'exit' to quit:\n")

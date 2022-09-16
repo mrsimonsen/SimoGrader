@@ -68,8 +68,11 @@ def main():
 					for tag in tags:
 						#algos will be stored for later with multiple assignment grading
 						grade_assignments(tag)
-				elif g == '3':
-					github = select_student()
+				elif g == '3' or g.isalpha():
+					if g.isalpha():
+						github = select_student(g)
+					else:
+						github = select_student()
 					if github != 'exit':
 						tag = select_tag()
 						if tag != 'exit':
@@ -104,6 +107,7 @@ def main():
 				elif g == '4':
 					print("---WARNING---\nAll student GitHub repos will be deleted!\nDatabase will also be deleted!")
 					if input('Continue?(Y/n)?\n').lower() in ('yes','y'):
+						#TODO: finish making grading.clean()
 						clean()
 						system(f"rm {DATABASE_NAME}")
 						print("Cleaning Complete")
@@ -111,8 +115,42 @@ def main():
 				else:
 					print(f"Invalid selection: '{g}'")
 		elif c == '3':
-			print('student')
-			#clone a student repo (really useful for quick checking for more detailed feedback)
+			g = ''
+			options = [
+				"'0' - Return to Main Menu",
+				"'1' - View a Student Report",
+				"'2' - Change a Student's data",
+				"'3' - Generate Class Report CSV",
+			]
+			while g != '0':
+				g = display_menu('Student Menu', options)
+				if g == '0':
+					print('Returning...')
+				elif g == '1':
+					github = select_student()
+					if github != 'exit':
+						print(student_report(github))
+				elif g == '2':
+					github = select_student()
+					if github != 'exit':
+						name = input("Enter new name 'Last, Legal (First)' or press 'Enter' to skip\n")
+						valid = False
+						while not valid:
+							try:
+								period = input("Enter new class period or press 'Enter' to skip\n")
+								period = int(period)
+								if period in range(1,9):
+									valid = True
+							except ValueError:
+								if period:
+									print("That wasn't a number.")
+								else:
+									valid = True
+						change_student(github,name,period)
+				elif g == '3':
+					csv_report()
+				else:
+					print(f"Invalid selection: '{g}'")
 		else:
 			print(f"Invalid selection: '{c}'")
 

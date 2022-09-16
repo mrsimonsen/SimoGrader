@@ -1,9 +1,9 @@
-from csv import DictReader
+from csv import DictReader,writer
 from os.path import exists
 
 from database import read, execute
 
-def change_student(github, name=None, period=None):
+def change_student(github, name, period):
 	'''Create or change a student's details'''
 	found = read(f"SELECT * FROM students WHERE github = '{github}'")
 	if found:
@@ -121,3 +121,24 @@ def import_students():
 			print('new student added')
 			count += 1
 	print(f"Complete: {count} new students added")
+
+def csv_report():
+	tags = read("SELECT tag FROM assignments;")
+	students = read(f"SELECT * FROM students;")
+	header = ['Period','Name']
+	for t in tags:
+		header.append(t[0])
+	stuff = [header]
+	for github, name, period in students:
+		row = [period, name]
+		for a in tags:
+			s = read(f"SELECT earned FROM scores WHERE github = '{github}' AND tag = '{a[0]}';")
+			if s:
+				row.append(s[0][0])
+			else:
+				row.append('-')
+		stuff.append(row)
+	with open(f'class_report.csv','w',newline='') as f:
+		w = csv.writer(f, delimiter=',')
+		w.writerows(stuff)
+	print("Report complete")

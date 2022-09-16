@@ -77,7 +77,7 @@ def grade_assignment(tag,now=False):
 	students = read('SELECT github FROM students;')
 	for s in students:
 		github = s[0]
-		grade(github,tag,True,now)
+		print(grade(github,tag,True,now))
 
 def clean():
 	'''delete student repos from GitHub, cleaning up the ORG for next year.
