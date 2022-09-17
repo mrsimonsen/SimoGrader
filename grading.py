@@ -1,5 +1,6 @@
 from os import chdir, system, mkdir
 from os.path import exists
+import json
 
 from database import read
 from student import change_grade
@@ -93,8 +94,41 @@ def clean():
 	I changed assignment templates and the code so that this is no longer the
 	case. I just like the ORG clean.'''
 
-	#get a list of assignment tags
-	ALL = 'f'
-	#list all repos that have prefix '{tag}-'
-	#for each repo
-		#delete it
+	print('Loading assignment prefixes...')
+	tags = read('SELECT tag FROM assignments;')
+	TAGS = ['godot']
+	for t in tags:
+		TAGS.append(t[0])
+
+	#gather up to 5,000 repo names from the github org
+	#~40 assignments with ~100 students, plus ~100 godot (game design)
+	print(f'Scraping 5000 repos from {GITHUB_ORGANIZATION_NAME} on GitHub...')
+	system(f'gh repo list {GITHUB_ORGANIZATION_NAME} --json name -L 5000 > temp.json')
+	remove = []
+	with open('temp.json') as f:
+		repos = json.load(f)
+	system('rm temp.json')
+	#filter repos
+	print("Filtering repos...")
+	for r in repos:
+		name = r["name"]
+		prefix = name.split('-')[0]
+		if prefix in TAGS:
+			remove.append(name)
+	total = len(remove)
+	print(f"{total} repos identified")
+	if input("Would you like to view the list before deletion?(Y/n)\n").lower() in ('yes','y'):
+		remove.sort()
+		with open('repos_to_delete.txt','w') as f:
+			for line in remove:
+				f.write(line+'\n')
+		print("Repos exported to 'repos_to_delete.txt'")
+		return
+	else:
+		print("checking authentication")
+		system("gh auth refresh -h github.com -s delete_repo")
+		c = 1
+		for i in remove:
+			print(f"({c:04}/{total}) Deleting: {GITHUB_ORGANIZATION_NAME}/{i}")
+			c += 1
+			system(f"gh repo delete {GITHUB_ORGANIZATION_NAME}/{i} --confirm")

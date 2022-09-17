@@ -3,3 +3,4 @@ __pycache__
 *.csv
 data.sqlite3
 *-Algos/
+repos_to_delete.txt

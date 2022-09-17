@@ -107,7 +107,6 @@ def main():
 				elif g == '4':
 					print("---WARNING---\nAll student GitHub repos will be deleted!\nDatabase will also be deleted!")
 					if input('Continue?(Y/n)?\n').lower() in ('yes','y'):
-						#TODO: finish making grading.clean()
 						clean()
 						system(f"rm {DATABASE_NAME}")
 						print("Cleaning Complete")
