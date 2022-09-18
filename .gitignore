@@ -1,6 +1,6 @@
 __pycache__
 .pytest_cache
-Repos/
-grading_data
-assignment.txt
 *.csv
+data.dat
+students.txt
+weber.csv
