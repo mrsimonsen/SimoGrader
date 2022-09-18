@@ -1,6 +1,6 @@
 __pycache__
 .pytest_cache
 *.csv
-data.dat
+data.sqlite3
+*-Algos/
 students.txt
-weber.csv

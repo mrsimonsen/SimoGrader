@@ -58,7 +58,7 @@ class Tests(unittest.TestCase):
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
 
-def main(verbose):
+def main(simple):
 	suite = unittest.defaultTestLoader
 	runner = unittest.TextTestRunner(stream=StringIO(), descriptions=False)
 	result = runner.run(suite.loadTestsFromTestCase(Tests))
@@ -69,24 +69,20 @@ def main(verbose):
 	else:
 		passed = total - len(result.failures) - len(result.errors)
 		score = round(passed/total*10,2)
-	print(f"Passed: {passed}/{total}")
-	print(f"Score: {score}")
-	if verbose:
+	report = f"Passed: {passed}/{total}\nScore: {score}\n"
+	if not simple:
 		failed = []
 		for i in result.failures:
 			failed.append(f"Fail: {i[0].id()[15:]}")
 		for i in result.errors:
 			failed.append(f"Error: {i[0].id()[15:]}")
-		print("Failed:")
+		report += "Failed:\n"
 		for i in failed:
-			print(f"	{i}")
-	return score
+			report += f"\t{i}\n"
+	return score, report
 
 if __name__ == '__main__':
-	try:
-		verbose = sys.argv[1] != 'simple'
-	except IndexError:
-		verbose = False
-	score = main(verbose)
+	score, report = main(sys.argv[1]=='True')
 	with open('score.txt','w') as f:
 		f.write(str(score))
+		f.write('\n'+report)
