@@ -128,7 +128,7 @@ def select_student(search=''):
 			except IndexError:
 				print("That wasn't a valid option.")
 		elif len(results) == 1:
-			github = results[0][1]
+			github = results[0][0]
 		else:
 			print("No results found. Try again.")
 		search = ''
