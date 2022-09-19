@@ -29,6 +29,7 @@ def extract_algorithm(github,tag,now):
 	return score
 
 def grade(github,tag,simple=True,now=False):
+	print(github)
 	#check if student already complete assignment
 	earned = read(f'SELECT earned FROM scores WHERE github == "{github}" AND tag = "{tag}";')
 	if earned and (10,) in earned:
@@ -39,7 +40,7 @@ def grade(github,tag,simple=True,now=False):
 	system('rm out.txt')
 	#if the student folder doesn't exist, then it didn't clone
 	if not exists('student'):
-		return f"Student hasn't started the assignment"
+		return f"Student hasn't accepted the assignment"
 	else:
 		score = 0
 		#enter the repo
@@ -52,7 +53,8 @@ def grade(github,tag,simple=True,now=False):
 		system(f"cp ../Testing/{tag}tests.py Tests.py")
 		try:
 			#run the test
-			system(f"python3 Tests.py {simple}")
+			system(f"python3 Tests.py {simple} 2> out.txt")
+			system('rm out.txt')
 			#get the score from the file the test made
 			with open('score.txt','r') as f:
 				lines = f.readlines()
@@ -60,11 +62,17 @@ def grade(github,tag,simple=True,now=False):
 			report = ''.join(lines[1:])
 			system("rm score.txt")
 		except KeyboardInterrupt:
-			return "Student test terminated"
+			chdir('..')
+			system('rm -rf student')
+			return "Student test terminated\n"
 		except ValueError as e:
-			return "non-numeric data in score.txt"
+			chdir('..')
+			system('rm -rf student')
+			return "non-numeric data in score.txt\n"
 		except FileNotFoundError:
-			return "Couldn't find score.txt file - student.py probably crashed"
+			chdir('..')
+			system('rm -rf student')
+			return "Couldn't find score.txt file - student.py probably crashed\n"
 		chdir('..')
 		system('rm -rf student')
 		change_grade(github,tag,score)

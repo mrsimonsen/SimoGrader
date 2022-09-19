@@ -1,5 +1,6 @@
 import sqlite3
 from os import listdir
+from sys import exit
 
 DATABASE_NAME = 'data.sqlite3'
 
@@ -12,6 +13,7 @@ def execute(query):
 		connection.commit()
 	except sqlite3.Error as e:
 		print(f"Execute Error:\n{e}\n{query}")
+		exit()
 
 def read(query):
 	'''connect to the default DATABASE_NAME and try to execute the provided query, return the results'''
@@ -21,9 +23,10 @@ def read(query):
 	try:
 		cursor.execute(query)
 		result = cursor.fetchall()
-		return result
 	except sqlite3.Error as e:
 		print(f"Read Error:\n{e}\n{query}")
+		exit()
+	return result
 
 def create():
 	'''Creates the tables using the default schema for auto-grader.
