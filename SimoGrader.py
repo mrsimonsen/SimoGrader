@@ -78,6 +78,7 @@ def main():
 						if tag != 'exit':
 							#show extended report and grade algo now
 							print(grade(github, tag, False, True))
+							print(student_report(github))
 				else:
 					print(f"Invalid selection: '{g}'")
 
