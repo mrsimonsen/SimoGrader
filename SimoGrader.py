@@ -60,14 +60,14 @@ def main():
 					if tag != 'exit':
 						#if it is a project, would you like to grade the algo now or later?
 						now = tag[0].isalpha() and input("Would you like to grade the algorithms now?(Y/n)\n").lower() in ('yes','y')
-						grade_assignment(select_tag(),now)
+					grade_assignment(select_tag(),now)
 				elif g == '2':
 					tags = []
 					while 'exit' not in tags:
 						tags.append(select_tag())
 					for tag in tags:
 						#algos will be stored for later with multiple assignment grading
-						grade_assignments(tag)
+						grade_assignment(tag)
 				elif g == '3' or g.isalpha():
 					if g.isalpha():
 						github = select_student(g)
