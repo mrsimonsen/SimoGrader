@@ -91,7 +91,7 @@ def select_tag():
 		ALL.append(i[0])
 	tag = ''
 	#allow the used to exit without crashing
-	while tag not in ALL or tag != 'exit':
+	while (tag not in ALL) and (tag != 'exit'):
 		#ask to display tags if no valid tag is given
 		if tag != '' and tag != 'exit':
 			if input('Would you like to see the assignment tags?(Y/n)\n').lower() in ('yes','y'):

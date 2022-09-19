@@ -60,7 +60,7 @@ def main():
 					if tag != 'exit':
 						#if it is a project, would you like to grade the algo now or later?
 						now = tag[0].isalpha() and input("Would you like to grade the algorithms now?(Y/n)\n").lower() in ('yes','y')
-					grade_assignment(select_tag(),now)
+					grade_assignment(tag,now)
 				elif g == '2':
 					tags = []
 					while 'exit' not in tags:
