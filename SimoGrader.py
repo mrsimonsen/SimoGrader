@@ -125,8 +125,11 @@ def main():
 				g = display_menu('Student Menu', options)
 				if g == '0':
 					print('Returning...')
-				elif g == '1':
-					github = select_student()
+				elif g == '1' or g.isalpha():
+					if g.isalpha():
+						github = select_student(g)
+					else:
+						github = select_student()
 					if github != 'exit':
 						print(student_report(github))
 				elif g == '2':
