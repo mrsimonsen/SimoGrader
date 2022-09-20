@@ -4,8 +4,8 @@ Project 1
 ## Steps
 1. Prompt the user to input a wall's height and width. These will not always be whole numbers so store them appropriately.
 2. Calculate and output the wall's area.
-3. Calculate and output the number of gallons needed to pain the wall. Assume that a gallon of paint covers 350 square feet.
-4. Calculate and output the number of 1 gallon pain cans needed to pain the wall. Hint: use the imported math function to round up to the nearest gallon.
+3. Calculate and output the number of gallons needed to paint the wall. Assume that a gallon of paint covers 350 square feet.
+4. Calculate and output the number of 1 gallon paint cans needed to paint the wall. Hint: use the imported math function to round up to the nearest gallon.
 
 The output of the program should look like the following:
 ```
