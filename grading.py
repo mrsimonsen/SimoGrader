@@ -32,8 +32,10 @@ def grade(github,tag,simple=True,now=False):
 	print(github)
 	#check if student already complete assignment
 	earned = read(f'SELECT earned FROM scores WHERE github == "{github}" AND tag = "{tag}";')
-	if earned and (10,) in earned:
-		return "student already complete assignment"
+	if earned:
+		total = read(f'SELECT total FROM assignments WHERE tag = "{tag}";')
+		if earned[0][0]/total[0][0] == 1:
+			return "student already complete assignment"
 	#clone student repo
 	system(f"gh repo clone {GITHUB_ORGANIZATION_NAME}/{tag}-{github} student -- -q 2> out.txt")
 	#pipe any errors into a file so that I don't see them
