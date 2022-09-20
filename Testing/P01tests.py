@@ -43,6 +43,18 @@ class Tests(unittest.TestCase):
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
 
+	inputs = "50\n10.5\n"
+	@patch('sys.stdin', StringIO(inputs))
+	@patch('sys.stdout', new_callable = StringIO)
+	def test05_all(self, stdout):
+		correct = "Enter wall height (feet):\nEnter wall width (feet):\n"
+		correct += "Wall area: 525.0 square feet\n"
+		correct += "Paint needed: 1.5 gallons\n"
+		correct += "Cans needed: 2 cans\n"
+		student.main()
+		result = stdout.getvalue()
+		self.assertEqual(result, correct)
+
 def main(simple):
 	suite = unittest.defaultTestLoader
 	runner = unittest.TextTestRunner(stream=StringIO(), descriptions=False)
