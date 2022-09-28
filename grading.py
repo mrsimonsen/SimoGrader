@@ -73,8 +73,8 @@ def grade(github,tag,simple=True,now=False):
 			#minimum one commit per step and a merge commit for that branch
 			#min count = num_steps*2
 			#number of tests don't match the number of expected commits,
-			#but serve as a simple basis to go by. Pretty sure that I don't have any tests
-			#with more tests than double the steps.
+			#but serve as a simple basis to go by. Also, github classroom makes 2 commits.
+			#Pretty sure that I don't have any tests with more tests than double the steps +2.
 			report += f"Commits: {commits}/{num}\n"
 			if num > commits:# they don't have the minimum amount
 				score -= 5 #half credit deduction
