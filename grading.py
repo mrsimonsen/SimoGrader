@@ -44,6 +44,7 @@ def grade(github,tag,simple=True,now=False):
 	if not exists('student'):
 		return f"Student hasn't accepted the assignment"
 	else:
+		min_commit = read(f"SELECT min_commits FROM assignments WHERE tag = '{tag}';")[0][0]
 		score = 0
 		#enter the repo
 		chdir('student')
@@ -68,7 +69,6 @@ def grade(github,tag,simple=True,now=False):
 			with open("commits.txt",'r') as f:
 				commits = int(f.read())
 			system("rm commits.txt")
-			min_commit = read(f"SELECT min_commits FROM assignments WHERE tag = '{tag}';")[0]
 			report += f"Commits: {commits}/{min_commit}\n"
 			if min_commit > commits:# they don't have the minimum amount
 				score -= 5 #half credit deduction

@@ -1,5 +1,7 @@
 # Simonsen Auto-Grader
 
+*Note: GitHub CLI must be installed and configured (gh auth login) for this program to work*
+
 I originally created this terminal program to collect student assignments hosted on GitHub then test/grade them and store the results in a database to enter into my school's SIS, but all privately to protect student information and keep my assignments and tests private.
 
 I'm now making a public repo to show off my work with example data so that other's can benefit from my years of work. This will be a work in progress, and progress can be tracked through the TODO list below.
