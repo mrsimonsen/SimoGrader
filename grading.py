@@ -61,8 +61,6 @@ def grade(github,tag,simple=True,now=False):
 			with open('score.txt','r') as f:
 				lines = f.readlines()
 			score += float(lines[0].strip())
-			#extract the number of tests
-			num = int(lines[1].split('/')[1].strip())
 			report = ''.join(lines[1:])
 			system("rm score.txt")
 			#check for commit count - aka students showing their work
@@ -70,13 +68,9 @@ def grade(github,tag,simple=True,now=False):
 			with open("commits.txt",'r') as f:
 				commits = int(f.read())
 			system("rm commits.txt")
-			#minimum one commit per step and a merge commit for that branch
-			#min count = num_steps*2
-			#number of tests don't match the number of expected commits,
-			#but serve as a simple basis to go by. Also, github classroom makes 2 commits.
-			#Pretty sure that I don't have any tests with more tests than double the steps +2.
-			report += f"Commits: {commits}/{num}\n"
-			if num > commits:# they don't have the minimum amount
+			min_commit = read(f"SELECT min_commits FROM assignments WHERE tag = '{tag}';")[0]
+			report += f"Commits: {commits}/{min_commit}\n"
+			if min_commit > commits:# they don't have the minimum amount
 				score -= 5 #half credit deduction
 				if score < 0:
 					score = 0 # no negative scores
