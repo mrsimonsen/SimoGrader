@@ -133,7 +133,10 @@ def create():
 			except ValueError:
 				#projects start with a letter and are worth more
 				points = 20
-			min_commits = data[tag]
+			min_commits = 0
+			#flexible for the first unit until the second project
+			if tag not in ('00p','01p','02p','03p','P01'):
+				min_commits = data[tag]
 			enter_assignment=f'''
 			INSERT INTO assignments (tag, total, min_commits)
 			VALUES ('{tag}', {points}, {min_commits});'''
