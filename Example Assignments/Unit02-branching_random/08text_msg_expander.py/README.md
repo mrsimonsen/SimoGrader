@@ -8,9 +8,11 @@ The output of the program should look like the following:
 ```
 Enter text:
 You entered: Totally JK! TTYL BFF
+
 Found "BFF", replaced with "best friend forever"
 Found "JK", replaced with "just kidding"
 Found "TTYL", replaced with "talk to you later"
-Expanded message: Totally just kidding! talk to you later best friend forever
+
+Expanded: Totally just kidding! talk to you later best friend forever
 ```
 *Note: This program outputs a newline after each input and the example show the user's input, but that actually isn't part of the output when the program runs.*
