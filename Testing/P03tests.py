@@ -71,7 +71,7 @@ class Tests(unittest.TestCase):
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
 	def test08_part_3_F(self, stdout):
-		correct = "\nFinal Grade: F (35.75%)\n"
+		correct = "\nFinal Grade: F (35.8%)\n"
 		student.main(10,80,10,5)
 		result = stdout.getvalue()[316:]
 		self.assertEqual(result, correct)
