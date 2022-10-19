@@ -41,14 +41,12 @@ def get_min_commits(d):
 			tag = 'sol' #and grab the interim assignment
 	with open('README.md','r') as f:
 		lines = f.readlines()
-	steps = []
+	count = 0
 	for l in lines:
-		try:
-			int(l[0])#does the line start with a number?
-			steps.append(l)
-		except ValueError:
-			pass#do nothing if it doesn't
-	min_commits = len(steps)+2 #add 2 for the 2 commits added by GitHub Classroom
+		#1st character is a number and followed by a '.'
+		if len(l)>3 and l[0].isdigit() and '.' in (l[1],l[2]):
+			count += 1
+	min_commits = count+2 #add 2 for the 2 commits added by GitHub Classroom
 	return tag, min_commits
 
 def execute(query):
@@ -125,11 +123,10 @@ def create():
 		data = search_readmes()
 		for file in testing:
 			tag = file[:3]
-			try:
-				#regular assignment start with a number
-				int(tag[0])
+			#regular assignment start with a number
+			if tag[0].isdigit():
 				points = 10
-			except ValueError:
+			else:
 				#projects start with a letter and are worth more
 				points = 20
 			min_commits = 0
