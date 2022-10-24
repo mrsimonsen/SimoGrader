@@ -9,8 +9,7 @@ GITHUB_ORGANIZATION_NAME = "NUAMES-CS"
 
 def extract_algorithm(github,tag,now):
 	'''extract the comments of the student file as an algorithm text file'''
-	with open('student.py','r') as f:
-		text = f.readlines()
+	with 
 	algo = []
 	for line in text:
 		if '#' in line:
