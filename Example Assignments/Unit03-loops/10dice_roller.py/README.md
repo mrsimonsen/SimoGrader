@@ -4,7 +4,7 @@ Objective: Learn the range function.
 ## Steps
 1. Prompt the user for two integers; a number of dice to roll and the number of sides those dice have. Display a message stating how many of what sided dice are being rolled.
 2. Display each dice roll.
-3. Display the of all of all the dice rolls.
+3. Display the total of all the dice rolls.
 
 The output of the program should look like the following:
 ```
