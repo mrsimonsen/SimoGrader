@@ -139,6 +139,6 @@ def csv_report():
 				row.append('-')
 		stuff.append(row)
 	with open(f'class_report.csv','w',newline='') as f:
-		w = csv.writer(f, delimiter=',')
+		w = writer(f, delimiter=',')
 		w.writerows(stuff)
 	print("Report complete")
