@@ -22,11 +22,47 @@ class Tests(unittest.TestCase):
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
 
-	inputs = "strengths\n"
+	inputs = "aeiou"
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
-	def test03_part_3_short(self, stdout):
-		correct = 'Enter a message:\nThe first vowel is "e".\n'
+	def test03_part_3_a(self, stdout):
+		correct = f'Enter a message:\nThe first vowel is "a".\n'
+		student.main()
+		result = stdout.getvalue()
+		self.assertEqual(result, correct)
+	
+	inputs = "eioua"
+	@patch('sys.stdin', StringIO(inputs))
+	@patch('sys.stdout', new_callable = StringIO)
+	def test04_part_3_e(self, stdout):
+		correct = f'Enter a message:\nThe first vowel is "e".\n'
+		student.main()
+		result = stdout.getvalue()
+		self.assertEqual(result, correct)
+
+	inputs = "iouae"
+	@patch('sys.stdin', StringIO(inputs))
+	@patch('sys.stdout', new_callable = StringIO)
+	def test05_part_3_i(self, stdout):
+		correct = f'Enter a message:\nThe first vowel is "i".\n'
+		student.main()
+		result = stdout.getvalue()
+		self.assertEqual(result, correct)
+
+	inputs = "ouaei"
+	@patch('sys.stdin', StringIO(inputs))
+	@patch('sys.stdout', new_callable = StringIO)
+	def test06_part_3_o(self, stdout):
+		correct = f'Enter a message:\nThe first vowel is "o".\n'
+		student.main()
+		result = stdout.getvalue()
+		self.assertEqual(result, correct)
+
+	inputs = "uaeio"
+	@patch('sys.stdin', StringIO(inputs))
+	@patch('sys.stdout', new_callable = StringIO)
+	def test07_part_3_u(self, stdout):
+		correct = f'Enter a message:\nThe first vowel is "u".\n'
 		student.main()
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
