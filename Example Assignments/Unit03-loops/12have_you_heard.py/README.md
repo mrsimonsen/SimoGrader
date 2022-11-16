@@ -3,7 +3,7 @@ Objective: Lean how to use while loops.
 
 ## Steps
 1. Ask the user if they've ever hear the tragedy of Darth Plagueis The Wise.
-2. Until the user's response isn't "yes" or "y", keep displaying the tragedy and asking the user again. Use the format from the example.
+2. Until the user's response is "yes" or "y", keep displaying the tragedy and asking the user again. Use the format from the example.
 
 The output of the program should look like the following:
 ```
