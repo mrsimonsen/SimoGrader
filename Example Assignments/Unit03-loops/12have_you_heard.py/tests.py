@@ -4,6 +4,7 @@ from io import StringIO
 import student
 
 class Tests(unittest.TestCase):
+	maxDiff = None
 	inputs = "no\nyes\n"
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
