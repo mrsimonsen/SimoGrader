@@ -2,7 +2,7 @@
 Project 5
 
 ## Steps
-1. Prompt the user for 3 number that will be used to create a half arrow shape.
+1. Prompt the user for 3 numbers that will be used to create a half arrow shape.
 2. Print out the arrow base rectangle.
 3. Print out the arrow head triangle.
 4. Expand the program so that it keep asking for a arrow head width until it is bigger than the arrow base width.
