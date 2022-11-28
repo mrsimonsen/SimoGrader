@@ -49,7 +49,8 @@ def main():
 				"'0' - Return to Main Menu",
 				"'1' - Grade an assignment",
 				"'2' - Grade multiple assignments",
-				"'3' - Grade a student's assignment"
+				"'3' - Grade a student's assignment",
+				"'4' - Grade all of a studnet's work"
 			]
 			while g != '0':
 				g = display_menu('Grading Menu', options)
@@ -79,6 +80,17 @@ def main():
 							#show extended report and grade algo now
 							print(grade(github, tag, False, True))
 							print(student_report(github))
+				elif g == '4':
+					github = select_student()
+					if github != 'exit':
+						ALL = []
+						for i in  read('SELECT tag FROM assignments;'):
+							ALL.append(i[0])
+						for tag in ALL:
+							#don't show extended repot, store algos for later
+							print(f"{tag}: ",end='')
+							grade(github, tag, True, False)
+						print(student_report(github))
 				else:
 					print(f"Invalid selection: '{g}'")
 
