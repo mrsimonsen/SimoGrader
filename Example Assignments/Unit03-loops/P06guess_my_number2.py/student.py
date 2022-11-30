@@ -1,3 +1,4 @@
+import random
 def main():
 	print("\tWelcome to Guess My Number!")
 	print("\nI'm thinking of a number between 1 and 100.")
