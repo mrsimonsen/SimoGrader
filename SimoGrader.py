@@ -50,7 +50,8 @@ def main():
 				"'1' - Grade an assignment",
 				"'2' - Grade multiple assignments",
 				"'3' - Grade a student's assignment",
-				"'4' - Grade all of a studnet's work"
+				"'4' - Grade all of a studnet's work",
+				"'5' - Set assignment to grade by student"
 			]
 			while g != '0':
 				g = display_menu('Grading Menu', options)
@@ -91,6 +92,16 @@ def main():
 							print(f"{tag}: ",end='')
 							grade(github, tag, True, False)
 						print(student_report(github))
+				elif g == '5':
+					tag = select_tag()
+					github = ''
+					while github != 'exit' and tag != 'exit':
+						if github:
+							print(grade(github, tag, False, True))
+							data = read(f'SELECT earned, assignments.total FROM scores INNER JOIN assignments on assignments.tag = scores.tag WHERE scores.github = "{github}" AND scores.tag = "{tag}"')
+							print(f"Grade: {data[0][0]}/{data[0][1]}")
+						github = select_student()
+
 				else:
 					print(f"Invalid selection: '{g}'")
 
