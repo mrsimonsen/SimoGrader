@@ -16,7 +16,11 @@ data = (
 	('Neptune', 163.7, 1.12, 0.673)
 )
 today = datetime.date.today()
-teresa = '''Enter Name:
+t_earth_days = (today - datetime.date(1987, 1, 17)).days
+t_earth_age = round(t_earth_days/Earth_orbit,1)
+e_earth_days = (today - datetime.date(2015, 8, 17)).days
+e_earth_age = round(e_earth_days/Earth_orbit,1)
+teresa = f'''Enter Name:
 Input birth year (YYYY):
 Input birth month (MM):
 Input birth day (DD):
@@ -24,11 +28,11 @@ Enter weight:
 
 Solar System data for Teresa
 Planet |Mercury|Venus  |Earth  |Mars   |Jupiter|Saturn |Uranus |Neptune|
-Age    |  147.3|   57.7|   35.5|   18.9|    3.0|    1.2|    0.4|    0.2|
+Age    |{round(t_earth_age/data[0][1],1):7}|{round(t_earth_age/data[1][1],1):7}|{round(t_earth_age/data[2][1],1):7}|{round(t_earth_age/data[3][1],1):7}|{round(t_earth_age/data[4][1],1):7}|{round(t_earth_age/data[5][1],1):7}|{round(t_earth_age/data[6][1],1):7}|{round(t_earth_age/data[7][1],1):7}|
 Weight |   75.6|  181.4|    200|   75.4|  472.0|  183.2|  177.8|  224.0|
-Days   |    220|     53|  12961|  12583|  31231|  29125|  18001|  19258|
+Days   |{int(t_earth_days/data[0][3]):7}|{int(t_earth_days/data[1][3]):7}|{int(t_earth_days/data[2][3]):7}|{int(t_earth_days/data[3][3]):7}|{int(t_earth_days/data[4][3]):7}|{int(t_earth_days/data[5][3]):7}|{int(t_earth_days/data[6][3]):7}|{int(t_earth_days/data[7][3]):7}|
 '''
-emily = '''Enter Name:
+emily = f'''Enter Name:
 Input birth year (YYYY):
 Input birth month (MM):
 Input birth day (DD):
@@ -36,15 +40,15 @@ Enter weight:
 
 Solar System data for Emily
 Planet |Mercury|Venus  |Earth  |Mars   |Jupiter|Saturn |Uranus |Neptune|
-Age    |   28.6|   11.2|    6.9|    3.7|    0.6|    0.2|    0.1|    0.0|
+Age    |{round(e_earth_age/data[0][1],1):7}|{round(e_earth_age/data[1][1],1):7}|{round(e_earth_age/data[2][1],1):7}|{round(e_earth_age/data[3][1],1):7}|{round(e_earth_age/data[4][1],1):7}|{round(e_earth_age/data[5][1],1):7}|{round(e_earth_age/data[6][1],1):7}|{round(e_earth_age/data[7][1],1):7}|
 Weight |  17.77|  42.63|     47|  17.72| 110.92|  43.05|  41.78|  52.64|
-Days   |     42|     10|   2522|   2448|   6077|   5667|   3502|   3747|
+Days   |{int(e_earth_days/data[0][3]):7}|{int(e_earth_days/data[1][3]):7}|{int(e_earth_days/data[2][3]):7}|{int(e_earth_days/data[3][3]):7}|{int(e_earth_days/data[4][3]):7}|{int(e_earth_days/data[5][3]):7}|{int(e_earth_days/data[6][3]):7}|{int(e_earth_days/data[7][3]):7}|
 '''
 
 class Tests(unittest.TestCase):
 	#to generate correct text
 	#$ echo -e "inputs_string" | python3 AK.py > out.txt
-	
+	maxDiff = None
 	inputs = "Teresa\n1987\n01\n17\n200\n"
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
@@ -87,7 +91,10 @@ def main(simple):
 	return score, report
 
 if __name__ == '__main__':
-	score, report = main(sys.argv[1]=='True')
-	with open('score.txt','w') as f:
-		f.write(str(score))
-		f.write('\n'+report)
+	if len(sys.argv) > 1:
+		score, report = main(sys.argv[1]=='True')
+		with open('score.txt','w') as f:
+			f.write(str(score))
+			f.write('\n'+report)
+	else:
+		unittest.main(failfast=True)
