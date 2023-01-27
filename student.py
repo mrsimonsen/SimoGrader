@@ -124,7 +124,7 @@ def import_students():
 
 def csv_report():
 	tags = read("SELECT tag FROM assignments;")
-	students = read(f"SELECT * FROM students;")
+	students = read(f"SELECT * FROM students ORDER BY name;")
 	header = ['Period','Name']
 	for t in tags:
 		header.append(t[0])
