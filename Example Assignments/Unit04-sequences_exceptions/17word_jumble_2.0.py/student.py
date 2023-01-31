@@ -1,7 +1,7 @@
 import random
 def main():
 	# create a sequence of words to choose from
-	WORDS = ("python", "jumble", "easy", "difficult", "answer")
+	WORDS = ("answer", "difficult", "easy", "jumble", "python")
 	# pick one word randomly from the sequence
 	word = random.choice(WORDS)
 	# create a variable to use later to see if the guess is correct
