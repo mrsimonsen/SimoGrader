@@ -7,7 +7,7 @@ Objective: Learn how to work with arrays: append, sum, max methods.
 3. Calculate and display the total weight.
 4. Calculate and display the average weight to a precision of 2 decimal places.
 5. Display the max weight.
-6. Expand the program so the exception is handled when the user doesn't enter in a number, without increasing the count.
+6. Expand the program to handle exceptions for improper input without increasing the count value; ie a count of 5 should result in a list lenght of 5.
 
 
 The output of the program should look like the following:
@@ -26,6 +26,7 @@ Enter weight 4:
 Enter weight 5:
 280.16
 You entered: [10.0, 25.6, 156.7, 350.0, 280.16]
+
 Total weight: 822.46
 Average weight: 164.49
 Max weight: 350.0
