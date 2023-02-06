@@ -5,7 +5,7 @@ Objective: Learn how to work with 2 dimensional tuples.
 1. Read and run the given program to understand how it works. Then modify the intro to match the example output.
 2. Expand the program so that it displays 'Goodbye.' if the player quits the game.
 3. Expand the "that's not it" message to include the hint instructions.
-4. Modify the 'WORDS' variable so that it's a 2D tuple, where each element is a tuple of a word and it's hint. Expand the branching so that if the user enters a '?' the paired hint prints out. Use the hints from the table below:
+4. Modify the 'WORDS' variable so that it's a 2D tuple, where each element is a tuple of a word and it's hint. Unpack the output of the random choice. Expand the branching so that if the user enters a '?' the paired hint prints out. Use the hints from the table below:
 	word | hint
 	:--: | --
 	answer|what you're looking for
