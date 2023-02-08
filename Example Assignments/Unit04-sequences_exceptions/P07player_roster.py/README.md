@@ -2,7 +2,7 @@
 Project 7
 
 ## Steps
-1. Prompt the user for 5 jersey numbers and ratings - save them into a two-dimensional list where each element represents a player [jersey, rating]. Then display the roster check the example output for formatting.
+1. Prompt the user for 5 jersey numbers and ratings - save them into as two-dimensional entries [jersey, rating] in the list 'players'. Then display the roster check the example output for formatting.
 2. Display the menu and prompt for user input. Loop this until the user input is 'q'.
 3. Implement the "Output roster" menu option. This should display the current values from the 2D list.
 4. Implement the "Output players above a rating" menu option. Note that this is above a rating, not above or equal to a rating. If there are no players above the entered rating, still display the title. Check the example output for formatting.

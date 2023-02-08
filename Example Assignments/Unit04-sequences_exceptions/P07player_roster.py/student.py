@@ -1,3 +1,3 @@
-def main():
+def main(players=[]):
 	#code here
 	
