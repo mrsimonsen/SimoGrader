@@ -45,10 +45,10 @@ Player 4 -- Jersey number: 30, Rating: 2
 Player 5 -- Jersey number: 66, Rating: 9
 
 MENU
-u - Update player rating
-a - Output players above a rating
-r - Replace player
 o - Output roster
+a - Output players above a rating
+u - Update player rating
+r - Replace player
 q - Quit
 
 Choose an option:
@@ -59,10 +59,10 @@ Enter a new rating for player:
 10
 
 MENU
-u - Update player rating
-a - Output players above a rating
-r - Replace player
 o - Output roster
+a - Output players above a rating
+u - Update player rating
+r - Replace player
 q - Quit
 
 Choose an option:
@@ -71,10 +71,10 @@ Enter a jersey number:
 10
 
 MENU
-u - Update player rating
-a - Output players above a rating
-r - Replace player
 o - Output roster
+a - Output players above a rating
+u - Update player rating
+r - Replace player
 q - Quit
 
 Choose an option:
@@ -87,10 +87,10 @@ Enter a rating for the new player:
 1
 
 MENU
-u - Update player rating
-a - Output players above a rating
-r - Replace player
 o - Output roster
+a - Output players above a rating
+u - Update player rating
+r - Replace player
 q - Quit
 
 Choose an option:
@@ -104,10 +104,10 @@ Player 4 -- Jersey number: 30, Rating: 10
 Player 5 -- Jersey number: 66, Rating: 9
 
 MENU
-u - Update player rating
-a - Output players above a rating
-r - Replace player
 o - Output roster
+a - Output players above a rating
+u - Update player rating
+r - Replace player
 q - Quit
 
 Choose an option:
@@ -121,10 +121,10 @@ Player 4 -- Jersey number: 30, Rating: 10
 Player 5 -- Jersey number: 66, Rating: 9
 
 MENU
-u - Update player rating
-a - Output players above a rating
-r - Replace player
 o - Output roster
+a - Output players above a rating
+u - Update player rating
+r - Replace player
 q - Quit
 
 Choose an option:
