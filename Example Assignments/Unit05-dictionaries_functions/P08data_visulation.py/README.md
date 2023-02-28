@@ -13,7 +13,7 @@ Project 8, extend assignment 15
 	* Display the column headers on the same line, separated by a vertical line.
 	* The first column header should be justified left justified to 20 characters, the second column header right justified to 23 characters.
 	* Print out a line of hyphens that is 44 characters long.
-	* For each key in the dictionary, display the key, left justified to 20 characters, a vertical line, then the value of that key right justified to 24 characters.
+	* For each key in the dictionary, display the key, left justified to 20 characters, a vertical line, then the value of that key right justified to 23 characters.
 4. Create the output_histogram function, which has a single parameter of a dictionary and returns nothing.
 	* For each key in the dictionary, display the key right justified 20 characters, followed by a space, the a number of asterisks equal the the value that's stored in that key.
 
