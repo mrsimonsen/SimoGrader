@@ -15,5 +15,5 @@ def main():
 		elif choice == 4:
 			print(f"Number of words: {num_words(data)}")
 		elif choice == 5:
-			find = input("Enter a word or pharase to be found:\n")
+			find = input("Enter a word or phrase to be found:\n")
 			print(f'"{find}" instances: {find_text(find, data)}')
