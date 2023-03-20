@@ -51,7 +51,7 @@ class Tests(unittest.TestCase):
 	inputs = "Bottled Water\n.96\n5\nCookies\n2.5\n3\n"
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
-	def test04_part_4(self, stdout):
+	def test04_all(self, stdout):
 		correct = "Item 1\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n\nItem 2\nEnter the item name:\nEnter the item price:\nEnter the item quantity:\n\nTOTAL COST\nBottled Water 5 @ $0.96 = $4.80\nCookies 3 @ $2.50 = $7.50\n\nTotal: $12.30\n"
 		try:
 			student.main()
