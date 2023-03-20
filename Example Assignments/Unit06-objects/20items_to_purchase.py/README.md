@@ -2,17 +2,16 @@
 Objective: Learn how to create objects with attributes, methods,  constructors, and string representations.
 
 ## Steps
-1. You've been given the main() method for this assignment. Do not edit it.
-2. Create the Item class with a constructor that sets default values for the following public attributes:
+*You've been given the main() method for this assignment. Do not edit it.*
+1. Create the Item class with a constructor that sets default values for the following public attributes:
 	attribute|value
 	--|--
 	name|"none"
 	price|0
 	quantity|0
 
-3. Create a method called total that returns the total value of the item.
-4. Create a string method that returns the attributes of the object like this example: ``Cookies 2 @ $0.76 = $1.52``. Format the price and total to always display to 2 rounded decimal places.
-5. Display the total cost of all the items, rounded to 2 decimal places.
+2. Create a method called total that returns the total value of the item.
+3. Create a string method that returns the attributes of the object like this example: ``Cookies 2 @ $0.76 = $1.52``. Format the price and total to always display to 2 rounded decimal places.
 
 The output of the program should look like the following:
 ```
