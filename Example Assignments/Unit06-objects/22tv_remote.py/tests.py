@@ -4,7 +4,7 @@ from io import StringIO
 import student
 
 class Tests(unittest.TestCase):
-	def test01_part_2(self):
+	def test01_part_1(self):
 		correct = (3,5)
 		try:
 			r = student.Remote()
@@ -22,7 +22,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test02_part_3(self, stdout):
+	def test02_part_2(self, stdout):
 		correct = "Channel: 3\nVolume: 5\n"
 		try:
 			r = student.Remote()
@@ -33,7 +33,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test03_part_4(self, stdout):
+	def test03_part_3(self, stdout):
 		correct = "Channel: 3\nVolume: 10\n"
 		try:
 			r = student.Remote()
@@ -49,7 +49,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test04_part_5(self, stdout):
+	def test04_part_4(self, stdout):
 		correct = "Channel: 3\nVolume: 0\n"
 		try:
 			r = student.Remote()
@@ -65,7 +65,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test05_part_6(self, stdout):
+	def test05_part_5(self, stdout):
 		correct = "Channel: 1\nVolume: 5\n"
 		try:
 			r = student.Remote()
@@ -81,7 +81,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test06_part_7(self, stdout):
+	def test06_part_6(self, stdout):
 		correct = "Channel: 100\nVolume: 5\n"
 		try:
 			r = student.Remote()
@@ -96,7 +96,7 @@ class Tests(unittest.TestCase):
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
 
-	def test07_part_8(self):
+	def test07_part_7(self):
 		correct = 3
 		try:
 			r = student.Remote()
@@ -108,7 +108,7 @@ class Tests(unittest.TestCase):
 			self.fail("Message: channel attribute does not have a getter method")
 		self.assertEqual(result, correct)
 
-	def test08_part_9(self):
+	def test08_part_8(self):
 		correct = 14
 		try:
 			r = student.Remote()
@@ -122,7 +122,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test09_part_9(self, stdout):
+	def test09_part_8(self, stdout):
 		correct = "Error: invalid literal for int() with base 10: 'test'\nExplanation: 'test' isn't a number\n"
 		try:
 			r = student.Remote()
@@ -136,7 +136,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(result, correct)
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test10_part_9(self, stdout):
+	def test10_part_8(self, stdout):
 		correct = "'3000' is out of the channel range\n"
 		try:
 			r = student.Remote()

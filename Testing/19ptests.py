@@ -5,7 +5,7 @@ import student
 
 class Tests(unittest.TestCase):
 	maxDiff = None
-	def test01_part_2(self):
+	def test01_part_1(self):
 		correct = [('Strength', 0), ('Dexterity', 0), ('Constitution', 0), ('Wisdom', 0), ('Intelligence', 0), ('Charisma', 0), ('Pool', [])]
 		correct.sort()
 		try:
@@ -20,7 +20,7 @@ class Tests(unittest.TestCase):
 		except TypeError:
 			self.fail('Message: reset() function has incorrect parameters')
 
-	def test02_part_3(self):
+	def test02_part_2(self):
 		try:
 			temp = student.reset()
 			for i in temp:
@@ -43,7 +43,7 @@ class Tests(unittest.TestCase):
 			self.fail('Message: table() function has incorrect parameters')
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test03_part_4(self, stdout):
+	def test03_part_3(self, stdout):
 		correct_out = "Rolled 4d6 [4, 4, 1, 3]\nDropped 1\n"
 		correct_sum = 11
 		try:
@@ -58,7 +58,7 @@ class Tests(unittest.TestCase):
 			self.fail('Message: randomize() function has incorrect parameters')
 
 	@patch('sys.stdout', new_callable = StringIO)
-	def test04_part_5_(self, stdout):
+	def test04_part_4_(self, stdout):
 		try:
 			temp = student.reset()
 			for i in temp:
@@ -79,7 +79,7 @@ class Tests(unittest.TestCase):
 		except TypeError:
 			self.fail('Message: roll_pool() function has incorrect parameters')
 
-	def test05_part_6(self):
+	def test05_part_5(self):
 		try:
 			temp = student.reset()
 			for i in temp:
@@ -120,7 +120,7 @@ class Tests(unittest.TestCase):
 			except TypeError:
 				self.fail('Message: add() function has incorrect parameters')
 
-	def test06_part_7(self):
+	def test06_part_6(self):
 		try:
 			temp = student.reset()
 			for i in temp:
