@@ -2,8 +2,8 @@
 Objective: Lean how to use dictionaries.
 
 ## Steps
-1. You have been given the main() function for this program. Do not edit the main() function.
-2. Create the reset() function. It has no parameters and returns a new dictionary with the following values:
+*You have been given the main() function for this program. Do not edit the main() function.*
+1. Create the reset() function. It has no parameters and returns a new dictionary with the following values:
 
 	Key|Value
 	--|--
@@ -15,9 +15,9 @@ Objective: Lean how to use dictionaries.
 	Charisma|0
 	Pool|[]
 
-3. Create the table() function. This function take a dictionary as a parameter and returns a pretty view of the dictionary as a string. The top and bottom of the string are 30 underscore characters. Each attribute is left justified to 12 characters, and each value has a tab character before it. See the example output for the remainder of the formatting.
+2. Create the table() function. This function take a dictionary as a parameter and returns a pretty view of the dictionary as a string. The top and bottom of the string are 30 underscore characters. Each attribute is left justified to 12 characters, and each value has a tab character before it. See the example output for the remainder of the formatting.
 
-4. Create the randomize() function. This function takes no parameters and follows the sudocode below:
+3. Create the randomize() function. This function takes no parameters and follows the sudocode below:
 	```
 	create an empty list
 	append a random 6-sided dice roll to the list 4 times
@@ -26,7 +26,7 @@ Objective: Lean how to use dictionaries.
 	display "Dropped " and whatever the lowest value was
 	return the sum of the remaining 3 dice rolls
 	```
-5. Create the roll_pool() function. This function has a parameter of a dictionary and follow the sudocode below:
+4. Create the roll_pool() function. This function has a parameter of a dictionary and follow the sudocode below:
 	```
 	reset the given dictionary
 	6 times
@@ -35,7 +35,7 @@ Objective: Lean how to use dictionaries.
 	sort the dictionary's 'Pool' in ascending order
 	return the new dictionary
 	```
-6. Create the add() function. This function takes in 3 parameters: an attribute name, an amount of points, and a dictionary. This function returns a string depending on the following sudocode:
+5. Create the add() function. This function takes in 3 parameters: an attribute name, an amount of points, and a dictionary. This function returns a string depending on the following sudocode:
 	```
 	if the attribute is in the dictionary and that attribute is not 'Pool'
 		if the amount is in the 'Pool'
@@ -47,7 +47,7 @@ Objective: Lean how to use dictionaries.
 	otherwise
 		return "'{attribute}' is not a valid attribute"
 	```
-7. Create the remove() function. This function take in 2 parameters: an attribute, and a dictionary. This function returns a string depending on the following sudocode:
+6. Create the remove() function. This function take in 2 parameters: an attribute, and a dictionary. This function returns a string depending on the following sudocode:
 	```
 	if the attribute is in the dictionary and that attribute is not 'Pool'
 		if the current attribute in the dictionary is greater than 0
