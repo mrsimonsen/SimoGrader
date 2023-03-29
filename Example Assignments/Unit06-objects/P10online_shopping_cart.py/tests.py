@@ -7,23 +7,23 @@ class Tests(unittest.TestCase):
 	def test01_part_3(self):
 		correct = [('none',0.0,1), ("tacos", 1.5, 3)]
 		try:
-			item1 = student.ShoppingCart.Items.Generic()
-			item2 = student.ShoppingCart.Items.Generic("tacos", 1.5, 3)
+			item1 = student.Items.Generic()
+			item2 = student.Items.Generic("tacos", 1.5, 3)
 			result = []
 			for item in (item1, item2):
 				thing = (item.name, item.price, item.quantity)
 				result.append(thing)
 			self.assertEqual(result, correct)
 		except TypeError:
-			self.fail("Message: Genric class constructor doesn't allow given values.")
+			self.fail("Message: Generic class constructor doesn't allow given values.")
 
-	inputs = "somthing that is really long, like over 50 characters\nMilk\n"
+	inputs = "something that is really long, like over 50 characters\nMilk\n"
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
 	def test02_part_4(self, stdout):
 		correct_val = "Milk"
 		correct_out = "Item names must be between 1 and 50 characters\nEnter a name for the item:\nItem names must be between 1 and 50 characters\nEnter a name for the item:\n"
-		temp = student.ShoppingCart.Items.Generic()
+		temp = student.Items.Generic()
 		temp.name = ''
 		result_out = stdout.getvalue()
 		try:
@@ -39,7 +39,7 @@ class Tests(unittest.TestCase):
 	def test03_part_5(self, stdout):
 		correct_out = "That wasn't a float.\nEnter item price:\nPrice can't be less than $0.00\nEnter item price:\n"
 		correct_val = 5.23
-		temp = student.ShoppingCart.Items.Generic()
+		temp = student.Items.Generic()
 		temp.price = 'two'
 		result_out = stdout.getvalue()
 		try:
@@ -55,7 +55,7 @@ class Tests(unittest.TestCase):
 	def test04_part_6(self, stdout):
 		correct_out = "That wasn't an integer.\nEnter item quantity:\nQuantity can't be less than 1, remove item instead.\nEnter item quantity:\n"
 		correct_val = 5
-		temp = student.ShoppingCart.Items.Generic()
+		temp = student.Items.Generic()
 		temp.quantity = 'ten'
 		result_out = stdout.getvalue()
 		try:
@@ -68,8 +68,8 @@ class Tests(unittest.TestCase):
 	def test05_part_7(self):
 		correct = [('none',0.0,1,'Today'), ("Beef",3.46,3,'Tomorrow?')]
 		try:
-			item1 = student.ShoppingCart.Items.Produce()
-			item2 = student.ShoppingCart.Items.Produce("Beef",3.46,3, expire = 'Tomorrow?')
+			item1 = student.Items.Produce()
+			item2 = student.Items.Produce("Beef",3.46,3, expire = 'Tomorrow?')
 			result = []
 			for item in (item1, item2):
 				thing = (item.name, item.price, item.quantity, item.expire)
@@ -84,7 +84,7 @@ class Tests(unittest.TestCase):
 	def test06_part_8(self, stdout):
 		correct_out = "Expiration cannot be empty.\nEnter expiration date:\n"
 		correct_val = "Tomorrow"
-		temp = student.ShoppingCart.Items.Produce()
+		temp = student.Items.Produce()
 		temp.expire = ''
 		result_out = stdout.getvalue()
 		try:
@@ -107,7 +107,7 @@ class Tests(unittest.TestCase):
 		correct = 5
 		cart = student.ShoppingCart.ShoppingCart('','')
 		for i in range(2,4):
-			cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Generic())
+			cart._ShoppingCart__cartItems.append(student.Items.Generic())
 			cart._ShoppingCart__cartItems[i-2].quantity = i
 		try:
 			result = cart.num_items()
@@ -119,7 +119,7 @@ class Tests(unittest.TestCase):
 		correct = 4.68
 		cart = student.ShoppingCart.ShoppingCart('','')
 		for i in range(2,4):
-			cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Generic())
+			cart._ShoppingCart__cartItems.append(student.Items.Generic())
 			cart._ShoppingCart__cartItems[i-2].quantity = i
 			cart._ShoppingCart__cartItems[i-2].price = i*.36
 		try:
@@ -140,8 +140,8 @@ class Tests(unittest.TestCase):
 	def test11_part_12_full(self, stdout):
 		correct = "Bob's Shopping Cart - Jan 1, 2020\nNumber of Items: 7\n\nCookies 2 @ $2.36 = $4.72, Expiration: Tomorrow\nnapkins 5 @ $0.45 = $2.25\n\nTotal: $6.97\n"
 		cart = student.ShoppingCart.ShoppingCart("Bob", "Jan 1, 2020")
-		cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Produce('Cookies',2.36,2,expire = 'Tomorrow'))
-		cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Generic('napkins',.45,5))
+		cart._ShoppingCart__cartItems.append(student.Items.Produce('Cookies',2.36,2,expire = 'Tomorrow'))
+		cart._ShoppingCart__cartItems.append(student.Items.Generic('napkins',.45,5))
 		print(cart)
 		result = stdout.getvalue()
 		self.assertEqual(result, correct)
@@ -150,7 +150,7 @@ class Tests(unittest.TestCase):
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
 	def test12_part_13(self,stdout):
-		correct_val = [student.ShoppingCart.Items.Produce('Cookies', 2.36,2, expire = 'Tomorrow').__str__(), student.ShoppingCart.Items.Generic('napkins',.45,5).__str__()]
+		correct_val = [student.Items.Produce('Cookies', 2.36,2, expire = 'Tomorrow').__str__(), student.Items.Generic('napkins',.45,5).__str__()]
 		correct_out = "What type of item: 'G'eneric or 'P'roduce?\nThat wasn't a valid option, try again.\nWhat type of item: 'G'eneric or 'P'roduce?\nEnter a name for the item:\nEnter item price:\nEnter item quantity:\nEnter expiration date:\nWhat type of item: 'G'eneric or 'P'roduce?\nEnter a name for the item:\nEnter item price:\nEnter item quantity:\n"
 		cart = student.ShoppingCart.ShoppingCart('','')
 		try:
@@ -173,7 +173,7 @@ class Tests(unittest.TestCase):
 		correct_val = []
 		cart = student.ShoppingCart.ShoppingCart('','')
 		try:
-			cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Generic('Cookies'))
+			cart._ShoppingCart__cartItems.append(student.Items.Generic('Cookies'))
 			cart.remove_item()
 			cart.remove_item()
 			result_out = stdout.getvalue()
@@ -181,18 +181,18 @@ class Tests(unittest.TestCase):
 			self.assertEqual(result_out, correct_out)
 			self.assertEqual(result_val, correct_val)
 		except AttributeError:
-			self.faild("Message: ShoppingCart doesn't have a remove_item() method.")
+			self.fail("Message: ShoppingCart doesn't have a remove_item() method.")
 
 	inputs = "cups\n5\nCookies\n3\n"
 	@patch('sys.stdin', StringIO(inputs))
 	@patch('sys.stdout', new_callable = StringIO)
 	def test14_part_15(self, stdout):
 		correct_out = "What item do you want to change?\nWhat's the new quantity?\nItem not found in cart. Nothing modified.\nWhat item do you want to change?\nWhat's the new quantity?\n"
-		correct_val = [student.ShoppingCart.Items.Generic('napkins',.45,5).__str__() ,student.ShoppingCart.Items.Produce('Cookies', 2.36,3, expire = 'Tomorrow').__str__()]
+		correct_val = [student.Items.Generic('napkins',.45,5).__str__() ,student.Items.Produce('Cookies', 2.36,3, expire = 'Tomorrow').__str__()]
 		try:
 			cart = student.ShoppingCart.ShoppingCart("",'')
-			cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Generic('napkins',.45,5))
-			cart._ShoppingCart__cartItems.append(student.ShoppingCart.Items.Produce('Cookies', 2.36,1, expire = 'Tomorrow'))
+			cart._ShoppingCart__cartItems.append(student.Items.Generic('napkins',.45,5))
+			cart._ShoppingCart__cartItems.append(student.Items.Produce('Cookies', 2.36,1, expire = 'Tomorrow'))
 			cart.change_item()
 			cart.change_item()
 			result_out = stdout.getvalue()
@@ -202,7 +202,7 @@ class Tests(unittest.TestCase):
 			self.assertEqual(result_out, correct_out)
 			self.assertEqual(result_val, correct_val)
 		except AttributeError:
-			self.fail("Message: ShoppingCart doens't have a change_item() method.")
+			self.fail("Message: ShoppingCart doesn't have a change_item() method.")
 
 	inputs = "Bob\nJan 1, 2020\na\nCookies\np\nCookies\n2.36\n2\n\nTomorrow\na\ng\n\npaper cups\nseven\n-20\n.76\ntwenty\n0\n20\nc\npaper cups\n10\nc\nnapkins\n5\na\ng\nThis is a really long item name, why would you type this out?\nnapkins\n.45\n5\nr\ncups\nr\npaper cups\no\nq\n"
 	@patch('sys.stdin', StringIO(inputs))
