@@ -46,12 +46,12 @@ Project 10: extends assignment 21 with a structure like 22.
 			if new is less than 1
 				display "Quantity can't be less than 1, remove item instead."
 			else:
-				set price to the new price
+				set quantity to the new quantity
 				set valid to true
 		if not valid:
-			prompt for a new price again with "Enter item quantity:\n"
+			prompt for a new quantity again with "Enter item quantity:\n"
 	```
-6. Copy assignment 21's Produce class into Items.py. Modify the constructor so that in addition to taking Generic values or defaults, it can have an attribute expire with a default value of "Today" or take a given value by key word. You'll need to use ``*args`` to catch and send the values for the Generic attributes.
+6. Copy assignment 21's Produce class into Items.py. Modify the constructor so that in addition to taking Generic values or defaults, it can have an attribute expire with a default value of "Today" or take a given value by key word.
 7. Convert the expire into a private attribute by setting properties for it. The setter should follow this pseudocode:
 	```
 	while the length of the new expire is empty
@@ -63,12 +63,13 @@ Project 10: extends assignment 21 with a structure like 22.
 	### ShoppingCart.py
 1. Create a file called ShoppingCart.py, import your classes from the Items.py file, and create the ShoppingCart class inside it. The ShoppingCart should have a constructor that takes in a name and date and sets the following private attributes:
 
-		attribute|value
-		--|--
-		name | *given name*
-		date | *given date*
-		cartItems | *empty list*
-	Since these attributes will not have properties, they need to be defined as private in the constructor.
+	attribute|value
+	--|--
+	name | *given name*
+	date | *given date*
+	cartItems | *empty list*
+
+	*Note: Since these attributes will not have properties (getters & setters), they need to be defined as private in the constructor.*
 2. The ShoppingCart should have a num_items() method that returns the total number of items in the cart. *Note: the number of items is **not** equal to the length of the cart.*
 3. The ShoppingCart should have a total_cost() method that returns the total cost of all the items in the cart.
 4. The ShoppingCart should have a string method that follows this pseudocode:
@@ -111,12 +112,13 @@ Project 10: extends assignment 21 with a structure like 22.
 6. The ShoppingCart should have a remove_item() method that follows this pseudocode:
 	```
 	prompt for the name of the item to remove
-	for every index in the range of the cartItems
-		if the item's name at the current index matches the name we're searching for
-			set a temp variable to that index
-	if our temp variable has a value:
-		delete the cartItem at that location
-	otherwise
+	set found variable to false
+	for each item in cartItems
+		if the item's name matches the name we're searching for
+			remove that items from cartItems
+			set found variable to true
+			break the loop
+	if not found:
 		display "Item not found in cart. Nothing removed."
 	```
 7. The ShoppingCart should have a change_item() method that follows this pseudocode:
