@@ -7,10 +7,26 @@ from student import change_grade
 
 GITHUB_ORGANIZATION_NAME = "NUAMES-CS"
 
+def get_text(file):
+	with open(file, 'r') as f:
+		return f.readlines()
+
 def extract_algorithm(github,tag,now):
 	'''extract the comments of the student file as an algorithm text file'''
-	with open('student.py','r') as f:
-		text = f.readlines()
+	#some projects have additional files to check
+	text = []
+	match tag:
+		case 'P10':
+			text.append('-----Items.py-----\n')
+			text += get_text('Items.py')
+			text.append('-----ShoppingCart.py-----\n')
+			text += get_text('ShoppingCart.py')
+		case 'P11':
+			text.append('-----Tools.py-----\n')
+			text += get_text('Tools.py')
+		case _:
+			text = get_text('student.py')
+	print(text)
 	algo = []
 	for line in text:
 		if '#' in line:
