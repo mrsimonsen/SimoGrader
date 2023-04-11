@@ -126,7 +126,7 @@ class Tests(unittest.TestCase):
 			result = cart.total_cost()
 			self.assertEqual(result, correct)
 		except AttributeError:
-			self.fail("Message: ShoppingCart doesn't have num_items() method.")
+			self.fail("Message: ShoppingCart doesn't have total_cost() method.")
 
 	@patch('sys.stdout', new_callable = StringIO)
 	def test10_part_12_empty(self, stdout):

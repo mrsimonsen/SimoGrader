@@ -5,7 +5,7 @@
 def main():
 	name = input("Enter customer's name:\n")
 	date = input("Enter today's date:\n")
-	cart = ShoppingCart(name, date)
+	cart = ShoppingCart.ShoppingCart(name, date)
 	choice = 'z'
 	while choice != 'q':
 		print('''
