@@ -17,16 +17,15 @@ def extract_algorithm(github,tag,now):
 	text = []
 	match tag:
 		case 'P10':
-			text.append('-----Items.py-----\n')
+			text.append('#-----Items.py-----\n')
 			text += get_text('Items.py')
-			text.append('-----ShoppingCart.py-----\n')
+			text.append('#-----ShoppingCart.py-----\n')
 			text += get_text('ShoppingCart.py')
 		case 'P11':
-			text.append('-----Tools.py-----\n')
+			text.append('#-----Tools.py-----\n')
 			text += get_text('Tools.py')
 		case _:
 			text = get_text('student.py')
-	print(text)
 	algo = []
 	for line in text:
 		if '#' in line:
