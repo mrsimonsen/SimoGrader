@@ -82,7 +82,7 @@ class ShoppingCart():
 	def total_cost(self):
 		total = 0
 		for item in self.__cartItems:
-			total += (item.price * item.quantity)
+			total += item.total()
 		return total
 
 	def num_items(self):
@@ -116,13 +116,12 @@ class ShoppingCart():
 
 	def remove_item(self):
 		name = input("What is the item's name that you want to remove?\n")
-		index = -1
-		for i in range(len(self.__cartItems)):
-			if self.__cartItems[i].name == name:
-				index = i
-		if index != -1:
-			del self.__cartItems[index]
-		else:
+		found = False
+		for item in self.__cartItems:
+			if item.name == name:
+				self.__cartItems.remove(item)
+				found = True
+		if not found:
 			print("Item not found in cart. Nothing removed.")
 
 	def change_item(self):
@@ -134,7 +133,6 @@ class ShoppingCart():
 			if i.name == item.name:
 				i.quantity = item.quantity
 				found = True
-
 		if not found:
 			print("Item not found in cart. Nothing modified.")
 
@@ -206,8 +204,7 @@ class Produce(Generic):
 		super().__init__(*args)
 
 	def __str__(self):
-		rep = super().__str__()
-		rep += f", Expiration: {self.expire}"
+		rep = super().__str__() + f", Expiration: {self.expire}"
 		return rep
 
 	@property
@@ -227,8 +224,8 @@ class Electronic(Generic):
 		super().__init__(*args)
 
 	def __str__(self):
-		rep = super().__str__()
-		rep += f", Warranty = {self.warranty}"
+		rep = super().__str__() + f", Warranty = {self.warranty}"
+		return rep
 
 	@property
 	def warranty(self):
@@ -236,8 +233,5 @@ class Electronic(Generic):
 	@warranty.setter
 	def warranty(self, new):
 		if new not in (True, False):
-			if new.lower() in ('yes','y'):
-				new = True
-			else:
-				new = False
+			new = new.lower() in ('yes','y')
 		self.__warranty = new
