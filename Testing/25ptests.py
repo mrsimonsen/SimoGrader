@@ -1,7 +1,6 @@
 import unittest, sys, os
 from unittest.mock import patch
 from io import StringIO
-from shelve import *
 import student
 
 class Tests(unittest.TestCase):
