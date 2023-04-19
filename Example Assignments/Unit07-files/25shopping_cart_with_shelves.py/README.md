@@ -14,10 +14,10 @@ Objective: Learn how to create binary files for storing complex data.
 ```
 prompt "Enter customer's name:\n"
 load the data from carts.bin
-get and return the ShoppingCart object stored with the customers
+get and return the ShoppingCart object stored with the customers name
 if there is no object with that name, return None
 ```
-5. Create the view() function: is had no parameters and returns nothing. Follow this pseudocode:
+5. Create the view() function: it has no parameters and returns nothing. Follow this pseudocode:
 	```
 	for each key in carts.bin
 		display "{name} - {date}\n\t{num_items} @ ${total_cost}"
