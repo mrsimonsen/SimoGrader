@@ -11,18 +11,18 @@ Objective: Learn how to create binary files for storing complex data.
 	save and close carts.bin
 	```
 4. Create the load() function: it has no parameters and returns a ShoppingCart object. Follow this pseudocode:
-```
-prompt "Enter customer's name:\n"
-load the data from carts.bin
-get and return the ShoppingCart object stored with the customers name
-if there is no object with that name, return None
-```
+	```
+	prompt "Enter customer's name:\n"
+	load the data from carts.bin
+	get and return the ShoppingCart object stored with the customers name
+	if there is no object with that name, return None
+	```
 5. Create the view() function: it has no parameters and returns nothing. Follow this pseudocode:
 	```
 	for each key in carts.bin
 		display "{name} - {date}\n\t{num_items} @ ${total_cost}"
 	```
-	Round the total cost to 2 decimal places.
+	Round the total cost to 2 decimal places. Check the example output for the exact style.
 
 The output of the program should look like the following:
 ```
