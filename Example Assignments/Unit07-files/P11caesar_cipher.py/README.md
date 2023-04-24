@@ -13,7 +13,7 @@ Project 11
 3. Create the get_cipher() method. This method take in no parameters and returns an integer. Follow this pseudocode:
 	```
 	while the key is not between 1 and 25 inclusive
-		get an integer input form the user, prompting "What is the cipher key?\n"
+		get an integer input from the user, prompting "What is the cipher key?\n"
 		if the input wasn't a number display "That wasn't a number."
 		if the input was a number but out of range, display "Cipher key must be between 1 and 25 inclusive."
 	return the key
@@ -55,8 +55,8 @@ Project 11
 	```
 	Create an list with 26 elements, each a 0
 	for each character in the message in lowercase:
-		if the numeric equivalent of that character is a lowercase number:
-			add 1 to the list index of that number - 97 (lowercase 'a')
+		if the numeric equivalent of that character is a lowercase letter:
+			add 1 to the list index of that number - 97 #for lowercase 'a'
 	for each entry in the list:
 		display {character version of index}: {number of that character, 0-led width to 2} {that many *s}
 	```
