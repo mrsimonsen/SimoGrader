@@ -63,5 +63,74 @@ Project 11
 
 The output of the program should look like the following:
 ```
+        Welcome to the Caesar Cipher!
+This utility will let you encrypt and decrypt a message from a file you provide.
+
+                MENU
+        Option 1: Encrypt Message
+        Option 2: Decrypt Message
+        Option 3: Letter Distribution Analysis
+        Option 0: Exit Program
+
+Choose an option:
+1
+Is the message in a file?
+no
+What is the cipher key?
+4
+What is the message?
+This is some awesome message.
+What do you want to call the output file?
+out    
+
+                MENU
+        Option 1: Encrypt Message
+        Option 2: Decrypt Message
+        Option 3: Letter Distribution Analysis
+        Option 0: Exit Program
+
+Choose an option:
+3
+Is the message in a file?
+out.txt
+Is the message in a file?
+yes
+What is the name of the file?
+out.txt
+a: 01 *
+b: 00 
+c: 00 
+d: 00 
+e: 02 **
+f: 00 
+g: 00 
+h: 00 
+i: 05 *****
+j: 00 
+k: 01 *
+l: 01 *
+m: 02 **
+n: 00 
+o: 00 
+p: 00 
+q: 03 ***
+r: 00 
+s: 02 **
+t: 00 
+u: 00 
+v: 00 
+w: 06 ******
+x: 01 *
+y: 00 
+z: 00 
+
+                MENU
+        Option 1: Encrypt Message
+        Option 2: Decrypt Message
+        Option 3: Letter Distribution Analysis
+        Option 0: Exit Program
+
+Choose an option:
+0
 ```
 *Note:*
